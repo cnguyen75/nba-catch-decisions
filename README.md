@@ -924,3 +924,127 @@ seed 7) and reported before synthetic runs.
 - **The miscalibration is still real** (p = 0.013).
 - **Not run,** per the registration: power and synthetic.
 - **The report** is at `~/Personal/site-handoff/tracks/nba-catch-decisions/feasibility.md`.
+
+# Stage 3a registration, part 3: decisions after the stop (Colin, 2026-10-13)
+
+Registered before any of it runs.
+
+## Notes required by the design
+
+- **Continuation values depend only weakly on the state.** On validation,
+  V_continue's RMSE is 1.1595 against 1.1607 for an intercept-only model, and
+  its predicted range is 0.88–1.17. So c_shoot is identified mainly through
+  openness (and distance) moving the value of shooting, not through the
+  alternatives.
+- **The close-range release detector runs 0.3–0.5 s late.** In the R3 eye
+  check, R1 + R2 placed only 5 of 10 located close shots within 0.2 s, mostly
+  7–14 frames late. A **registered sensitivity** will therefore rerun the
+  main fit with a **2.0 s** "shoot now" window instead of 1.5 s.
+
+## C-rule: powered calibration rule (replaces the fixed ECE ≤ 0.03)
+
+- **Why it changed.** At the validation sample size (1,231 shots), a
+  perfectly calibrated model with the observed predictions has a median ECE
+  of 0.034, and passes 0.03 only 29% of the time. The fixed limit was below
+  the noise floor.
+- **New rule.** V_shoot passes if its validation ECE (10 equal-count bins)
+  is at or below the 95th percentile of the ECE that a perfectly calibrated
+  model would show with **the same predicted probabilities**. That reference
+  is found by simulating y ~ Bernoulli(p̂) from the model's own validation
+  predictions: 5,000 draws, seed 0, the same binning.
+- **Reporting.** The decile table is reported either way.
+
+## V_shoot fix (scored once on validation)
+
+**Base model:** logistic regression (L2, C = 1.0) on league train
+shoot-now attempts, with features:
+
+- natural cubic spline in distance (knots at 4, 10, 18, 23.75 and 28 ft;
+  boundary knots at 0 and 47);
+- zone one-hot;
+- log(1 + openness), and that term × distance/10 (openness-by-distance);
+- that term × the three indicator;
+- shot clock at the catch, and its square/100.
+
+**Recalibration:**
+
+- 5-fold cross-validated out-of-fold predictions on the train attempts
+  (folds by game, seed 5).
+- A Platt map (a logistic fit of y on the out-of-fold logit) is fitted to
+  them.
+- The final model is the base model refit on all train attempts, with the
+  Platt map applied.
+
+**Scoring:** once on validation under the C-rule. **If it fails:** stop and
+report, with no further tuning.
+
+## One scale: possession points
+
+- **V_shoot = P(make | x) × points + g(zone).**
+- **g(zone)** is the mean over league train shoot-now catches in that zone
+  of (possession points − actual shot points, i.e. made × 2 or 3). It is the
+  value of offensive rebounds and free throws after the shot, and is
+  reported by zone.
+- Player make-probability offsets are unchanged (MAP, prior N(0, 0.3²)).
+- **Sensitivity, immediate-shot scale (V_shoot without g):**
+  - **In 3a, synthetic only.** For each synthetic run, the data is generated
+    with possession-scale V_shoot and also fitted with immediate-scale
+    V_shoot. The mean c_shoot bias that causes is reported.
+  - **In the real fit, later:** registered as a sensitivity.
+
+## Drive/pass retest (once)
+
+**Fixed detector, D-v2.** Same as before except for the pass rule.
+
+- **Touch:** the ball is within 3 ft of a player, at **any height**, for at
+  least 2 consecutive frames.
+- **pass:** no drive; P's possession ends within 4.0 s of the catch; and the
+  first player other than P to touch the ball within 2.0 s after the end is
+  a teammate. This covers lobs and alley-oops caught above 8 ft, and
+  handoffs.
+- **drive:** unchanged. There is a frame i in [s, min(e, s + 4.0 s)] where P
+  is ≥ 20 ft from the attacking basket, a later frame j ≤ e where P is
+  ≤ 10 ft from it, and at least one dribble (ball z ≤ 1.5 ft, within 5 ft of
+  P) in [i, j]. **The drive's start is any such frame i**, not its actual
+  start.
+- **hold:** everything else.
+- **Precedence:** shoot now > unknown > drive > pass > hold.
+
+**Labelling rule (identical wording, used by eye):**
+
+- **drive** if at any moment in the first 4 s of the possession he is 20+ ft
+  from the basket, and later in the same possession he has dribbled to
+  within 10 ft;
+- **else pass** if the possession ends within 4 s of the catch and the next
+  player to touch the ball (any height, within 2 s) is a teammate;
+- **else hold.**
+
+**Fresh held-out set.**
+
+- 60 catches from **validation** games, excluding the 60 catches of the
+  first check.
+- Tuning used the pass-1 games and the first check's 60.
+- Proxy strata as before, 20 each, seed 43. Shoot-now and unknown catches
+  are excluded.
+- Sheets show the possession and the following 2 s: tracks, ball height,
+  and teammate and opponent positions **at the next touch**. No detector
+  output.
+- **The D-v2 detector is a separate script** (`scripts/dp2.py`). It is run
+  only after the labels are committed.
+
+**Gate:** 54/60, no stratum below 16.
+
+- **Pass:** the four-way model is primary.
+- **Fail:** binary is primary, four-way is a registered extension, and
+  nothing is retried.
+
+## Then
+
+Power, then synthetic recovery, as registered in part 2, using:
+
+- the possession-scale V_shoot;
+- the primary model this retest decides;
+- V_drive, V_pass and V_hold refit with the D-v2 action labels.
+
+**Stop before any real-player fit.** The pilot T is the only exception,
+with c discarded as before.
