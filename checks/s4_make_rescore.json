@@ -1,0 +1,66 @@
+{
+ "level": {
+  "mean_pred": 0.3766,
+  "mean_obs": 0.376,
+  "abs_diff": 0.0006,
+  "limit": 0.01,
+  "passes": true
+ },
+ "gradient": {
+  "pred_change_0to4_vs_8plus": 0.0672,
+  "obs_change": 0.0909,
+  "abs_diff": 0.0236,
+  "limit": 0.03,
+  "passes": true,
+  "n_0to4": 5351,
+  "n_8plus": 938
+ },
+ "bins": {
+  "table": {
+   "[0, 2)": {
+    "n": 1101.0,
+    "pred": 0.3285,
+    "obs": 0.3124,
+    "err": 0.016
+   },
+   "[2, 4)": {
+    "n": 4250.0,
+    "pred": 0.3662,
+    "obs": 0.3671,
+    "err": -0.0009
+   },
+   "[4, 6)": {
+    "n": 3933.0,
+    "pred": 0.3821,
+    "obs": 0.3725,
+    "err": 0.0096
+   },
+   "[6, 8)": {
+    "n": 1328.0,
+    "pred": 0.3992,
+    "obs": 0.4179,
+    "err": -0.0187
+   },
+   "[8, 12)": {
+    "n": 679.0,
+    "pred": 0.4221,
+    "obs": 0.4359,
+    "err": -0.0138
+   },
+   "[12, 99)": {
+    "n": 259.0,
+    "pred": 0.4349,
+    "obs": 0.4749,
+    "err": -0.04
+   }
+  },
+  "max_abs_err": 0.04,
+  "limit": 0.04,
+  "passes": false
+ },
+ "info": {
+  "ece_val": 0.0163,
+  "note": "same model reproduced exactly (Platt map identical); scored once"
+ },
+ "all_pass": false
+}
