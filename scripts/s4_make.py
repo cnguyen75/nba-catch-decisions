@@ -160,6 +160,7 @@ def main():
     keep = ["game", "split", "pid", "start", "team", "quarter", "d_basket", "zone", "open_catch", "open_cf_raw", "open_cf",
             "rim_prot", "shot_clock", "best_tm_open", "margin", "poss_points", "action", "made", "V_shoot", "V_shoot_imm"]
     c[keep].to_csv(S4 / "vshoot.csv", index=False)
+    np.savez(S4 / "make_model.npz", mean=scl.mean_, scale=scl.scale_, coef=mdl.coef_, intercept=mdl.intercept_, A=A, B=B, kf=kf)
     (S4 / "make_report.json").write_text(json.dumps(rep, indent=1, default=str))
     print(json.dumps({k: v for k, v in rep.items() if k not in ("make_model",)}, indent=1, default=str))
     print(json.dumps({k: v for k, v in rep["make_model"].items() if k != "decile_table_val"}, indent=1))
