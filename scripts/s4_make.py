@@ -14,6 +14,7 @@ from vshoot2 import ece, ns_basis  # noqa: E402
 from values import map_offset  # noqa: E402
 
 BINS = [0, 2, 4, 6, 8, 12, 99]
+SCORE_ONLY = "--score-only" in sys.argv
 
 
 def X2(d, zone, three, op, cs, sc):
@@ -65,6 +66,11 @@ def main():
     e, dec = ece(pv, yv)
     rng = np.random.default_rng(0)
     null = np.array([ece(pv, (rng.random(len(pv)) < pv).astype(float))[0] for _ in range(5000)])
+    if SCORE_ONLY:
+        va.assign(pred=pv)[["game", "made", "pred", "open_release_all", "three", "cs"]].to_csv(S4 / "make_val_preds.csv", index=False)
+        (S4 / "make_rescore_repro.json").write_text(json.dumps({"ece_val": e, "platt": [A, B]}))
+        print("reproduced ECE", round(e, 6), "platt", A, B)
+        return
     rep["make_model"] = {"n_train": int(len(tr)), "n_val": int(len(va)), "platt": [A, B], "ece_val": round(e, 4),
                          "null_p95": round(float(np.quantile(null, .95)), 4), "null_median": round(float(np.median(null)), 4),
                          "passes": bool(e <= np.quantile(null, .95)), "decile_table_val": dec,

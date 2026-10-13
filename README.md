@@ -1416,3 +1416,23 @@ It stops before any real fit of c.
 by the identical deterministic code path (same data, same seeds, lbfgs). It
 must reproduce the scored ECE (0.0163) and Platt map exactly. Otherwise it
 is not the same model, and I stop.
+
+### Re-score result: FAILS (bins), stop
+
+The same model (Platt map reproduced to every digit, ECE 0.016258) was scored
+once on the same validation shots.
+
+| Criterion | Result | Limit | Outcome |
+|---|---|---|---|
+| Level | 0.3766 predicted vs 0.3760 observed, \|diff\| 0.0006 | ≤ 0.01 | pass |
+| Gradient | predicted change 0.0672 vs observed 0.0909 (0–4 ft vs 8+ ft), \|diff\| 0.0236 | ≤ 0.03 | pass |
+| Bins | 0–2: +0.016; 2–4: −0.001; 4–6: +0.010; 6–8: −0.019; 8–12: −0.014; **12+: −0.040019** | ≤ 0.04 | **FAIL** |
+
+**The 12+ bin misses by 0.00002.** It has n = 259 and 123 makes, an
+observed rate of 0.4749 against 0.4349 predicted. One fewer make would put
+the error at about −0.036. The binomial SE of the observed rate is 0.031, so
+the 0.04 bin limit is about 1.3 SE in that bin.
+
+**Per the rule:** stop and report. There is no fix on the spent validation
+games, and V_shoot, V_continue, 7a–7c, the checks, power and synthetic were
+not run.
