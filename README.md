@@ -1505,3 +1505,57 @@ c_shoot moves. The rescaling holds each catch's P(make) at its 0–4 ft level
 and multiplies the openness-driven difference above that level by r.
 
 **Fail:** stop and report. No further calibration attempts.
+
+## Calibration attempt 2 and the registered sequence: results (stopped, no gated player proceeds)
+
+**Make model (attempt 2), scored once on 58 fresh games with jump shots
+(5,546 shots): PASS.**
+
+| Criterion | Result | Limit |
+|---|---|---|
+| Level | 0.0095 | 0.01 |
+| Gradient | 0.0068 (observed-over-predicted ratio 0.881) | 0.03 |
+| Bins | all within max(0.04, 2 SE); worst 12+ ft, 0.029 vs 0.083 | |
+| ECE (information) | 0.0153 | |
+
+**V_shoot,** with the counterfactual release openness:
+
+- delta 0.96 s (25 frames);
+- shot-side adjustment: rim 1.33 ft and above-break 1.01 ft subtracted for
+  non-shooters;
+- g(zone): rim 0.107, mid 0.135, above-break 0.162, corner 0.168.
+
+**7a, control group:**
+
+- control (28 players, 2,260 catches): slope 0.0010 [−0.0143, 0.0158];
+- shooters (310 players, 58,743 catches): 0.0086 [0.0054, 0.0119];
+- **no selection detected.** The control interval is wide.
+
+**7c, Dubin–McFadden synthetic validation:** corrected covers 20/20 seeds;
+naive misses only 3/20 (bias −0.0009 at ρ = 0.3). **Not shown to work** under
+the rule. **Naive V_continue is primary**, and the Dubin–McFadden version
+(real openness slope 0.0052 against 0.0100 naive) is a sensitivity.
+
+**Check 1, value-gap slope in counterfactual openness at 22–30 ft:**
+
+| Player | Slope [95% CI] | Outcome |
+|---|---|---|
+| Curry | 0.0050 [−0.0059, 0.0183] | **FAILS:** stops here |
+| Harden | 0.0187 [0.0097, 0.0293] | passes |
+| LeBron (not gated) | 0.0162 [0.0109, 0.0216] | passes |
+
+**Power:** the pilot T diverges for Harden (496) and LeBron (720). MDE is
+142 and 186, so **underpowered**; the games-needed numbers are meaningless
+at a diverged T.
+
+**Synthetic:** not run, because no gated player proceeds.
+
+**Diagnostic** (slopes of P(shoot) on the value gap only; no c):
+
+- **all ≤ 30 ft:** Curry −0.27, LeBron −2.57, Harden −1.05;
+- **22–30 ft:** +0.05, +0.16, −1.82.
+
+The rim zone's gap is negative (−0.16 to −0.22) while players shoot 18–33%
+of rim catches. **The make model is jump shots only, and it is applied to rim
+catches whose shots are mostly layups and dunks, so it understates V_shoot at
+the rim.**

@@ -1,0 +1,396 @@
+{
+ "control_group": {
+  "n_players_control": 28,
+  "n_players_shooters": 310,
+  "control": {
+   "n_catches": 2260,
+   "slope_pts_per_ft": 0.001,
+   "ci95": [
+    -0.0143,
+    0.0158
+   ]
+  },
+  "shooters": {
+   "n_catches": 58743,
+   "slope_pts_per_ft": 0.0086,
+   "ci95": [
+    0.0054,
+    0.0119
+   ]
+  },
+  "selection_present": false
+ },
+ "dmf_synthetic": {
+  "rho": 0.3,
+  "sigma": 1.123,
+  "true_open_slope": 0.01,
+  "n": 129131,
+  "corrected_covers": 20,
+  "naive_misses": 3,
+  "passes": false,
+  "mean_naive_bias": -0.0009,
+  "mean_corrected_bias": -0.0004,
+  "runs": [
+   {
+    "seed": 300,
+    "true": 0.01,
+    "naive": 0.0089,
+    "naive_ci": [
+     0.0069,
+     0.0109
+    ],
+    "naive_covers": true,
+    "corrected": 0.0093,
+    "corrected_ci": [
+     0.0074,
+     0.0113
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.166
+   },
+   {
+    "seed": 301,
+    "true": 0.01,
+    "naive": 0.0074,
+    "naive_ci": [
+     0.0052,
+     0.0095
+    ],
+    "naive_covers": false,
+    "corrected": 0.008,
+    "corrected_ci": [
+     0.0058,
+     0.0101
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.166
+   },
+   {
+    "seed": 302,
+    "true": 0.01,
+    "naive": 0.0087,
+    "naive_ci": [
+     0.0068,
+     0.0109
+    ],
+    "naive_covers": true,
+    "corrected": 0.0092,
+    "corrected_ci": [
+     0.0072,
+     0.0113
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.165
+   },
+   {
+    "seed": 303,
+    "true": 0.01,
+    "naive": 0.0087,
+    "naive_ci": [
+     0.0066,
+     0.0108
+    ],
+    "naive_covers": true,
+    "corrected": 0.0091,
+    "corrected_ci": [
+     0.007,
+     0.0112
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.164
+   },
+   {
+    "seed": 304,
+    "true": 0.01,
+    "naive": 0.0099,
+    "naive_ci": [
+     0.0076,
+     0.0117
+    ],
+    "naive_covers": true,
+    "corrected": 0.0104,
+    "corrected_ci": [
+     0.0083,
+     0.0125
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.166
+   },
+   {
+    "seed": 305,
+    "true": 0.01,
+    "naive": 0.0097,
+    "naive_ci": [
+     0.0079,
+     0.0121
+    ],
+    "naive_covers": true,
+    "corrected": 0.0101,
+    "corrected_ci": [
+     0.0083,
+     0.0126
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.165
+   },
+   {
+    "seed": 306,
+    "true": 0.01,
+    "naive": 0.0095,
+    "naive_ci": [
+     0.0076,
+     0.0118
+    ],
+    "naive_covers": true,
+    "corrected": 0.0101,
+    "corrected_ci": [
+     0.008,
+     0.0125
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.165
+   },
+   {
+    "seed": 307,
+    "true": 0.01,
+    "naive": 0.0085,
+    "naive_ci": [
+     0.0065,
+     0.0106
+    ],
+    "naive_covers": true,
+    "corrected": 0.0089,
+    "corrected_ci": [
+     0.0069,
+     0.011
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.166
+   },
+   {
+    "seed": 308,
+    "true": 0.01,
+    "naive": 0.0077,
+    "naive_ci": [
+     0.0054,
+     0.0098
+    ],
+    "naive_covers": false,
+    "corrected": 0.0082,
+    "corrected_ci": [
+     0.006,
+     0.0105
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.166
+   },
+   {
+    "seed": 309,
+    "true": 0.01,
+    "naive": 0.008,
+    "naive_ci": [
+     0.006,
+     0.01
+    ],
+    "naive_covers": true,
+    "corrected": 0.0085,
+    "corrected_ci": [
+     0.0065,
+     0.0107
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.164
+   },
+   {
+    "seed": 310,
+    "true": 0.01,
+    "naive": 0.008,
+    "naive_ci": [
+     0.0061,
+     0.0098
+    ],
+    "naive_covers": false,
+    "corrected": 0.0084,
+    "corrected_ci": [
+     0.0064,
+     0.0105
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.165
+   },
+   {
+    "seed": 311,
+    "true": 0.01,
+    "naive": 0.0099,
+    "naive_ci": [
+     0.0081,
+     0.0122
+    ],
+    "naive_covers": true,
+    "corrected": 0.0105,
+    "corrected_ci": [
+     0.0087,
+     0.0128
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.167
+   },
+   {
+    "seed": 312,
+    "true": 0.01,
+    "naive": 0.0087,
+    "naive_ci": [
+     0.0066,
+     0.0107
+    ],
+    "naive_covers": true,
+    "corrected": 0.0093,
+    "corrected_ci": [
+     0.0072,
+     0.0112
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.167
+   },
+   {
+    "seed": 313,
+    "true": 0.01,
+    "naive": 0.0091,
+    "naive_ci": [
+     0.0072,
+     0.011
+    ],
+    "naive_covers": true,
+    "corrected": 0.0097,
+    "corrected_ci": [
+     0.0079,
+     0.0118
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.165
+   },
+   {
+    "seed": 314,
+    "true": 0.01,
+    "naive": 0.0088,
+    "naive_ci": [
+     0.0068,
+     0.0107
+    ],
+    "naive_covers": true,
+    "corrected": 0.0095,
+    "corrected_ci": [
+     0.0075,
+     0.0116
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.167
+   },
+   {
+    "seed": 315,
+    "true": 0.01,
+    "naive": 0.0104,
+    "naive_ci": [
+     0.0085,
+     0.0129
+    ],
+    "naive_covers": true,
+    "corrected": 0.011,
+    "corrected_ci": [
+     0.0089,
+     0.0135
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.166
+   },
+   {
+    "seed": 316,
+    "true": 0.01,
+    "naive": 0.0107,
+    "naive_ci": [
+     0.0086,
+     0.0131
+    ],
+    "naive_covers": true,
+    "corrected": 0.0112,
+    "corrected_ci": [
+     0.0092,
+     0.0138
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.165
+   },
+   {
+    "seed": 317,
+    "true": 0.01,
+    "naive": 0.0088,
+    "naive_ci": [
+     0.0069,
+     0.0108
+    ],
+    "naive_covers": true,
+    "corrected": 0.0092,
+    "corrected_ci": [
+     0.0072,
+     0.0111
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.164
+   },
+   {
+    "seed": 318,
+    "true": 0.01,
+    "naive": 0.0098,
+    "naive_ci": [
+     0.0079,
+     0.0121
+    ],
+    "naive_covers": true,
+    "corrected": 0.0104,
+    "corrected_ci": [
+     0.0083,
+     0.0127
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.164
+   },
+   {
+    "seed": 319,
+    "true": 0.01,
+    "naive": 0.0102,
+    "naive_ci": [
+     0.0079,
+     0.0121
+    ],
+    "naive_covers": true,
+    "corrected": 0.0107,
+    "corrected_ci": [
+     0.0084,
+     0.0127
+    ],
+    "corrected_covers": true,
+    "shoot_rate": 0.165
+   }
+  ]
+ },
+ "real": {
+  "naive_open_slope": 0.01,
+  "dmf_open_slope": 0.0052,
+  "dmf_lambda_coef": -0.0445
+ },
+ "main_V_continue": "naive",
+ "player_offsets_cont": {
+  "Curry": {
+   "V_cont_naive": 0.11883690645875768,
+   "V_cont_dmf": 0.11566868173855908
+  },
+  "LeBron": {
+   "V_cont_naive": 0.07709582353108192,
+   "V_cont_dmf": 0.08876777247252851
+  },
+  "Harden": {
+   "V_cont_naive": 0.013252126661217166,
+   "V_cont_dmf": 0.02388852300480094
+  }
+ }
+}

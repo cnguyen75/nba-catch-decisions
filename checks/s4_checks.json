@@ -1,0 +1,249 @@
+{
+ "cont_main": "naive",
+ "players": {
+  "Curry": {
+   "gated": true,
+   "n_train": 494,
+   "n_shoot": 122,
+   "value_gap_table_22_30ft": {
+    "[0, 4)": {
+     "n": 239.0,
+     "shoot_rate": 0.197,
+     "gap_new": 0.196,
+     "gap_old": 0.293
+    },
+    "[4, 6)": {
+     "n": 55.0,
+     "shoot_rate": 0.255,
+     "gap_new": 0.268,
+     "gap_old": 0.304
+    },
+    "[6, 8)": {
+     "n": 14.0,
+     "shoot_rate": 0.714,
+     "gap_new": 0.318,
+     "gap_old": 0.251
+    },
+    "[8, 12)": {
+     "n": 7.0,
+     "shoot_rate": 0.429,
+     "gap_new": 0.171,
+     "gap_old": 0.079
+    },
+    "[12, 99)": {
+     "n": 8.0,
+     "shoot_rate": 0.375,
+     "gap_new": 0.223,
+     "gap_old": 0.168
+    }
+   },
+   "check1_gap_slope": {
+    "slope": 0.005,
+    "ci95": [
+     -0.0059,
+     0.0183
+    ],
+    "n": 330,
+    "passes": false
+   },
+   "check1_gap_slope_sensitivity_other_Vcont": {
+    "slope": 0.0071,
+    "ci95": [
+     -0.0039,
+     0.0205
+    ],
+    "n": 330,
+    "passes": false
+   },
+   "decision": "stops at check 1 (value gap not increasing in openness)"
+  },
+  "LeBron": {
+   "gated": false,
+   "n_train": 545,
+   "n_shoot": 44,
+   "value_gap_table_22_30ft": {
+    "[0, 4)": {
+     "n": 115.0,
+     "shoot_rate": 0.009,
+     "gap_new": 0.074,
+     "gap_old": 0.276
+    },
+    "[4, 6)": {
+     "n": 94.0,
+     "shoot_rate": 0.106,
+     "gap_new": 0.151,
+     "gap_old": 0.267
+    },
+    "[6, 8)": {
+     "n": 57.0,
+     "shoot_rate": 0.105,
+     "gap_new": 0.183,
+     "gap_old": 0.259
+    },
+    "[8, 12)": {
+     "n": 33.0,
+     "shoot_rate": 0.121,
+     "gap_new": 0.151,
+     "gap_old": 0.239
+    },
+    "[12, 99)": {
+     "n": 5.0,
+     "shoot_rate": 0.2,
+     "gap_new": 0.236,
+     "gap_old": 0.28
+    }
+   },
+   "check1_gap_slope": {
+    "slope": 0.0162,
+    "ci95": [
+     0.0109,
+     0.0216
+    ],
+    "n": 305,
+    "passes": true
+   },
+   "check1_gap_slope_sensitivity_other_Vcont": {
+    "slope": 0.0185,
+    "ci95": [
+     0.0132,
+     0.0238
+    ],
+    "n": 305,
+    "passes": true
+   },
+   "power_main": {
+    "pilot_T": 719.8885,
+    "c_shoot=-0.2": {
+     "se_c": 124.0027,
+     "se_T": 298731.0252,
+     "mde80": 347.2075
+    },
+    "c_shoot=+0.0": {
+     "se_c": 66.3927,
+     "se_T": 298731.0208,
+     "mde80": 185.8996
+    },
+    "c_shoot=+0.2": {
+     "se_c": 84.9425,
+     "se_T": 298731.0222,
+     "mde80": 237.8389
+    },
+    "mde80_at_c0": 185.8996
+   },
+   "power_sensitivity_other_Vcont": {
+    "pilot_T": 588.4392,
+    "c_shoot=-0.2": {
+     "se_c": 102.6996,
+     "se_T": 201088.9656,
+     "mde80": 287.5588
+    },
+    "c_shoot=+0.0": {
+     "se_c": 54.6607,
+     "se_T": 201088.9607,
+     "mde80": 153.0499
+    },
+    "c_shoot=+0.2": {
+     "se_c": 69.0716,
+     "se_T": 201088.9616,
+     "mde80": 193.4004
+    },
+    "mde80_at_c0": 153.0499
+   },
+   "decision": "underpowered (MDE 185.8996); games needed ~33790692"
+  },
+  "Harden": {
+   "gated": true,
+   "n_train": 504,
+   "n_shoot": 64,
+   "value_gap_table_22_30ft": {
+    "[0, 4)": {
+     "n": 185.0,
+     "shoot_rate": 0.151,
+     "gap_new": 0.081,
+     "gap_old": 0.199
+    },
+    "[4, 6)": {
+     "n": 92.0,
+     "shoot_rate": 0.141,
+     "gap_new": 0.166,
+     "gap_old": 0.207
+    },
+    "[6, 8)": {
+     "n": 22.0,
+     "shoot_rate": 0.227,
+     "gap_new": 0.213,
+     "gap_old": 0.17
+    },
+    "[8, 12)": {
+     "n": 10.0,
+     "shoot_rate": 0.3,
+     "gap_new": 0.18,
+     "gap_old": 0.175
+    },
+    "[12, 99)": {
+     "n": 2.0,
+     "shoot_rate": 0.0,
+     "gap_new": 0.038,
+     "gap_old": 0.091
+    }
+   },
+   "check1_gap_slope": {
+    "slope": 0.0187,
+    "ci95": [
+     0.0097,
+     0.0293
+    ],
+    "n": 312,
+    "passes": true
+   },
+   "check1_gap_slope_sensitivity_other_Vcont": {
+    "slope": 0.0193,
+    "ci95": [
+     0.0107,
+     0.0298
+    ],
+    "n": 312,
+    "passes": true
+   },
+   "power_main": {
+    "pilot_T": 496.4196,
+    "c_shoot=-0.2": {
+     "se_c": 98.0354,
+     "se_T": 154783.9802,
+     "mde80": 274.4991
+    },
+    "c_shoot=+0.0": {
+     "se_c": 50.8675,
+     "se_T": 154783.9727,
+     "mde80": 142.429
+    },
+    "c_shoot=+0.2": {
+     "se_c": 57.8069,
+     "se_T": 154783.9715,
+     "mde80": 161.8594
+    },
+    "mde80_at_c0": 142.429
+   },
+   "power_sensitivity_other_Vcont": {
+    "pilot_T": 91.3425,
+    "c_shoot=-0.2": {
+     "se_c": 18.3876,
+     "se_T": 5297.3202,
+     "mde80": 51.4852
+    },
+    "c_shoot=+0.0": {
+     "se_c": 9.4937,
+     "se_T": 5297.3127,
+     "mde80": 26.5825
+    },
+    "c_shoot=+0.2": {
+     "se_c": 10.5463,
+     "se_T": 5297.3115,
+     "mde80": 29.5296
+    },
+    "mde80_at_c0": 26.5825
+   },
+   "decision": "underpowered (MDE 142.429); games needed ~22540023"
+  }
+ }
+}
