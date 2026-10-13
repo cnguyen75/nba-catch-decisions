@@ -748,3 +748,164 @@ states a distance of 8 ft or less. All other shots keep R1 + R2 unchanged.
 - best teammate's openness (the maximum over teammates of each one's
   nearest-opponent distance);
 - score margin.
+
+# Stage 3a registration, part 2: values, choice model, power, synthetic
+
+Registered before any value model is fitted or any choice model is run.
+
+## Data for the value models
+
+**League catches:** counted catches by every player except the three gated
+ones, in **train-split** games. Validation-split league catches are used
+only for calibration reports.
+
+**Excluded:**
+
+- catches with action unknown (F1);
+- drives from catches inside 20 ft (see "Choice set");
+- catches missing any state feature.
+
+## V_shoot
+
+**Data:** league shoot-now attempts, i.e. located shots within 1.5 s of the
+catch. The outcome is make/miss from the PBP.
+
+**Model:** logistic regression (scikit-learn 1.5.2, L2 with C = 1.0, lbfgs)
+on:
+
+- d and d² (distance at the catch, ft);
+- zone one-hot (rim, mid, above-break three, corner three);
+- log(1 + openness at catch), and that term × the three indicator.
+
+**Value:** V_shoot = P(make) × points, with points = 3 for corner and
+above-break zones and 2 otherwise. This is the immediate value of the shot
+only (see the note below).
+
+**Calibration, on validation-game league shoot-now attempts:**
+
+- ECE over 10 equal-count bins of predicted P;
+- a decile table;
+- **limit: ECE ≤ 0.03.**
+- If it fails, it is reported and V_shoot is not used for synthetic or
+  power until a registered fix.
+
+**Player skill:** a per-zone logit offset δ_z for each gated player.
+
+- Fitted on his train-game shoot-now attempts only, by maximum a posteriori
+  with prior N(0, 0.3²). This is shrinkage toward zero, as in Cervone et al.
+- A zone with no attempts gets δ = 0.
+
+## V_drive, V_pass, V_hold (and V_continue)
+
+**Outcome:** possession points after the catch (rule in part 1).
+
+**Model:** for each action a, ridge regression (alpha = 1.0) on league train
+catches whose observed action is a. Features, standardized:
+
+- d and d²;
+- zone one-hot;
+- openness (capped at 15);
+- rim protection (capped at 20);
+- shot clock;
+- best teammate's openness (capped at 20);
+- score margin (clipped to ±20).
+
+**V_continue,** for the binary model, uses the same regression on all
+league catches that are not shoot-now.
+
+**Player offsets:** δ_a = Σ residuals / (n_a + 50) over his own train
+catches with action a. The 50 is the shrinkage pseudo-count.
+
+**Reported on validation league catches:**
+
+- RMSE against an intercept-only model;
+- a decile table of predicted against observed.
+
+**Assumption, selection on observables.** Each continuation value is the
+mean outcome of catches where that action was chosen in that state. Using it
+as the value of that action had it been chosen assumes nothing unobserved
+drives both the choice and the outcome. This is an assumption, not
+something tested.
+
+**Known mismatch (flagged, not fixed, per the design).** V_shoot counts only
+the shot's own points. The continuation values are whole-possession points,
+which include offensive rebounds and free throws. To size the gap, the mean
+possession points after league shoot-now catches minus mean V_shoot is
+reported.
+
+## Choice model
+
+P(a | x) ∝ exp((V_a(x) − c_a) / T), with c_hold = 0.
+
+- **Four-way:** actions {shoot, drive, pass, hold}; parameters (c_shoot,
+  c_drive, c_pass, T).
+- **Binary:** {shoot, continue}; parameters (c_shoot, T).
+
+**Primary model:** four-way if the drive/pass detector passes its gate,
+binary otherwise.
+
+**Choice set:** drive is available only if d_basket ≥ 20 ft at the catch.
+Catches with an observed drive and d_basket < 20 are excluded and counted.
+
+**Fitting:** maximum likelihood (scipy 1.14.1, BFGS on c's and log T),
+used for synthetic recovery only in 3a.
+
+**Secondary:** c_shoot by zone, with zone-specific c_shoot and the other
+parameters shared. Only its expected standard errors are reported in 3a.
+
+## Pilot T (the only real-data choice fit in 3a)
+
+The primary model is fitted by maximum likelihood on each gated player's
+train-game catches. **Only T is written out.** The pilot's c estimates are
+discarded in code and never printed.
+
+## Power (Fisher information)
+
+**Setup:**
+
+- each player's real train-game catch states;
+- his fitted V's, including his offsets;
+- T = his pilot T.
+
+**Parameter settings:** c_shoot ∈ {−0.2, 0, +0.2}, with c_drive = c_pass = 0.
+
+**Fisher information:** for each catch, J_iᵀ (diag p − p pᵀ) J_i, summed over
+catches. J_i is the Jacobian of the utilities with respect to the
+parameters.
+
+**Reported:** standard errors of c_shoot and T, and the minimum detectable
+|c_shoot| at 80% power (two-sided α = 0.05): MDE = 2.80 × SE(c_shoot).
+
+**Decision, per player:** evaluated at c_shoot = 0.
+
+- **Proceed** if MDE ≤ 0.15 points.
+- **Otherwise underpowered,** with games needed = ceil(train games ×
+  (MDE / 0.15)²).
+
+## Synthetic recovery
+
+**Setup:** for each player that proceeds, a made-up player built on his real
+train catch states and fitted V's.
+
+**Settings** (as (c_shoot, c_drive, c_pass, T)):
+
+- S1: (−0.2, +0.1, −0.1, T_p);
+- S2: (0, 0, 0, T_p);
+- S3: (+0.2, −0.1, +0.1, 1.5 T_p).
+
+For the binary model, only c_shoot and T apply. **20 seeds per setting**
+(seeds 100–119).
+
+**Limits:** for each parameter, 2.576 × SE from the Fisher information at
+the true setting, which is the ideal estimator's 99th percentile of |error|.
+
+**Pass rule:**
+
+- a run passes if every parameter is within its limit;
+- a player passes if at least 18 of 20 runs pass in every setting.
+
+**Ideal-estimator power of this rule:** the probability that it passes when
+the errors are exactly N(0, I⁻¹), computed by simulation (100,000 draws,
+seed 7) and reported before synthetic runs.
+
+**Every run is reported.** Players who don't proceed get no synthetic runs.
