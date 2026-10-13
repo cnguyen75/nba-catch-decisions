@@ -259,3 +259,106 @@ These were added to `gate.py` **after** the gate numbers were seen. They are
 reported separately and do not change the verdict:
 `post_hoc_sensitivity` (teammate-pass catches only; criterion 2 at 22–30 ft)
 and `power_crit2` (simulated power of criterion 2).
+
+---
+
+# Second pass: 10 Curry games (registered 2026-10-13, before any new data was scored)
+
+This section was written and committed before any of the 8 new games was
+downloaded. It governs the second pass. Where it is silent, the first-pass
+rules above (with R1 and R2) apply unchanged.
+
+### Sample
+
+- **Gated:** Curry (201939) in the 10 earliest-dated GSW games in the archive.
+  - The two already used: 10.27.2015.NOP.at.GSW and 10.31.2015.GSW.at.NOP.
+  - Plus 8 more: 11.02.2015.MEM.at.GSW, 11.04.2015.LAC.at.GSW,
+    11.06.2015.DEN.at.GSW, 11.07.2015.GSW.at.SAC, 11.09.2015.DET.at.GSW,
+    11.11.2015.GSW.at.MEM, 11.12.2015.GSW.at.MIN, 11.14.2015.BKN.at.GSW.
+- **Reported but not gated:** LeBron and Harden, on their first-pass games,
+  with the fixed catch rule. They get numbers but no label.
+
+### C1: fixed catch rule ("sticky" control)
+
+**Why.** Under the old rule, the nearest player within 3 ft controlled the
+ball. A defender briefly nearer the ball during the holder's own dribble
+therefore ended his possession, and when it ended a new "catch" started.
+
+**New control rule,** applied frame by frame:
+
+- **Holder keeps the ball.** If the current holder H has the ball within
+  3 ft and z ≤ 8 ft, H keeps control, whoever else is nearer.
+- **Otherwise it passes to the nearest player.** Control goes to the nearest
+  player with the ball within 3 ft and z ≤ 8 ft, or to nobody.
+- **Resets.** The holder resets to nobody at a frame that is not contiguous
+  with the previous one, or at a change of quarter.
+
+**Unchanged:** possession spells (merging across gaps of 1.0 s or less, with no
+other controller and z ≤ 8), the 5-frame clean pre-window, frontcourt, shot
+clock running, the measures at the catch, the outcome linkage, and the
+release rule.
+
+**What counts as a catch.** A catch is the first frame of P's spell under
+sticky control. Its source is recorded for reporting:
+
+| Source | Meaning |
+|---|---|
+| teammate | a pass or handoff, including an inbound |
+| opponent | a steal or deflection that ended in P's hands |
+| none / self | a rebound, loose ball, or his own miss |
+
+Under sticky control the ball must actually leave P's 3 ft (or go above 8 ft)
+before anyone else can take control. So an opponent source now means the ball
+really left him.
+
+**Report only, not a gate:** before and after catch counts, by source, on the
+two first-pass Curry games.
+
+### Eye check of C1, before the gate runs
+
+- **Sample:** 10 counted Curry catches drawn from the 8 new games (seed 3).
+  Each is rendered with the catch frame marked, showing frames, ball height,
+  and ball-to-player distance. The openness value is not displayed.
+- **A hit** means the marked frame is within 0.2 s of a real start of
+  possession: the ball arrives from elsewhere and was not already in his
+  dribble.
+- **The hit rate is reported.**
+- **It is not a gate,** but if it is below 7/10, I stop and report before
+  running the gate.
+
+### C2: criterion 2 restricted to 22–30 ft
+
+Criterion 2 now uses only catches with `d_basket` in [22, 30) ft. Its
+thresholds are unchanged:
+
+- |P(cs | top tercile) − P(cs | bottom tercile)| ≥ 0.10;
+- a bootstrap 95% interval that excludes 0, using 10,000 resamples, seed 0,
+  with the terciles recomputed each time.
+
+Criteria 1 (bands 0–10, 10–22, 22+) and 3, and the 60-catch minimum, are
+unchanged.
+
+### C3: outcome labels (Curry only), with a decision rule
+
+`gap` is the top-minus-bottom tercile difference in P(cs). Its CI is the
+bootstrap interval above. Exactly one label applies, taken from the first
+rule that matches:
+
+1. **sample too small:** fewer than 60 counted catches.
+2. **no variation:** criterion 1 fails.
+3. **pass:** criteria 1, 2 and 3 all hold.
+4. **no prediction:** the CI lies entirely below +0.10 (upper bound < 0.10).
+5. **underpowered:** the CI includes both 0 and +0.10.
+6. **unlabelled (named reason):** any case the four labels above don't cover.
+   - Example: criteria 1 and 2 hold but criterion 3 fails.
+   - Example: the CI excludes 0 and includes +0.10, but the point gap is below
+     0.10.
+
+   This is reported as such, and not forced into another label.
+
+The labels are directional (positive means more open → more catch-and-shoot).
+Criterion 2 itself still uses |gap|, as registered. A strongly negative gap
+(CI below 0) would fall under rule 4.
+
+**The gate runs once.** Its numbers are reported whichever way they go, and
+then the work stops.
