@@ -362,3 +362,35 @@ Criterion 2 itself still uses |gap|, as registered. A strongly negative gap
 
 **The gate runs once.** Its numbers are reported whichever way they go, and
 then the work stops.
+
+### C1a: brief opponent touches (recorded before any new game was scored or eye-checked)
+
+**What was seen.** On the two first-pass Curry games, C1 cut counted catches
+only from 83 to 80, and opponent-sourced catches from 22 to 18. Tracing the
+remaining 18:
+
+- **About 11 are real passes.** A teammate's pass passes within 3 ft of a
+  defender for 1–4 frames in flight. The catch is real; only its source label
+  is wrong.
+- **About 5 are still the dribble flicker.** In each, Curry's previous spell
+  ended 1–25 frames earlier and the ball strayed 4–7 ft on a dribble. A
+  defender within 3 ft of the ball then held "control" for 1–13 frames.
+- C1's "the holder keeps the ball within 3 ft" therefore does not cover your
+  stated intent: a defender briefly nearest the ball during the shooter's own
+  dribble does not end or start a possession.
+
+**Rule added on top of C1.** A **brief opponent touch** is an opponent spell of
+12 frames (0.48 s) or less.
+
+1. **Merge.** If P's spell, then a brief opponent touch, then P's spell again,
+   with the gap from the end of P's first spell to the start of his second
+   at most 1.0 s, the two P spells merge into one possession. No catch is
+   created.
+2. **Source.** When a catch's source is computed, brief opponent touches are
+   skipped and the spell before them is used. A pass that skims a defender is
+   therefore labelled "teammate". Every catch carries a `brief_opp_touch` flag.
+
+**Accepted cost.** A real steal or deflection off P that comes back to P within
+1 s no longer creates a catch. Under the first-pass definitions this is rare.
+
+Everything else in C1, C2 and C3 is unchanged.

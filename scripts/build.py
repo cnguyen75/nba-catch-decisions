@@ -18,6 +18,18 @@ GAMES = {
     "0021500011": "10.28.2015.CLE.at.MEM",
     "0021500010": "10.28.2015.DEN.at.HOU",
 }
+# second pass (registered 4a18241): 8 more GSW games
+GAMES_PASS2 = {
+    "0021500051": "11.02.2015.MEM.at.GSW",
+    "0021500069": "11.04.2015.LAC.at.GSW",
+    "0021500083": "11.06.2015.DEN.at.GSW",
+    "0021500092": "11.07.2015.GSW.at.SAC",
+    "0021500104": "11.09.2015.DET.at.GSW",
+    "0021500120": "11.11.2015.GSW.at.MEM",
+    "0021500125": "11.12.2015.GSW.at.MIN",
+    "0021500144": "11.14.2015.BKN.at.GSW",
+}
+RULE = "nearest"  # "nearest" (first pass) or "sticky" (second pass, C1)
 TARGETS = {201939: "Curry", 2544: "LeBron", 201935: "Harden"}
 BASKETS = np.array([[5.25, 25.0], [88.75, 25.0]])
 CONTIG = 0.06
@@ -68,7 +80,7 @@ def load_timeline(game_id):
     nd = dist[np.arange(n), near]
     ctrl = np.where((nd <= CTRL_D) & (B[:, 2] <= CTRL_Z), PID[np.arange(n), near], 0)
     tl["dist"] = dist
-    tl["ctrl"] = ctrl
+    tl["ctrl"] = sticky_ctrl(dist, B, PID, prev_ok) if RULE == "sticky" else ctrl
     tl["home_team"] = g["events"][0]["home"]["teamid"]
     tl["visitor_team"] = g["events"][0]["visitor"]["teamid"]
     return g, events, tl, skipped
@@ -77,6 +89,27 @@ def load_timeline(game_id):
 def pc_seconds(s):
     m, sec = s.split(":")
     return int(m) * 60 + int(sec)
+
+
+def sticky_ctrl(dist, B, PID, prev_ok):
+    """C1: the holder keeps control while the ball is within 3 ft of him and z <= 8, whoever is nearer;
+    otherwise control goes to the nearest player within 3 ft (z <= 8) or to nobody. Resets at data gaps."""
+    n = len(B)
+    out = np.zeros(n, dtype=PID.dtype)
+    holder = 0
+    low = B[:, 2] <= CTRL_Z
+    for i in range(n):
+        if not prev_ok[i]:
+            holder = 0
+        if holder and low[i]:
+            j = np.where(PID[i] == holder)[0]
+            if len(j) and dist[i, j[0]] <= CTRL_D:
+                out[i] = holder
+                continue
+        k = dist[i].argmin()
+        holder = PID[i, k] if (dist[i, k] <= CTRL_D and low[i]) else 0
+        out[i] = holder
+    return out
 
 
 def window(tl, q, gmax, gmin):
@@ -180,7 +213,7 @@ def nearest_opp(tl, i, team, point):
 
 
 def main():
-    OUT.mkdir(exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True)
     pbp = pd.read_csv(DATA / "pbp" / "2015-16_pbp.csv", dtype={"GAME_ID": str})
     pbp = pbp[pbp.GAME_ID.isin(GAMES)].copy()
     shots_rows, catch_rows, join_rows = [], [], []
@@ -308,4 +341,15 @@ def main():
 
 
 if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--rule", choices=["nearest", "sticky"], default="nearest")
+    ap.add_argument("--games", choices=["pass1", "pass2"], default="pass1")
+    ap.add_argument("--out", default=None)
+    a = ap.parse_args()
+    RULE = a.rule
+    if a.games == "pass2":
+        GAMES.update(GAMES_PASS2)
+    if a.out:
+        OUT = Path(a.out).resolve()
     main()
