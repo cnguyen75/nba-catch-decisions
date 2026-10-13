@@ -420,3 +420,117 @@ Stopped here, as instructed.
   geometry bounds openness. It is not a reinterpretation of the result.
 - **Criteria 2 and 3 passed.**
 - **The registered label scheme, with its residual label, is accepted.**
+
+# Stage 2: trusted catch detector, then the full set (registered before running)
+
+## Detector rules D1–D3
+
+These are added on top of C1 + C1a. Everything else is unchanged: the 1.0 s
+gap merge, the 5-frame clean pre-window, frontcourt, shot clock running, the
+measures at the catch, release rules R1 and R2, and the outcome linkage.
+
+- **D1, despike the ball track.** This happens first, and the cleaned track
+  then feeds everything else, including the release rule.
+  - Within each run of contiguous frames, and for each ball coordinate (x, y
+    and z) separately, compute the centred 5-frame median.
+  - Wherever the value differs from that median by more than 3 ft, replace it
+    with the median.
+  - A ball in smooth flight sits on its median, so only isolated jumps
+    change. This targets the one-frame height jump seen in the eye check
+    (15 → 3.4 → 15 ft).
+- **D2, hysteresis on possession distance.** This handles the holding offset.
+  - **Acquire:** the nearest player with the ball within 3 ft and z ≤ 8 ft.
+  - **Keep:** the holder H keeps control while the ball is within **5 ft** of
+    H and z ≤ 8 ft.
+  - **Takeover:** another player Q takes control from H if Q is the nearest
+    player to the ball, with the ball within 3 ft and z ≤ 8, for **6
+    consecutive frames** (0.24 s). Control is then assigned to Q from the
+    first of those frames.
+  - **Reset:** control resets to nobody at a non-contiguous frame or a change
+    of quarter.
+- **D3, minimum duration.** After D2, any run of consecutive frames with the
+  same controller that is shorter than **5 frames** (0.2 s) is set to "no
+  controller". Spells, the gap merge, C1a and catches are then built as
+  before. A catch therefore holds for at least 5 frames.
+
+## Held-out eye check (gate)
+
+**Held-out games.** Four GSW games drawn at random (seed 4) from the 31 GSW
+games not used so far:
+
+- 11.22.2015.GSW.at.DEN
+- 11.30.2015.GSW.at.UTA
+- 12.06.2015.GSW.at.BKN
+- 01.08.2016.GSW.at.POR
+
+The full list is in `checks/manifest.json`.
+
+**Candidate pool.** The union, for Curry, of the counted catches from both
+earlier detectors run on these games:
+
+- the nearest-player rule (pass 1);
+- C1 + C1a (pass 2).
+
+Candidates within 5 frames of each other are merged, keeping the C1 + C1a
+frame.
+
+**Sampling.** Openness thirds are the tercile cuts of openness at the
+candidate frame within the pool. Draw 20 candidates per third (seed 5), 60 in
+all.
+
+**Labelling, by eye, before D1–D3 is run on these games.** The sheet shows
+the frames from −2 s to +1 s, the raw ball height, and the ball-to-Curry
+distance. It does not show openness or any D-detector output. Each candidate
+gets one label:
+
+- `real`: a real start of possession by Curry, with the ball arriving from
+  elsewhere (a pass, rebound, loose ball or steal). It is recorded with t*,
+  the first frame the ball is in his hands, read from the trace to about
+  ±2 frames.
+- `not_catch`: anything else, recorded with its error type.
+
+The labels are committed in `checks/heldout_labels.json` before D1–D3 is run
+on these games.
+
+**Scoring.**
+
+- A `real` candidate is correct if D1–D3 reports a counted Curry catch within
+  5 frames of t*.
+- A `not_catch` candidate is correct if D1–D3 reports no counted Curry catch
+  within 5 frames of the candidate frame.
+
+**Gate.** At least 54 of 60 correct, and no openness third below 16 of 20.
+
+**If it fails:** report the error types and stop. No tuning on the held-out
+set.
+
+**Known limitation.** The pool contains only catches that an earlier detector
+found. So the check measures D1–D3's precision, and its recall relative to
+that pool. It does not measure recall on catches that both earlier detectors
+missed.
+
+## If the gate passes: the full set (descriptive only)
+
+**Games.**
+
+- Curry: all 41 GSW games in the archive.
+- LeBron: all 39 CLE games, reported but not gated.
+- Harden: all 42 HOU games, reported but not gated.
+- A game shared between these teams is built once.
+
+Each game is extracted, processed, and its extracted JSON deleted. The .7z
+archives stay in `~/Documents/nba-tracking/raw`.
+
+**Reported numbers.** No model.
+
+- catches per game;
+- openness at catch by distance band;
+- at 22–30 ft, the rate of shooting within 1.5 s and within 4 s by openness
+  third, with bootstrap 95% CIs;
+- time from catch to shot;
+- openness at catch against openness at release;
+- detector-artefact checks:
+  - the per-game spread of catches per game, and any outliers;
+  - catches by quarter;
+  - catch frames bunched at the edge of the window;
+  - spikes in catch-to-shot times.
