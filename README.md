@@ -1979,3 +1979,134 @@ Dropping the post-catch closing window changes nothing material.
 **Within-player (the three):** most cells are thin. Resolved: Curry
 ahead-by-5+ 3.13, Q1–3 5.32, away 2.10, pass 3.88; LeBron Q1–3 4.23, away
 4.77, pass 4.81. Harden has no resolved cell.
+
+---
+
+# Stage 5b: latent shot quality, bivariate probit with sample selection (registered 2026-10-13, before any measurement)
+
+**Earlier gates stand.** Test games are untouched until a player passes
+everything below.
+
+## Data
+
+**League training catches:** the 414 training games, 16–30 ft, shot clock
+recorded, motion features present, action shoot-now or continue.
+
+- Selection s = shoot-now.
+- Outcome y = made, observed only for shoot-now catches with a located,
+  linked make/miss. Shoot-now catches without that are dropped and counted.
+
+## Model
+
+| | Equation | Covariates |
+|---|---|---|
+| **Selection** | s* = Zγ + u | Z = X + **excluded variables:** best teammate openness (capped at 20), score margin (clipped ±20), catch-source dummies (offensive rebound, inbound, other; pass is the reference) |
+| **Outcome** | y* = Xβ + e | X = 1, distance/10 and its square, zone dummies (above the break, corner), openness at catch (capped 15), counterfactual release openness open_cf (capped 15), shot clock, **motion state:** closing_pre and closing_post (clipped ±15), catcher speed (clipped at 25), set, defenders within 6 ft (capped at 3), pass flight time (clipped at 3) and distance (clipped at 60) |
+
+- Errors (u, e) are standard bivariate normal with correlation **ρ**,
+  parameterized as ρ = tanh(α).
+- **Note:** flight time and distance are 0 for catches that aren't passes,
+  so they carry a little of the catch-source information into the outcome
+  equation. Stated, not changed.
+
+**Log-likelihood:**
+
+- s = 0: ln Φ(−Zγ)
+- s = 1, y = 1: ln Φ₂(Zγ, Xβ; ρ)
+- s = 1, y = 0: ln Φ₂(Zγ, −Xβ; −ρ)
+
+Φ₂ is computed by 20-node Gauss–Legendre integration of the bivariate
+density in ρ. Covariates are standardized (the intercept is not).
+
+**Fitting:** L-BFGS-B, starting from the two separate probits and ρ = 0.
+
+**Uncertainty:** BHHH (outer product of per-observation scores, by central
+differences). The 95% interval for ρ is Wald on α, transformed back.
+
+## Quantities
+
+- **Counterfactual make rate for unshot catches** = the mean over s = 0
+  catches of P(y = 1 | x, s = 0) = Φ₂(Xβ, −Zγ; −ρ) / Φ(−Zγ).
+- **Naive counterpart** = the mean of Φ(Xβ_naive) over the same catches,
+  with β_naive from a probit on the shoot-now catches alone.
+
+## Step 1: exclusion strength (threshold set here, before measuring)
+
+- **Measurement:** on league training catches, a probit of s on Z (full)
+  against s on X (restricted).
+  - **Statistic:** LR = 2(ℓ_full − ℓ_restricted), with df = 5.
+  - **Partial pseudo-R²** = 1 − ℓ_full / ℓ_restricted.
+- **Threshold:** **LR / df ≥ 10**, the likelihood-ratio analogue of the
+  first-stage F ≥ 10 rule. Partial pseudo-R² is reported alongside.
+- **Below the threshold:** stop and report.
+- With about 100,000 catches, LR will easily clear this. The **practical**
+  test of whether ρ is identified is step 2, run at the real strength.
+
+## Step 2: synthetic validation, at the real exclusion strength
+
+- **Covariates:** the real league training catches (all rows, same size).
+- **True γ:** the real selection probit coefficients (from step 1), so the
+  excluded variables carry **exactly the real strength**.
+- **True β:** the real naive outcome probit coefficients.
+- **Data:** (u, e) bivariate normal with ρ ∈ {0, 0.3, 0.6}. Then s =
+  1[Zγ + u > 0], and y = 1[Xβ + e > 0], observed only if s = 1.
+- **Seeds:** 20 per setting (500–519, 600–619, 700–719).
+- **Each run, reported:**
+  - ρ̂ with its 95% interval, and whether it covers the truth;
+  - the estimated and the true counterfactual make rate for unshot catches,
+    and the absolute error;
+  - the naive estimate's error.
+- **Pass, in every setting:** the interval covers the true ρ in **≥ 18 of
+  20** seeds, **and** the counterfactual error is ≤ 0.03 in **≥ 18 of 20**.
+- **Fail:** stop.
+
+## Step 3: power on ρ
+
+- **Expected SE of ρ** at the real size = the mean BHHH SE across the
+  ρ = 0 synthetic runs. The minimum detectable |ρ| is 2.8 × SE.
+- **Registered:** the correction is used only if the **real ρ's 95%
+  interval excludes 0**. Otherwise the naive make model stands, and 5b ends
+  with that finding.
+
+## Step 4: real fit and validation (once)
+
+- **Fit** on league training catches. If one fit takes more than 30 minutes,
+  a 50% subsample at seed 4242 is used instead, and stated.
+- **Validation once,** on league **validation-game** catches (same unit):
+  mean per-catch log-likelihood of the bivariate probit against the two
+  separate probits (ρ = 0), with the difference and a game-bootstrap 95%
+  interval (1,000 resamples, seed 0).
+- **Reported:**
+  - ρ̂ [95% CI];
+  - by open_cf bin (0–2, 2–4, 4–6, 6–8, 8+ ft), for unshot catches, the
+    corrected conditional make probability, the corrected marginal Φ(Xβ),
+    and the naive Φ(Xβ_naive);
+  - the **corrected value gap** by open_cf bin: corrected V_shoot
+    (marginal make probability × points + g(zone)) minus naive V_continue.
+
+## Step 5: the player sequence
+
+A player continues only if **both** hold:
+
+- ρ is resolved;
+- his corrected value gap passes the old **check 1** (22–30 ft OLS slope on
+  open_cf > 0, bootstrap 95% CI excluding 0). For the check, V_shoot is the
+  league-corrected marginal value with no player offset (zone constants
+  don't change a within-band openness slope).
+
+**If so, the registered sequence:**
+
+1. power (pilot T, MDE ≤ 0.15);
+2. synthetic recovery;
+3. the real fit of c, scored once on test games;
+4. the sensitivities.
+
+**Otherwise stop there.**
+
+## Reporting
+
+- **One interim message** with the exclusion strength and the synthetic
+  results, before the real fit. Then continue.
+- **Final:** everything in plain terms, including **one paragraph on what
+  the result depends on** (the normality of the errors, and the exclusion
+  restrictions).
