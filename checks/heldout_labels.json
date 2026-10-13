@@ -1,0 +1,352 @@
+{
+ "labelled_before_d3_run": true,
+ "labeller": "Claude, by eye from sheets (no openness, no D-detector output)",
+ "labels": [
+  {
+   "cid": "H00",
+   "label": "real",
+   "t_star": 5295,
+   "note": ""
+  },
+  {
+   "cid": "H01",
+   "label": "real",
+   "t_star": 31180,
+   "note": ""
+  },
+  {
+   "cid": "H02",
+   "label": "real",
+   "t_star": 42675,
+   "note": ""
+  },
+  {
+   "cid": "H03",
+   "label": "real",
+   "t_star": 60862,
+   "note": ""
+  },
+  {
+   "cid": "H04",
+   "label": "not_catch",
+   "note": "alternating-frame ball glitch after his own shot; candidate frame is a glitch frame"
+  },
+  {
+   "cid": "H05",
+   "label": "real",
+   "t_star": 42455,
+   "note": ""
+  },
+  {
+   "cid": "H06",
+   "label": "real",
+   "t_star": 68288,
+   "note": ""
+  },
+  {
+   "cid": "H07",
+   "label": "real",
+   "t_star": 2140,
+   "note": ""
+  },
+  {
+   "cid": "H08",
+   "label": "real",
+   "t_star": 13591,
+   "note": ""
+  },
+  {
+   "cid": "H09",
+   "label": "real",
+   "t_star": 4672,
+   "note": ""
+  },
+  {
+   "cid": "H10",
+   "label": "real",
+   "t_star": 7511,
+   "note": ""
+  },
+  {
+   "cid": "H11",
+   "label": "real",
+   "t_star": 45190,
+   "note": ""
+  },
+  {
+   "cid": "H12",
+   "label": "real",
+   "t_star": 51148,
+   "note": ""
+  },
+  {
+   "cid": "H13",
+   "label": "not_catch",
+   "note": "mid-possession: ball within 3 ft for 2 s, dribbling with defender tight"
+  },
+  {
+   "cid": "H14",
+   "label": "real",
+   "t_star": 43073,
+   "note": ""
+  },
+  {
+   "cid": "H15",
+   "label": "real",
+   "t_star": 38518,
+   "note": ""
+  },
+  {
+   "cid": "H16",
+   "label": "real",
+   "t_star": 30676,
+   "note": ""
+  },
+  {
+   "cid": "H17",
+   "label": "real",
+   "t_star": 33423,
+   "note": "pass; one-frame spike after"
+  },
+  {
+   "cid": "H18",
+   "label": "not_catch",
+   "note": "ball position teleport: ball 25+ ft away jumps onto Curry for ~3 frames, then back"
+  },
+  {
+   "cid": "H19",
+   "label": "real",
+   "t_star": 4033,
+   "note": ""
+  },
+  {
+   "cid": "H20",
+   "label": "real",
+   "t_star": 44062,
+   "note": ""
+  },
+  {
+   "cid": "H21",
+   "label": "real",
+   "t_star": 10003,
+   "note": ""
+  },
+  {
+   "cid": "H22",
+   "label": "not_catch",
+   "note": "loose ball on the floor near Curry for 2 s with defender (scramble); no arrival"
+  },
+  {
+   "cid": "H23",
+   "label": "not_catch",
+   "note": "ball 2-3.5 ft from Curry for 2 s in a screen/handoff tangle with teammate; no arrival"
+  },
+  {
+   "cid": "H24",
+   "label": "real",
+   "t_star": 9956,
+   "note": ""
+  },
+  {
+   "cid": "H25",
+   "label": "real",
+   "t_star": 45917,
+   "note": ""
+  },
+  {
+   "cid": "H26",
+   "label": "real",
+   "t_star": 46058,
+   "note": ""
+  },
+  {
+   "cid": "H27",
+   "label": "real",
+   "t_star": 224,
+   "note": ""
+  },
+  {
+   "cid": "H28",
+   "label": "real",
+   "t_star": 36750,
+   "note": ""
+  },
+  {
+   "cid": "H29",
+   "label": "real",
+   "t_star": 15452,
+   "note": ""
+  },
+  {
+   "cid": "H30",
+   "label": "real",
+   "t_star": 22937,
+   "note": ""
+  },
+  {
+   "cid": "H31",
+   "label": "not_catch",
+   "note": "mid-possession dribble, defender overlapping"
+  },
+  {
+   "cid": "H32",
+   "label": "not_catch",
+   "note": "one-frame ball teleport onto Curry (ball otherwise 14-35 ft away)"
+  },
+  {
+   "cid": "H33",
+   "label": "not_catch",
+   "note": "own dribble excursion to 5 ft under pressure, regained within 0.3 s; no arrival"
+  },
+  {
+   "cid": "H34",
+   "label": "real",
+   "t_star": 28422,
+   "note": "arrival includes a 12 ft one-frame position jump; ball stays with him after"
+  },
+  {
+   "cid": "H35",
+   "label": "real",
+   "t_star": 7182,
+   "note": ""
+  },
+  {
+   "cid": "H36",
+   "label": "real",
+   "t_star": 461,
+   "note": ""
+  },
+  {
+   "cid": "H37",
+   "label": "real",
+   "t_star": 50272,
+   "note": ""
+  },
+  {
+   "cid": "H38",
+   "label": "real",
+   "t_star": 7347,
+   "note": "rebound coming down onto him"
+  },
+  {
+   "cid": "H39",
+   "label": "real",
+   "t_star": 13567,
+   "note": ""
+  },
+  {
+   "cid": "H40",
+   "label": "real",
+   "t_star": 69725,
+   "note": ""
+  },
+  {
+   "cid": "H41",
+   "label": "real",
+   "t_star": 10400,
+   "note": ""
+  },
+  {
+   "cid": "H42",
+   "label": "real",
+   "t_star": 48820,
+   "note": ""
+  },
+  {
+   "cid": "H43",
+   "label": "not_catch",
+   "note": "mid-possession dribble, defender overlapping"
+  },
+  {
+   "cid": "H44",
+   "label": "not_catch",
+   "note": "mid-possession dribble, excursion to 4.5 ft"
+  },
+  {
+   "cid": "H45",
+   "label": "not_catch",
+   "note": "mid-possession dribble, excursion to 4.2 ft, defender overlapping"
+  },
+  {
+   "cid": "H46",
+   "label": "real",
+   "t_star": 15719,
+   "note": ""
+  },
+  {
+   "cid": "H47",
+   "label": "real",
+   "t_star": 12852,
+   "note": ""
+  },
+  {
+   "cid": "H48",
+   "label": "real",
+   "t_star": 11570,
+   "note": ""
+  },
+  {
+   "cid": "H49",
+   "label": "not_catch",
+   "note": "wide dribble/holding offset: ball 3-4 ft from Curry for ~1 s, no other player near"
+  },
+  {
+   "cid": "H50",
+   "label": "real",
+   "t_star": 1168,
+   "note": "ball arrived ~0.7 s before candidate (possible Thompson handoff; judged as arrival)"
+  },
+  {
+   "cid": "H51",
+   "label": "real",
+   "t_star": 1169,
+   "note": ""
+  },
+  {
+   "cid": "H52",
+   "label": "not_catch",
+   "note": "holding offset: ball 3-7 ft from Curry for 1.5 s, no other player near the ball"
+  },
+  {
+   "cid": "H53",
+   "label": "real",
+   "t_star": 32055,
+   "note": ""
+  },
+  {
+   "cid": "H54",
+   "label": "not_catch",
+   "note": "mid-possession dribble, defender overlapping"
+  },
+  {
+   "cid": "H55",
+   "label": "real",
+   "t_star": 9098,
+   "note": ""
+  },
+  {
+   "cid": "H56",
+   "label": "real",
+   "t_star": 42269,
+   "note": "slow pass; one-frame glitches 1 s earlier"
+  },
+  {
+   "cid": "H57",
+   "label": "real",
+   "t_star": 41579,
+   "note": ""
+  },
+  {
+   "cid": "H58",
+   "label": "real",
+   "t_star": 35861,
+   "note": ""
+  },
+  {
+   "cid": "H59",
+   "label": "real",
+   "t_star": 7931,
+   "note": "loose ball/deflection near defender; one-frame spike just before"
+  }
+ ]
+}
