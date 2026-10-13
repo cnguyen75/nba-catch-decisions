@@ -1,0 +1,92 @@
+{
+ "correct": 51,
+ "n": 60,
+ "by_stratum": {
+  "drive_like": 16,
+  "other": 16,
+  "pass_like": 19
+ },
+ "passes": false,
+ "confusion_rows_eye_cols_detector": {
+  "drive": {
+   "drive": 15,
+   "hold": 2,
+   "pass": 2
+  },
+  "hold": {
+   "drive": 0,
+   "hold": 18,
+   "pass": 1
+  },
+  "pass": {
+   "drive": 0,
+   "hold": 4,
+   "pass": 18
+  }
+ },
+ "errors": [
+  {
+   "fid": "F43",
+   "stratum": "drive_like",
+   "eye": "drive",
+   "det": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F47",
+   "stratum": "other",
+   "eye": "pass",
+   "det": "hold",
+   "note": "uncertain: next possessor unclear"
+  },
+  {
+   "fid": "F58",
+   "stratum": "drive_like",
+   "eye": "drive",
+   "det": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F13",
+   "stratum": "other",
+   "eye": "pass",
+   "det": "hold",
+   "note": "uncertain: lob toward basket, judged a lob to a teammate (not his own shot)"
+  },
+  {
+   "fid": "F36",
+   "stratum": "drive_like",
+   "eye": "drive",
+   "det": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F53",
+   "stratum": "drive_like",
+   "eye": "drive",
+   "det": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F16",
+   "stratum": "other",
+   "eye": "pass",
+   "det": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F30",
+   "stratum": "other",
+   "eye": "pass",
+   "det": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F17",
+   "stratum": "pass_like",
+   "eye": "hold",
+   "det": "pass",
+   "note": "uncertain: ball travels far, next touch unclear"
+  }
+ ]
+}
