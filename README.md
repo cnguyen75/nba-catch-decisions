@@ -408,3 +408,15 @@ track folder. The C1 eye check scored 7/10, in `checks/eye_c1.json`.
 - **Criterion 3 passes:** 30%.
 
 Stopped here, as instructed.
+
+---
+
+# Decision after the second pass (Colin, 2026-10-13)
+
+- **Proceed to building the dataset.** The registered label "no variation"
+  stands; it came from the 0–10 ft band only (14 catches, IQR 1.9 ft).
+- **The decision was made after seeing the numbers.** It is a post-hoc
+  judgement that criterion 1 was mis-specified for the rim band, where
+  geometry bounds openness. It is not a reinterpretation of the result.
+- **Criteria 2 and 3 passed.**
+- **The registered label scheme, with its residual label, is accepted.**
