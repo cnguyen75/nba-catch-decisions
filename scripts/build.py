@@ -421,7 +421,8 @@ def main():
             e = events.get(int(row.EVENTNUM))
             rec = dict(game=gid, eventnum=int(row.EVENTNUM), shooter=int(row.PLAYER1_ID),
                        team=int(row.PLAYER1_TEAM_ID), period=int(row.PERIOD), pctime=row.PCTIMESTRING,
-                       made=int(row.EVENTMSGTYPE == 1), joined=e is not None)
+                       made=int(row.EVENTMSGTYPE == 1), joined=e is not None,
+                       pbp_gc=pc_seconds(row.PCTIMESTRING))
             if e is None:
                 rec["reason"] = "not_joined"
                 shots_rows.append(rec)
