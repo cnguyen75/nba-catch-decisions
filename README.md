@@ -236,3 +236,26 @@ window is not.
 The join (event number → PBP row) is unchanged and still supplies shooter,
 period, clock and description. Still no catch or gate quantity had been
 computed.
+
+## Raw file checksums (SHA-256)
+
+```
+33c1eed43de032dc42b47f130c03a87ad2e70ee9287017d95819661ca7782747  10.27.2015.CLE.at.CHI.7z
+1734f248b324b52eff271e606af300ae89d50059a38f46b7112761c94c4ff4a1  10.27.2015.NOP.at.GSW.7z
+815cacfd9a583df862c2a38b9464f70b3db452f7ccd1986dd2e68d20f3c3388d  10.28.2015.CLE.at.MEM.7z
+1a8c71f74cfdc29e809bda203755b4de6fe5de2ad997ecf1ad921284ac99eef2  10.28.2015.DEN.at.HOU.7z
+17b4225ae1a9c1ac8d617238f29e0e067181c81d392ca4be122fd504efced603  10.31.2015.GSW.at.NOP.7z
+b10a0e3ff6870d9a7559281e910ebaed12fd244938049b7384480be64dd0d21f  2015-16_pbp.csv
+```
+
+## Results
+
+Gate numbers and the report are in
+`~/Personal/site-handoff/tracks/nba-catch-decisions/` (`feasibility.md`,
+`results.json`). The pre-registered verdict is **fail**: criterion 2 fails for
+all three players.
+
+These were added to `gate.py` **after** the gate numbers were seen. They are
+reported separately and do not change the verdict:
+`post_hoc_sensitivity` (teammate-pass catches only; criterion 2 at 22–30 ft)
+and `power_crit2` (simulated power of criterion 2).

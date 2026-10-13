@@ -27,6 +27,70 @@ def tercile_gap(openness, cs):
     return float(top.mean() - bot.mean()), len(bot), len(top)
 
 
+def counted(c, pid):
+    cnt = c[(c.pid == pid) & c.valid_catch & c.frontcourt & c.sc_running].copy()
+    cnt["cs"] = (cnt.catch_to_shot.notna() & (cnt.catch_to_shot <= 1.5)).astype(int)
+    cnt["shot4"] = (cnt.catch_to_shot.notna() & (cnt.catch_to_shot <= 4.0)).astype(int)
+    return cnt
+
+
+def crit2(far, rng):
+    o, y = far.open_catch.values, far.cs.values
+    gap = tercile_gap(o, y)[0]
+    boots = np.array([tercile_gap(o[i], y[i])[0] for i in (rng.integers(0, len(o), len(o)) for _ in range(N_BOOT))])
+    lo95, hi95 = np.quantile(boots[~np.isnan(boots)], [0.025, 0.975])
+    return dict(n=int(len(far)), gap=float(gap), ci95=[float(lo95), float(hi95)], p_cs=float(y.mean()),
+                passes=bool(abs(gap) >= 0.10 and (lo95 > 0 or hi95 < 0)))
+
+
+def sensitivity(c, rng):
+    """POST HOC, not part of the verdict. (a) catches from a teammate's pass only (drops 'opponent' catches,
+    mostly a defender momentarily nearest the ball); (b) criterion 2 on catches 22-30 ft out."""
+    out = {}
+    for name, pid in TARGET_IDS.items():
+        cnt = counted(c, pid)
+        tm = cnt[cnt.source == "teammate"]
+        out[name] = {
+            "teammate_only": dict(n=int(len(tm)), share_shot4=float(tm.shot4.mean()),
+                                  iqr_by_band={lab: (iqr(x.open_catch.values)[0] if len(x) >= 10 else None, int(len(x)))
+                                               for lab, lo, hi in BANDS
+                                               for x in [tm[(tm.d_basket >= lo) & (tm.d_basket < hi)]]},
+                                  crit2_22plus=crit2(tm[tm.d_basket >= 22], rng)),
+            "crit2_22_to_30ft": crit2(cnt[(cnt.d_basket >= 22) & (cnt.d_basket < 30)], rng),
+        }
+    return out
+
+
+def power_crit2(res, reps=500, seed=0):
+    """Simulated power of criterion 2 for a true top-minus-bottom tercile gap of 15 or 20 pp centred on the
+    player's own 22+ catch-and-shoot rate. (A true gap of exactly 10 pp caps power at 50%, since the rule
+    needs the estimate itself to reach 10 pp.) Planning number only; 200 bootstrap draws per replicate."""
+    rng = np.random.default_rng(seed)
+    out = {}
+    for name, r in res["players"].items():
+        base = r["bands"]["22+"]["p_cs"]
+        per_game = r["bands"]["22+"]["n"] / len(r["games"])
+        entry = dict(base_p_cs=base, catches22_per_game=per_game)
+        for true_gap in (0.15, 0.20):
+            pb, pt = max(base - true_gap / 2, 0.0), base + true_gap / 2
+            table = {}
+            for n in (60, 120, 240, 480, 960):
+                m = n // 3
+                hits = 0
+                for _ in range(reps):
+                    y = np.r_[rng.random(m) < pb, rng.random(m) < base, rng.random(m) < pt].astype(int)
+                    o = np.r_[np.zeros(m), np.ones(m), 2 * np.ones(m)] + rng.random(3 * m) * 0.5
+                    bt = [tercile_gap(o[i], y[i])[0] for i in (rng.integers(0, 3 * m, 3 * m) for _ in range(200))]
+                    lo, hi = np.nanquantile(bt, [0.025, 0.975])
+                    hits += abs(tercile_gap(o, y)[0]) >= 0.10 and lo > 0
+                table[n] = hits / reps
+            need = next((n for n, pw in table.items() if pw >= 0.8), None)
+            entry[f"gap_{int(true_gap * 100)}pp"] = dict(power_by_n22=table, n22_for_80pct=need,
+                                                         games_for_80pct=None if need is None else math.ceil(need / per_game))
+        out[name] = entry
+    return out
+
+
 def main():
     c = pd.read_csv(OUT / "catches.csv", dtype={"game": str})
     s = pd.read_csv(OUT / "shots.csv", dtype={"game": str})
@@ -84,7 +148,7 @@ def main():
                       p_cs_bottom=float(y[o <= np.quantile(o, 1 / 3)].mean()),
                       p_cs_top=float(y[o > np.quantile(o, 2 / 3)].mean()),
                       cut_ft=[float(np.quantile(o, 1 / 3)), float(np.quantile(o, 2 / 3))])
-            crit2_ok = abs(gap) >= 0.10 and (lo95 > 0 or hi95 < 0)
+            crit2_ok = bool(abs(gap) >= 0.10 and (lo95 > 0 or hi95 < 0))
         else:
             crit2_ok = False
         r["crit2"] = c2
@@ -124,6 +188,8 @@ def main():
     else:
         verdict = "fail"
     res["verdict"] = verdict
+    res["post_hoc_sensitivity"] = sensitivity(c, rng)
+    res["power_crit2"] = power_crit2(res)
     (OUT / "results.json").write_text(json.dumps(res, indent=1, default=float))
     print(json.dumps(res, indent=1, default=float))
 
