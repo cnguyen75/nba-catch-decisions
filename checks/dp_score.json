@@ -1,0 +1,85 @@
+{
+ "correct": 53,
+ "n": 60,
+ "by_stratum": {
+  "drive_like": 18,
+  "other": 16,
+  "pass_like": 19
+ },
+ "passes": false,
+ "confusion_eye_vs_detector": {
+  "drive": {
+   "drive": 17,
+   "hold": 1,
+   "pass": 0
+  },
+  "hold": {
+   "drive": 2,
+   "hold": 18,
+   "pass": 3
+  },
+  "pass": {
+   "drive": 1,
+   "hold": 0,
+   "pass": 18
+  }
+ },
+ "errors": [
+  {
+   "did": "D12",
+   "stratum": "other",
+   "eye": "drive",
+   "detector": "hold",
+   "correct": false,
+   "note": "borderline: minimum ~10.0 ft"
+  },
+  {
+   "did": "D24",
+   "stratum": "other",
+   "eye": "pass",
+   "detector": "hold",
+   "correct": false,
+   "note": ""
+  },
+  {
+   "did": "D27",
+   "stratum": "pass_like",
+   "eye": "drive",
+   "detector": "pass",
+   "correct": false,
+   "note": "borderline: ~10 ft then data glitch"
+  },
+  {
+   "did": "D32",
+   "stratum": "drive_like",
+   "eye": "hold",
+   "detector": "drive",
+   "correct": false,
+   "note": "drive started ~5.6 s after catch (>4 s)"
+  },
+  {
+   "did": "D48",
+   "stratum": "other",
+   "eye": "pass",
+   "detector": "hold",
+   "correct": false,
+   "note": "uncertain: ball turns near teammate and opponent"
+  },
+  {
+   "did": "D53",
+   "stratum": "other",
+   "eye": "pass",
+   "detector": "hold",
+   "correct": false,
+   "note": ""
+  },
+  {
+   "did": "D55",
+   "stratum": "drive_like",
+   "eye": "drive",
+   "detector": "hold",
+   "correct": false,
+   "note": ""
+  }
+ ]
+}
