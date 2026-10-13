@@ -1120,3 +1120,21 @@ of train catches. Power and synthetic run on the restricted set.
 synthetic data set, generated with possession-scale V_shoot, is also fitted
 with V_shoot_imm. The per-run difference (c_shoot fitted on the immediate
 scale minus the truth) is reported, as its mean and SD per setting.
+
+## Stage 3a results (part 3): stopped, no player proceeds
+
+| Item | Result |
+|---|---|
+| V_shoot fix | **PASSES** (ECE 0.0385 ≤ 0.0492) |
+| Drive/pass retest | **FAILS** 51/60; binary is primary |
+| Scope rule | d ≤ 30 ft (shot-model support) |
+| Power: Curry, Harden | Pilot T diverges, so underpowered (model degenerate) |
+| Power: LeBron | MDE 0.34 > 0.15, so underpowered (~113 train games needed) |
+| Synthetic | **Not run** (no player proceeds) |
+
+**Diagnostic.** League P(make) on catch-and-shoot threes is flat in openness
+at the catch (39/36/39% by tercile), so V_shoot does not move with openness.
+For Curry and Harden, shooting falls as V_shoot − V_continue rises (slopes
+−1.06 and −3.69).
+
+The report is in the track folder's `feasibility.md`.
