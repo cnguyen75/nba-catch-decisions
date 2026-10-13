@@ -361,6 +361,10 @@ def stage3_features(tl, sp, k, p, team, bk, pxy, unloc):
     out["min_dbasket"] = float(np.nanmin(dP))
     out["max_dbasket"] = float(np.nanmax(dP))
     out["n_dribbles"] = int(np.sum(drib[1:] & ~drib[:-1]))
+    for kf in range(5, 45, 5):
+        i = st + kf
+        pk = player_xy(tl, i, p) if i < tl["n"] and Q[i] == Q[st] else None
+        out[f"open_k{kf}"] = nearest_opp(tl, i, team, pk) if pk is not None else np.nan
     nxt = sp[k + 1] if k + 1 < len(sp) else None
     if nxt is None or Q[nxt[1]] != Q[st]:
         rel, gap = "none", np.nan
@@ -441,6 +445,14 @@ def main():
                 rec["ball_z_release"] = float(tl["B"][t_r, 2])
                 # nearest player to ball at release
                 rec["nearest_at_release"] = int(tl["PID"][t_r, tl["dist"][t_r].argmin()])
+                sxy = player_xy(tl, t_r, rec["shooter"])
+                rec["jump"] = "Jump" in desc
+                rec["sc_release"] = None if np.isnan(tl["SC"][t_r]) else float(tl["SC"][t_r])
+                if sxy is not None:
+                    d_rel = float(np.linalg.norm(sxy - BASKETS[bk]))
+                    rec["d_release"] = d_rel
+                    rec["zone_release"] = zone_of(sxy, bk, d_rel)
+                    rec["open_release_all"] = nearest_opp(tl, t_r, rec["team"], sxy)
                 votes.setdefault((rec["team"], rec["period"]), []).append(bk)
             shots_rows.append(rec)
         # --- attacking basket per (team, period)
