@@ -1,0 +1,307 @@
+{
+ "labelled_before_reading_detector": true,
+ "disclosure": "drive/pass flags were computed in the same batch build as the strata proxies; they were not read for these 60 catches until this file was committed",
+ "label_semantics": "registered detector definitions (incl. 4 s windows), judged by eye from track/trace sheets",
+ "labels": [
+  {
+   "did": "D00",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D01",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D02",
+   "label": "drive",
+   "note": "drove 24 ft to ~10.5 ft when ball lifted (>8 ft, possession end), then to 1 ft holding the ball: judged a drive"
+  },
+  {
+   "did": "D03",
+   "label": "hold",
+   "note": "dribbled 23 ft to ~10.1 ft, not within 10"
+  },
+  {
+   "did": "D04",
+   "label": "hold",
+   "note": "uncertain: ball leaves him toward baseline, no teammate near"
+  },
+  {
+   "did": "D05",
+   "label": "hold",
+   "note": "passes after 4.8 s (>4 s) without reaching 10 ft"
+  },
+  {
+   "did": "D06",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D07",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D08",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D09",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D10",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D11",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D12",
+   "label": "drive",
+   "note": "borderline: minimum ~10.0 ft"
+  },
+  {
+   "did": "D13",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D14",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D15",
+   "label": "hold",
+   "note": "uncertain: ball ends next to an opponent"
+  },
+  {
+   "did": "D16",
+   "label": "hold",
+   "note": "player-track glitch after possession"
+  },
+  {
+   "did": "D17",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D18",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D19",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D20",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D21",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D22",
+   "label": "drive",
+   "note": "borderline: minimum ~10.0 ft"
+  },
+  {
+   "did": "D23",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D24",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D25",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D26",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D27",
+   "label": "drive",
+   "note": "borderline: ~10 ft then data glitch"
+  },
+  {
+   "did": "D28",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D29",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D30",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D31",
+   "label": "drive",
+   "note": "last frame >=20 ft at ~1.9 s, drive from ~19.5 ft"
+  },
+  {
+   "did": "D32",
+   "label": "hold",
+   "note": "drive started ~5.6 s after catch (>4 s)"
+  },
+  {
+   "did": "D33",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D34",
+   "label": "pass",
+   "note": "uncertain entry pass"
+  },
+  {
+   "did": "D35",
+   "label": "hold",
+   "note": "data gap after possession"
+  },
+  {
+   "did": "D36",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D37",
+   "label": "hold",
+   "note": "data gap after possession; receiver not visible"
+  },
+  {
+   "did": "D38",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D39",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D40",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D41",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D42",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D43",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D44",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D45",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D46",
+   "label": "drive",
+   "note": "caught at 18 ft, out to 21 ft, then drove"
+  },
+  {
+   "did": "D47",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "did": "D48",
+   "label": "pass",
+   "note": "uncertain: ball turns near teammate and opponent"
+  },
+  {
+   "did": "D49",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D50",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D51",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D52",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D53",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D54",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D55",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D56",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D57",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "did": "D58",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "did": "D59",
+   "label": "drive",
+   "note": ""
+  }
+ ]
+}
