@@ -9,12 +9,13 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).parent))
-from s4_data import GATED, ZONES, S4, load  # noqa: E402
+from s4_data import GATED, ZONES, S4, ROOT as ROOT_DIR, load  # noqa: E402
 from vshoot2 import ece, ns_basis  # noqa: E402
 from values import map_offset  # noqa: E402
 
 BINS = [0, 2, 4, 6, 8, 12, 99]
 SCORE_ONLY = "--score-only" in sys.argv
+OPEN_KNOTS = np.array([2.0, 4.0, 6.0, 8.0, 12.0])
 
 
 def X2(d, zone, three, op, cs, sc):
@@ -24,7 +25,8 @@ def X2(d, zone, three, op, cs, sc):
     three = np.asarray(three, float)
     cs = np.asarray(cs, float)
     sc = np.asarray(sc, float)
-    return np.column_stack([ns_basis(d), z, lo, lo * d / 10, lo * three, cs, cs * lo, sc, sc ** 2 / 100])
+    op_c = np.clip(np.asarray(op, float), 0, 30)
+    return np.column_stack([ns_basis(d), z, ns_basis(op_c, OPEN_KNOTS), lo * d / 10, lo * three, cs, cs * lo, sc, sc ** 2 / 100])
 
 
 def shots_X(df):
@@ -45,7 +47,7 @@ def main():
                                          "n_all": int(len(th)), "n_cs": int((th.cs == 1).sum())}
     # ---- step 2: make model on all league jump shots
     js = lg[lg.jump.astype(bool) & lg.sc_release.notna()]
-    tr, va = js[js.split == "train"], js[js.split == "validation"]
+    tr, va = js[js.split == "train"], js[js.split == "calib"]  # attempt 2: score on the fresh calibration games
     def fit_base(d):
         sc_ = StandardScaler().fit(shots_X(d))
         return sc_, LogisticRegression(C=1.0, max_iter=5000).fit(sc_.transform(shots_X(d)), d.made.astype(int))
@@ -65,11 +67,28 @@ def main():
     pv = p_make(shots_X(va)); yv = va.made.to_numpy(float)
     e, dec = ece(pv, yv)
     rng = np.random.default_rng(0)
-    null = np.array([ece(pv, (rng.random(len(pv)) < pv).astype(float))[0] for _ in range(5000)])
+    null = np.array([ece(pv, (rng.random(len(pv)) < pv).astype(float))[0] for _ in range(5000 if SCORE_ONLY else 1)])
     if SCORE_ONLY:
-        va.assign(pred=pv)[["game", "made", "pred", "open_release_all", "three", "cs"]].to_csv(S4 / "make_val_preds.csv", index=False)
-        (S4 / "make_rescore_repro.json").write_text(json.dumps({"ece_val": e, "platt": [A, B]}))
-        print("reproduced ECE", round(e, 6), "platt", A, B)
+        out = va.assign(pred=pv)
+        out[["game", "made", "pred", "open_release_all", "three", "cs"]].to_csv(S4 / "make_calib_preds.csv", index=False)
+        lvl = abs(out.pred.mean() - out.made.mean())
+        bb = pd.cut(out.open_release_all, BINS, right=False)
+        t = out.groupby(bb, observed=True).agg(n=("made", "size"), pred=("pred", "mean"), obs=("made", "mean"))
+        t["se"] = np.sqrt(t.obs * (1 - t.obs) / t.n)
+        t["limit"] = np.maximum(0.04, 2 * t.se)
+        t["err"] = t.pred - t.obs
+        t["ok"] = t.err.abs() <= t.limit
+        lo4, hi8 = out[out.open_release_all < 4], out[out.open_release_all >= 8]
+        dp, do = hi8.pred.mean() - lo4.pred.mean(), hi8.made.mean() - lo4.made.mean()
+        res = {"n_train_shots": int(len(tr)), "n_calib_shots": int(len(out)), "n_calib_games": int(out.game.nunique()), "platt": [A, B],
+               "level": {"mean_pred": round(out.pred.mean(), 4), "mean_obs": round(out.made.mean(), 4), "abs_diff": round(lvl, 4), "passes": bool(lvl <= 0.01)},
+               "gradient": {"pred_change": round(dp, 4), "obs_change": round(do, 4), "abs_diff": round(abs(dp - do), 4), "passes": bool(abs(dp - do) <= 0.03),
+                            "ratio_obs_over_pred": round(do / dp, 4)},
+               "bins": {str(k): {kk: (round(float(x), 4) if kk != "ok" else bool(x)) for kk, x in r.items()} for k, r in t.iterrows()},
+               "bins_pass": bool(t.ok.all()), "ece_info": round(e, 4), "decile_table_info": dec}
+        res["all_pass"] = res["level"]["passes"] and res["gradient"]["passes"] and res["bins_pass"]
+        (ROOT_DIR / "checks/s4_calib2_score.json").write_text(json.dumps(res, indent=1, default=str))
+        print(json.dumps({k: v for k, v in res.items() if k != "decile_table_info"}, indent=1, default=str))
         return
     rep["make_model"] = {"n_train": int(len(tr)), "n_val": int(len(va)), "platt": [A, B], "ece_val": round(e, 4),
                          "null_p95": round(float(np.quantile(null, .95)), 4), "null_median": round(float(np.median(null)), 4),

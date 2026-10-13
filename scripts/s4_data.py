@@ -44,6 +44,11 @@ def load():
     s["split"] = s.game.map(split)
     c = c[c.split != "test"].copy()
     s = s[s.split != "test"].copy()
+    calib_f = ROOT / "checks/calib_games.json"
+    if calib_f.exists():  # calibration attempt 2 (0812282): league rows in the 60 games become "calib"
+        calib = set(json.loads(calib_f.read_text())["calib_games"])
+        c.loc[c.game.isin(calib) & ~c.pid.isin(GATED), "split"] = "calib"
+        s.loc[s.game.isin(calib) & ~s.shooter.isin(GATED), "split"] = "calib"
     p = pd.read_csv(S4 / "poss.csv", dtype={"game": str})
     c = c.merge(p, on=["game", "pid", "start"], how="left")
     sh = s.set_index(["game", "eventnum"])
