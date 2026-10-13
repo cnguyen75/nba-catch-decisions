@@ -6,7 +6,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from gate import BANDS, MIN_CATCHES, counted, crit2, iqr
+import sys
+
+sys.path.insert(0, str(Path(__file__).parent))
+from gate import BANDS, MIN_CATCHES, counted, crit2, iqr  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "out" / "v2"
