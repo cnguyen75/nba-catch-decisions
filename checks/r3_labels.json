@@ -1,0 +1,156 @@
+{
+ "labelled_before_r3_run": true,
+ "units": "release_s = seconds since window start (window = [pbp+6 s, pbp-0.5 s] game clock)",
+ "labels": [
+  {
+   "sid": "S00",
+   "release_s": 3.7,
+   "note": ""
+  },
+  {
+   "sid": "S01",
+   "release_s": 2.8,
+   "note": ""
+  },
+  {
+   "sid": "S02",
+   "release_s": 0.9,
+   "note": "uncertain: ball near rim with shooter underneath; release taken at final rise"
+  },
+  {
+   "sid": "S03",
+   "release_s": 1.4,
+   "note": ""
+  },
+  {
+   "sid": "S04",
+   "release_s": null,
+   "note": "no frames in window"
+  },
+  {
+   "sid": "S05",
+   "release_s": null,
+   "note": "no frames in window"
+  },
+  {
+   "sid": "S06",
+   "release_s": null,
+   "note": "no frames in window"
+  },
+  {
+   "sid": "S07",
+   "release_s": 3.3,
+   "note": ""
+  },
+  {
+   "sid": "S08",
+   "release_s": null,
+   "note": "frames missing 0.5-4.6 s (interpolated), release inside the gap"
+  },
+  {
+   "sid": "S09",
+   "release_s": 3.2,
+   "note": ""
+  },
+  {
+   "sid": "S10",
+   "release_s": 3.35,
+   "note": ""
+  },
+  {
+   "sid": "S11",
+   "release_s": 0.65,
+   "note": "putback dunk, uncertain to ~0.2 s"
+  },
+  {
+   "sid": "S12",
+   "release_s": 4.3,
+   "note": ""
+  },
+  {
+   "sid": "S13",
+   "release_s": 3.0,
+   "note": ""
+  },
+  {
+   "sid": "S14",
+   "release_s": null,
+   "note": "no frames in window"
+  },
+  {
+   "sid": "S15",
+   "release_s": 2.0,
+   "note": "layup with ball rolling on rim afterwards"
+  },
+  {
+   "sid": "S16",
+   "release_s": 3.95,
+   "note": ""
+  },
+  {
+   "sid": "S17",
+   "release_s": null,
+   "note": "blocked; ball never rises above 4.6 ft, no visible release"
+  },
+  {
+   "sid": "S18",
+   "release_s": 2.2,
+   "note": "blocked layup"
+  },
+  {
+   "sid": "S19",
+   "release_s": null,
+   "note": "ball tracked 14-20 ft from shooter throughout, no tip visible"
+  },
+  {
+   "sid": "S20",
+   "release_s": 5.3,
+   "note": ""
+  },
+  {
+   "sid": "S21",
+   "release_s": 3.15,
+   "note": ""
+  },
+  {
+   "sid": "S22",
+   "release_s": 3.5,
+   "note": ""
+  },
+  {
+   "sid": "S23",
+   "release_s": 4.75,
+   "note": ""
+  },
+  {
+   "sid": "S24",
+   "release_s": null,
+   "note": "ball/shooter tracks inconsistent; ball parked at rim height near basket for 1 s"
+  },
+  {
+   "sid": "S25",
+   "release_s": 2.75,
+   "note": ""
+  },
+  {
+   "sid": "S26",
+   "release_s": 3.15,
+   "note": "blocked"
+  },
+  {
+   "sid": "S27",
+   "release_s": 3.0,
+   "note": ""
+  },
+  {
+   "sid": "S28",
+   "release_s": 0.9,
+   "note": ""
+  },
+  {
+   "sid": "S29",
+   "release_s": null,
+   "note": "no frames in window"
+  }
+ ]
+}

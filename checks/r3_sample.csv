@@ -1,0 +1,31 @@
+sid,game,eventnum,shooter,period,pctime,desc,loc
+S00,0021500214,245,101106,3,10:45,Bogut  Alley Oop Dunk (8 PTS) (Curry 7 AST) ,False
+S01,0021500336,145,203105,2,9:50, Ezeli 6' Turnaround Fadeaway (7 PTS) (Speights 1 AST),True
+S02,0021500313,128,2544,2,8:45,James  Reverse Layup (6 PTS) (Love 1 AST) ,False
+S03,0021500502,527,201976,4,0:49, Beverley 3' Driving Finger Roll Layup (10 PTS),False
+S04,0021500480,170,101111,2,6:02,MISS Villanueva 1' Running Layup ,False
+S05,0021500601,457,2730,4,11:46,MISS Howard 7' Hook Shot ,False
+S06,0021500176,279,203114,3,10:16, MISS Middleton 1' Running Jump Shot,False
+S07,0021500314,399,201978,4,10:27,Budinger 1' Driving Finger Roll Layup (7 PTS) ,True
+S08,0021500287,466,101109,4,6:09,Felton  Cutting Layup Shot (9 PTS) (Nowitzki 4 AST) ,False
+S09,0021500232,377,201935,3,1:54,MISS Harden 2' Layup ,False
+S10,0021500041,521,201147,4,1:23, MISS Brewer 7' Driving Hook Shot,True
+S11,0021500177,83,201599,1,3:03,Jordan  Putback Dunk (3 PTS) ,False
+S12,0021500349,289,201935,3,11:25,MISS Harden 2' Running Reverse Layup ,False
+S13,0021500106,245,2544,2,0:10,MISS James 6' Running Jump Shot ,True
+S14,0021500287,95,101114,1,3:10,D. Williams 1' Running Layup (8 PTS) (Matthews 1 AST) ,False
+S15,0021500445,360,201936,3,3:06,Evans  Driving Layup (6 PTS) ,False
+S16,0021500401,19,201976,1,9:23,MISS Beverley 7' Jump Shot ,True
+S17,0021500634,190,1626171,2,5:24,MISS Portis 6' Jump Shot Thompson BLOCK (2 BLK),False
+S18,0021500384,217,202684,2,2:58,MISS Thompson 2' Running Layup Ibaka BLOCK (1 BLK),False
+S19,0021500254,238,203093,2,3:52, Jones  Tip Layup Shot (2 PTS),True
+S20,0021500439,197,202695,2,3:52, Leonard  Running Dunk (9 PTS),True
+S21,0021500104,5,203105,1,11:00,MISS Ezeli 2' Driving Layup ,True
+S22,0021500041,80,2548,1,4:49,MISS Wade 6' Turnaround Bank Shot ,False
+S23,0021500365,31,2730,1,7:11, Howard  Alley Oop Dunk (2 PTS) (Motiejunas 1 AST),False
+S24,0021500543,397,203521,3,0:03, Dellavedova 1' Layup (10 PTS) (Jefferson 2 AST),False
+S25,0021500518,398,203504,4,7:07,Burke 7' Driving Bank Shot (10 PTS) ,True
+S26,0021500051,154,2571,2,8:34,MISS Barbosa 6' Jump Shot Wright BLOCK (1 BLK),False
+S27,0021500177,302,201933,3,10:38,MISS Griffin 3' Alley Oop Layup ,False
+S28,0021500219,6,202684,1,11:21, Thompson 5' Driving Bank Hook Shot (2 PTS) (James 1 AST),True
+S29,0021500262,191,2747,2,5:56,MISS Smith 7' Running Jump Shot ,False
