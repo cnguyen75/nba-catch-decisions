@@ -1138,3 +1138,163 @@ For Curry and Harden, shooting falls as V_shoot − V_continue rises (slopes
 −1.06 and −3.69).
 
 The report is in the track folder's `feasibility.md`.
+
+---
+
+# Stage 3b-prep (registered 2026-10-13, before anything below ran)
+
+The scope rule (catches within 30 ft) is **approved**. LeBron is
+**reported, not gated**: his numbers are computed, but no decision rests on
+them.
+
+## Finding recorded first (Colin's review)
+
+**"Openness does not move the value of shooting" (Stage 3a) was an
+artefact.** It came from measuring openness at the *catch* on *taken* shots.
+Taken catch-and-shoot threes almost never have a defender close at the catch;
+the defender closes during the shot.
+
+**Colin's tables:**
+
+- Of 2,607 league catch-and-shoot threes, 74 had the defender within 6 ft at
+  the catch.
+- By defender distance at **release**, the same shots run **34% (0–2 ft) to
+  47% (8–12 ft)**.
+- All league threes run **29% to 43%**.
+
+**My reproduction,** non-test league catch-and-shoot threes (linked and
+located, three by "3PT" in the PBP): 2,713 shots, 62 with the defender
+within 6 ft at the catch.
+
+| Defender distance (ft) | 0–2 | 2–4 | 4–6 | 6–8 | 8–12 | 12+ |
+|---|---|---|---|---|---|---|
+| **At release:** make % (n) | 30.8 (78) | 33.6 (703) | 38.1 (1,028) | 42.5 (463) | 46.2 (264) | 46.3 (177) |
+| **At catch:** make % (n) | 0 (2) | 28.6 (14) | 28.3 (46) | 34.9 (195) | 38.3 (872) | 40.0 (1,584) |
+
+The "all league threes" table is reproduced after the full parse (step 1),
+which is when release openness exists for every shot.
+
+## 1. Parse every usable game in the archive
+
+- **Scope:** all 626 correctly named archives, built with the D1–D3 + C1a
+  rules, R1 + R2 releases (no R3), and the all-player catch features.
+- **Skipped:** empty archives and games with no tracking frames, with a log.
+- **Load:** 3 build processes in parallel, each deleting extracted JSON after
+  loading.
+- **Split:**
+  - The 116 already-split games keep their labels (test stays test).
+  - **New games** (no gated player appears in them) are assigned 80% train
+    and 20% validation at game level (seed 2027). None are test.
+  - League value models train on train games and calibrate on validation
+    games, excluding the gated players' catches and shots, as before.
+
+**New per-shot fields** (located FG attempts):
+
+- defender distance at release (nearest opponent to the shooter at t_r);
+- shooter's distance to the arrival basket at release;
+- zone at release (same zone rule);
+- shot clock at release;
+- **jump shot:** PBP description contains "Jump";
+- **shot type:** catch-and-shoot if linked to the shooter's catch with
+  catch-to-release ≤ 1.5 s, otherwise off-the-dribble or other.
+
+**New per-catch fields:** P's nearest-opponent distance at the catch frame +
+k frames, for k = 5, 10, …, 40.
+
+## 2. Make model on release openness
+
+**Data:** all league **jump shots** (located; train games). Three is taken
+from "3PT" in the PBP.
+
+**Model:** logistic regression (L2, C = 1.0) on:
+
+- a natural cubic spline in release distance (knots as before);
+- zone one-hot (at release);
+- log(1 + release openness), and × distance/10, and × three;
+- catch-and-shoot indicator, and C&S × log(1 + release openness);
+- shot clock at release, and its square/100.
+
+**Calibration:** a Platt map from 5-fold game-grouped out-of-fold predictions
+(seed 5).
+
+**Scored once** on validation league jump shots under the powered rule (ECE
+≤ the perfect-model 95th percentile, simulated from the model's own
+validation predictions, 5,000 draws, seed 0). Decile table reported.
+
+- **If it fails:** stop and report.
+- **Cross-check, reported only:** a logistic of make on log(1 + release
+  openness) + the distance spline + three, fitted separately on all train
+  jump shots and on the **late-clock subset (shot clock at release ≤ 4 s)**.
+  The two openness slopes are compared.
+
+## 3. Counterfactual release openness, for every catch
+
+- **delta** = the median catch-to-release delay (s) of league train
+  catch-and-shoots (reported), rounded to the nearest 5 frames.
+- **open_cf** = P's nearest-opponent distance at frame catch + delta. This is
+  observed for every catch, whether or not he shoots.
+- **Reported by zone:** median open_cf − open_catch, the correlation, and the
+  share with open_cf < open_catch.
+
+## 4. V_shoot (one scale)
+
+**V_shoot = P(make | open_cf, distance at catch, zone at catch, C&S = 1,
+shot clock at catch − delta) × points + g(zone).**
+
+- g(zone) is as registered in part 3, recomputed on the new training set.
+- **Player skill:** a per-zone logit offset, MAP with prior N(0, 0.3²),
+  fitted on the player's train catch-and-shoot attempts, evaluated at their
+  *actual* release openness and distance.
+- Within the 30 ft scope.
+
+## 5. V_continue and the selection-bias statement
+
+**V_continue** is as before (ridge on the registered state), refit on the
+larger league train set, plus the shrunk player offset.
+
+**Selection-bias direction (assumption made explicit).** Among open catches,
+the players who continued instead of shooting were selected: they continued
+when continuing looked better than average. So **V_continue(open) is
+overstated**, the value gap V_shoot − V_continue is understated for open
+catches, and **c_shoot is biased toward a shooter's premium** (negative).
+
+**Registered sensitivity: Dubin–McFadden correction.**
+
+- **Reduced-form choice:** a logit of shoot-now on the full state, on league
+  train catches. It includes best teammate openness and score margin.
+- **Correction term:** for continuing catches, with P = P(shoot):
+  λ = P·ln P / (1 − P) + ln(1 − P).
+- **Corrected regression:** possession points on the state **excluding best
+  teammate openness and margin** (the exclusion restrictions), plus λ. The
+  corrected V_continue is the prediction with the λ term removed.
+- **Flag:** the exclusion is strong. Best teammate openness plausibly affects
+  continuation points directly, and Colin's instruction names the shot
+  outcome as the excluded equation. Applied to the continuation equation as
+  the only place a correction can use it, it is an assumption, not a
+  finding.
+- **Validated first on synthetic data with known values:**
+  - league train states;
+  - a known continuation function (the uncorrected regression's fitted
+    values minus the exclusion variables' terms);
+  - a shoot choice driven by a known gap plus the exclusion variables;
+  - an unobservable correlated with continuation points (correlation 0.3).
+- **Pass:** the corrected regression recovers the true continuation function
+  to within 0.02 points (mean absolute error) where the naive one misses by
+  more. Otherwise the correction is not used, and that is reported.
+
+## 6. Checks, in order (each player; LeBron reported, not gated)
+
+1. **Value gap is positive in openness.** Within 22–30 ft train catches, the
+   OLS slope of (V_shoot − V_continue) on open_cf must be **> 0**, with a
+   bootstrap 95% CI excluding 0 (2,000 resamples, seed 0). Otherwise the
+   player stops here.
+2. **Power rule** (part 2): pilot T, Fisher information, proceed if
+   MDE ≤ 0.15.
+3. **Synthetic recovery** (part 2 limits and pass rule; S1–S3; 20 seeds),
+   with the immediate-scale bias also reported.
+
+**Reported in all cases:** the value-gap table by openness bin (0–4, 4–6,
+6–8, 8–12, 12+ ft, by open_cf), old values (Stage 3a) and new side by side,
+per player.
+
+**Stop before any real fit of c.**
