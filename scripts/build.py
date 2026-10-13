@@ -467,6 +467,9 @@ if __name__ == "__main__":
         for stem in Path(a.stems).read_text().split():
             with py7zr.SevenZipFile(DATA / "raw" / f"{stem}.7z") as z:
                 names = z.getnames()
+            if not names:
+                print("SKIP empty archive", stem)
+                continue
             assert len(names) == 1 and names[0].endswith(".json") and "/" not in names[0], names
             GAMES[names[0][:-5]] = stem
     if a.out:

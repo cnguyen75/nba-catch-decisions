@@ -155,8 +155,8 @@ if __name__ == "__main__":
     gid, lo, hi, stem = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4]
     kv = [m.split("=") for m in sys.argv[5:]]
     player = next((int(v) for k, v in kv if k == "player"), None)
-    stem = next((v for k, v in kv if k == "stem"), None)
-    if stem:
-        b.GAMES[gid] = stem
+    game_stem = next((v for k, v in kv if k == "stem"), None)
+    if game_stem:
+        b.GAMES[gid] = game_stem
     marks = {int(v): k for k, v in kv if k not in ("player", "stem")}
     render(gid, lo, hi, stem, marks, player)
