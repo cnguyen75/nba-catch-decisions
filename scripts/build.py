@@ -4,6 +4,7 @@ Implements the rules pre-registered in README.md. Writes out/shots.csv, out/catc
 out/join_check.csv and out/build_meta.json. Raw data is read from ~/Documents/nba-tracking.
 """
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -40,6 +41,8 @@ SC_LAG = 12
 BRIEF_FRAMES = 12
 MIN_RUN = 5
 CLEANUP = False
+R3 = False
+ALL_PLAYERS = False
 
 
 class EmptyGame(Exception):
@@ -105,6 +108,14 @@ def load_timeline(game_id):
     tl["home_team"] = g["events"][0]["home"]["teamid"]
     tl["visitor_team"] = g["events"][0]["visitor"]["teamid"]
     return g, events, tl, skipped
+
+
+CLOSE_RE = re.compile(r"Layup|Dunk|Tip|Hook|Putback|Finger Roll|Alley Oop")
+
+
+def is_close(desc):
+    m = re.search(r"(\d+)' ", desc)
+    return bool(CLOSE_RE.search(desc)) or (m is not None and int(m.group(1)) <= 8)
 
 
 def pc_seconds(s):
@@ -211,15 +222,21 @@ def ball_to_player(tl, i, pid):
     return np.inf if len(j) == 0 else tl["dist"][i, j[0]]
 
 
-def _release_before(tl, idx, lo, a, bk, shooter):
-    """Last frame in idx[lo:a] with ball within 3 ft of shooter, plus validity checks."""
+def _release_before(tl, idx, lo, a, bk, shooter, close=False):
+    """Last frame in idx[lo:a] with ball within 3 ft (4 ft for close-range under R3) of shooter, plus checks."""
     d_sh = np.array([ball_to_player(tl, i, shooter) for i in idx[lo:a]])
-    cand = np.where(d_sh <= 3.0)[0]
+    cand = np.where(d_sh <= (4.0 if close else 3.0))[0]
     if len(cand) == 0:
         return None, "shooter_never_near_ball"
     t_r = idx[lo + cand[-1]]
     if tl["B"][t_r, 2] < 6.0:
         return None, "z_below_6"
+    if close:
+        if np.linalg.norm(tl["B"][t_r, :2] - BASKETS[bk]) > 12.0:
+            return None, "r3_far_from_basket"
+        if tl["GC"][t_r] - tl["GC"][idx[a]] > 1.2:
+            return None, "r3_arrival_late"
+        return t_r, "ok"
     if t_r + 10 >= tl["n"]:
         return None, "end_of_data"
     if not ball_to_player(tl, t_r + 5, shooter) > d_sh[cand[-1]]:
@@ -231,7 +248,7 @@ def _release_before(tl, idx, lo, a, bk, shooter):
     return t_r, "ok"
 
 
-def locate_release(tl, idx, shooter, target_gc):
+def locate_release(tl, idx, shooter, target_gc, close=False):
     """Release rule as amended by R1 and R2. Returns (t_r, t_a, basket_index, reason)."""
     if len(idx) == 0:
         return None, None, None, "empty_window"
@@ -250,7 +267,7 @@ def locate_release(tl, idx, shooter, target_gc):
         a = episodes[k][0]
         lo = episodes[k - 1][1] + 1 if k > 0 else 0
         bk = int(db[a].argmin())
-        t_r, why = _release_before(tl, idx, lo, a, bk, shooter)
+        t_r, why = _release_before(tl, idx, lo, a, bk, shooter, close)
         if t_r is not None:
             found.append((abs(tl["GC"][t_r] - target_gc), t_r, idx[a], bk))
         elif reason == "no_arrival":
@@ -260,7 +277,7 @@ def locate_release(tl, idx, shooter, target_gc):
         return t_r, t_a, bk, "ok"
     a = int(B[:, 2].argmax())
     bk = int(db[a].argmin())
-    t_r, reason_air = _release_before(tl, idx, 0, a, bk, shooter)
+    t_r, reason_air = _release_before(tl, idx, 0, a, bk, shooter, close)
     if t_r is not None:
         return t_r, idx[a], bk, "ok_airball"
     return None, idx[a], bk, reason if episodes else reason_air
@@ -304,6 +321,57 @@ def is_brief_opp(tl, s, pid, at):
     """Spell s is an opponent's (relative to pid at frame `at`) and lasts <= 12 frames."""
     return (s[2] - s[1] + 1 <= BRIEF_FRAMES and s[0] != pid
             and team_of(tl, s[2], s[0]) != team_of(tl, at, pid))
+
+
+def zone_of(pxy, bk, d_b):
+    """Registered zones: rim <= 6 ft; corner three: |y-25| >= 22 and within 14 ft of baseline; three >= 23.75 ft."""
+    corner = abs(pxy[1] - 25.0) >= 22.0 and abs(pxy[0] - (0.0 if bk == 0 else 94.0)) <= 14.0
+    if d_b <= 6.0:
+        return "rim"
+    if corner:
+        return "corner3"
+    if d_b >= 23.75:
+        return "above_break3"
+    return "mid"
+
+
+def stage3_features(tl, sp, k, p, team, bk, pxy, unloc):
+    """Stage 3a features for a counted catch: zone, best teammate openness, drive/pass flags (registered rules),
+    next-owner relation, F1 unknown flag."""
+    o, st, en = sp[k]
+    GC, Q = tl["GC"], tl["Q"]
+    d_b = float(np.linalg.norm(pxy - BASKETS[bk]))
+    out = {"zone": zone_of(pxy, bk, d_b)}
+    tm = [j for j in range(10) if tl["TEAM"][st, j] == team and tl["PID"][st, j] != p]
+    out["best_tm_open"] = max(nearest_opp(tl, st, team, tl["PXY"][st, j]) for j in tm) if tm else np.nan
+    seg = np.arange(st, en + 1)
+    j_p = [np.where(tl["PID"][i] == p)[0] for i in seg]
+    dP = np.array([np.linalg.norm(tl["PXY"][i, jj[0]] - BASKETS[bk]) if len(jj) else np.nan for i, jj in zip(seg, j_p)])
+    bP = np.array([tl["dist"][i, jj[0]] if len(jj) else np.inf for i, jj in zip(seg, j_p)])
+    drib = (tl["B"][seg, 2] <= 1.5) & (bP <= 5.0)
+    cs = np.r_[0, np.cumsum(drib)]
+    drive = False
+    four = GC[st] - 4.0
+    for jj in np.where(dP <= 10.0)[0]:
+        ii = np.where((dP[:jj] >= 20.0) & (GC[seg[:jj]] >= four))[0]
+        if len(ii) and cs[jj + 1] - cs[ii[-1]] > 0:
+            drive = True
+            break
+    out["drive"] = drive
+    out["min_dbasket"] = float(np.nanmin(dP))
+    out["max_dbasket"] = float(np.nanmax(dP))
+    out["n_dribbles"] = int(np.sum(drib[1:] & ~drib[:-1]))
+    nxt = sp[k + 1] if k + 1 < len(sp) else None
+    if nxt is None or Q[nxt[1]] != Q[st]:
+        rel, gap = "none", np.nan
+    else:
+        gap = float(GC[en] - GC[nxt[1]])
+        rel = "self" if nxt[0] == p else ("teammate" if team_of(tl, nxt[1], nxt[0]) == team else "opponent")
+    out["next_rel"], out["next_gap"] = rel, gap
+    out["pass"] = (not drive) and rel == "teammate" and gap <= 1.5 and (GC[st] - GC[en]) <= 4.0
+    lo, hi = GC[en] - 0.5, GC[st]
+    out["f1_unknown"] = any(q == Q[st] and lo <= pg + 5.0 and pg + 0.5 <= hi for q, pg in unloc)
+    return out
 
 
 def team_of(tl, i, pid):
@@ -359,8 +427,12 @@ def main():
                 shots_rows.append(rec)
                 continue
             pbp_gc = pc_seconds(row.PCTIMESTRING)
+            rec["pbp_gc"] = pbp_gc
             idx = window(tl, int(row.PERIOD), pbp_gc + 10.0, pbp_gc - 0.5)
-            t_r, t_a, bk, reason = locate_release(tl, idx, rec["shooter"], pbp_gc + 2.5)
+            desc = " ".join(str(x) for x in (row.HOMEDESCRIPTION, row.VISITORDESCRIPTION) if isinstance(x, str))
+            rec["close"] = is_close(desc)
+            rec["three"] = "3PT" in desc
+            t_r, t_a, bk, reason = locate_release(tl, idx, rec["shooter"], pbp_gc + 2.5, R3 and rec["close"])
             rec.update(reason=reason, t_r=t_r, t_a=t_a, basket_at_arrival=bk)
             if t_r is not None:
                 rec["gc_release"] = float(tl["GC"][t_r])
@@ -388,8 +460,13 @@ def main():
         sp = spells(tl)
         present = [p for p in TARGETS if (tl["PID"] == p).any()]
         GC, Q, SC = tl["GC"], tl["Q"], tl["SC"]
+        catchers = sorted({x[0] for x in sp}) if ALL_PLAYERS else present
+        unloc = {}
+        for x in shots_rows:
+            if x["game"] == gid and x.get("t_r") is None:
+                unloc.setdefault(x["shooter"], []).append((x["period"], x["pbp_gc"]))
         my_shots = [s for s in shots_rows if s["game"] == gid and s.get("t_r") is not None]
-        for p in present:
+        for p in catchers:
             psp = [(k, s) for k, s in enumerate(sp) if s[0] == p]
             for k, (o, st, en) in psp:
                 ok_pre = st >= PRE_FRAMES and all(tl["prev_ok"][st - j] for j in range(PRE_FRAMES)) \
@@ -415,13 +492,18 @@ def main():
                     src = "self"
                 else:
                     src = "teammate" if team_of(tl, prev[2], prev[0]) == team else "opponent"
-                row = dict(game=gid, player=TARGETS[p], pid=p, start=st, end=en, quarter=q,
+                row = dict(game=gid, player=TARGETS.get(p, "other"), pid=p, start=st, end=en, quarter=q,
                            gc=float(GC[st]), valid_catch=bool(ok_pre), frontcourt=bool(frontcourt),
                            sc_running=bool(sc_run), shot_clock=None if np.isnan(SC[st]) else float(SC[st]),
                            d_basket=d_b, source=src, brief_opp_touch=brief, t_next=float(GC[st] - GC[en]))
                 if bk is not None:
                     row["open_catch"] = nearest_opp(tl, st, team, pxy)
                     row["rim_prot"] = nearest_opp(tl, st, team, BASKETS[bk])
+                if ALL_PLAYERS:
+                    if not (ok_pre and frontcourt and sc_run):
+                        continue
+                    row["team"] = int(team)
+                    row.update(stage3_features(tl, sp, k, p, team, bk, pxy, unloc.get(p, [])))
                 catch_rows.append(row)
         meta["games"][gid] = dict(file=GAMES[gid], frames=tl["n"], skipped_moments=skipped,
                                   events=len(g["events"]), events_with_moments=len(events),
@@ -430,7 +512,7 @@ def main():
                                   n_spells=len(sp))
         # link located target shots to latest spell of shooter at/before t_r with no other spell in between
         for s in my_shots:
-            if s["shooter"] not in TARGETS:
+            if s["shooter"] not in TARGETS and not ALL_PLAYERS:
                 continue
             t_r = s["t_r"]
             before = [x for x in sp if x[1] <= t_r]
@@ -466,8 +548,12 @@ if __name__ == "__main__":
     ap.add_argument("--stems", default=None, help="file with one archive stem per line; replaces --games")
     ap.add_argument("--cleanup", action="store_true", help="delete each extracted JSON after loading it")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--r3", action="store_true", help="close-range release rule R3")
+    ap.add_argument("--all-players", action="store_true", help="Stage 3a: counted catches for every player")
     a = ap.parse_args()
+    ALL_PLAYERS = a.all_players
     RULE = a.rule
+    R3 = a.r3
     CLEANUP = a.cleanup
     KEEP_STEMS = set(GAMES.values()) | set(GAMES_PASS2.values())
     if a.games == "pass2":
