@@ -1,0 +1,11 @@
+{
+ "pool_size": 150,
+ "pool_by_src": {
+  "sticky": 126,
+  "nearest_only": 24
+ },
+ "tercile_cuts_ft": [
+  3.7773127973837854,
+  7.086361498631413
+ ]
+}

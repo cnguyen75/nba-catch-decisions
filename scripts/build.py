@@ -38,10 +38,17 @@ MERGE_S = 1.0
 PRE_FRAMES = 5
 SC_LAG = 12
 BRIEF_FRAMES = 12
+MIN_RUN = 5
+CLEANUP = False
 
 
 def load_timeline(game_id):
     path = DATA / "json" / GAMES[game_id] / f"{game_id}.json"
+    if not path.exists():
+        import py7zr
+        with py7zr.SevenZipFile(DATA / "raw" / f"{GAMES[game_id]}.7z") as z:
+            assert z.getnames() == [f"{game_id}.json"], z.getnames()
+            z.extractall(path.parent)
     g = json.loads(path.read_text())
     assert g["gameid"] == game_id
     seen = {}
@@ -75,13 +82,20 @@ def load_timeline(game_id):
     prev_ok = np.zeros(n, bool)
     prev_ok[1:] = (Q[1:] == Q[:-1]) & ((GC[:-1] - GC[1:]) <= CONTIG)
     tl["prev_ok"] = prev_ok
+    if RULE == "d3":
+        B = despike(B, prev_ok)
+        tl["B"] = B
     # ball-player horizontal distances, controller
     dist = np.linalg.norm(PXY - B[:, None, :2], axis=2)
     near = dist.argmin(1)
     nd = dist[np.arange(n), near]
     ctrl = np.where((nd <= CTRL_D) & (B[:, 2] <= CTRL_Z), PID[np.arange(n), near], 0)
     tl["dist"] = dist
-    tl["ctrl"] = sticky_ctrl(dist, B, PID, prev_ok) if RULE == "sticky" else ctrl
+    if RULE == "sticky":
+        ctrl = sticky_ctrl(dist, B, PID, prev_ok)
+    elif RULE == "d3":
+        ctrl = min_run(hyst_ctrl(dist, B, PID, prev_ok), prev_ok)
+    tl["ctrl"] = ctrl
     tl["home_team"] = g["events"][0]["home"]["teamid"]
     tl["visitor_team"] = g["events"][0]["visitor"]["teamid"]
     return g, events, tl, skipped
@@ -110,6 +124,70 @@ def sticky_ctrl(dist, B, PID, prev_ok):
         k = dist[i].argmin()
         holder = PID[i, k] if (dist[i, k] <= CTRL_D and low[i]) else 0
         out[i] = holder
+    return out
+
+
+def despike(B, prev_ok, win=5, tol=3.0):
+    """D1: within contiguous runs, replace a ball coordinate by its centred 5-frame median where they differ
+    by more than 3 ft."""
+    B = B.copy()
+    starts = np.r_[np.where(~prev_ok)[0], len(B)]
+    h = win // 2
+    for a, z in zip(starts[:-1], starts[1:]):
+        seg = B[a:z]
+        if len(seg) < win:
+            continue
+        pad = np.concatenate([np.repeat(seg[:1], h, 0), seg, np.repeat(seg[-1:], h, 0)])
+        med = np.median(np.lib.stride_tricks.sliding_window_view(pad, win, axis=0), axis=-1)
+        bad = np.abs(seg - med) > tol
+        seg[bad] = med[bad]
+    return B
+
+
+def hyst_ctrl(dist, B, PID, prev_ok, keep_d=5.0, take_frames=6):
+    """D2: acquire within 3 ft (nearest, z <= 8); holder keeps while within 5 ft and z <= 8; another player
+    takes over after being the nearest within 3 ft for 6 consecutive frames (assigned from the first)."""
+    n = len(B)
+    out = np.zeros(n, dtype=PID.dtype)
+    holder, sq, sl = 0, 0, 0
+    low = B[:, 2] <= CTRL_Z
+    for i in range(n):
+        if not prev_ok[i]:
+            holder, sq, sl = 0, 0, 0
+        k = dist[i].argmin()
+        cand = PID[i, k] if (dist[i, k] <= CTRL_D and low[i]) else 0
+        if cand and cand != holder:
+            sl = sl + 1 if cand == sq else 1
+            sq = cand
+        else:
+            sq, sl = 0, 0
+        hj = np.where(PID[i] == holder)[0] if holder else []
+        if holder and low[i] and len(hj) and dist[i, hj[0]] <= keep_d:
+            if sl >= take_frames:
+                holder = sq
+                out[i - take_frames + 1:i + 1] = holder
+                sq, sl = 0, 0
+            else:
+                out[i] = holder
+        else:
+            holder = cand
+            out[i] = holder
+            sq, sl = 0, 0
+    return out
+
+
+def min_run(ctrl, prev_ok, k=MIN_RUN):
+    """D3: runs of the same controller shorter than 5 frames become 'no controller'."""
+    out = ctrl.copy()
+    n = len(ctrl)
+    i = 0
+    while i < n:
+        j = i + 1
+        while j < n and ctrl[j] == ctrl[i] and prev_ok[j]:
+            j += 1
+        if ctrl[i] != 0 and j - i < k:
+            out[i:j] = 0
+        i = j
     return out
 
 
@@ -200,7 +278,7 @@ def spells(tl):
         cur = (o, k, k)
     if cur is not None:
         out.append(cur)
-    if RULE != "sticky":
+    if RULE not in ("sticky", "d3"):
         return out
     # C1a: P, brief opponent touch (<= 12 frames), P within 1.0 s -> one possession
     res = []
@@ -240,6 +318,10 @@ def main():
     meta = {"games": {}}
     for gid in GAMES:
         g, events, tl, skipped = load_timeline(gid)
+        if CLEANUP and GAMES[gid] not in KEEP_STEMS:
+            path = DATA / "json" / GAMES[gid] / f"{gid}.json"
+            path.unlink()
+            path.parent.rmdir()
         gp = pbp[pbp.GAME_ID == gid]
         # --- join: every PBP row
         for _, row in gp.iterrows():
@@ -312,7 +394,7 @@ def main():
                 frontcourt = d_b is not None and d_b <= 47.0
                 kk = k - 1
                 brief = False
-                while RULE == "sticky" and kk >= 0 and Q[sp[kk][1]] == q and is_brief_opp(tl, sp[kk], p, st):
+                while RULE in ("sticky", "d3") and kk >= 0 and Q[sp[kk][1]] == q and is_brief_opp(tl, sp[kk], p, st):
                     kk -= 1
                     brief = True
                 prev = sp[kk] if kk >= 0 else None
@@ -368,13 +450,25 @@ def main():
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--rule", choices=["nearest", "sticky"], default="nearest")
+    ap.add_argument("--rule", choices=["nearest", "sticky", "d3"], default="nearest")
     ap.add_argument("--games", choices=["pass1", "pass2"], default="pass1")
+    ap.add_argument("--stems", default=None, help="file with one archive stem per line; replaces --games")
+    ap.add_argument("--cleanup", action="store_true", help="delete each extracted JSON after loading it")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
     RULE = a.rule
+    CLEANUP = a.cleanup
+    KEEP_STEMS = set(GAMES.values()) | set(GAMES_PASS2.values())
     if a.games == "pass2":
         GAMES.update(GAMES_PASS2)
+    if a.stems:
+        import py7zr
+        GAMES.clear()
+        for stem in Path(a.stems).read_text().split():
+            with py7zr.SevenZipFile(DATA / "raw" / f"{stem}.7z") as z:
+                names = z.getnames()
+            assert len(names) == 1 and names[0].endswith(".json") and "/" not in names[0], names
+            GAMES[names[0][:-5]] = stem
     if a.out:
         OUT = Path(a.out).resolve()
     main()
