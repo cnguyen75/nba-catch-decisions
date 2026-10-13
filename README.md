@@ -1805,3 +1805,74 @@ Every interval excludes 0. The players show the same pattern. The shortfall
 is largest mid-clock and smallest at both ends, so the result is
 **under-shooting at every clock state**, not a specific "waits too long"
 timing pattern.
+
+---
+
+# Stage 5a: motion features (registered 2026-10-13, before running)
+
+**Scope.** Earlier gates stand. Test games are skipped entirely, as always.
+This part adds features and compares models; **V_shoot is not rebuilt here**
+(that waits for 5b).
+
+## Features, from the frames (D1–D3 timeline, 25 Hz)
+
+**Velocity rule.** A player's velocity at frame i is (position(i+1) −
+position(i−1)) / (game-clock difference), computed only where the frames are
+contiguous.
+
+**Per counted catch (catch frame s, catcher C, team T):**
+
+- **closing_pre:** take D, the nearest opponent to C at frame s. Average,
+  over frames s−12 … s−1 (0.5 s), D's velocity projected onto the unit vector
+  from D toward C, in ft/s (positive means approaching).
+- **closing_post:** the same, over frames s … s+12.
+- **catcher_speed:** |position(s+2) − position(s−2)| / 0.16 s.
+- **set:** catcher_speed < 3 ft/s.
+- **n_def6:** the number of opponents within 6 ft of C at frame s.
+- **Catch source,** from the previous possession spell (same rule as the
+  build: brief opponent touches skipped), with precedence inbound > offensive
+  rebound > pass > other:
+  - **inbound:** the previous owner is a teammate whose position at his last
+    control frame is outside the court (x < 0 or > 94, y < 0 or > 50);
+  - **offensive rebound:** a located FG release by team T falls between the
+    previous spell's start and frame s, in the same quarter;
+  - **pass:** the previous owner is a teammate (otherwise);
+  - **other:** a loose ball, steal, own spell, or no previous owner.
+- **Pass flight,** for passes only: time = clock at the passer's last control
+  frame − clock at s; distance = |passer position there − C at s|. Set to 0
+  with a flag for other sources.
+
+**Per located shot (release frame t_r, shooter S):**
+
+- closing_pre over t_r−12 … t_r−1, toward S;
+- shooter_speed (±2 frames) and set (< 3 ft/s);
+- n_def6 at t_r.
+
+## Make-model comparison (league jump shots)
+
+- **Train** = the 414 league training games; **evaluate** = the 60 fresh
+  calibration games.
+- **Current model:** the attempt-2 specification, refit identically.
+- **Motion model:** the current model plus closing_pre (clipped ±15),
+  shooter_speed (clipped at 25), set, and n_def6 (capped at 3). Same Platt
+  procedure.
+- **Reported:**
+  - the registered criteria (level, gradient, bins with max(0.04, 2 SE)) for
+    the motion model;
+  - ECE for both;
+  - **mean log loss** for both, and the difference (motion − current) with a
+    bootstrap 95% interval over calibration games (1,000 resamples, seed 0).
+
+"Improves" means the log-loss difference interval lies entirely below 0. Its
+calibration is judged by the same criteria.
+
+## Behavioural model with motion (the Stage 4 step-2 logistic)
+
+- **Main:** the Stage 4 covariates plus closing_pre, closing_post,
+  catcher_speed (clipped at 25), set, n_def6, pass flight time and distance
+  (0 when not a pass), and catch-source dummies (pass as the reference).
+- **Sensitivity:** the same, **without closing_post.** The window after the
+  catch overlaps the decision itself, so the defender may be reacting to it.
+- **Reported:** the openness and clock slopes, with and without motion, for
+  the league and each player, with intervals (bootstrap over games, 1,000
+  resamples). Same unit as Stage 4 (16–30 ft, shot clock recorded).
