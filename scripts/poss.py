@@ -59,6 +59,8 @@ def possession(rows, period, gc_catch, off, home):
             pts += int(made)
             if pending_fg_clock is not None:
                 prev_ev = r.EVENTNUM
+                if not made and "Technical" not in r.desc:
+                    pending_fg_clock = None  # missed and-one: the rebound decides (registered rule)
                 continue
             last = any(k in r.desc for k in ("1 of 1", "2 of 2", "3 of 3")) and "Technical" not in r.desc
             if last and made:
