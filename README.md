@@ -1915,3 +1915,67 @@ calibration is judged by the same criteria.
 
 **Thin cells:** fewer than 150 catches, fewer than 20 shots, or a β_clock
 interval that includes 0. Their numbers are still reported, flagged.
+
+## Stage 5a and 5c results (5b not started: it waits for review with Colin)
+
+### 5a
+
+**Motion features:** computed for 239,824 catches and 80,220 shots in
+non-test games.
+
+**Make model, 60 fresh calibration games, 5,512 shots:**
+
+- Motion **does not improve** it. Log loss changes by −0.00014 [−0.00092,
+  +0.00061].
+- Both models pass all registered criteria:
+
+| Model | Level | Gradient | Worst bin | ECE |
+|---|---|---|---|---|
+| Current | 0.0094 | 0.0072 | 0.026 | 0.013 |
+| Motion | 0.0097 | 0.0062 | 0.026 | 0.015 |
+
+- Standardized motion coefficients are small: shooter speed −0.09, closing
+  +0.06, set −0.02, defenders within 6 ft +0.02.
+
+**Behavioural slopes, Stage 4 against with motion:**
+
+| Group | Openness slope | Clock slope | ER (s/ft) |
+|---|---|---|---|
+| League | 0.396 → 0.421 | −0.055 → −0.060 | 7.18 → 7.00 |
+| Curry | 0.344 → **0.247** | | 3.86 → 2.54 [1.29, 5.78] |
+| LeBron | | | 4.63 → 3.02 [1.17, 6.45] |
+| Harden | | | unresolved (clock slope interval includes 0) |
+
+Dropping the post-catch closing window changes nothing material.
+
+### 5c (ER = seconds of shot clock per foot of space)
+
+**League map:**
+
+- 219 players with ≥ 300 catches; **98 resolved**.
+- Median **5.08** s/ft, IQR 3.99–6.13.
+- Highest: Deng 10.1, Thompson 9.3, Bradley 9.1, Casspi 8.7, Gordon 8.3.
+  Upper intervals are wide.
+- Lowest: Ibaka −8.5 (shoots more with more clock), Booker 1.8, Jack 2.0,
+  Wade 2.0, Ellis 2.1.
+- **Curry 3.93 [2.27, 10.07], 24th percentile; LeBron 4.63 [2.59, 10.08],
+  42nd; Harden unresolved.**
+
+**Within-player (league):**
+
+| Cut | ER [95% CI] |
+|---|---|
+| Behind by 5+ | 8.12 [7.08, 9.48] |
+| Within 5 | 6.70 [6.09, 7.42] |
+| Ahead by 5+ | 6.97 [6.26, 7.90] |
+| Q1–3 | 7.44 [6.86, 8.07] |
+| Q4 + OT | 6.64 [5.89, 7.64] |
+| Home | 7.25 |
+| Away | 7.17 |
+| Pass | 7.79 [7.24, 8.42] |
+| **Other (loose ball, steal)** | **2.68 [2.13, 3.53]** |
+| Offensive rebound, inbound | thin |
+
+**Within-player (the three):** most cells are thin. Resolved: Curry
+ahead-by-5+ 3.13, Q1–3 5.32, away 2.10, pass 3.88; LeBron Q1–3 4.23, away
+4.77, pass 4.81. Harden has no resolved cell.
