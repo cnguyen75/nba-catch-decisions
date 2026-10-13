@@ -558,3 +558,193 @@ track folder's `results.json`.
   - One archive is empty.
   - One game has no tracking frames.
 - Stopped here, as instructed.
+
+---
+
+# Stage 3a: detectors, values, power, synthetic recovery (registration part 1)
+
+Registered 2026-10-13, before anything below was run. There is **no fit to a
+real player in 3a**. The one exception is the crude pilot for T in the power
+step: it is specified there, and its c estimates are neither saved nor
+printed.
+
+## Design (Colin, final)
+
+**Question.** "When Stephen Curry, LeBron James and James Harden catch the
+ball, do they shoot when the points say to?"
+
+- **Players:** all three are gated under the same rules. Gates and decisions
+  apply per player.
+- **Unit:** a frontcourt catch with the shot clock running. The catch is
+  defined by D1–D3 + C1 + C1a, and the missing-shot-clock exclusion stays as
+  it is.
+- **Actions:**
+  - **shoot now:** his shot within 1.5 s;
+  - **drive:** NBA definition, starting 20+ ft out and dribbled to within
+    10 ft;
+  - **pass:** the ball goes to a teammate without a drive;
+  - **hold:** anything else (dribbling without driving, a shot after 1.5 s,
+    a turnover).
+  - If the drive/pass detector fails its gate, the primary model becomes
+    binary (shoot now against continue), and the four-way model is a
+    registered extension.
+- **Choice model:** P(a | x) ∝ exp((V_a(x) − c_a) / T), with c_hold = 0 as
+  the reference and one temperature T per player.
+- **Headline parameter: c_shoot.**
+  - 0 means he shoots exactly when the points say to.
+  - Negative means a shooter's premium.
+  - Positive means he passes up shots the points would take.
+- **Secondary:** c_shoot by zone (rim, mid-range, above-break three, corner
+  three). Corner threes may be too rare for some players.
+
+## Citations for design choices
+
+- **Skinner, B. (2011).** "The problem of shot selection in basketball."
+  arXiv:1107.5793. Source of the threshold form of the shoot/continue
+  decision, and of its prediction that players "wait too long".
+- **Cervone, D., D'Amour, A., Bornn, L., Goldsberry, K. (2014).** "A
+  multiresolution stochastic process model for predicting basketball
+  possession outcomes." arXiv:1408.0777. Region and defender openness belong
+  in the value model, and player skill enters through shrinkage.
+- **Sandholtz, N., Mortensen, J., Bornn, L. (2019).** "Measuring spatial
+  allocative efficiency in basketball." arXiv:1912.05129. Over- and
+  under-shooting is measured at zone level.
+- **"Leveraging expected action value",** Journal of Sports Analytics (2025).
+  Each immediate action at a decision point is valued.
+
+## Split (committed before any value model is fitted)
+
+- **Game set:** the 116 built games, all GSW, CLE and HOU games in the
+  archive.
+- **Assignment:** games are permuted with seed 2026. In that order, each game
+  goes to the split (train/validation/test) with the largest deficit against
+  60/20/20 targets, summed over the gated players who appear in it. Ties go
+  train, then validation, then test.
+- **Shared games** (between two of these teams) get one label.
+- **Test games are never touched in 3a.** They appear in no value model,
+  pilot, synthetic run or eye check.
+- **League data:** the value models train on catches by every player other
+  than the three gated ones, in train-split games only. Validation-split
+  games are used for calibration.
+- **Stored in** `checks/split.json`.
+
+## Data fix F1: unlocated shots make the action unknown
+
+- **Rule.** The possession is P's spell from the catch to its end. The game
+  clock interval [gc_end − 0.5 s, gc_catch] is compared with the plausible
+  release interval of each PBP FG attempt by P whose release was not
+  located: [pbp_gc + 0.5 s, pbp_gc + 5.0 s]. If they overlap, the catch's
+  action is **unknown** and it is excluded from every model.
+- **5.0 s** is the 95th percentile of the PBP lag seen in pass 1.
+- **Precedence.** A located shot-now link takes precedence over F1.
+- **Reporting.** The exclusion rate is reported per player.
+
+## Data fix R3: close-range release
+
+**Scope.** R3 applies to FG attempts whose PBP description contains
+"Layup", "Dunk", "Tip", "Hook", "Putback", "Finger Roll" or "Alley Oop", or
+states a distance of 8 ft or less. All other shots keep R1 + R2 unchanged.
+
+**Within the R2 window and R1 arrival episodes:**
+
+- **Release:** the last frame before the episode's arrival where the ball is
+  within **4 ft** of the shooter (3 ft for other shots).
+- **Validity:**
+  - z at release ≥ 6 ft;
+  - the ball within **12 ft** of the arrival basket at release;
+  - arrival no more than **1.2 s** after release.
+- **Dropped for close shots:** the "moving away over 5 frames" and "toward
+  the basket over 10 frames" checks. The shooter moves with the ball there.
+- **Choice of episode:** the one closest to pbp + 2.5 s, as in R2.
+- **Air-ball fallback:** the maximum-z frame, with the same close-range
+  validity checks.
+
+**Eye check, gate 27/30.**
+
+- **Sample:** 30 close-range FG attempts from train or validation games other
+  than the pass-1 tuning games (seed 31). 20 are drawn from attempts
+  currently unlocated and 10 from attempts currently located.
+- **Labelling, by eye, committed before R3 runs:**
+  - Each sheet shows ball height, ball-to-shooter distance and
+    ball-to-basket distance over [pbp − 0.5 s, pbp + 6 s], with players drawn
+    around the shooter. No detector output is shown.
+  - Each attempt gets the release frame, or "not visible" if the data has no
+    release.
+- **Scoring:** R3 is correct if its release falls within 5 frames of the
+  label, or if both say "not visible".
+
+## Drive/pass detector (rules)
+
+**Inside P's possession,** the spell from catch frame s to end frame e:
+
+- **dribble:** a frame with ball z ≤ 1.5 ft and the ball within 5 ft of P.
+- **drive:** frames i < j in [s, e] where:
+  - P is ≥ 20 ft from the attacking basket at i;
+  - P is ≤ 10 ft from it at j;
+  - at least one dribble falls in [i, j];
+  - i is at most 4.0 s after s.
+- **pass:** no drive, and:
+  - the next spell after e belongs to a teammate;
+  - it starts within 1.5 s of e;
+  - e is at most 4.0 s after s.
+- **Precedence:** shoot now > unknown (F1) > drive > pass > hold.
+
+**Held-out check, gate 54/60 with no class below 16/20.**
+
+- **Sample:** 60 catches from **validation** games. These are not tuning
+  games; tuning is limited to the pass-1 games.
+- **Strata, by a cruder proxy, 20 each:**
+  - "drive-like": P's minimum distance to the basket during the spell is
+    ≤ 10 ft and he was ≥ 20 ft out at some point;
+  - "pass-like": the next spell's owner is a teammate;
+  - "other".
+  - Shoot-now catches are excluded from the draw.
+- **Labelling, committed before the detector runs on them:** each catch is
+  labelled drive, pass or hold from a sheet showing:
+  - P's track and the ball's track;
+  - distance to the basket and ball height;
+  - the next owner;
+  - no detector output and no stratum.
+- **Classes** for the per-class bar are the strata. The confusion matrix by
+  eye label is also reported.
+
+## Possession points (rule and check)
+
+- **Offence:** P's team.
+- **Events after the catch:** PBP rows in the catch's period with
+  PCTIMESTRING-seconds < gc_catch, in EVENTNUM order. PBP lags real time, so
+  an event logged at a smaller clock value than the catch happened after it.
+- **The possession ends at the first of:**
+  - a made FG by the offence (an "and-one" free throw at the same clock
+    stays in the possession);
+  - the offence's last free throw made, or missed and then rebounded by the
+    defence;
+  - a defensive rebound (rebounder's team, or team rebound, not the
+    offence);
+  - an offence turnover;
+  - the end of the period.
+- **Points:** the offence's made FGs (3 if "3PT" is in the description,
+  otherwise 2) and made FTs (description not starting with "MISS"), from
+  the catch to the end.
+- **Score margin at the catch:** offence minus defence, from the last SCORE
+  before the first post-catch row.
+- **Eye check:** 20 random league catches from train/validation games (seed
+  20). The PBP rows around each are printed, and each computed end and point
+  total is judged against them. Reported as a hit count; it is a check, not
+  a gate.
+
+## State features at the catch
+
+- distance to the attacking basket;
+- zone:
+  - rim: ≤ 6 ft;
+  - three: ≥ 23.75 ft, or a corner;
+  - corner three: |y − 25| ≥ 22 ft and within 14 ft of the baseline;
+  - above-break three: the other threes;
+  - mid-range: the rest;
+- openness at catch;
+- rim protection;
+- shot clock;
+- best teammate's openness (the maximum over teammates of each one's
+  nearest-opponent distance);
+- score margin.
