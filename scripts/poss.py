@@ -13,6 +13,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 DATA = Path.home() / "Documents" / "nba-tracking"
 TARGET_IDS = {201939, 2544, 201935}
+OUTDIR = sys.argv[2] if len(sys.argv) > 2 else "out/s3"
 
 
 def secs(s):
@@ -78,8 +79,8 @@ def possession(rows, period, gc_catch, off, home):
 
 
 def build():
-    c = pd.read_csv(ROOT / "out/s3/catches.csv", dtype={"game": str})
-    meta = json.loads((ROOT / "out/s3/build_meta.json").read_text())["games"]
+    c = pd.read_csv(ROOT / OUTDIR / "catches.csv", dtype={"game": str})
+    meta = json.loads((ROOT / OUTDIR / "build_meta.json").read_text())["games"]
     pbp = load_pbp(set(c.game))
     homes = {}
     for g in set(c.game):
@@ -91,14 +92,14 @@ def build():
         pts, et, ev, mg = possession(pbp[r.game], r.quarter, r.gc, r.team, homes[r.game])
         out.append((r.game, r.pid, r.start, pts, et, ev, mg))
     df = pd.DataFrame(out, columns=["game", "pid", "start", "poss_points", "end_type", "end_eventnum", "margin"])
-    df.to_csv(ROOT / "out/s3/poss.csv", index=False)
+    df.to_csv(ROOT / OUTDIR / "poss.csv", index=False)
     print(df.end_type.value_counts(normalize=True).round(3).to_dict(), df.poss_points.mean().round(3))
 
 
 def check():
     split = json.loads((ROOT / "checks/split.json").read_text())["split"]
-    c = pd.read_csv(ROOT / "out/s3/catches.csv", dtype={"game": str})
-    ps = pd.read_csv(ROOT / "out/s3/poss.csv", dtype={"game": str})
+    c = pd.read_csv(ROOT / OUTDIR / "catches.csv", dtype={"game": str})
+    ps = pd.read_csv(ROOT / OUTDIR / "poss.csv", dtype={"game": str})
     c = c.merge(ps, on=["game", "pid", "start"])
     c = c[~c.pid.isin(TARGET_IDS) & c.game.map(lambda g: split[g] in ("train", "validation"))]
     pick = c.sample(20, random_state=20)
