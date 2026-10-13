@@ -1757,3 +1757,51 @@ Logistic regression of shoot-now on the same covariates (unpenalized).
 
 Everything, with the plain reading. `feasibility.md` gets its chronological
 table and site paragraph updated.
+
+## Stage 4 results
+
+**Repo note.** A commit titled "Stage 4 script" (`50c2605`) holds the
+registered script with identical content. Its message differs from the one
+intended. The results below come from that committed script, and the working
+tree was clean.
+
+**Power** (Fisher information of the step 2 logit):
+
+| Group | SE(β_clock) | Smallest detectable R_b − R_m (s/ft, 80%) |
+|---|---|---|
+| League | 0.0021 | 0.78 |
+| Curry | 0.029 | 3.5 |
+| LeBron | 0.040 | 5.2 |
+| Harden | 0.030 | 2,568 (β_clock ≈ 0) |
+
+**Measured (league train, 16–30 ft):**
+
+- g_clock = −0.00196 pts/s [−0.0021, −0.0018];
+- g_open (openness at catch) = **−0.00308 pts/ft** [−0.0033, −0.0029];
+- R_m = +1.57 s/ft [1.42, 1.74].
+
+**Behavioural:**
+
+| Group | β_clock | β_open | R_b (s/ft) | Implied value pts/ft | Implied ÷ measured |
+|---|---|---|---|---|---|
+| League | −0.055 [−0.061, −0.050] | 0.394 [0.386, 0.403] | −7.1 [−7.8, −6.5] | **0.014 [0.013, 0.016]** | −4.6 |
+| Curry | −0.088 [−0.151, −0.035] | 0.35 | −3.9 [−10.1, −2.3] | **0.008 [0.005, 0.020]** | −2.5 |
+| LeBron | −0.100 [−0.191, −0.046] | 0.46 | −4.6 [−10.0, −2.5] | **0.009 [0.005, 0.020]** | −3.0 |
+| Harden | −0.004 [−0.059, 0.062] | 0.46 | — | 0.23 [−0.50, 0.55] | **not individually resolved** (lean on league) |
+
+**Skinner's test.** At every clock state the observed shoot-now rate is far
+**below** the value-maximiser's.
+
+| Clock bin | League observed | League maximiser |
+|---|---|---|
+| 0–4 s | 0.40 | 0.61 |
+| 4–8 s | 0.25 | 0.70 |
+| 8–12 s | 0.18 | 0.72 |
+| 12–16 s | 0.13 | 0.69 |
+| 16–20 s | 0.12 | 0.64 |
+| 20–24 s | 0.19 | 0.42 |
+
+Every interval excludes 0. The players show the same pattern. The shortfall
+is largest mid-clock and smallest at both ends, so the result is
+**under-shooting at every clock state**, not a specific "waits too long"
+timing pattern.
