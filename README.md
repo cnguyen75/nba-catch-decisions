@@ -207,3 +207,32 @@ are grouped into **episodes**: runs merged across gaps of 5 frames or fewer.
    the window) and its checks.
 
 Everything else is unchanged.
+
+### R2: release search anchored on the PBP clock (before the gate was computed)
+
+**What was seen.** After R1, 78% of FG attempts were located, but 18 releases
+were shared by two different PBP events. The cause:
+
+- Event moment windows are not reliably bounded. Some run on past their own
+  PBP event and contain the next shot.
+- Example: game 0021500003, event 82, Curry at 3:06. Its window contains
+  Curry's next shot, event 88 at 2:45.
+- Other windows end before their shot (113 cases where the shooter was "never
+  near the ball").
+
+Among located shots, the release preceded the PBP clock by 1.9–3.2 s in the
+interquartile range (median 2.55 s). The PBP clock is reliable and the event
+window is not.
+
+**New rule.**
+
+- The release search window is the deduplicated timeline frames in the PBP
+  period with game clock in [pbp − 0.5 s, pbp + 10 s], where pbp is
+  `PCTIMESTRING` in seconds. It no longer uses the event's moments.
+- The R1 arrival episodes and validity checks apply within that window.
+- Among all episodes yielding a valid release, use the one whose release clock
+  is closest to pbp + 2.5 s. The air-ball fallback is unchanged.
+
+The join (event number → PBP row) is unchanged and still supplies shooter,
+period, clock and description. Still no catch or gate quantity had been
+computed.
