@@ -1048,3 +1048,17 @@ Power, then synthetic recovery, as registered in part 2, using:
 
 **Stop before any real-player fit.** The pilot T is the only exception,
 with c discarded as before.
+
+### Amendment to the retest, before the D-v2 detector or the fresh sample ran
+
+**Problem.** "Touch at any height" would credit a lob that passes 1–2 ft
+horizontally over a defender's head (ball at 13–14 ft) to the defender.
+Tuning-set plays D24 and D53 show exactly this.
+
+**New rule.** A touch is the ball within 3 ft horizontally **and at most
+12 ft high** (within reach), for at least 2 consecutive frames. The labelling
+rule reads the same: "the next player to touch the ball (within reach)".
+
+**Tuning-set re-read of D55.** It was my eye error, not a detector miss: the
+catch was at 18.1 ft, and he passed 20 ft only after reaching 7 ft. No
+change.
