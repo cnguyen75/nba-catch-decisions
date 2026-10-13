@@ -1062,3 +1062,33 @@ rule reads the same: "the next player to touch the ball (within reach)".
 **Tuning-set re-read of D55.** It was my eye error, not a detector miss: the
 catch was at 18.1 ft, and he passed 20 ft only after reaching 7 ft. No
 change.
+
+### Amendment 2 to the retest, before the fresh sample was drawn or D-v2 ran on it
+
+**Problem.** On the tuning set, the "touch" rule (within 3 ft, z ≤ 12, 2
+frames) credits passes to defenders the ball flies past just after release.
+It scored 51/60 against 53 for the old rule.
+
+**Replacement pass rule.** **pass** if there is no drive, P's possession ends
+within 4.0 s of the catch, and either:
+
+- the next D3 possession spell starts within **2.0 s** of the end and
+  belongs to a teammate; or
+- before any other spell starts, a **located FG release by a teammate**
+  falls within 2.0 s after the end (a lob or alley-oop caught above 8 ft and
+  finished at once).
+
+The labelling rule reads the same: "the next player to take possession of
+the ball, or to shoot it on the catch, within 2 s".
+
+**Tuning-set finding.** First-check plays D24 and D53, which I labelled
+"lob pass", were in fact **the catcher's own shots**. Each was a located FG
+attempt by P, released just after 1.5 s (so "hold") and rebounded by the
+defence.
+
+Together with D32 (rule semantics) and D55 (catch at 18.1 ft), at least 4 of
+the first check's 7 "errors" were my labels. The first gate's FAIL stands as
+committed.
+
+**Sheet change for the fresh set.** A ball-to-basket trace is added, so
+shots are visible on the sheet. No detector output is shown.
