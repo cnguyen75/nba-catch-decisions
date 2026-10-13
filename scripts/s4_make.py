@@ -33,9 +33,9 @@ def shots_X(df):
 def main():
     c, s = load()
     rep = {}
-    s["loc"] = s.reason.astype(str).str.startswith("ok")
+    s["located"] = s.reason.astype(str).str.startswith("ok")
     s["cs"] = (s.catch_to_shot.notna() & (s.catch_to_shot <= 1.5)).astype(int)
-    lg = s[s.loc & ~s.shooter.isin(GATED) & s.open_release_all.notna() & s.d_release.notna()]
+    lg = s[s.located & ~s.shooter.isin(GATED) & s.open_release_all.notna() & s.d_release.notna()]
     # ---- step 0: all league threes by release openness (non-test)
     th = lg[lg.three.astype(bool)]
     tab = lambda d: {str(k): {"make": round(float(v["mean"]), 3), "n": int(v["size"])}

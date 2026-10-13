@@ -1,0 +1,282 @@
+{
+ "threes_by_release_openness": {
+  "all_league_threes": {
+   "[0, 2)": {
+    "make": 0.281,
+    "n": 919
+   },
+   "[2, 4)": {
+    "make": 0.314,
+    "n": 6509
+   },
+   "[4, 6)": {
+    "make": 0.356,
+    "n": 9763
+   },
+   "[6, 8)": {
+    "make": 0.381,
+    "n": 4049
+   },
+   "[8, 12)": {
+    "make": 0.408,
+    "n": 2255
+   },
+   "[12, 99)": {
+    "make": 0.408,
+    "n": 1201
+   }
+  },
+  "catch_and_shoot_threes": {
+   "[0, 2)": {
+    "make": 0.306,
+    "n": 588
+   },
+   "[2, 4)": {
+    "make": 0.334,
+    "n": 4474
+   },
+   "[4, 6)": {
+    "make": 0.363,
+    "n": 7449
+   },
+   "[6, 8)": {
+    "make": 0.39,
+    "n": 3339
+   },
+   "[8, 12)": {
+    "make": 0.416,
+    "n": 1901
+   },
+   "[12, 99)": {
+    "make": 0.406,
+    "n": 1071
+   }
+  },
+  "n_all": 24696,
+  "n_cs": 18822
+ },
+ "make_model": {
+  "n_train": 42919,
+  "n_val": 11550,
+  "platt": [
+   0.9608467326429183,
+   -0.019178626027283173
+  ],
+  "ece_val": 0.0163,
+  "null_p95": 0.0159,
+  "null_median": 0.0112,
+  "passes": false,
+  "decile_table_val": [
+   {
+    "b": 0,
+    "n": 1155,
+    "pred": 0.2857,
+    "obs": 0.2918
+   },
+   {
+    "b": 1,
+    "n": 1155,
+    "pred": 0.3294,
+    "obs": 0.3117
+   },
+   {
+    "b": 2,
+    "n": 1155,
+    "pred": 0.3473,
+    "obs": 0.3299
+   },
+   {
+    "b": 3,
+    "n": 1155,
+    "pred": 0.3601,
+    "obs": 0.3887
+   },
+   {
+    "b": 4,
+    "n": 1155,
+    "pred": 0.3719,
+    "obs": 0.3905
+   },
+   {
+    "b": 5,
+    "n": 1155,
+    "pred": 0.3831,
+    "obs": 0.3887
+   },
+   {
+    "b": 6,
+    "n": 1155,
+    "pred": 0.3951,
+    "obs": 0.3645
+   },
+   {
+    "b": 7,
+    "n": 1155,
+    "pred": 0.4089,
+    "obs": 0.3983
+   },
+   {
+    "b": 8,
+    "n": 1155,
+    "pred": 0.4265,
+    "obs": 0.4459
+   },
+   {
+    "b": 9,
+    "n": 1155,
+    "pred": 0.4582,
+    "obs": 0.4502
+   }
+  ],
+  "share_cs_train": 0.499,
+  "p_make_cs_three_25ft": {
+   "1": 0.307,
+   "2": 0.327,
+   "4": 0.355,
+   "6": 0.373,
+   "8": 0.388,
+   "12": 0.409
+  },
+  "p_make_cs_mid_16ft": {
+   "1": 0.4,
+   "2": 0.425,
+   "4": 0.457,
+   "6": 0.479,
+   "8": 0.495,
+   "12": 0.518
+  }
+ },
+ "late_clock_check": {
+  "all_train_jump_shots": {
+   "slope_log1p_open": 0.344,
+   "ci95": [
+    0.296,
+    0.394
+   ],
+   "n": 42919
+  },
+  "shot_clock_le_4": {
+   "slope_log1p_open": 0.479,
+   "ci95": [
+    0.327,
+    0.671
+   ],
+   "n": 4273
+  }
+ },
+ "delta": {
+  "median_catch_to_release_s": 0.96,
+  "frames_used": 25,
+  "seconds_used": 1.0
+ },
+ "cf_vs_catch_by_zone": {
+  "above_break3": {
+   "n": 63113,
+   "median_cf_minus_catch": -3.28,
+   "corr": 0.308,
+   "share_cf_lt_catch": 0.856
+  },
+  "corner3": {
+   "n": 9751,
+   "median_cf_minus_catch": -6.49,
+   "corr": 0.429,
+   "share_cf_lt_catch": 0.958
+  },
+  "mid": {
+   "n": 66538,
+   "median_cf_minus_catch": -1.52,
+   "corr": 0.385,
+   "share_cf_lt_catch": 0.714
+  },
+  "rim": {
+   "n": 8229,
+   "median_cf_minus_catch": 0.23,
+   "corr": 0.142,
+   "share_cf_lt_catch": 0.454
+  }
+ },
+ "shot_side_check": {
+  "above_break3": {
+   "diff_nonshot_minus_shot": 1.019,
+   "bins": 26,
+   "adjust": 1.019
+  },
+  "corner3": {
+   "diff_nonshot_minus_shot": 0.577,
+   "bins": 25,
+   "adjust": 0.0
+  },
+  "mid": {
+   "diff_nonshot_minus_shot": 0.552,
+   "bins": 25,
+   "adjust": 0.0
+  },
+  "rim": {
+   "diff_nonshot_minus_shot": 1.327,
+   "bins": 17,
+   "adjust": 1.327
+  }
+ },
+ "g_zone": {
+  "rim": 0.0984,
+  "mid": 0.1338,
+  "above_break3": 0.1596,
+  "corner3": 0.1651
+ },
+ "player_offsets": {
+  "Curry": {
+   "rim": {
+    "n": 6,
+    "offset_logit": 0.2056
+   },
+   "mid": {
+    "n": 57,
+    "offset_logit": 0.1361
+   },
+   "above_break3": {
+    "n": 47,
+    "offset_logit": 0.5094
+   },
+   "corner3": {
+    "n": 12,
+    "offset_logit": 0.0388
+   }
+  },
+  "LeBron": {
+   "rim": {
+    "n": 9,
+    "offset_logit": 0.282
+   },
+   "mid": {
+    "n": 17,
+    "offset_logit": 0.2202
+   },
+   "above_break3": {
+    "n": 15,
+    "offset_logit": 0.1802
+   },
+   "corner3": {
+    "n": 3,
+    "offset_logit": -0.0968
+   }
+  },
+  "Harden": {
+   "rim": {
+    "n": 3,
+    "offset_logit": 0.1576
+   },
+   "mid": {
+    "n": 23,
+    "offset_logit": 0.1316
+   },
+   "above_break3": {
+    "n": 33,
+    "offset_logit": 0.1313
+   },
+   "corner3": {
+    "n": 5,
+    "offset_logit": -0.0693
+   }
+  }
+ }
+}
