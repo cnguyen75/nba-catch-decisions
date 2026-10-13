@@ -909,3 +909,18 @@ the errors are exactly N(0, I⁻¹), computed by simulation (100,000 draws,
 seed 7) and reported before synthetic runs.
 
 **Every run is reported.** Players who don't proceed get no synthetic runs.
+
+## Stage 3a results: stopped at the V_shoot calibration limit
+
+| Item | Result | Bar | Outcome |
+|---|---|---|---|
+| R3 close-range release | 18/30 | 27 | **Rejected** |
+| Drive/pass detector | 53/60 | 54 | **Fails;** the primary model is binary |
+| Possession points | 20/20 | check only | After a code fix to the registered rule |
+| V_shoot ECE | 0.0545 | 0.03 | **Fails** |
+
+- **The 0.03 limit is underpowered.** A perfectly calibrated model passes it
+  only 29% of the time at n = 1,231.
+- **The miscalibration is still real** (p = 0.013).
+- **Not run,** per the registration: power and synthetic.
+- **The report** is at `~/Personal/site-handoff/tracks/nba-catch-decisions/feasibility.md`.
