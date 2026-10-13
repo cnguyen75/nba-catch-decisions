@@ -1436,3 +1436,72 @@ the 0.04 bin limit is about 1.3 SE in that bin.
 **Per the rule:** stop and report. There is no fix on the spent validation
 games, and V_shoot, V_continue, 7a–7c, the checks, power and synthetic were
 not run.
+
+---
+
+# Stage 3b-prep, calibration attempt 2 (Colin: option 2; registered before running)
+
+## Recorded first
+
+The replacement **bins criterion** (|error| ≤ 0.04 in every
+release-openness bin) was set at about **1.3 standard errors of its noisiest
+bin** (12+ ft: n = 259, SE 0.031). It was therefore **the same error as the
+old project's v3b gate:** a perfect model fails it often. The re-score
+failure, by 0.00002, stays on the record.
+
+## 1. Fresh calibration set
+
+- **60 games** drawn at random (**seed 2028**) from the 474 training games,
+  stored in `checks/calib_games.json`.
+- **Removed from training for every league model:** the make model, g(zone),
+  V_continue, the control-group fits and the Dubin–McFadden first stage.
+- **The gated players' own catches are unaffected.** They are never used in
+  league models, and their train/validation/test labels stay as in
+  `checks/split.json`, so their offsets, power and synthetic use the same
+  games as before.
+- **League models train on the remaining 414** training games.
+- **Validation games are spent** and not scored again. Test games stay
+  untouched.
+
+## 2. Registered model change (the only change)
+
+- **Release openness main effect:** a **natural cubic spline** with knots at
+  **2, 4, 6, 8 and 12 ft** (boundary knots 2 and 12, linear beyond; openness
+  capped at 30), **instead of log(1 + openness)**.
+- **Unchanged:** the openness interactions, which still use log(1 +
+  openness) (× distance/10, × three, × C&S), plus the distance spline, zone,
+  shot type and shot clock.
+- **Platt recalibration:** from 5-fold game-grouped out-of-fold training
+  predictions (seed 5), as before.
+
+## 3. Criteria, scored once on the 60 fresh games (league jump shots)
+
+1. **Level:** |mean predicted − mean observed| ≤ 0.01.
+2. **Gradient:** |(predicted 8+ ft rate − predicted 0–4 ft rate) − (observed
+   8+ ft rate − observed 0–4 ft rate)| ≤ 0.03.
+3. **Bins:** for each release-openness bin (0–2, 2–4, 4–6, 6–8, 8–12,
+   12+), |predicted − observed| ≤ max(0.04, 2 × SE), with SE =
+   sqrt(obs × (1 − obs) / n).
+
+ECE and the decile table are reported as information.
+
+## 4. Outcome
+
+**Pass:** continue the registered sequence:
+
+- V_shoot with the counterfactual release openness (using this model);
+- V_continue;
+- 7a–7c;
+- the value-gap check;
+- power;
+- synthetic recovery.
+
+It stops before any real fit of c.
+
+**Registered sensitivity for the main fit (later).** Rerun the main fit with
+V_shoot's openness gradient scaled by r = (observed 8+ minus 0–4 change) /
+(predicted 8+ minus 0–4 change) from this scoring, and report how much
+c_shoot moves. The rescaling holds each catch's P(make) at its 0–4 ft level
+and multiplies the openness-driven difference above that level by r.
+
+**Fail:** stop and report. No further calibration attempts.
