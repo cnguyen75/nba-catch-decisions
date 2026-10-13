@@ -1,0 +1,257 @@
+{
+ "correct": 18,
+ "n": 30,
+ "passes": false,
+ "by_prior_status": {
+  "sum": {
+   "false": 13,
+   "true": 5
+  },
+  "size": {
+   "false": 20,
+   "true": 10
+  }
+ },
+ "rows": [
+  {
+   "sid": "S00",
+   "was_located": false,
+   "label": 3.7,
+   "det_reason": "ok",
+   "offset_frames": -6,
+   "correct": false
+  },
+  {
+   "sid": "S01",
+   "was_located": true,
+   "label": 2.8,
+   "det_reason": "ok",
+   "offset_frames": 5,
+   "correct": true
+  },
+  {
+   "sid": "S02",
+   "was_located": false,
+   "label": 0.9,
+   "det_reason": "ok",
+   "offset_frames": 3,
+   "correct": true
+  },
+  {
+   "sid": "S03",
+   "was_located": false,
+   "label": 1.4,
+   "det_reason": "ok",
+   "offset_frames": -7,
+   "correct": false
+  },
+  {
+   "sid": "S04",
+   "was_located": false,
+   "label": null,
+   "det_reason": "empty_window",
+   "offset_frames": null,
+   "correct": true
+  },
+  {
+   "sid": "S05",
+   "was_located": false,
+   "label": null,
+   "det_reason": "empty_window",
+   "offset_frames": null,
+   "correct": true
+  },
+  {
+   "sid": "S06",
+   "was_located": false,
+   "label": null,
+   "det_reason": "empty_window",
+   "offset_frames": null,
+   "correct": true
+  },
+  {
+   "sid": "S07",
+   "was_located": true,
+   "label": 3.3,
+   "det_reason": "ok",
+   "offset_frames": 1,
+   "correct": true
+  },
+  {
+   "sid": "S08",
+   "was_located": false,
+   "label": null,
+   "det_reason": "z_below_6",
+   "offset_frames": null,
+   "correct": true
+  },
+  {
+   "sid": "S09",
+   "was_located": false,
+   "label": 3.2,
+   "det_reason": "ok",
+   "offset_frames": -12,
+   "correct": false
+  },
+  {
+   "sid": "S10",
+   "was_located": true,
+   "label": 3.35,
+   "det_reason": "ok",
+   "offset_frames": 8,
+   "correct": false
+  },
+  {
+   "sid": "S11",
+   "was_located": false,
+   "label": 0.65,
+   "det_reason": "shooter_never_near_ball",
+   "offset_frames": null,
+   "correct": false
+  },
+  {
+   "sid": "S12",
+   "was_located": false,
+   "label": 4.3,
+   "det_reason": "ok",
+   "offset_frames": -6,
+   "correct": false
+  },
+  {
+   "sid": "S13",
+   "was_located": true,
+   "label": 3.0,
+   "det_reason": "ok",
+   "offset_frames": 10,
+   "correct": false
+  },
+  {
+   "sid": "S14",
+   "was_located": false,
+   "label": null,
+   "det_reason": "empty_window",
+   "offset_frames": null,
+   "correct": true
+  },
+  {
+   "sid": "S15",
+   "was_located": false,
+   "label": 2.0,
+   "det_reason": "ok",
+   "offset_frames": -5,
+   "correct": true
+  },
+  {
+   "sid": "S16",
+   "was_located": true,
+   "label": 3.95,
+   "det_reason": "ok",
+   "offset_frames": 14,
+   "correct": false
+  },
+  {
+   "sid": "S17",
+   "was_located": false,
+   "label": null,
+   "det_reason": "shooter_never_near_ball",
+   "offset_frames": null,
+   "correct": true
+  },
+  {
+   "sid": "S18",
+   "was_located": false,
+   "label": 2.2,
+   "det_reason": "ok",
+   "offset_frames": 3,
+   "correct": true
+  },
+  {
+   "sid": "S19",
+   "was_located": true,
+   "label": null,
+   "det_reason": "ok_airball",
+   "offset_frames": null,
+   "correct": false
+  },
+  {
+   "sid": "S20",
+   "was_located": true,
+   "label": 5.3,
+   "det_reason": "ok",
+   "offset_frames": -3,
+   "correct": true
+  },
+  {
+   "sid": "S21",
+   "was_located": true,
+   "label": 3.15,
+   "det_reason": "ok",
+   "offset_frames": 2,
+   "correct": true
+  },
+  {
+   "sid": "S22",
+   "was_located": false,
+   "label": 3.5,
+   "det_reason": "ok",
+   "offset_frames": 11,
+   "correct": false
+  },
+  {
+   "sid": "S23",
+   "was_located": false,
+   "label": 4.75,
+   "det_reason": "ok",
+   "offset_frames": -8,
+   "correct": false
+  },
+  {
+   "sid": "S24",
+   "was_located": false,
+   "label": null,
+   "det_reason": "shooter_never_near_ball",
+   "offset_frames": null,
+   "correct": true
+  },
+  {
+   "sid": "S25",
+   "was_located": true,
+   "label": 2.75,
+   "det_reason": "ok",
+   "offset_frames": 7,
+   "correct": false
+  },
+  {
+   "sid": "S26",
+   "was_located": false,
+   "label": 3.15,
+   "det_reason": "ok",
+   "offset_frames": -3,
+   "correct": true
+  },
+  {
+   "sid": "S27",
+   "was_located": false,
+   "label": 3.0,
+   "det_reason": "ok",
+   "offset_frames": 4,
+   "correct": true
+  },
+  {
+   "sid": "S28",
+   "was_located": true,
+   "label": 0.9,
+   "det_reason": "ok",
+   "offset_frames": 0,
+   "correct": true
+  },
+  {
+   "sid": "S29",
+   "was_located": false,
+   "label": null,
+   "det_reason": "empty_window",
+   "offset_frames": null,
+   "correct": true
+  }
+ ]
+}

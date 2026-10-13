@@ -1,0 +1,171 @@
+
+=== P00 game 0021500010 Q2 catch gc=249.7 (4:09) offence team 1610612745 -> points 0, end def_rebound at event 219, margin -1
+   ev 216  4:11 t 2 team 1610612745 score         MISS Harden 3' Layup |  
+   ev 217  4:09 t 4 team 1610612745 score         Capela REBOUND (Off:3 Def:1) |  
+   ev 218  4:05 t 2 team 1610612745 score         MISS Beverley 25' 3PT Jump Shot |  
+   ev 219  4:04 t 4 team 1610612743 score          | Harris REBOUND (Off:0 Def:2) <-- END
+   ev 220  3:59 t 2 team 1610612743 score         Capela BLOCK (1 BLK) | MISS Faried 2' Layup 
+   ev 221  3:57 t 4 team 1610612745 score         Beverley REBOUND (Off:0 Def:4) |  
+   ev 222  3:52 t 2 team 1610612745 score         MISS Harden 27' 3PT Jump Shot |  
+   ev 223  3:52 t 4 team 1610612743 score          | Mudiay REBOUND (Off:0 Def:2) 
+   ev 224  3:47 t 1 team 1610612743 score 39 - 36  | Faried  Cutting Dunk Shot (11 PTS) (Harris 4 AST) 
+   ev 225  3:46 t 9 team 1610612745 score         ROCKETS Timeout: Regular (Full 2 Short 0) |  
+
+=== P01 game 0021500559 Q3 catch gc=64.6 (1:04) offence team 1610612739 -> points 3, end made_fg at event 391, margin 6
+   ev 388  1:03 t 1 team 1610612739 score 74 - 66  | Love 2' Layup (14 PTS) (James 9 AST) 
+   ev 389  1:03 t 6 team 1610612755 score         Covington S.FOUL (P3.T4) (M.Lindsay) |  
+   ev 390  1:03 t 8 team 1610612755 score         SUB: Smith FOR McConnell |  
+   ev 391  1:03 t 3 team 1610612739 score 75 - 66  | Love Free Throw 1 of 1 (15 PTS) <-- END
+   ev 392  0:49 t 2 team 1610612755 score         MISS Grant 6' Jump Shot |  
+   ev 393  0:47 t 4 team 1610612755 score         Grant REBOUND (Off:1 Def:6) |  
+   ev 394  0:42 t 1 team 1610612755 score 75 - 69 Covington 26' 3PT Jump Shot (7 PTS) (Grant 2 AST) |  
+
+=== P02 game 0021500104 Q3 catch gc=235.7 (3:55) offence team 1610612765 -> points 0, end def_rebound at event 331, margin -11
+   ev 330  3:43 t 2 team 1610612765 score          | MISS Drummond 13' Turnaround Hook Shot 
+   ev 331  3:40 t 4 team 1610612744 score         Green REBOUND (Off:0 Def:6) |  <-- END
+   ev 332  3:33 t 6 team 1610612765 score          | Caldwell-Pope S.FOUL (P2.T4) (T.Maddox) 
+   ev 333  3:33 t 3 team 1610612744 score 60 - 72 Curry Free Throw 1 of 3 (14 PTS) |  
+   ev 335  3:33 t 3 team 1610612744 score 60 - 73 Curry Free Throw 2 of 3 (15 PTS) |  
+   ev 337  3:33 t 3 team 1610612744 score 60 - 74 Curry Free Throw 3 of 3 (16 PTS) |  
+
+=== P03 game 0021500601 Q4 catch gc=209.6 (3:29) offence team 1610612745 -> points 2, end made_fg at event 544, margin -20
+   ev 542  3:37 t 1 team 1610612739 score 88 - 68  | Thompson  Dunk (10 PTS) 
+   ev 543  3:37 t 4 team 1610612739 score          | Thompson REBOUND (Off:3 Def:1) 
+   ev 544  3:24 t 1 team 1610612745 score 88 - 70 Harrell  Dunk (4 PTS) (Ariza 1 AST) |  <-- END
+   ev 545  3:15 t 6 team 1610612745 score         Beverley Personal Take Foul (P4.PN) (D.Richardson) |  
+   ev 546  3:15 t 3 team 1610612739 score 89 - 70  | Irving Free Throw 1 of 2 (22 PTS) 
+   ev 548  3:15 t 8 team 1610612745 score         SUB: Terry FOR Beverley |  
+   ev 549  3:15 t 8 team 1610612745 score         SUB: Jones FOR Ariza |  
+   ev 550  3:15 t 8 team 1610612739 score          | SUB: Dellavedova FOR James 
+   ev 551  3:15 t 3 team 1610612739 score 90 - 70  | Irving Free Throw 2 of 2 (23 PTS) 
+   ev 554  3:00 t 5 team 1610612745 score         Jones Traveling Turnover (P1.T18) |  
+   ev 555  3:00 t 8 team 1610612739 score          | SUB: Cunningham FOR Irving 
+
+=== P04 game 0021500051 Q2 catch gc=187.8 (3:07) offence team 1610612763 -> points 0, end def_rebound at event 222, margin -13
+   ev 221  3:02 t 2 team 1610612763 score          | MISS Randolph 16' Jump Shot 
+   ev 222  3:01 t 4 team 1610612744 score         Rush REBOUND (Off:0 Def:4) |  <-- END
+   ev 223  2:53 t 2 team 1610612744 score         MISS Green 6' Running Jump Shot |  
+   ev 224  2:51 t 4 team 1610612744 score         Curry REBOUND (Off:1 Def:0) |  
+   ev 225  2:48 t 2 team 1610612744 score         MISS Curry 26' 3PT Jump Shot |  
+   ev 226  2:46 t 4 team 1610612763 score          | Lee REBOUND (Off:0 Def:1) 
+   ev 227  2:43 t 1 team 1610612763 score 31 - 42  | Lee 2' Cutting Layup Shot (6 PTS) 
+   ev 228  2:43 t 6 team 1610612744 score         Rush S.FOUL (P1.T3) (T.Washington) |  
+   ev 229  2:43 t 9 team 1610612744 score         WARRIORS Timeout: Regular (Full 2 Short 0) |  
+   ev 232  2:43 t 8 team 1610612744 score         SUB: Iguodala FOR Rush |  
+   ev 233  2:43 t 3 team 1610612763 score          | MISS Lee Free Throw 1 of 1 
+   ev 235  2:42 t 4 team 1610612744 score         Green REBOUND (Off:0 Def:6) |  
+
+=== P05 game 0021500002 Q4 catch gc=205.0 (3:24) offence team 1610612739 -> points 0, end def_rebound at event 518, margin -6
+   ev 515  3:27 t 6 team 1610612741 score         Snell P.FOUL (P3.T2) (B.Taylor) |  
+   ev 516  3:26 t 6 team 1610612741 score         Snell P.FOUL (P4.T3) (B.Taylor) |  
+   ev 517  3:19 t 2 team 1610612739 score          | MISS Williams 5' Floating Jump Shot 
+   ev 518  3:18 t 4 team 1610612741 score         Mirotic REBOUND (Off:2 Def:7) |  <-- END
+   ev 519  3:07 t 2 team 1610612741 score         MISS Rose 7' Jump Shot |  
+   ev 520  3:06 t 4 team 1610612739 score          | Thompson REBOUND (Off:1 Def:9) 
+   ev 521  3:00 t 2 team 1610612739 score          | MISS James 24' 3PT Jump Shot 
+   ev 522  2:58 t 4 team 1610612741 score         Butler REBOUND (Off:1 Def:4) |  
+
+=== P06 game 0021500445 Q1 catch gc=123.6 (2:03) offence team 1610612740 -> points 3, end made_fg at event 120, margin -8
+   ev 120  1:58 t 1 team 1610612740 score 34 - 29 Gordon 24' 3PT Jump Shot (11 PTS) (Anderson 1 AST) |  <-- END
+   ev 121  1:35 t 2 team 1610612745 score          | MISS Jones 2' Layup 
+   ev 122  1:34 t 1 team 1610612745 score 36 - 29  | Capela  Putback Dunk (2 PTS) 
+   ev 123  1:34 t 4 team 1610612745 score          | Capela REBOUND (Off:2 Def:2) 
+
+=== P07 game 0021500453 Q4 catch gc=673.6 (11:13) offence team 1610612739 -> points 2, end made_fg at event 375, margin -33
+   ev 373 11:07 t 1 team 1610612739 score 61 - 92  | Jones 2' Layup (2 PTS) (Shumpert 1 AST) 
+   ev 374 11:07 t 6 team 1610612757 score         Davis S.FOUL (P1.T1) (R.Garretson) |  
+   ev 375 11:07 t 3 team 1610612739 score          | MISS Jones Free Throw 1 of 1 <-- END
+   ev 377 11:05 t 4 team 1610612739 score          | Cavaliers Rebound 
+   ev 378 11:00 t 1 team 1610612739 score 63 - 92  | Jones 13' Floating Jump Shot (4 PTS) (Cunningham 1 AST) 
+
+=== P08 game 0021500453 Q2 catch gc=695.2 (11:35) offence team 1610612757 -> points 2, end made_fg at event 128, margin 22
+   ev 128 11:31 t 1 team 1610612757 score 12 - 36 Crabbe 13' Floating Jump Shot (15 PTS) (Frazier 1 AST) |  <-- END
+   ev 129 11:09 t 2 team 1610612739 score          | MISS Shumpert  3PT Jump Shot 
+   ev 130 11:09 t 4 team 1610612739 score          | Thompson REBOUND (Off:2 Def:1) 
+
+=== P09 game 0021500351 Q4 catch gc=197.1 (3:17) offence team 1610612744 -> points 2, end made_fg at event 522, margin -11
+   ev 520  3:10 t 2 team 1610612744 score          | MISS Thompson 26' 3PT Jump Shot 
+   ev 521  3:08 t 4 team 1610612744 score          | Iguodala REBOUND (Off:1 Def:8) 
+   ev 522  3:05 t 1 team 1610612744 score 90 - 99  | Green 1' Layup (21 PTS) (Iguodala 5 AST) <-- END
+   ev 523  2:51 t 1 team 1610612749 score 90 - 101 Monroe 1' Driving Layup (27 PTS) (Carter-Williams 7 AST) |  
+   ev 524  2:51 t 6 team 1610612744 score          | Green S.FOUL (P4.PN) (J.Capers) 
+   ev 525  2:51 t 9 team 1610612744 score          | Warriors Timeout: Regular (Reg.5 Short 0) 
+   ev 529  2:51 t 3 team 1610612749 score 90 - 102 Monroe Free Throw 1 of 1 (28 PTS) |  
+
+=== P10 game 0021500092 Q1 catch gc=576.8 (9:36) offence team 1610612744 -> points 0, end def_rebound at event 21, margin -3
+   ev  20  9:24 t 2 team 1610612744 score          | MISS Ezeli 17' Jump Shot 
+   ev  21  9:24 t 4 team 1610612758 score         Gay REBOUND (Off:0 Def:2) |  <-- END
+   ev  22  9:13 t 2 team 1610612758 score         MISS Gay 5' Driving Hook Shot |  
+   ev  23  9:12 t 4 team 1610612744 score          | Green REBOUND (Off:0 Def:1) 
+
+=== P11 game 0021500268 Q4 catch gc=181.8 (3:01) offence team 1610612766 -> points 0, end turnover at event 477, margin -16
+   ev 477  2:58 t 5 team 1610612766 score         Hansbrough Traveling Turnover (P1.T8) |  <-- END
+   ev 478  2:47 t 2 team 1610612744 score         Hansbrough BLOCK (1 BLK) | MISS McAdoo 2' Layup 
+   ev 479  2:45 t 4 team 1610612766 score         Hansbrough REBOUND (Off:1 Def:2) |  
+   ev 480  2:39 t 1 team 1610612766 score 112 - 98 Kaminsky 1' Driving Layup (16 PTS) |  
+   ev 481  2:39 t 6 team 1610612744 score          | McAdoo S.FOUL (P2.PN) (L.Richardson) 
+   ev 482  2:39 t 3 team 1610612766 score         MISS Kaminsky Free Throw 1 of 1 |  
+   ev 484  2:38 t 4 team 1610612744 score          | Thompson REBOUND (Off:0 Def:2) 
+
+=== P12 game 0021500504 Q4 catch gc=543.6 (9:03) offence team 1610612744 -> points 0, end def_rebound at event 430, margin 8
+   ev 426  8:57 t 2 team 1610612744 score         MISS Livingston 7' Jump Shot |  
+   ev 427  8:53 t 4 team 1610612744 score         Green REBOUND (Off:4 Def:10) |  
+   ev 428  8:52 t 6 team 1610612743 score          | Miller P.FOUL (P4.T1) (J.VanDuyne) 
+   ev 429  8:45 t 2 team 1610612744 score         MISS Thompson 17' Jump Shot |  
+   ev 430  8:44 t 4 team 1610612743 score          | Nelson REBOUND (Off:3 Def:4) <-- END
+   ev 431  8:35 t 5 team 1610612743 score         Green STEAL (4 STL) | Barton Bad Pass Turnover (P3.T10) 
+   ev 510  8:56 t 4 team 1610612744 score         Green REBOUND (Off:2 Def:10) |  
+   ev 513  8:56 t 2 team 1610612744 score         MISS Green 1' Tip Layup Shot |  
+   ev 517  8:55 t 4 team 1610612744 score         Green REBOUND (Off:3 Def:10) |  
+   ev 518  8:55 t 2 team 1610612744 score         MISS Green 1' Tip Layup Shot |  
+
+=== P13 game 0021500104 Q2 catch gc=193.9 (3:13) offence team 1610612744 -> points 2, end made_fg at event 201, margin 4
+   ev 200  3:16 t 1 team 1610612765 score 39 - 43  | Johnson 1' Driving Layup (6 PTS) (Marc Morris 1 AST) 
+   ev 201  2:56 t 1 team 1610612744 score 39 - 45 Iguodala 14' Pullup Jump Shot (7 PTS) (Ezeli 2 AST) |  <-- END
+
+=== P14 game 0021500187 Q2 catch gc=465.3 (7:45) offence team 1610612741 -> points 2, end made_fg at event 136, margin 1
+   ev 134  7:50 t 2 team 1610612744 score         MISS Barbosa 11' Floating Jump Shot |  
+   ev 135  7:49 t 4 team 1610612741 score          | Gasol REBOUND (Off:0 Def:7) 
+   ev 136  7:37 t 1 team 1610612741 score 33 - 35  | Mirotic 2' Layup (6 PTS) (Gasol 2 AST) <-- END
+
+=== P15 game 0021500064 Q2 catch gc=249.9 (4:09) offence team 1610612753 -> points 2, end made_fg at event 229, margin -7
+   ev 229  4:04 t 1 team 1610612753 score 51 - 56  | Gordon  Dunk (6 PTS) <-- END
+   ev 230  3:47 t 5 team 1610612745 score         Ariza Bad Pass Turnover (P3.T9) | Fournier STEAL (1 STL) 
+   ev 231  3:42 t 2 team 1610612753 score          | MISS Oladipo 2' Driving Layup 
+   ev 232  3:41 t 1 team 1610612753 score 53 - 56  | Fournier 1' Putback Layup (11 PTS) 
+   ev 233  3:41 t 4 team 1610612753 score          | Fournier REBOUND (Off:1 Def:3) 
+
+=== P16 game 0021500274 Q2 catch gc=623.1 (10:23) offence team 1610612740 -> points 2, end last_ft_made at event 156, margin 12
+   ev 145 10:29 t 2 team 1610612745 score         MISS Brewer 25' 3PT Jump Shot |  
+   ev 146 10:28 t 4 team 1610612740 score          | Anderson REBOUND (Off:1 Def:1) 
+   ev 147 10:20 t 2 team 1610612740 score          | MISS Cole 25' 3PT Jump Shot 
+   ev 148 10:19 t 4 team 1610612740 score          | Pelicans Rebound 
+   ev 149 10:19 t 8 team 1610612740 score          | SUB: Asik FOR Ajinca 
+   ev 150 10:19 t 8 team 1610612745 score         SUB: Beverley FOR Thornton |  
+   ev 151 10:07 t 2 team 1610612740 score          | MISS Anderson 3' Layup 
+   ev 152 10:06 t 4 team 1610612740 score          | Anderson REBOUND (Off:2 Def:1) 
+   ev 153 10:06 t 6 team 1610612745 score         Howard S.FOUL (P1.T1) (G.Zielinski) |  
+   ev 154 10:06 t 3 team 1610612740 score 32 - 19  | Anderson Free Throw 1 of 2 (3 PTS) 
+   ev 156 10:06 t 3 team 1610612740 score 33 - 19  | Anderson Free Throw 2 of 2 (4 PTS) <-- END
+   ev 159  9:54 t 5 team 1610612745 score         Howard Illegal Screen Turnover (P1.T2) |  
+
+=== P17 game 0021500125 Q3 catch gc=442.0 (7:22) offence team 1610612750 -> points 0, end def_rebound at event 309, margin -14
+   ev 308  7:22 t 2 team 1610612750 score         MISS Wiggins 12' Turnaround Jump Shot |  
+   ev 309  7:20 t 4 team 1610612744 score          | Warriors Rebound <-- END
+   ev 310  7:06 t 5 team 1610612744 score          | Thompson Out of Bounds - Bad Pass Turnover Turnover (P3.T7) 
+
+=== P18 game 0021500466 Q3 catch gc=257.9 (4:17) offence team 1610612739 -> points 0, end turnover at event 326, margin 1
+   ev 325  4:16 t 6 team 1610612739 score          | Jones OFF.Foul (P1) (G.Petraitis) 
+   ev 326  4:16 t 5 team 1610612739 score          | Jones Foul Turnover (P1.T11) <-- END
+   ev 327  4:05 t 2 team 1610612756 score         MISS Warren 16' Pullup Jump Shot |  
+   ev 328  4:02 t 4 team 1610612739 score          | James REBOUND (Off:0 Def:3) 
+
+=== P19 game 0021500336 Q3 catch gc=409.1 (6:49) offence team 1610612738 -> points 0, end turnover at event 335, margin -7
+   ev 333  6:56 t 2 team 1610612744 score          | MISS Bogut 10' Floating Jump Shot 
+   ev 334  6:55 t 4 team 1610612738 score         Sullinger REBOUND (Off:2 Def:8) |  
+   ev 335  6:47 t 5 team 1610612738 score         Sullinger Traveling Turnover (P1.T8) |  <-- END
+   ev 336  6:42 t 6 team 1610612738 score         Bradley P.FOUL (P2.T2) (A.Smith) |  
+   ev 337  6:32 t 2 team 1610612744 score          | MISS Curry 21' Jump Shot 
+   ev 338  6:31 t 4 team 1610612738 score         Thomas REBOUND (Off:2 Def:3) |  
+   ev 339  6:24 t 2 team 1610612738 score         MISS Bradley  3PT Jump Shot |  
+   ev 340  6:23 t 4 team 1610612744 score          | Bogut REBOUND (Off:1 Def:4) 

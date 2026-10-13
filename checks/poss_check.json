@@ -1,0 +1,4 @@
+{"n": 20, "correct_before_fix": 19, "correct_after_fix": 20,
+ "error": "P07 (0021500453 Q4 11:13): made layup + missed and-one FT, offence team rebound, second basket. Code ended at the made FG (2 pts); registered rule lets the rebound decide (4 pts). Code fixed to the registered rule (8abb389).",
+ "quirk": "P12: late-inserted PBP rows (EVENTNUM 510-518, clock 8:56) appear out of order; EVENTNUM ordering skips them. No effect on that possession's points.",
+ "note": "P17: shot logged at the same PBP second as the catch (PBP lag); possession outcome unaffected."}
