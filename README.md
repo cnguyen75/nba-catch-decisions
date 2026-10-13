@@ -1092,3 +1092,31 @@ committed.
 
 **Sheet change for the fresh set.** A ball-to-basket trace is added, so
 shots are visible on the sheet. No detector output is shown.
+
+### Results so far, and a scope rule (registered before power or synthetic ran)
+
+**Results so far.**
+
+- **V_shoot fix: PASSES the powered rule.** ECE 0.0385 against a null 95th
+  percentile of 0.0492. g(zone): rim 0.143, mid 0.216, above-break 0.130,
+  corner 0.143.
+- **Drive/pass retest: FAILS, 51/60** (strata 16/16/19). **Binary is
+  primary**, four-way is a registered extension, and nothing is retried.
+
+**Support problem found after the fix passed.** The fixed V_shoot
+extrapolates beyond its data. Mean predicted make probability is 0.57 at
+35–47 ft, and up to 0.97 for a 45 ft catch, against 0.41 at 26–30 ft. 98.0%
+of league train catch-and-shoot attempts are within 30 ft (only 70 beyond).
+The gated players' shoot-now attempts beyond 30 ft number 1, 7 and 6.
+Validation calibration cannot see this, because validation shots come from
+the same range.
+
+**Scope rule (for Colin's sign-off).** The choice-model unit is restricted to
+catches with **d_basket ≤ 30 ft**, the support of the shot model. V_shoot is
+not modified. This removes 21.6% (Curry), 27.7% (LeBron) and 35.5% (Harden)
+of train catches. Power and synthetic run on the restricted set.
+
+**Synthetic, immediate-scale bias (detail of the part 3 sensitivity).** Each
+synthetic data set, generated with possession-scale V_shoot, is also fitted
+with V_shoot_imm. The per-run difference (c_shoot fitted on the immediate
+scale minus the truth) is reported, as its mean and SD per setting.

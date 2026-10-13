@@ -20,8 +20,16 @@ ZONES = ["rim", "mid", "above_break3", "corner3"]
 
 
 def primary_model():
-    dp = json.loads((ROOT / "checks/dp_score.json").read_text())
+    dp = json.loads((ROOT / "checks/dp2_score.json").read_text())  # the registered retest decides
     return "fourway" if dp["passes"] else "binary"
+
+
+D_MAX = 30.0  # scope rule: support of the shot model
+
+
+def load_values():
+    v = pd.read_csv(S3 / "values2.csv", dtype={"game": str})
+    return v[v.d_basket <= D_MAX]
 
 
 def design(df, model):
@@ -96,7 +104,7 @@ def fisher(V, avail, c, T, zone_idx=None, nz=0):
 
 def power():
     model = primary_model()
-    v = pd.read_csv(S3 / "values.csv", dtype={"game": str})
+    v = load_values()
     split = json.loads((ROOT / "checks/split.json").read_text())
     out = {"primary_model": model, "players": {}}
     for name, pid in PLAYERS.items():
@@ -142,7 +150,7 @@ def settings(model, T_p):
 def synth():
     pw = json.loads((S3 / "power.json").read_text())
     model = pw["primary_model"]
-    v = pd.read_csv(S3 / "values.csv", dtype={"game": str})
+    v = load_values()
     out = {"primary_model": model, "players": {}}
     for name, pid in PLAYERS.items():
         info = pw["players"][name]
@@ -172,15 +180,23 @@ def synth():
                 ch, Th, _ = fit(V, avail, ysim, k)
                 est = np.r_[ch, Th]
                 err = est - np.r_[c0, T0]
-                runs.append({"seed": seed, "estimate": dict(zip(names, est.round(4).tolist())),
+                Vimm = V.copy()
+                Vimm[:, 0] = d.V_shoot_imm.to_numpy(float)
+                ci, Ti, _ = fit(Vimm, avail, ysim, k)
+                runs.append({"seed": seed, "c_shoot_immediate_scale_fit": round(float(ci[0]), 4),
+                             "immediate_scale_bias": round(float(ci[0] - c0[0]), 4),
+                             "estimate": dict(zip(names, est.round(4).tolist())),
                              "error": dict(zip(names, err.round(4).tolist())),
                              "within": dict(zip(names, (np.abs(err) <= lim).tolist())),
                              "pass": bool(np.all(np.abs(err) <= lim))})
             npass = sum(r["pass"] for r in runs)
+            ib = np.array([r["immediate_scale_bias"] for r in runs])
             res["settings"][sname] = {"true": dict(zip(names, np.r_[c0, T0].round(4).tolist())),
                                       "limits": dict(zip(names, lim.round(4).tolist())),
                                       "ideal_p_run_pass": round(p_run, 4), "ideal_p_rule_pass": round(p_rule, 4),
-                                      "runs_passed": npass, "setting_passes": npass >= 18, "runs": runs}
+                                      "runs_passed": npass, "setting_passes": npass >= 18,
+                                      "immediate_scale_bias_mean_sd": [round(float(ib.mean()), 4), round(float(ib.std()), 4)],
+                                      "runs": runs}
         res["passes"] = all(s["setting_passes"] for s in res["settings"].values())
         out["players"][name] = res
     (S3 / "synth.json").write_text(json.dumps(out, indent=1))
