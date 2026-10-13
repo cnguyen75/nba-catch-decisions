@@ -1559,3 +1559,93 @@ The rim zone's gap is negative (−0.16 to −0.22) while players shoot 18–33%
 of rim catches. **The make model is jump shots only, and it is applied to rim
 catches whose shots are mostly layups and dunks, so it understates V_shoot at
 the rim.**
+
+---
+
+# Final round (Colin; registered 2026-10-13 before running)
+
+## Recorded first: the scope mismatch
+
+**What went wrong.** The make model is trained on **jump shots only**, but
+the choice unit included catches from 0–16 ft, including rim catches.
+
+- A catch at the rim is usually finished with a layup or dunk, which goes in
+  far more often than a jump shot from the same spot.
+- Valuing it with the jump-shot model understated V_shoot there, giving a
+  value gap of −0.16 to −0.22 while players shot 18–33% of rim catches.
+- That pulled the choice-model slope negative.
+- The mismatch should have been caught when the scope was registered.
+
+**Fix: the choice unit is catches 16–30 ft from the basket.** That is the
+jump-shot model's valid range, and catch-and-shoot is the decision being
+studied.
+
+## 1. Gated sequence on the 16–30 ft unit (Curry, Harden; LeBron reported, not gated)
+
+**Rerun, as registered:**
+
+- **Check 1:** the value-gap slope on counterfactual release openness, 22–30 ft
+  train catches. OLS, bootstrap 95% CI (2,000 resamples, seed 0), must
+  exclude 0 on the positive side.
+- **Power:** pilot T on 16–30 ft train catches (c discarded), Fisher
+  information; proceed if MDE ≤ 0.15 at c = 0.
+
+**If a player passes both, then in order:**
+
+1. **Synthetic recovery** (S1–S3 × 20 seeds, part 2 limits and pass rule).
+2. **The real fit, scored once on test games:**
+   - c_shoot and T are fitted by maximum likelihood on the player's train +
+     validation catches (16–30 ft);
+   - c_shoot is reported with a Fisher 95% interval;
+   - **once** on his test-game catches: per-catch log-likelihood of the
+     fitted model, against (i) his train + validation shoot rate as a
+     constant, and (ii) the model with c = 0 and T refit;
+   - test-game values use the same league models and his train-game
+     offsets.
+3. **Sensitivities:** the gradient-scale rerun (openness-driven part of
+   P(make) above the 0–4 ft level × 0.881), and Dubin–McFadden V_continue.
+
+**If no player passes, the gated sequence stops there.**
+
+## 2. Descriptive result (no gate): revealed against measured value of openness
+
+**Data:** each player's non-test catches (train + validation games) at
+16–30 ft, shoot-now against continue.
+
+**Definitions:**
+
+- **Openness** = counterfactual release openness, open_cf (catch + 1.0 s,
+  with the shot-side adjustment).
+- **Reference openness** = the player's median open_cf, and his median
+  openness at catch (V_continue's openness input).
+- **gap** = V_shoot − V_continue (naive V_continue).
+- **gap_dz** = the gap recomputed with both openness inputs at the reference
+  values. It varies with distance, zone, shot clock, rim protection,
+  teammates and margin; everything except openness. The stated wording "from
+  distance and zone" covers all non-openness state.
+- **gap_open** = gap − gap_dz.
+
+**The four results:**
+
+- **(a) Measured value of openness:** the OLS slope of gap_open on open_cf,
+  in points per ft.
+- **(b) and (c):** a logistic model, logit P(shoot now) = α + b·open_cf +
+  c·gap_dz.
+  - **(b)** = b, the change in log-odds of shooting per ft of openness;
+  - **(c)** = c, per point of non-openness value gap.
+- **(d)** = b / c, in points per ft: **the openness value players behave as
+  if they see**, set against (a).
+
+**Intervals:** bootstrap 95% (2,000 resamples of catches, seed 0). The
+ratio's interval is percentile-based and reported as unstable if c's
+interval includes 0.
+
+**Plain-language reading per player:** "he behaves as if an extra foot of
+openness were worth d points, against a measured a points."
+
+## 3. Record
+
+`feasibility.md` gets the full sequence (feasibility, Stage 2, 3a, 3b-prep,
+the calibration rounds, this round), with nothing removed, plus a suggested
+site paragraph for the outcome that occurs. **Then stop: the project's
+record is complete.**
