@@ -1,0 +1,40 @@
+{
+ "correct": 57,
+ "n": 60,
+ "by_third": {
+  "high": 20,
+  "low": 17,
+  "mid": 20
+ },
+ "labels": {
+  "real": 46,
+  "not_catch": 14
+ },
+ "passes": true,
+ "errors": [
+  {
+   "cid": "H23",
+   "third": "low",
+   "label": "not_catch",
+   "note": "ball 2-3.5 ft from Curry for 2 s in a screen/handoff tangle with teammate; no arrival",
+   "correct": false,
+   "d3_nearest_catch_offset": 5.0
+  },
+  {
+   "cid": "H44",
+   "third": "low",
+   "label": "not_catch",
+   "note": "mid-possession dribble, excursion to 4.5 ft",
+   "correct": false,
+   "d3_nearest_catch_offset": 0.0
+  },
+  {
+   "cid": "H52",
+   "third": "low",
+   "label": "not_catch",
+   "note": "holding offset: ball 3-7 ft from Curry for 1.5 s, no other player near the ball",
+   "correct": false,
+   "d3_nearest_catch_offset": 0.0
+  }
+ ]
+}
