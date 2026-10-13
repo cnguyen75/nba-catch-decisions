@@ -1876,3 +1876,42 @@ calibration is judged by the same criteria.
 - **Reported:** the openness and clock slopes, with and without motion, for
   the league and each player, with intervals (bootstrap over games, 1,000
   resamples). Same unit as Stage 4 (16–30 ft, shot clock recorded).
+
+# Stage 5c: descriptive exchange-rate map (registered 2026-10-13, before running; no gates)
+
+## Exchange rate (ER)
+
+- **Definition:** ER = −β_open / β_clock, in **seconds of shot clock per
+  foot of space**. It comes from the Stage 4 step-2 logistic (Stage 4
+  covariates, no motion features) on the group's catches. It is positive when
+  more space and less clock both raise shooting.
+- **Data:** non-test catches (train, validation and calibration games) at
+  16–30 ft, shot clock recorded, shoot-now against continue.
+- **Intervals:** bootstrap over games, 1,000 resamples (seed 0; per-player
+  seeds offset by rank).
+- **"Resolved":** the β_clock 95% interval excludes 0. Unresolved players
+  are listed but not ranked.
+
+## League-wide map
+
+- **Eligibility:** every player with **≥ 300** such catches.
+- **Reported:**
+  - the distribution of ER among resolved players (median, IQR, histogram
+    counts);
+  - the **ten highest and ten lowest** resolved;
+  - Curry, LeBron and Harden's values and their percentile among the
+    resolved (or "unresolved").
+
+## Within-player variation (Curry, LeBron, Harden, and the league = all non-gated players)
+
+**Cells:**
+
+- score margin (offence's view): behind by 5+, within 5, ahead by 5+;
+- period: 1–3 against 4th and overtime;
+- home against away (home team from the PBP);
+- catch source (5a): pass, offensive rebound, inbound, other.
+
+**Each cell:** ER and its 95% interval, n, and shots.
+
+**Thin cells:** fewer than 150 catches, fewer than 20 shots, or a β_clock
+interval that includes 0. Their numbers are still reported, flagged.
