@@ -1355,3 +1355,18 @@ they differ.
 
 c_shoot's power and synthetic recovery are reported under **whichever
 V_continue the rule selects**. The other is a sensitivity.
+
+## Stage 3b-prep results: stopped at the make-model calibration rule
+
+- **Make model** (all league jump shots on release openness): validation ECE
+  0.0163, against a perfect-model 95th percentile of 0.0159 (n = 11,550).
+  **Fails narrowly.**
+- **Not run:** V_shoot, 7a, 7c, the checks, power and synthetic.
+- **Computed:**
+  - all league threes by release openness: 28.1% → 40.8%;
+  - late-clock openness slope 0.479 [0.327, 0.671], against 0.344 overall;
+  - delta 0.96 s (25 frames);
+  - shot-side check: rim 1.33 ft and above-break 1.02 ft adjusted; mid and
+    corner not adjusted;
+  - g(zone) recomputed.
+- **Report:** the track folder's `feasibility.md`.
