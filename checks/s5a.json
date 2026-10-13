@@ -1,0 +1,337 @@
+{
+ "n_motion_catches": 239824,
+ "n_motion_shots": 80220,
+ "make_rows_dropped_missing_motion": 366,
+ "make_comparison": {
+  "n_train": 37122,
+  "n_eval": 5512,
+  "current": {
+   "level": 0.0094,
+   "level_pass": true,
+   "gradient": 0.0072,
+   "gradient_pass": true,
+   "bins_pass": true,
+   "worst_bin_err": 0.026,
+   "ece": 0.0132
+  },
+  "motion": {
+   "level": 0.0097,
+   "level_pass": true,
+   "gradient": 0.0062,
+   "gradient_pass": true,
+   "bins_pass": true,
+   "worst_bin_err": 0.0263,
+   "ece": 0.0145
+  },
+  "logloss_current": 0.65394,
+  "logloss_motion": 0.6538,
+  "delta_logloss_motion_minus_current": [
+   -0.00014,
+   [
+    -0.00092,
+    0.00061
+   ]
+  ],
+  "motion_improves_logloss": false
+ },
+ "motion_coefs_standardized": {
+  "closing_pre": 0.0588,
+  "shooter_speed": -0.0861,
+  "set": -0.0153,
+  "n_def6": 0.0152
+ },
+ "behavioural": {
+  "League": {
+   "n": 101532,
+   "shots": 16018,
+   "stage4": {
+    "beta_clock": [
+     -0.0551,
+     [
+      -0.0599,
+      -0.0505
+     ]
+    ],
+    "beta_open": [
+     0.3955,
+     [
+      0.3866,
+      0.404
+     ]
+    ],
+    "ER_s_per_ft": [
+     7.181,
+     [
+      6.564,
+      7.85
+     ]
+    ]
+   },
+   "motion": {
+    "beta_clock": [
+     -0.0602,
+     [
+      -0.0654,
+      -0.0553
+     ]
+    ],
+    "beta_open": [
+     0.421,
+     [
+      0.4118,
+      0.4305
+     ]
+    ],
+    "ER_s_per_ft": [
+     6.996,
+     [
+      6.441,
+      7.627
+     ]
+    ]
+   },
+   "motion_no_post": {
+    "beta_clock": [
+     -0.0627,
+     [
+      -0.0677,
+      -0.0579
+     ]
+    ],
+    "beta_open": [
+     0.4317,
+     [
+      0.4222,
+      0.441
+     ]
+    ],
+    "ER_s_per_ft": [
+     6.884,
+     [
+      6.357,
+      7.474
+     ]
+    ]
+   }
+  },
+  "Curry": {
+   "n": 575,
+   "shots": 134,
+   "stage4": {
+    "beta_clock": [
+     -0.0892,
+     [
+      -0.1564,
+      -0.0314
+     ]
+    ],
+    "beta_open": [
+     0.3439,
+     [
+      0.2805,
+      0.4357
+     ]
+    ],
+    "ER_s_per_ft": [
+     3.856,
+     [
+      2.285,
+      10.802
+     ]
+    ]
+   },
+   "motion": {
+    "beta_clock": [
+     -0.0973,
+     [
+      -0.1689,
+      -0.044
+     ]
+    ],
+    "beta_open": [
+     0.247,
+     [
+      0.1463,
+      0.3671
+     ]
+    ],
+    "ER_s_per_ft": [
+     2.539,
+     [
+      1.289,
+      5.775
+     ]
+    ]
+   },
+   "motion_no_post": {
+    "beta_clock": [
+     -0.0973,
+     [
+      -0.168,
+      -0.0439
+     ]
+    ],
+    "beta_open": [
+     0.2476,
+     [
+      0.1451,
+      0.3758
+     ]
+    ],
+    "ER_s_per_ft": [
+     2.544,
+     [
+      1.282,
+      5.819
+     ]
+    ]
+   }
+  },
+  "LeBron": {
+   "n": 610,
+   "shots": 38,
+   "stage4": {
+    "beta_clock": [
+     -0.1003,
+     [
+      -0.1901,
+      -0.0407
+     ]
+    ],
+    "beta_open": [
+     0.4645,
+     [
+      0.3254,
+      0.703
+     ]
+    ],
+    "ER_s_per_ft": [
+     4.629,
+     [
+      2.405,
+      10.314
+     ]
+    ]
+   },
+   "motion": {
+    "beta_clock": [
+     -0.1304,
+     [
+      -0.2463,
+      -0.0755
+     ]
+    ],
+    "beta_open": [
+     0.3933,
+     [
+      0.2265,
+      0.7047
+     ]
+    ],
+    "ER_s_per_ft": [
+     3.016,
+     [
+      1.17,
+      6.449
+     ]
+    ]
+   },
+   "motion_no_post": {
+    "beta_clock": [
+     -0.1258,
+     [
+      -0.2405,
+      -0.0721
+     ]
+    ],
+    "beta_open": [
+     0.3627,
+     [
+      0.1994,
+      0.6397
+     ]
+    ],
+    "ER_s_per_ft": [
+     2.883,
+     [
+      1.005,
+      6.342
+     ]
+    ]
+   }
+  },
+  "Harden": {
+   "n": 590,
+   "shots": 71,
+   "stage4": {
+    "beta_clock": [
+     -0.0107,
+     [
+      -0.0661,
+      0.0523
+     ]
+    ],
+    "beta_open": [
+     0.465,
+     [
+      0.3919,
+      0.6023
+     ]
+    ],
+    "ER_s_per_ft": [
+     43.416,
+     [
+      -235.626,
+      197.021
+     ]
+    ]
+   },
+   "motion": {
+    "beta_clock": [
+     -0.0114,
+     [
+      -0.0774,
+      0.056
+     ]
+    ],
+    "beta_open": [
+     0.4944,
+     [
+      0.3883,
+      0.7237
+     ]
+    ],
+    "ER_s_per_ft": [
+     43.305,
+     [
+      -189.06,
+      200.578
+     ]
+    ]
+   },
+   "motion_no_post": {
+    "beta_clock": [
+     -0.0105,
+     [
+      -0.074,
+      0.0583
+     ]
+    ],
+    "beta_open": [
+     0.4898,
+     [
+      0.3805,
+      0.6924
+     ]
+    ],
+    "ER_s_per_ft": [
+     46.486,
+     [
+      -147.687,
+      301.207
+     ]
+    ]
+   }
+  }
+ }
+}
