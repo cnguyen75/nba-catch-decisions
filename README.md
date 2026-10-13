@@ -178,4 +178,32 @@ re-running.
 
 ## Changes to the pre-registration
 
-(none yet)
+### R1: release arrival, the last episode rather than the first (before the gate was computed)
+
+**What was seen.** Under the original rule, only 62% of FG attempts were
+located. Among those, the shooter was nearest the ball at release in only 51%.
+Tracing plays showed the cause:
+
+- An event's moments start about 20 s before the PBP event and end at the PBP
+  clock.
+- So the window often contains the *previous* shot, frequently the opponent's,
+  and "the first arrival in the window" picks that shot.
+- Example: game 0021500003, event 14, Curry layup at 9:34. The window opens on
+  an opponent shot at 593 s, while Curry's release is at about 578.8 s.
+
+Only the join check and the release table had been looked at. No catch or gate
+quantity had been computed.
+
+**New rule.** Arrival frames, as before (ball within 3 ft of a basket, z ≥ 9),
+are grouped into **episodes**: runs merged across gaps of 5 frames or fewer.
+
+1. Scan the episodes from last to first.
+2. For each, search for the release over the frames after the previous episode
+   (or from the window start) up to the episode's first frame. The release is
+   the last frame there with the ball within 3 ft of the shooter.
+3. Apply the same three validity checks as before. The latest episode that
+   yields a valid release is used.
+4. If no episode does, fall back to the air-ball rule (the maximum-z frame of
+   the window) and its checks.
+
+Everything else is unchanged.
