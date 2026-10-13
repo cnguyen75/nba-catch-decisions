@@ -1298,3 +1298,60 @@ catches, and **c_shoot is biased toward a shooter's premium** (negative).
 per player.
 
 **Stop before any real fit of c.**
+
+## 7. Measure the selection in V_continue (Colin; amendment registered before anything ran)
+
+This **replaces step 5's assumed bias direction and validation rule** where
+they differ.
+
+### (a) Control group, continuation side
+
+- **Groups,** league non-gated players with **at least 40** train catches at
+  22–30 ft:
+  - **control:** shoot-now rate there under 2%;
+  - **shooters:** the rest.
+- **Fit, for each group:** the V_continue regression (same features, ridge
+  α = 1, *unstandardized* openness so the slope is in points per ft) on that
+  group's **continuing** catches at 22–30 ft, train games.
+- **Reported:** the openness-at-catch coefficient with a **game-clustered
+  bootstrap 95% interval** (2,000 resamples, seed 0).
+- **Decision:** if the shooters' slope is **above the upper end of the
+  control group's 95% interval,** selection is present and (c) becomes the
+  main path. Otherwise the naive V_continue stands and (c) is a
+  sensitivity.
+
+### (b) The same check on the shot side
+
+- **Comparison:** within 1-ft bins of openness at catch, the mean
+  counterfactual release openness (catch + delta) of catches that became
+  shoot-now, against those that did not. League train catches at ≤ 30 ft.
+- **Difference = non-shot − shot,** averaged over bins weighted by non-shot
+  counts, by zone.
+- **Rule:** if it exceeds 1 ft in a zone, it is **subtracted** from the
+  counterfactual for non-shooting catches in that zone, and this is reported.
+
+### (c) Dubin–McFadden correction
+
+- **Choice:** the reduced-form shoot/continue logit on the full state.
+  **Exclusion restrictions:** best teammate openness and score margin enter
+  the choice and are left out of the corrected continuation equation.
+- **Term and corrected value:** λ = P·ln P/(1 − P) + ln(1 − P). The
+  corrected V_continue is the prediction without λ.
+- **Synthetic validation before any real use:**
+  - league train catch states and the same sample sizes;
+  - known true continuation values, with a known openness slope;
+  - choice and outcome errors with correlation 0.3 (normal errors; the
+    choice is a threshold on a latent index with logistic marginal);
+  - 20 seeds (300–319);
+  - 95% intervals by bootstrap that re-estimates the first stage (200
+    resamples).
+- **Pass:** the corrected estimate's interval contains the true openness
+  slope in **≥ 18 of 20** seeds, **and** the naive estimate visibly fails:
+  its interval excludes the truth in **≥ 10 of 20** seeds.
+- **If not:** the correction is not shown to work. The naive values stand,
+  with the bias direction stated.
+
+### Reporting
+
+c_shoot's power and synthetic recovery are reported under **whichever
+V_continue the rule selects**. The other is a sensitivity.
