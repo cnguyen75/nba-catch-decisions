@@ -42,6 +42,10 @@ MIN_RUN = 5
 CLEANUP = False
 
 
+class EmptyGame(Exception):
+    pass
+
+
 def load_timeline(game_id):
     path = DATA / "json" / GAMES[game_id] / f"{game_id}.json"
     if not path.exists():
@@ -70,6 +74,8 @@ def load_timeline(game_id):
             seen[key] = m
     keys = sorted(seen, key=lambda k: (k[0], -k[1]))
     n = len(keys)
+    if n == 0:
+        raise EmptyGame(game_id)
     Q = np.array([k[0] for k in keys])
     GC = np.array([k[1] for k in keys])
     SC = np.array([np.nan if seen[k][3] is None else seen[k][3] for k in keys])
@@ -317,7 +323,12 @@ def main():
     shots_rows, catch_rows, join_rows = [], [], []
     meta = {"games": {}}
     for gid in GAMES:
-        g, events, tl, skipped = load_timeline(gid)
+        try:
+            g, events, tl, skipped = load_timeline(gid)
+        except EmptyGame:
+            print("SKIP no tracking frames", gid, GAMES[gid], flush=True)
+            meta.setdefault("skipped_games", []).append(GAMES[gid])
+            continue
         if CLEANUP and GAMES[gid] not in KEEP_STEMS:
             path = DATA / "json" / GAMES[gid] / f"{gid}.json"
             path.unlink()
