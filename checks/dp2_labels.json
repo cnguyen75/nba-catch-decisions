@@ -1,0 +1,306 @@
+{
+ "labelled_before_dv2_run": true,
+ "label_rule": "registered retest wording incl. amendment 2",
+ "labels": [
+  {
+   "fid": "F00",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F01",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F02",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F03",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F04",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F05",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F06",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F07",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F08",
+   "label": "hold",
+   "note": "his own shot after ~1.4-2 s (ball to rim)"
+  },
+  {
+   "fid": "F09",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F10",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F11",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F12",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F13",
+   "label": "pass",
+   "note": "uncertain: lob toward basket, judged a lob to a teammate (not his own shot)"
+  },
+  {
+   "fid": "F14",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F15",
+   "label": "hold",
+   "note": "uncertain: ball next near an opponent"
+  },
+  {
+   "fid": "F16",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F17",
+   "label": "hold",
+   "note": "uncertain: ball travels far, next touch unclear"
+  },
+  {
+   "fid": "F18",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F19",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F20",
+   "label": "hold",
+   "note": "uncertain: tracking glitch at catch near half court"
+  },
+  {
+   "fid": "F21",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F22",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F23",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F24",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F25",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F26",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F27",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F28",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F29",
+   "label": "pass",
+   "note": "uncertain: handoff vs deflection"
+  },
+  {
+   "fid": "F30",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F31",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F32",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F33",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F34",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F35",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F36",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F37",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F38",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F39",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F40",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F41",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F42",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F43",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F44",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F45",
+   "label": "drive",
+   "note": "drive by registered semantics (20+ ft within first 4 s, reached 10 ft at ~9.5 s)"
+  },
+  {
+   "fid": "F46",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F47",
+   "label": "pass",
+   "note": "uncertain: next possessor unclear"
+  },
+  {
+   "fid": "F48",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F49",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F50",
+   "label": "hold",
+   "note": "his own shot"
+  },
+  {
+   "fid": "F51",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F52",
+   "label": "hold",
+   "note": "min ~11 ft, not within 10"
+  },
+  {
+   "fid": "F53",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F54",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F55",
+   "label": "drive",
+   "note": "drive by registered semantics (reached 10 ft at ~9 s)"
+  },
+  {
+   "fid": "F56",
+   "label": "pass",
+   "note": ""
+  },
+  {
+   "fid": "F57",
+   "label": "hold",
+   "note": ""
+  },
+  {
+   "fid": "F58",
+   "label": "drive",
+   "note": ""
+  },
+  {
+   "fid": "F59",
+   "label": "drive",
+   "note": ""
+  }
+ ]
+}
