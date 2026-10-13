@@ -1649,3 +1649,25 @@ openness were worth d points, against a measured a points."
 the calibration rounds, this round), with nothing removed, plus a suggested
 site paragraph for the outcome that occurs. **Then stop: the project's
 record is complete.**
+
+## Final round: results (the project record is complete)
+
+**Gated, 16–30 ft unit:**
+
+- Curry: check 1 FAIL (0.0050 [−0.0059, 0.0183]).
+- Harden: check 1 pass (0.0187 [0.0097, 0.0293]); pilot T diverges (510),
+  MDE 163, so **underpowered.**
+- **No gated player proceeds.** The gated sequence stops: no synthetic, no
+  real fit of c, test games never touched.
+- LeBron (not gated): pilot T 0.73, MDE 0.246, which would be underpowered.
+
+**Descriptive** (16–30 ft, non-test catches; bootstrap 95% intervals):
+
+| | (a) measured pts/ft | (b) log-odds/ft | (c) log-odds per point of gap_dz | (d) = b/c pts/ft |
+|---|---|---|---|---|
+| Curry (n = 585, 134 shots) | 0.019 [0.015, 0.024] | 0.18 [0.10, 0.29] | −0.02 [−0.81, 0.85] | unstable (−9.2; [−7.6, 6.0]) |
+| Harden (n = 596, 72) | 0.029 [0.024, 0.034] | 0.14 [0.03, 0.26] | 0.90 [−1.27, 2.97] | 0.15 [−1.24, 1.30] |
+| LeBron (n = 610, 38) | 0.021 [0.017, 0.024] | 0.27 [0.19, 0.38] | −0.46 [−3.24, 2.23] | unstable (−0.59; [−3.09, 3.10]) |
+
+**Reading.** The interval for (c) includes 0 for every player, so (d) is
+reported as unstable, as registered.
