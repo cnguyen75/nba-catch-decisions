@@ -1,0 +1,21 @@
+{
+ "rule": "C1 + C1a (sticky control, brief opponent touches merged)",
+ "sample": "10 counted Curry catches from the 8 new games, seed 3; sheets show positions, ball z and ball-to-player distance only",
+ "hit_criterion": "marked frame within 0.2 s of a real start of possession (ball arrives from elsewhere, not already in his dribble)",
+ "plays": [
+  {"game": "0021500051", "catch_frame": 47184, "hit": false, "note": "ball already with Curry for >2 s at 3-5 ft from his tracked centre; catch is the ball crossing the 3 ft line mid-possession"},
+  {"game": "0021500069", "catch_frame": 41964, "hit": false, "note": "one-frame ball tracking glitch (z 15 -> 3.4 -> 15 ft) during a high ball"},
+  {"game": "0021500104", "catch_frame": 50453, "hit": true, "note": "pass arrives"},
+  {"game": "0021500083", "catch_frame": 44499, "hit": false, "note": "high ball coming down passes within 2.2 ft of Curry at z=8; teammate #31 (Ezeli) takes it"},
+  {"game": "0021500083", "catch_frame": 34389, "hit": true, "note": "pass arrives"},
+  {"game": "0021500125", "catch_frame": 69909, "hit": true, "note": "return pass after he passed it away"},
+  {"game": "0021500051", "catch_frame": 17858, "hit": true, "note": "pass arrives"},
+  {"game": "0021500104", "catch_frame": 14610, "hit": true, "note": "pass arrives"},
+  {"game": "0021500051", "catch_frame": 45557, "hit": true, "note": "high ball (rebound or lob) arrives"},
+  {"game": "0021500104", "catch_frame": 49637, "hit": true, "note": "pass arrives"}
+ ],
+ "hits": 7,
+ "n": 10,
+ "registered_stop_rule": "stop before the gate if below 7/10",
+ "proceed": true
+}

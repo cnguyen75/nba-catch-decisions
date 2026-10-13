@@ -17,6 +17,8 @@ import numpy as np  # noqa: E402
 sys.path.insert(0, str(Path(__file__).parent))
 import build as b  # noqa: E402
 
+b.GAMES.update(b.GAMES_PASS2)
+
 UP = Path.home() / "Documents" / "nba-tracking" / "upstream"
 sys.path.append(str(UP))
 import Event as up_event  # noqa: E402

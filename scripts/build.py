@@ -37,6 +37,7 @@ CTRL_D, CTRL_Z = 3.0, 8.0
 MERGE_S = 1.0
 PRE_FRAMES = 5
 SC_LAG = 12
+BRIEF_FRAMES = 12
 
 
 def load_timeline(game_id):
@@ -199,7 +200,26 @@ def spells(tl):
         cur = (o, k, k)
     if cur is not None:
         out.append(cur)
-    return out
+    if RULE != "sticky":
+        return out
+    # C1a: P, brief opponent touch (<= 12 frames), P within 1.0 s -> one possession
+    res = []
+    for sp in out:
+        if len(res) >= 2:
+            a, t = res[-2], res[-1]
+            if (a[0] == sp[0] and is_brief_opp(tl, t, sp[0], sp[1])
+                    and Q[a[2]] == Q[sp[1]] and GC[a[2]] - GC[sp[1]] <= MERGE_S):
+                res.pop()
+                res[-1] = (a[0], a[1], sp[2])
+                continue
+        res.append(sp)
+    return res
+
+
+def is_brief_opp(tl, s, pid, at):
+    """Spell s is an opponent's (relative to pid at frame `at`) and lasts <= 12 frames."""
+    return (s[2] - s[1] + 1 <= BRIEF_FRAMES and s[0] != pid
+            and team_of(tl, s[2], s[0]) != team_of(tl, at, pid))
 
 
 def team_of(tl, i, pid):
@@ -290,7 +310,12 @@ def main():
                           and all(tl["prev_ok"][st + j] for j in range(1, SC_LAG + 1))
                           and SC[st + SC_LAG] < SC[st])
                 frontcourt = d_b is not None and d_b <= 47.0
-                prev = sp[k - 1] if k > 0 else None
+                kk = k - 1
+                brief = False
+                while RULE == "sticky" and kk >= 0 and Q[sp[kk][1]] == q and is_brief_opp(tl, sp[kk], p, st):
+                    kk -= 1
+                    brief = True
+                prev = sp[kk] if kk >= 0 else None
                 if prev is None or Q[prev[1]] != q:
                     src = "none"
                 elif prev[0] == p:
@@ -300,7 +325,7 @@ def main():
                 row = dict(game=gid, player=TARGETS[p], pid=p, start=st, end=en, quarter=q,
                            gc=float(GC[st]), valid_catch=bool(ok_pre), frontcourt=bool(frontcourt),
                            sc_running=bool(sc_run), shot_clock=None if np.isnan(SC[st]) else float(SC[st]),
-                           d_basket=d_b, source=src, t_next=float(GC[st] - GC[en]))
+                           d_basket=d_b, source=src, brief_opp_touch=brief, t_next=float(GC[st] - GC[en]))
                 if bk is not None:
                     row["open_catch"] = nearest_opp(tl, st, team, pxy)
                     row["rim_prot"] = nearest_opp(tl, st, team, BASKETS[bk])
