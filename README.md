@@ -1370,3 +1370,49 @@ V_continue the rule selects**. The other is a sensitivity.
     corner not adjusted;
   - g(zone) recomputed.
 - **Report:** the track folder's `feasibility.md`.
+
+### Calibration decision (Colin), registered before re-scoring
+
+**What happened.** The registered powered-ECE rule **failed, and stays
+recorded as failed** (0.0163 against 0.0159). That rule tests *perfect*
+calibration. At 11,550 validation shots, it detects errors too small to
+matter for this model.
+
+**The replacement was chosen after seeing the result.** The reason: the
+quantities that pass into c_shoot are
+
+- the overall level, since a constant error passes one-for-one into c_shoot;
+- the openness gradient, which is the slope that identifies c;
+- no large local error at any openness;
+
+not a perfect-calibration test.
+
+**Replacement criteria.** The **same model** (no refit, no tuning) is scored
+**once** on the **same validation shots:**
+
+1. **Level:** |mean predicted − mean observed| ≤ 0.01.
+2. **Gradient:** |(pred rate in 8+ ft − pred rate in 0–4 ft) − (obs rate in
+   8+ ft − obs rate in 0–4 ft)| ≤ 0.03, by release-openness bins.
+3. **Bins:** for each release-openness bin (0–2, 2–4, 4–6, 6–8, 8–12,
+   12+ ft), |mean predicted − observed| ≤ 0.04.
+
+ECE and the decile table are reported as information.
+
+**If all three hold,** the make model is fit for purpose, and the registered
+sequence continues:
+
+- V_shoot with the counterfactual release openness;
+- V_continue;
+- 7a–7c;
+- the value-gap check;
+- power;
+- synthetic recovery.
+
+It stops before any real fit of c.
+
+**If any fails:** stop and report. No fix on the spent validation games.
+
+**"No refit" in practice.** The model was not saved, so it is reconstructed
+by the identical deterministic code path (same data, same seeds, lbfgs). It
+must reproduce the scored ECE (0.0163) and Platt map exactly. Otherwise it
+is not the same model, and I stop.
