@@ -394,3 +394,17 @@ remaining 18:
 1 s no longer creates a catch. Under the first-pass definitions this is rare.
 
 Everything else in C1, C2 and C3 is unchanged.
+
+## Second-pass results
+
+The gate ran once, at `288db65`; see `out/v2/results.json`, copied to the
+track folder. The C1 eye check scored 7/10, in `checks/eye_c1.json`.
+
+**Curry's registered label is "no variation".**
+
+- **Criterion 1 fails** in the 0–10 ft band only: IQR 1.9 ft with n = 14. The
+  10–22 and 22+ bands are 4.8 and 4.7 ft.
+- **Criterion 2 passes:** 22–30 ft, +41 pp, 95% CI [+26, +53].
+- **Criterion 3 passes:** 30%.
+
+Stopped here, as instructed.
