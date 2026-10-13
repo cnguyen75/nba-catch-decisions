@@ -1671,3 +1671,89 @@ record is complete.**
 
 **Reading.** The interval for (c) includes 0 for every player, so (d) is
 reported as unstable, as registered.
+
+---
+
+# Stage 4: openness priced in shot-clock seconds (registered 2026-10-13, before running)
+
+This is a new question with its own registration. **No earlier gate is
+reopened.** It covers all three players, plus the league as the reference.
+
+## Data and unit
+
+- **Unit:** counted catches at 16–30 ft with the shot clock recorded,
+  shoot-now against continue. Unknown actions are excluded.
+- **League:** non-gated catches in **train** games, the 414 after the 60
+  calibration games were removed.
+- **Players:** each player's non-test catches (train + validation).
+- **Values** are as built (possession scale):
+  - V_shoot from the attempt-2 make model, with counterfactual release
+    openness and its shot clock (catch clock − 1.0 s), so late shots are
+    rushed;
+  - **naive V_continue** (league ridge; plus the player offset for player
+    catches).
+- **Openness** = nearest-opponent distance **at the catch**, capped at 15 ft,
+  in every regression.
+- **Covariates (identical in steps 1 and 2):** shot clock (s), openness at
+  catch, distance/10 and its square, zone dummies (mid as reference; above
+  the break, corner), and best teammate openness (capped at 20).
+- **Intervals:** bootstrap over **games** (1,000 resamples, seed 0). The
+  player and league bootstraps are independent and paired by replicate
+  index, for any quantity that combines them.
+
+## 1. Measured value gradients (league)
+
+OLS of gap = V_shoot − V_continue on the covariates.
+
+- **g_clock** = the coefficient on shot clock (points per second).
+- **g_open** = the coefficient on openness (points per ft).
+
+## 2. Behavioural gradients (each player, and the league)
+
+Logistic regression of shoot-now on the same covariates (unpenalized).
+
+- **β_clock:** log-odds per second.
+- **β_open:** log-odds per ft.
+
+## 3. Exchange rate
+
+- **Behavioural ratio** R_b = β_open / β_clock, against **measured ratio**
+  R_m = g_open / g_clock, in seconds of clock per ft of openness. Under a
+  single temperature they are equal.
+- **Implied temperature** from the clock: T_clock = g_clock / β_clock.
+- **Implied value of a foot of openness** = β_open × T_clock (points per
+  ft), against the measured g_open.
+- Reported per player (behavioural, from his catches; measured, from the
+  league) and for the league.
+
+## 4. Skinner's test
+
+- **Value-maximiser:** shoots if and only if gap > 0, with his own values
+  for players and league values for the league.
+- **Implied shoot-now rate** in each shot-clock bin (0–4, 4–8, 8–12, 12–16,
+  16–20, 20–24 s) = the share of catches with gap > 0.
+- **Reported:** observed rate, implied rate, and the difference with an
+  interval.
+- **Reading:**
+  - shooting **later** than the maximiser = observed below implied early in
+    the clock and above it late (Skinner's "waits too long");
+  - **earlier** = the reverse.
+- **Caveat (stated):** V_continue is the average of what actually followed
+  continuing, not of optimal continuation.
+
+## 5. Power first (computed and reported before steps 3–4 are read)
+
+- From the Fisher information of the step 2 logit at its fitted parameters,
+  on each player's real catches: SE(β_clock), SE(β_open), and their
+  covariance.
+- **Smallest detectable difference** between R_b and R_m at 80% power:
+  2.8 × SE(R_b), by the delta method.
+- **Rule:** each player's exchange rate is reported with its interval
+  regardless. A player is marked **"not individually resolved"** if his
+  β_clock bootstrap interval includes 0, and the league estimate is the one
+  to lean on for him.
+
+## 6. Reporting
+
+Everything, with the plain reading. `feasibility.md` gets its chronological
+table and site paragraph updated.
