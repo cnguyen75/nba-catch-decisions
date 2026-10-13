@@ -534,3 +534,27 @@ archives stay in `~/Documents/nba-tracking/raw`.
   - catches by quarter;
   - catch frames bunched at the edge of the window;
   - spikes in catch-to-shot times.
+
+## Stage 2 results
+
+**Held-out eye check passed: 57/60 correct**, with 20/20/17 across the
+openness thirds. All three errors are false catches in the tight third. The
+files are `checks/heldout_score.json` and `checks/heldout_labels.json`.
+
+**Full set:** 116 games built.
+
+- Curry: 39 games and 1,119 counted catches.
+- LeBron: 37 games and 1,327 catches.
+- Harden: 42 games and 1,378 catches.
+
+**Descriptive numbers only** are in `out/full/describe.json`, copied into the
+track folder's `results.json`.
+
+- At 22–30 ft, Curry's rate of shooting within 1.5 s rises from 5.3% in the
+  tight third to 45.5% in the open third.
+- **Data artefacts:**
+  - The shot clock is null for whole games in three games, so the "shot
+    clock running" rule excludes their catches.
+  - One archive is empty.
+  - One game has no tracking frames.
+- Stopped here, as instructed.
