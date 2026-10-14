@@ -1,0 +1,23 @@
+{
+ "all_jump_shots": {
+  "n": 37122,
+  "ame_per_s": 0.00106,
+  "ci95": [
+   -0.00013,
+   0.00225
+  ],
+  "covers_0": true,
+  "within_0.01": true
+ },
+ "release_16_30ft": {
+  "n": 26594,
+  "ame_per_s": 0.00081,
+  "ci95": [
+   -0.00049,
+   0.00219
+  ],
+  "covers_0": true,
+  "within_0.01": true
+ },
+ "passes": true
+}

@@ -1,0 +1,17 @@
+{
+ "n": 101532,
+ "n_shoot": 16018,
+ "LR": 603.41,
+ "df": 6,
+ "LR_per_df": 100.57,
+ "partial_pseudo_R2": 0.00907,
+ "passes": true,
+ "excluded_coefs_std": {
+  "clock_mid": -0.1222,
+  "best_tm_open": 0.0272,
+  "margin": -0.0251,
+  "oreb": -0.0571,
+  "inbound": -0.0167,
+  "other": -0.0146
+ }
+}
