@@ -2190,3 +2190,30 @@ The probit of shoot-now on Z against X, now with **df = 6**. Same threshold
   registered in 5b.
 - **Fail:** **stop; this closes 5b.** The record will state that the
   strongest available lever could not resolve the selection.
+
+## Stage 5b, strategy 2: results. 5b CLOSED.
+
+**Step 1, falsification: PASS.** On taken league jump shots, the
+average marginal effect of clock_mid on make probability is +0.00106 per
+second, [−0.00013, +0.00225] (n = 37,122). That covers 0 and lies within
+±0.01. The 16–30 ft subset gives +0.00081 [−0.00049, +0.00219].
+
+**Step 2, exclusion strength:**
+
+- LR = 603.4 on 6 df (100.6/df). Partial pseudo-R² = 0.00907 (strategy 1:
+  0.00196).
+- Standardized clock_mid coefficient −0.122, the largest excluded effect.
+
+**Step 3, synthetic at the new real strength: FAIL.**
+
+| True ρ | ρ covered | Within 0.03 | Within 0.05 (information) | Median counterfactual error (corrected / naive) | Mean SE(ρ) |
+|---|---|---|---|---|---|
+| 0 | 18/20 | **2/20** | 8/20 | 0.064 / 0.003 | 0.098 |
+| 0.3 | 20/20 | **10/20** | 15/20 | 0.031 / 0.243 | 0.087 |
+| 0.6 | 20/20 | **8/20** | 12/20 | 0.035 / 0.488 | 0.060 |
+
+**Closing statement (as registered).** The strongest available lever, the
+shot clock over 5–24 s, passed its falsification test and raised the
+exclusion strength 4.6-fold. **It still could not resolve the selection:**
+the make rate of passed-up shots is not recovered within 0.03 in 18 of 20
+seeds at any ρ. **5b is closed with no real fit.**
