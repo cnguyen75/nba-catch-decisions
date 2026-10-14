@@ -2803,3 +2803,15 @@ passer**:
 ## Record
 
 A table row, a full section, and results.json "stage9_pass_to_open_man".
+
+### Stage 9 results (run once, `1334986`)
+
+- **133,882 passes** (177 dropped: receiver not matched).
+- **League:** P(most open) 0.312 [0.308, 0.316]; within 1 ft 0.373; mean
+  deficit 4.2 ft; basket advantage 3.4 ft.
+- **The three:** Curry 0.243 [0.212, 0.276], LeBron 0.374 [0.332, 0.416],
+  Harden 0.424 [0.375, 0.472].
+- **LeBron − league:** +0.062 [+0.019, +0.104] (registered MDE 0.055).
+- **Corner-three most-open man found:** 0.146 (league).
+- The record is in `feasibility.md` (Stage 9 row and section) and
+  results.json "stage9_pass_to_open_man".
