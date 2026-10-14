@@ -2645,3 +2645,69 @@ The record is in the track folder's `feasibility.md` (Stage 7 row and
 section, updated site paragraph) and `results.json`
 ("stage7_clock_added_shots"). The figure is at
 `out/s7/stage7_clock_added.svg`, copied to the track's `figures/stage7/`.
+
+---
+
+# Stage 8: the exchange-rate map with partial pooling (registered 2026-10-14, before running; descriptive, no gates)
+
+**Why.** Stage 5c's "median 5.1 s/ft" is the median over the 98 players
+whose clock slope is individually significant. That filter conditions on a
+large denominator and biases the ratio low (the pooled league figure is 7.1).
+Stage 8 gives every eligible player an estimate by shrinking toward the
+league, so the median is over all of them.
+
+## Method
+
+- **Unit:** as in 5c. Non-test catches (train, validation and calibration
+  games; `out/s4/vshoot.csv` via Stage 4's `unit()`) at 16–30 ft, shot clock
+  recorded, shoot against continue. Every player with **≥ 300** such catches
+  qualifies; Curry, LeBron and Harden are included as players.
+- **Per-player model:** the Stage 4 logit (`cov()` covariates: intercept,
+  shot clock, openness at catch capped at 15, distance/10 and its square, the
+  two three-point zone dummies, best teammate openness), unpenalized
+  (`logit_fit`). Kept: (β_clock, β_open) and their 2 × 2 block of the inverse
+  Fisher information, S_i.
+- **Shrinkage, empirical Bayes:**
+  - **Prior:** β̂_i ~ N(μ, Τ + S_i), with S_i known.
+  - **Fit:** μ (2) and Τ (2 × 2, through a Cholesky factor, so positive
+    definite) by maximum marginal likelihood (scipy L-BFGS-B).
+  - **Posterior:** Σ_i = (Τ⁻¹ + S_i⁻¹)⁻¹ and m_i = Σ_i (Τ⁻¹ μ + S_i⁻¹ β̂_i).
+  - μ and Τ are reported.
+
+## Exchange rate per player
+
+- **ER** = −m_open / m_clock.
+- **Interval:** from 2,000 draws of N(m_i, Σ_i) (seed 0); ER per draw;
+  2.5–97.5 percentiles.
+- **"Clock-indeterminate":** more than 5% of the draws of β_clock have the
+  sign opposite to m_clock's. His ER is then reported as **unresolved**, not
+  dropped.
+
+## The league number for the page (registered)
+
+- **The median posterior ER over all eligible players.** Unresolved players
+  are excluded from the median only if they are fewer than 10% of the set.
+  Otherwise the median is reported both with and without them.
+- **Also:** the IQR, and the histogram in 5c's bins (≤ 0, 0–2, 2–4, 4–6, 6–8,
+  8–10, 10–15, > 15).
+- **Curry, LeBron, Harden:** posterior ER, interval, and percentile among all
+  eligible players (rank of the posterior-mean ER).
+
+## Figure and checks
+
+- **Figure** (`figures/stage8/`): a scatter of posterior β_open (x) against
+  −β_clock (y) for every eligible player, with rays of constant ER at 2, 5, 7
+  and 10 s/ft. The three are named and μ is marked.
+- **Sanity check, reported:** the raw (unshrunk) median ER over the 98
+  players 5c called resolved should reproduce 5c's 5.1 to within rounding.
+  It is computed from this stage's own per-player fits, using 5c's list of
+  resolved players (`checks/s5c.json`).
+- **Information only:** the ten highest and ten lowest posterior ERs, with
+  intervals.
+
+## Record
+
+- A table row, a full section, and results.json "stage8_exchange_rate_pooled".
+- **Site paragraph:** the league exchange-rate sentence changes to the Stage
+  8 median **if it differs from 7 by more than 1 s/ft.** The old paragraph is
+  kept, marked superseded.
