@@ -2217,3 +2217,196 @@ shot clock over 5–24 s, passed its falsification test and raised the
 exclusion strength 4.6-fold. **It still could not resolve the selection:**
 the make rate of passed-up shots is not recovered within 0.03 in 18 of 20
 seeds at any ρ. **5b is closed with no real fit.**
+
+---
+
+# Stage 6: the last identification attempt (registered 2026-10-13, before anything below ran)
+
+## Instrument history: three sets, tried in order, each chosen before its run
+
+1. **Set 1 (5b, strategy 1, `40ba56a`):** best teammate openness, score
+   margin, catch source.
+   - **Why chosen:** they plausibly shift the decision (an open teammate
+     makes passing attractive; score context changes risk; how the ball
+     arrived changes the possession's rhythm) without changing whether a
+     given shot goes in.
+   - **Result:** strength passed (LR 26/df) but was practically weak (partial
+     pseudo-R² 0.002). Synthetic failed.
+2. **Set 2 (5b, strategy 2, `0dcd379`):** Set 1 + shot clock over 5–24 s.
+   - **Why chosen:** after Set 1 proved too weak. Stage 4 showed the clock
+     drives the decision strongly, and outside the last 4 s it should not
+     change make probability. A falsification test was registered first.
+   - **Result:** falsification passed, strength 4.6×. Synthetic still failed.
+3. **Set 3 (this stage):** Set 2 + **rhythm** (recent makes) + the
+   **first-shot flag**.
+   - **Why chosen:** players act on "being hot". Bocskocsky, Ezekowitz &
+     Stein (2014) found that players who have hit recent shots go on to take
+     harder shots, so rhythm moves the decision.
+   - Whether rhythm also moves make probability, at a given difficulty, is
+     tested here first (falsification). The hot-hand size is reported either
+     way.
+   - **History:** the 2015 course project used a running in-game
+     field-goal percentage for the same reason. The 2026 audit found that
+     feature was computed across games: it shifted across game boundaries
+     (dossier, "two feature bugs").
+
+## Citations (for this stage's design choices)
+
+- Bocskocsky, A., Ezekowitz, J., Stein, C. (2014). "The Hot Hand: A New
+  Approach to an Old 'Fallacy'." MIT Sloan Sports Analytics Conference.
+  Rhythm as a lever on shot selection.
+- Chang, Y.-H., Maheswaran, R., Su, J., Kwok, S., Levy, T., Wexler, A.,
+  Squire, K. (2014). "Quantifying Shot Quality in the NBA." MIT Sloan Sports
+  Analytics Conference. Defender height and position in shot quality.
+- Goldman, M., Rao, J. M. (2012). "Effort vs. Concentration: The Asymmetric
+  Impact of Pressure on NBA Performance." MIT Sloan Sports Analytics
+  Conference. The clutch flag.
+
+## External data (outside the repo; aggregates only published)
+
+- **Heights:** Kaggle `justinas/nba-players-data`, `all_seasons.csv`,
+  season 2015-16 (licence listed "other"). Joined on normalized name to
+  the PBP's PLAYER1_NAME/ID (stats.nba.com was unreachable). Coverage is
+  reported.
+- **Schedule:** Kaggle `nathanlauga/nba-games`, `games.csv`, SEASON 2015
+  (licence "unknown"), used for back-to-back flags.
+
+## A. New state (every catch, and every located shot where it applies)
+
+**1. Rhythm,** from the player's FG attempts in this game (PBP).
+
+- **Attempt time:** the release clock if located, otherwise PBP clock +
+  2.5 s.
+- **Prior attempts:** earlier periods, or the same period with attempt time
+  > the catch clock (for a shot: before its own release).
+- **Features:**
+  - **m3 / m5:** makes among the last 3 / 5 prior attempts (counting the
+    available ones when fewer);
+  - **none_yet:** flag when he has no prior attempt;
+  - **last_made;**
+  - **t_since_make:** minutes of game time since his last make, capped at
+    24 (24 when none).
+
+**2. First-shot flag:** whether his first attempt of the game was made,
+carried forward. Before that attempt, the none_yet flag applies.
+
+**3. Relative openness:**
+
+- **team_mean_open:** the running mean of capped openness at catch over the
+  team's earlier counted catches this game (league train mean, with a flag,
+  when there are none);
+- **rel_open** = capped openness at catch − team_mean_open.
+
+**4. Other context:**
+
+- **Defender height (cm):** of the nearest opponent at the catch (and at
+  release for shots). Missing heights get the league mean plus a flag.
+- **minutes_so_far:** the catcher's on-court time from tracking frames
+  before the catch.
+- **b2b:** the team also played the previous calendar day.
+- **clutch:** quarter ≥ 4, clock ≤ 300 s, and |margin| ≤ 5.
+
+**5. Identity effects** (league train games; MAP with prior N(0, 0.15²) on
+the logit scale):
+
+- **δ_def:** per-defender make offset, nearest defender at release, on
+  league jump shots. The base logit is the attempt-2 make model's
+  specification.
+- **δ_rim:** per-player offset on the make rate of FG attempts with release
+  distance ≤ 6 ft, for the opponent nearest the basket at release. The base
+  is a logistic in release distance and openness.
+- **δ_drive:** per-player shrunk mean (pseudo-count 50) of possession-points
+  residuals (against the league drive mean) on catches with a drive, by the
+  opponent nearest the basket at the catch.
+- **In the models:**
+  - the decision model gets δ_def of the nearest defender at the catch, and
+    δ_rim and δ_drive of the opponent nearest the basket at the catch;
+  - the make model gets δ_def at release;
+  - unseen players get 0.
+
+## B. What moves what
+
+**6. Decision model:** logistic shoot-now, 16–30 ft, shot clock recorded.
+
+- **Covariates:** Stage 4 covariates + 5a motion + all of A.
+- **Three variants:**
+  - **absolute:** open_catch;
+  - **relative:** rel_open in its place;
+  - **both.**
+- **Fitted** on league train games.
+- **Held-out:** mean log loss on league **validation** games for each
+  variant.
+- **Reported:** every effect with a game-bootstrap 95% interval (500
+  resamples, seed 0), for the league and for each player on his non-test
+  catches (variant "both"); also the rhythm coefficients across variants.
+- **Window choice for the falsification test, decided here:** whichever of
+  m3 and m5 has the larger |coefficient × SD| in the league "both" model.
+
+**7. Make model:** league train jump shots.
+
+- **Covariates:** the attempt-2 specification with late and clock_mid in
+  place of the shot clock terms, + release motion + A at the shot (chosen
+  rhythm window, none_yet, last_made, t_since_make, first_made, defender
+  height at release, minutes, b2b, clutch, δ_def at release).
+- **Falsification:** average marginal effects on make probability, with
+  game-bootstrap 95% intervals (500):
+  - the chosen rhythm window (per additional recent make);
+  - first_made (made minus missed);
+  - clock_mid (per second).
+- **An instrument is valid if:**
+  - |AME| < 0.02; and
+  - the interval covers 0, or lies entirely within ±0.03.
+  - A valid instrument whose interval excludes 0 is a **small leak**,
+    carried as a registered sensitivity, not a disqualification.
+- **Hot-hand size:** the AMEs of the window and of last_made, reported
+  either way.
+
+## C. Selection model, strategy 3
+
+- **Instruments:** every **valid** instrument from step 7, plus best
+  teammate openness, margin and catch source.
+- **The other rhythm features** (last_made, t_since_make, none_yet) enter
+  **both** equations.
+- **Covariates:** the full A state (non-instrument parts) + 5b X (with late
+  in place of the shot clock) in both equations.
+- **Exclusion strength:** LR with df = number of instrument columns.
+  Threshold LR/df ≥ 10, plus partial pseudo-R².
+- **Synthetic,** at the real joint strength (true γ and β from the real
+  probits):
+  - ρ ∈ {0, 0.3, 0.6}, seeds 1100–1119, 1200–1219, 1300–1319;
+  - **gate:** ρ covered ≥ 18/20 **and** the passed-up make rate within 0.03
+    in ≥ 18/20, per setting;
+  - within 0.05 reported as information.
+- **Pass:** real fit, validation once, then the per-player sequence, as
+  registered.
+- **Fail:** **stop. 5b is closed for good,** and the record says so.
+
+## D. Descriptive (no gates, whatever happens in C)
+
+**9. Exchange rate by zone:** threes (above the break and corner) against
+mid-range, for the league and the three players. Stage 4 definition;
+game-bootstrap 1,000.
+
+**10. Rhythm response:** for each of the three, on catches with at least 3
+prior attempts this game:
+
+- the shoot-now rate, and the median openness at catch of shoot-now
+  catches, for m3 ∈ {2, 3} against {0, 1};
+- the same by first_made (1 against 0);
+- game-bootstrap 95% intervals on the differences (1,000).
+
+**11. Defenders and rim protectors:**
+
+- the 10 most negative δ_def (minimum 100 contests) and the 10 most negative
+  δ_rim (minimum 50 rim contests), with Laplace 95% intervals and contest
+  counts;
+- the held-out improvement in the decision model's log loss with the
+  identity features against without (validation games, game-bootstrap 95%
+  interval).
+- **Caveat stated:** shots over the best defenders are the ones players
+  chose to take.
+
+## Record
+
+`feasibility.md` gets its chronological table and site paragraph updated,
+with nothing removed.
