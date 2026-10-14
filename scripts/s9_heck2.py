@@ -126,3 +126,70 @@ def synth(rho):
 
 if __name__ == "__main__":
     {"falsify": falsify, "excl": excl, "synth": lambda: synth(float(sys.argv[2]))}[sys.argv[1]]()
+
+
+def real():
+    """Step 4 (only if steps 1-3 pass): real fit on league training catches, validation once, reports, player check."""
+    from s4_checks import gap_slope
+    from s4_cont import X_full, ridge
+    from s4_data import S4
+    import json as _j
+    d, _ = h.build_frame("train")
+    dv, _ = h.build_frame("validation")
+    dg, _ = h.build_frame("gated")
+
+    def raw(dd):
+        Xo = h.X_out(dd); late, mid = late_mid(dd.shot_clock); Xo[:, 6] = late
+        return Xo, np.column_stack([Xo, mid, h.X_excl(dd)])
+    Xo, Xz = raw(d); sx, sz = h.Std(Xo), h.Std(Xz)
+    X, Z = sx(Xo), sz(Xz)
+    s, y = d.s.to_numpy(float), d.y.to_numpy(float)
+    g0, _ = h.probit(Z, s); b0, _ = h.probit(X[s == 1], y[s == 1])
+    th, info, cov = h.fit_heck(Z, X, s, y, g0, b0)
+    kz = Z.shape[1]
+    out = {"n": int(len(d)), "fit": info, "resolved": bool(info["rho_ci"][0] > 0 or info["rho_ci"][1] < 0)}
+    # validation once
+    Xvo, Xvz = raw(dv); Xv, Zv = sx(Xvo), sz(Xvz)
+    sv, yv = dv.s.to_numpy(float), dv.y.to_numpy(float)
+    th0 = np.r_[g0, b0, 0.0]
+    llh, ll0 = h.ll_vec(th, Zv, Xv, sv, yv), h.ll_vec(th0, Zv, Xv, sv, yv)
+    gi = {gg: np.where(dv.game.to_numpy() == gg)[0] for gg in dv.game.unique()}
+    gl = list(gi); r = np.random.default_rng(0)
+    bs = [np.mean((llh - ll0)[np.concatenate([gi[x] for x in r.choice(gl, len(gl))])]) for _ in range(1000)]
+    out["validation"] = {"n": int(len(dv)), "mean_ll_heck": round(float(llh.mean()), 5), "mean_ll_separate": round(float(ll0.mean()), 5),
+                         "diff": round(float((llh - ll0).mean()), 6), "ci95": np.quantile(bs, [.025, .975]).round(6).tolist()}
+    # make probabilities by open_cf bin, unshot training catches
+    g, b, rho = th[:kz], th[kz:-1], np.tanh(th[-1])
+    zg, xb, xb0 = Z @ g, X @ b, X @ b0
+    m0 = s == 0
+    bins = pd.cut(d.open_cf, [0, 2, 4, 6, 8, 99], right=False)
+    tab = pd.DataFrame({"bin": bins[m0], "cond": h.phi2(xb[m0], -zg[m0], -rho) / ndtr(-zg[m0]), "marg": ndtr(xb[m0]), "naive": ndtr(xb0[m0])})
+    out["unshot_make_by_open_cf"] = {str(k): {kk: round(float(v), 4) for kk, v in row.items()} for k, row in tab.groupby("bin", observed=True).mean().iterrows()}
+    # corrected value gap by open_cf (league train catches)
+    mk = _j.loads((S4 / "make_report.json").read_text())
+    gz = mk["g_zone"]
+    vs = pd.read_csv(S4 / "vshoot.csv", dtype={"game": str})
+    lt = vs[~vs.pid.isin(GATED) & (vs.split == "train")]
+    cc = lt[lt.action == "continue"]
+    b_naive = ridge(X_full(cc), cc.poss_points.to_numpy(float))
+    pts = lambda dd: 2 + dd.zone.isin(["above_break3", "corner3"]).astype(int).to_numpy()
+    d["V_shoot_corr"] = ndtr(xb) * pts(d) + d.zone.map(gz).to_numpy()
+    d["V_cont"] = X_full(d) @ b_naive
+    d["gap_corr"] = d.V_shoot_corr - d.V_cont
+    out["corrected_value_gap_by_open_cf"] = {str(k): round(float(v), 4) for k, v in d.groupby(bins, observed=True).gap_corr.mean().items()}
+    # player check (registered check 1 on corrected values; no player offset)
+    Xgo, _ = raw(dg); Xg = sx(Xgo)
+    dg["V_shoot"] = ndtr(Xg @ b) * pts(dg) + dg.zone.map(gz).to_numpy()
+    pv = pd.read_csv(S4 / "values.csv", dtype={"game": str})[["game", "pid", "start", "V_cont_naive"]]
+    dg = dg.merge(pv, on=["game", "pid", "start"], how="left")
+    out["players"] = {}
+    for pid, name in GATED.items():
+        band = dg[(dg.pid == pid) & (dg.split == "train") & (dg.d_basket >= 22) & (dg.d_basket <= 30)].assign(V_continue=lambda x: x.V_cont_naive)
+        chk = gap_slope(band)
+        out["players"][name] = {"check1": chk, "continues": bool(out["resolved"] and chk["passes"])}
+    (S5 / "s5b2_real.json").write_text(_j.dumps(out, indent=1, default=float))
+    print(_j.dumps(out, indent=1, default=float))
+
+
+if __name__ == "__main__" and sys.argv[1] == "real":
+    real()
