@@ -187,7 +187,11 @@ def main():
                                 d[w], d.none_yet, d.last_made.fillna(0), d.t_since_make, d.first_made.fillna(0), d.def_h / 10, d.def_h_missing,
                                 d.shooter_minutes / 10, d.b2b.fillna(0), d.clutch, d.def_eff_rel]).astype(float)
     K = mfeats(jtr.iloc[:5]).shape[1]
-    IDX = {"clock_mid": K - 16, "window": K - 12, "last_made": K - 10, "first_made": K - 8}
+    _probe = mfeats(jtr.iloc[:200])
+    assert np.allclose(_probe[:, K - 11], jtr.iloc[:200][w].to_numpy(float)) and np.allclose(_probe[:, K - 7], jtr.iloc[:200].first_made.fillna(0).to_numpy(float))
+    # columns from the end: def_eff_rel -1, clutch -2, b2b -3, minutes -4, def_h_missing -5, def_h -6, first_made -7,
+    # t_since_make -8, last_made -9, none_yet -10, window -11, n_def6 -12, set -13, speed -14, closing -15, clock_mid -16, late -17
+    IDX = {"clock_mid": K - 16, "window": K - 11, "last_made": K - 9, "first_made": K - 7}
     def ames(d):
         X = mfeats(d); mu, sdv = X.mean(0), X.std(0); sdv[sdv == 0] = 1
         Xs = np.column_stack([np.ones(len(X)), (X - mu) / sdv])
