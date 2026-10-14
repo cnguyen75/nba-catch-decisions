@@ -2602,3 +2602,27 @@ the other. The [0,4) bin is drawn in a lighter tone and labelled "rushed".
   tracking can't, I couldn't settle" with the Stage 7 finding in one or two
   sentences, keeping the 5b sentence that the full counterfactual could not
   be recovered.
+
+### Stage 7 power (computed from the training pilot before the confirmatory run; `checks/s7_power.json`)
+
+**Pilot** (407 training games; 23,585 jump shots in the 4–24 s range):
+
+- AME of [4,8) against [12,20): −0.0077;
+- marginal share m = 0.490;
+- Δ = −0.016.
+
+This is consistent with the disclosed pilot shoot rates (25% against 12.7%
+pooled).
+
+**Expected at the confirmatory size** (183 games, 10,837 shots in the 4–24 s
+range; training game-bootstrap SEs × √(407/183) = ×1.49):
+
+- SE(AME) ≈ 0.013;
+- **SE(Δ) ≈ 0.027;**
+- **smallest detectable Δ at 80% power ≈ 0.076.**
+
+**Implication, stated before the run.** The detectable Δ is larger than the
+registered reading bound of 0.05. Unless the true Δ is far from −0.05, an
+"unresolved at this sample size" reading is likely.
+
+214 shots across all non-test splits lack motion features, and are dropped.

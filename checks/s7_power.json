@@ -1,0 +1,17 @@
+{
+ "source": "training pilot (spent), game-bootstrap SEs scaled by sqrt(train games / confirmatory games)",
+ "train_games": 407,
+ "confirmatory_games": 183,
+ "scale": 1.4913,
+ "train_shots_main": 23585,
+ "confirmatory_shots_main": 10837,
+ "pilot_point": {
+  "ame": -0.0077,
+  "m": 0.4895,
+  "delta": -0.0158
+ },
+ "expected_se_ame": 0.0133,
+ "expected_se_delta": 0.0271,
+ "smallest_detectable_delta_80pct": 0.0758,
+ "motion_dropped_all_splits": 214
+}
