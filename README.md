@@ -2711,3 +2711,16 @@ league, so the median is over all of them.
 - **Site paragraph:** the league exchange-rate sentence changes to the Stage
   8 median **if it differs from 7 by more than 1 s/ft.** The old paragraph is
   kept, marked superseded.
+
+### Stage 8 results (run once, `94f4d2d`)
+
+- **219 eligible players;** 61 clock-indeterminate (27.9% > 10%).
+- **Median ER:** 7.79 s/ft with the indeterminate players, 6.93 without.
+- **μ:** (−0.0559, 0.4529), so ER 8.11. **Τ:** SDs 0.036 and 0.084,
+  correlation −0.35.
+- **IQR:** 6.05–11.75.
+- **Sanity check:** the raw median over 5c's 98 resolved is 5.081 (5c:
+  5.082).
+- **The three:** Curry 5.12 [3.20, 13.25], 11th percentile; LeBron 6.11
+  [3.54, 16.98], 26th; Harden indeterminate (flip share 0.122).
+- **Site sentence unchanged** (within 1 s/ft of 7).
