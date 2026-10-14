@@ -2492,3 +2492,113 @@ openness, margin, source).
   - Identity improves held-out decision prediction by nothing measurable.
   - **Caveat:** shots over the best defenders are the ones players chose to
     take.
+
+---
+
+# Stage 7: clock-added shots (registered 2026-10-14, before running)
+
+**Question.** Between 24 and 5 seconds on the shot clock, the shoot-now rate
+on 16–30 ft catches roughly doubles. Do the shots added as the clock runs
+down go in less often than the shots taken with more time, at equal
+observables?
+
+**Why it answers something 5b could not.** Under the
+threshold-on-hidden-quality model 5b assumed, the catches added as the clock
+runs down are the marginal ones.
+
+- If marginal shots are Delta points worse at equal observables, the make
+  rate of taken shots in a late bin falls by (marginal share) × Delta.
+- This contrasts taken shots with taken shots, and never passes through the
+  (beta, rho) ridge.
+- It bounds the quality of the **marginal** passed-up catches, not the
+  inframarginal ones.
+
+**Assumption, stated.** Hidden shot quality is independent of the shot
+clock given the observables (the strategy-2 exclusion). The ≤ 4 s bin is
+excluded from the main contrast, because rushed shots are worse for a
+different reason; it is reported separately.
+
+**Unit.**
+
+- **Shots:** league (non-gated) jump shots, located, 16–30 ft at release,
+  shot clock recorded, 4 ≤ clock < 24.
+- **Catches:** league counted catches at 16–30 ft, shot clock recorded,
+  action in {shoot, continue}, same clock range.
+- **Clock bins:** [4,8), [8,12), [12,16), [16,20), [20,24). The [0,4) bin is
+  reported as information only.
+
+**Pilot disclosed.** A review ran this on training games only:
+
+- shoot rates 25 / 18 / 13 / 12 / 19%;
+- raw make rates 37.7 / 38.4 / 38.5 / 38.2 / 38.5%;
+- adjusted log-odds of the 4–8 s bin against 20–24 s of −0.035.
+
+Training games are therefore spent for this stage.
+
+**Confirmatory sample.** Validation games plus the 60 calibration games
+(league rows), scored once. Training games are used only to fit the
+adjustment model's nuisance terms. The clock-bin effects reported are from
+the confirmatory sample.
+
+**Quantities.**
+
+- **(i) Shoot-now rate by clock bin,** with the marginal share m = (rate[4,8)
+  − rate[12,20)) / rate[4,8), where rate[12,20) pools the two bins.
+- **(ii) Make model:** logistic regression of made on:
+  - a natural cubic spline of release openness (knots 2, 4, 6, 8, 12 ft,
+    capped at 30);
+  - ns_basis of release distance;
+  - zone dummies and three;
+  - the catch-and-shoot flag (catch_to_shot ≤ 1.5 s);
+  - closing speed (s_closing_pre, clipped to ±15), shooter speed (s_speed,
+    clipped 0–25), defenders within 6 ft (clipped at 3);
+  - clock-bin dummies, with [20,24) as the reference.
+
+  Shots missing motion features are dropped, and the count is reported.
+  **The primary statistic** is the average marginal effect (AME) of the
+  [4,8) bin against the pooled [12,20) bins, in make-probability points.
+- **(iii) Marginal-shot quality gap:** Delta = AME / m.
+- **(iv) Information only:** the same AME for [0,4) against [12,20); a
+  version restricted to catch-and-shoot shots; the raw table.
+
+**Intervals.** Game bootstrap, 1,000 resamples, seed 0, over the
+confirmatory games. m and the AME are resampled together, so Delta's
+interval accounts for both.
+
+**Power, computed and recorded before the confirmatory run.** From the
+training pilot's counts scaled to the confirmatory sample size: the
+expected SE of the AME and of Delta, and the smallest detectable Delta at
+80% power (2.8 × SE). Written into the record before step 3 runs.
+
+**Registered reading of Delta.**
+
+- **"The added shots are not detectably worse"** if the 95% interval's lower
+  bound is above −0.05.
+- **"The added shots are worse"** if the upper bound is below −0.05.
+- **Otherwise, "unresolved at this sample size".**
+- The bound −0.05 is chosen because a 5-point difference in make
+  probability is about 0.15 points of V_shoot on a three, the effect size
+  the project's power rules were built around.
+
+**What a result means.**
+
+- **Not detectably worse:** the first tranche of the Stage 4 under-shooting
+  (12% → 25% shoot rate) is real, not an artefact of hidden quality. The
+  inframarginal catches stay unvalued.
+- **Worse:** the Stage 4 under-shooting is overstated by at least that
+  tranche, and the record says by how much at the interval ends.
+
+**Figure for the page.** Shot clock on the x-axis (bins). The shoot-now rate
+is one line; the adjusted make rate of taken shots, with its interval, is
+the other. The [0,4) bin is drawn in a lighter tone and labelled "rushed".
+
+**Record.**
+
+- A Stage 7 row in the chronological table, and a full section.
+- A results.json entry "stage7_clock_added_shots", with every number and
+  its interval.
+- An updated site paragraph (the old one kept, marked superseded). It
+  replaces "Whether they pass up shots because they can see something the
+  tracking can't, I couldn't settle" with the Stage 7 finding in one or two
+  sentences, keeping the 5b sentence that the full counterfactual could not
+  be recovered.
