@@ -2815,3 +2815,138 @@ A table row, a full section, and results.json "stage9_pass_to_open_man".
 - **Corner-three most-open man found:** 0.146 (league).
 - The record is in `feasibility.md` (Stage 9 row and section) and
   results.json "stage9_pass_to_open_man".
+
+# Stage 10: release timing against the closeout (registered 2026-10-14, before running; descriptive, no gates)
+
+Why: the release is the one continuous decision the tracking observes
+cleanly. A first-order condition on timing can be estimated from taken shots,
+because an additive hidden shot quality drops out of the derivative. One on
+shoot-vs-continue cannot.
+
+**Pilot, disclosed:** on training games, the median catch-to-release was
+1.04 s in the slowest closeout quartile and 0.92 s in the fastest. Release
+openness was 5.3 vs 5.2 ft, and the make rate was flat at 37-39%. The
+pilot's training games are included in the sample below. Nothing here is
+confirmatory.
+
+## Unit
+
+**Shots:** catch-and-shoot jump shots from `out/s4/shots.csv`, loaded with
+`load()` (test rows dropped at load, and asserted absent by split and by
+game), merged with `out/s5/motion_shots_*.csv`. A shot is kept if:
+
+- it is located (`reason` starts with "ok") and is a jump shot;
+- `catch_to_shot` ≤ 1.5 s;
+- it is 16-30 ft from the basket at release, and `sc_release` is recorded;
+- `open_release_all`, `s_closing_pre` and `s_speed` are present.
+
+All non-test games are used (train, validation, calibration). Shots dropped
+for missing motion features are counted.
+
+**Groups:**
+
+- **league** = every shooter except Curry, LeBron and Harden. Thompson and
+  Redick are in the league and are also reported separately.
+- **the named players:** Curry 201939, LeBron 2544, Harden 201935, Klay
+  Thompson 202691 and JJ Redick 200755 (pids looked up in the PBP file).
+
+**Definitions:**
+
+- **release time** = `catch_to_shot` (s);
+- **closing speed** = `s_closing_pre`, clipped to ±15 ft/s. This is the
+  nearest defender at release, closing over the 0.5 s before release;
+  positive means approaching.
+- **release openness** = `open_release_all`.
+- **Quartile cuts** for closing speed come from the league sample and are
+  applied to everyone.
+
+## Quantities
+
+All intervals are game bootstrap, 1,000 resamples, seed 0, with everything
+refitted in each resample.
+
+**(i)** Median release time and median release openness, by closing-speed
+quartile.
+
+**(ii) Slope of release time on closing speed** (s per ft/s): OLS of release
+time on closing speed, the natural-spline basis of distance (`ns_basis`,
+default knots) and the zone dummies (above the break, corner; mid is the
+reference).
+
+**(iii) Space preserved** = −slope × the median closing speed in the top
+quartile (ft).
+
+**(iv) The rush-penalty curve.**
+
+- **Sample:** release-time bins 0.3-0.7, 0.7-0.9, 0.9-1.1 and 1.1-1.5 s
+  (right-closed at 1.5; shots under 0.3 s are excluded and counted).
+- **Model:** a logit of make on the bin dummies (0.9-1.1 is the reference)
+  plus:
+  - the release-openness spline (`ns_basis`, `OPEN_KNOTS`, openness capped
+    at 30);
+  - the distance spline, the zone dummies and a three indicator;
+  - the Stage 7 motion terms: closing speed (±15), shooter speed (capped at
+    25) and defenders within 6 ft (capped at 3).
+- **Fitted** on the league sample.
+- **Reported** as AMEs against the 0.9-1.1 s bin: the mean predicted
+  probability with every shot set to bin b, minus the same with every shot
+  set to 0.9-1.1.
+
+**(v) For each named player:** (i) and (ii) only, on that player's shots
+with the league cuts. With n under 100, the player is reported as too thin.
+
+## Registered reading (written before the run)
+
+The stationarity condition of a timing problem says the shooter stops
+waiting when the make-probability gain from another 0.1 s of set-up equals
+the loss from the defender closing:
+
+  loss per 0.1 s ≈ dP/d(openness) × closing speed × 0.1 s.
+
+**The openness slope** comes from the attempt-2 make model, refitted
+identically on league training jump shots (5-fold out-of-fold Platt, seed
+5). dP/d(openness) is the mean central finite difference (±0.5 ft) of its
+predicted probability over the Stage 10 league shots with release openness
+in [4, 6). The brief's guide is about 0.02 per ft. It is fixed (not
+bootstrapped).
+
+**The closing speed** is the league top-quartile median (bootstrapped).
+
+**The gain per 0.1 s** over 0.7-1.1 s comes from the rush curve:
+(AME(0.9-1.1) − AME(0.7-0.9)) / 2, since the bin centres are 0.2 s apart.
+For information, the same is reported over 1.0-1.3 s:
+−AME(1.1-1.5) / 3.
+
+**Reported:** loss, gain, gain − loss with its interval, and which is
+larger.
+
+- If the rush penalty is flat above about 0.7 s, so that the gain interval
+  includes 0 and loss > gain, waiting is pure loss. The observed ~0.9 s floor
+  is then mechanics, not a trade-off.
+- If the gain exceeds the loss, players release earlier than the condition
+  says.
+
+## Caveats, to state
+
+- **The release marker is late:** about 0.1 s, and up to 0.5 s at close
+  range. At 16-30 ft, differences across bins are comparable; levels are
+  not.
+- **Closing speed is measured over the 0.5 s before release,** so it partly
+  reflects the timing it is set against. The slope is descriptive, not
+  causal.
+
+## Figure
+
+`figures/stage10/`:
+
+- release time (y) against closing speed (x);
+- league medians by closing-speed decile, with bootstrap intervals;
+- the five named players as points (median closing speed, median release
+  time);
+- the space-preserved annotation.
+
+## Record
+
+A table row, a section, and results.json "stage10_release_timing".
+Script: `scripts/s16_release_timing.py`, committed before it runs, run
+once.
