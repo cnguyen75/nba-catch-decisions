@@ -1,0 +1,4241 @@
+{
+ "n_eligible": 219,
+ "mu_beta_clock_open": [
+  -0.05587,
+  0.45294
+ ],
+ "Tau": [
+  [
+   0.001309,
+   -0.001053
+  ],
+  [
+   -0.001053,
+   0.007093
+  ]
+ ],
+ "Tau_sd": [
+  0.03618,
+  0.08422
+ ],
+ "Tau_corr": -0.345,
+ "mu_ER": 8.108,
+ "optimizer_converged": true,
+ "n_players_with_constant_columns_dropped": 11,
+ "n_unresolved": 61,
+ "share_unresolved": 0.2785,
+ "median_ER_all": 7.792,
+ "median_ER_resolved_only": 6.926,
+ "league_number_for_page": {
+  "with_unresolved": 7.792,
+  "without_unresolved": 6.926
+ },
+ "IQR_all": [
+  6.05,
+  11.752
+ ],
+ "histogram_all": {
+  "(-inf, 0.0]": 4,
+  "(0.0, 2.0]": 0,
+  "(2.0, 4.0]": 3,
+  "(4.0, 6.0]": 45,
+  "(6.0, 8.0]": 66,
+  "(8.0, 10.0]": 26,
+  "(10.0, 15.0]": 39,
+  "(15.0, inf]": 36
+ },
+ "gated": {
+  "Curry": {
+   "ER": 5.119,
+   "ER_ci": [
+    3.1953132374511997,
+    13.25373877087119
+   ],
+   "unresolved": false,
+   "clock_sign_flip_share": 0.0,
+   "pct": 10.959,
+   "n": 585,
+   "shots": 134,
+   "raw_ER": 3.934
+  },
+  "LeBron": {
+   "ER": 6.108,
+   "ER_ci": [
+    3.5362194375469462,
+    16.975996487188404
+   ],
+   "unresolved": false,
+   "clock_sign_flip_share": 0.002,
+   "pct": 26.484,
+   "n": 610,
+   "shots": 38,
+   "raw_ER": 4.629
+  },
+  "Harden": {
+   "ER": 17.254,
+   "ER_ci": [
+    -148.72896645223958,
+    167.36499913255514
+   ],
+   "unresolved": true,
+   "clock_sign_flip_share": 0.122,
+   "pct": 86.758,
+   "n": 596,
+   "shots": 72,
+   "raw_ER": 119.084
+  }
+ },
+ "sanity_raw_median_5c_resolved": {
+  "n": 98,
+  "median_raw_ER": 5.081,
+  "5c_reported": 5.082
+ },
+ "ten_highest": [
+  {
+   "name": "Jamal Crawford",
+   "ER": 46.52,
+   "ER_ci": [
+    -205.61,
+    260.64
+   ],
+   "unresolved": true,
+   "n": 503
+  },
+  {
+   "name": "Allen Crabbe",
+   "ER": 44.09,
+   "ER_ci": [
+    -278.54,
+    253.65
+   ],
+   "unresolved": true,
+   "n": 797
+  },
+  {
+   "name": "Darren Collison",
+   "ER": 42.66,
+   "ER_ci": [
+    -253.82,
+    214.91
+   ],
+   "unresolved": true,
+   "n": 416
+  },
+  {
+   "name": "O.J. Mayo",
+   "ER": 37.99,
+   "ER_ci": [
+    -189.56,
+    222.4
+   ],
+   "unresolved": true,
+   "n": 434
+  },
+  {
+   "name": "Rudy Gay",
+   "ER": 34.5,
+   "ER_ci": [
+    -256.44,
+    248.62
+   ],
+   "unresolved": true,
+   "n": 592
+  },
+  {
+   "name": "Jeff Teague",
+   "ER": 30.26,
+   "ER_ci": [
+    -261.08,
+    204.4
+   ],
+   "unresolved": true,
+   "n": 569
+  },
+  {
+   "name": "David West",
+   "ER": 28.83,
+   "ER_ci": [
+    -208.43,
+    218.56
+   ],
+   "unresolved": true,
+   "n": 312
+  },
+  {
+   "name": "Ersan Ilyasova",
+   "ER": 27.64,
+   "ER_ci": [
+    -236.23,
+    263.2
+   ],
+   "unresolved": true,
+   "n": 732
+  },
+  {
+   "name": "Kenneth Faried",
+   "ER": 24.82,
+   "ER_ci": [
+    -147.89,
+    168.2
+   ],
+   "unresolved": true,
+   "n": 300
+  },
+  {
+   "name": "Kelly Olynyk",
+   "ER": 24.56,
+   "ER_ci": [
+    -196.6,
+    182.77
+   ],
+   "unresolved": true,
+   "n": 515
+  }
+ ],
+ "ten_lowest": [
+  {
+   "name": "Trevor Ariza",
+   "ER": -114.41,
+   "ER_ci": [
+    -413.85,
+    363.89
+   ],
+   "unresolved": true,
+   "n": 725
+  },
+  {
+   "name": "Kyle Lowry",
+   "ER": -35.7,
+   "ER_ci": [
+    -273.06,
+    221.76
+   ],
+   "unresolved": true,
+   "n": 821
+  },
+  {
+   "name": "Serge Ibaka",
+   "ER": -20.35,
+   "ER_ci": [
+    -212.53,
+    151.45
+   ],
+   "unresolved": true,
+   "n": 740
+  },
+  {
+   "name": "Kyle Korver",
+   "ER": -9.88,
+   "ER_ci": [
+    -109.17,
+    97.61
+   ],
+   "unresolved": true,
+   "n": 641
+  },
+  {
+   "name": "Monta Ellis",
+   "ER": 3.29,
+   "ER_ci": [
+    2.29,
+    5.6
+   ],
+   "unresolved": false,
+   "n": 671
+  },
+  {
+   "name": "Draymond Green",
+   "ER": 3.72,
+   "ER_ci": [
+    2.42,
+    7.24
+   ],
+   "unresolved": false,
+   "n": 727
+  },
+  {
+   "name": "Blake Griffin",
+   "ER": 3.89,
+   "ER_ci": [
+    2.92,
+    5.99
+   ],
+   "unresolved": false,
+   "n": 792
+  },
+  {
+   "name": "Dwyane Wade",
+   "ER": 4.09,
+   "ER_ci": [
+    2.43,
+    10.5
+   ],
+   "unresolved": false,
+   "n": 793
+  },
+  {
+   "name": "DeMar DeRozan",
+   "ER": 4.22,
+   "ER_ci": [
+    2.75,
+    7.61
+   ],
+   "unresolved": false,
+   "n": 1031
+  },
+  {
+   "name": "Jarrett Jack",
+   "ER": 4.27,
+   "ER_ci": [
+    2.35,
+    11.86
+   ],
+   "unresolved": false,
+   "n": 470
+  }
+ ],
+ "all": [
+  {
+   "pid": 977,
+   "name": "Kobe Bryant",
+   "n": 843,
+   "shots": 122,
+   "raw_beta_clock": -0.06043362125870512,
+   "raw_beta_open": 0.3327106676556864,
+   "raw_ER": 5.50539022362095,
+   "post_beta_clock": -0.054945155814572016,
+   "post_beta_open": 0.35292846880192325,
+   "ER": 6.423286340164005,
+   "ER_ci": [
+    3.738462771447261,
+    22.126055413760167
+   ],
+   "clock_sign_flip_share": 0.003,
+   "unresolved": false
+  },
+  {
+   "pid": 1495,
+   "name": "Tim Duncan",
+   "n": 380,
+   "shots": 26,
+   "raw_beta_clock": -0.18781113724755477,
+   "raw_beta_open": 0.5642204449491568,
+   "raw_ER": 3.0041905566305958,
+   "post_beta_clock": -0.08451386793889264,
+   "post_beta_open": 0.48912639432549104,
+   "ER": 5.787528204000219,
+   "ER_ci": [
+    3.362347084425001,
+    20.048082175129174
+   ],
+   "clock_sign_flip_share": 0.003,
+   "unresolved": false
+  },
+  {
+   "pid": 1717,
+   "name": "Dirk Nowitzki",
+   "n": 894,
+   "shots": 201,
+   "raw_beta_clock": -0.017493080069791295,
+   "raw_beta_open": 0.5278684927791775,
+   "raw_ER": 30.175846144484908,
+   "post_beta_clock": -0.03089330493131389,
+   "post_beta_open": 0.5096304786255442,
+   "ER": 16.496470020239745,
+   "ER_ci": [
+    -88.65247261823325,
+    104.73475635957843
+   ],
+   "clock_sign_flip_share": 0.047,
+   "unresolved": false
+  },
+  {
+   "pid": 1718,
+   "name": "Paul Pierce",
+   "n": 344,
+   "shots": 95,
+   "raw_beta_clock": -0.005860104819180576,
+   "raw_beta_open": 0.3865462350886028,
+   "raw_ER": 65.96234146246105,
+   "post_beta_clock": -0.025146508340257372,
+   "post_beta_open": 0.4014827552731024,
+   "ER": 15.965745615281444,
+   "ER_ci": [
+    -149.84639333043128,
+    161.00512798602344
+   ],
+   "clock_sign_flip_share": 0.1315,
+   "unresolved": true
+  },
+  {
+   "pid": 1938,
+   "name": "Manu Ginobili",
+   "n": 554,
+   "shots": 65,
+   "raw_beta_clock": -0.05840563063475571,
+   "raw_beta_open": 0.39171398265893204,
+   "raw_ER": 6.706784575421278,
+   "post_beta_clock": -0.0539800781482975,
+   "post_beta_open": 0.41047877069603333,
+   "ER": 7.604264105886249,
+   "ER_ci": [
+    3.6631274719011686,
+    36.777733121040995
+   ],
+   "clock_sign_flip_share": 0.0125,
+   "unresolved": false
+  },
+  {
+   "pid": 2037,
+   "name": "Jamal Crawford",
+   "n": 503,
+   "shots": 82,
+   "raw_beta_clock": 0.02009829689088045,
+   "raw_beta_open": 0.3423037719199535,
+   "raw_ER": -17.03148151201174,
+   "post_beta_clock": -0.007698257308951635,
+   "post_beta_open": 0.3581169330907755,
+   "ER": 46.5192210027005,
+   "ER_ci": [
+    -205.6066387433505,
+    260.6352790885166
+   ],
+   "clock_sign_flip_share": 0.358,
+   "unresolved": true
+  },
+  {
+   "pid": 2200,
+   "name": "Pau Gasol",
+   "n": 809,
+   "shots": 175,
+   "raw_beta_clock": -0.09590811379168344,
+   "raw_beta_open": 0.4970035516708528,
+   "raw_ER": 5.182080347762505,
+   "post_beta_clock": -0.08170953044534053,
+   "post_beta_open": 0.4879841969044145,
+   "ER": 5.97218212177649,
+   "ER_ci": [
+    3.9522627509458514,
+    11.89230598117523
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 2207,
+   "name": "Joe Johnson",
+   "n": 809,
+   "shots": 103,
+   "raw_beta_clock": -0.08568235918897935,
+   "raw_beta_open": 0.4782081317964759,
+   "raw_ER": 5.581173724940852,
+   "post_beta_clock": -0.07407373334839772,
+   "post_beta_open": 0.4749910322203862,
+   "ER": 6.412408430749909,
+   "ER_ci": [
+    3.938138417056634,
+    17.028860383156648
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 2216,
+   "name": "Zach Randolph",
+   "n": 526,
+   "shots": 58,
+   "raw_beta_clock": -0.12894544903961425,
+   "raw_beta_open": 0.5720651319600201,
+   "raw_ER": 4.436489509484526,
+   "post_beta_clock": -0.09063887863314347,
+   "post_beta_open": 0.5271848181653471,
+   "ER": 5.816321054666866,
+   "ER_ci": [
+    3.573899865730729,
+    13.970289200918941
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 2225,
+   "name": "Tony Parker",
+   "n": 556,
+   "shots": 34,
+   "raw_beta_clock": -0.1253673785894303,
+   "raw_beta_open": 0.4930236303892347,
+   "raw_ER": 3.932630927889573,
+   "post_beta_clock": -0.08571741503719225,
+   "post_beta_open": 0.4814206803070381,
+   "ER": 5.6163695568532095,
+   "ER_ci": [
+    3.3423088999602064,
+    14.395208706301622
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 2440,
+   "name": "Matt Barnes",
+   "n": 649,
+   "shots": 150,
+   "raw_beta_clock": -0.09484175363301314,
+   "raw_beta_open": 0.5040055033547903,
+   "raw_ER": 5.314173178461272,
+   "post_beta_clock": -0.08290053466487385,
+   "post_beta_open": 0.49391283379226614,
+   "ER": 5.957896843354668,
+   "ER_ci": [
+    3.958357620861015,
+    10.736928928814258
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 2449,
+   "name": "Luis Scola",
+   "n": 678,
+   "shots": 118,
+   "raw_beta_clock": -0.07285474449192318,
+   "raw_beta_open": 0.6725453540677415,
+   "raw_ER": 9.231318547034382,
+   "post_beta_clock": -0.07303319595325553,
+   "post_beta_open": 0.585118740352889,
+   "ER": 8.011681985372665,
+   "ER_ci": [
+    4.859394027636912,
+    18.97164671007506
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 2544,
+   "name": "LeBron James",
+   "n": 610,
+   "shots": 38,
+   "raw_beta_clock": -0.10034728810254974,
+   "raw_beta_open": 0.46450938144277615,
+   "raw_ER": 4.629017786390715,
+   "post_beta_clock": -0.0755801705833306,
+   "post_beta_open": 0.4616514266724598,
+   "ER": 6.108102470653569,
+   "ER_ci": [
+    3.5362194375469462,
+    16.975996487188404
+   ],
+   "clock_sign_flip_share": 0.002,
+   "unresolved": false
+  },
+  {
+   "pid": 2546,
+   "name": "Carmelo Anthony",
+   "n": 935,
+   "shots": 117,
+   "raw_beta_clock": -0.07117863569345194,
+   "raw_beta_open": 0.5869082933939904,
+   "raw_ER": 8.245568177530872,
+   "post_beta_clock": -0.06928749280017138,
+   "post_beta_open": 0.5493672754220107,
+   "ER": 7.928808695768709,
+   "ER_ci": [
+    4.982325634357078,
+    20.19928398093195
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 2547,
+   "name": "Chris Bosh",
+   "n": 1226,
+   "shots": 223,
+   "raw_beta_clock": -0.01165809809323705,
+   "raw_beta_open": 0.511106524410376,
+   "raw_ER": 43.841329891268686,
+   "post_beta_clock": -0.027604036175904945,
+   "post_beta_open": 0.4966341339665596,
+   "ER": 17.99135933606921,
+   "ER_ci": [
+    -117.58331429580868,
+    184.9968289089336
+   ],
+   "clock_sign_flip_share": 0.078,
+   "unresolved": true
+  },
+  {
+   "pid": 2548,
+   "name": "Dwyane Wade",
+   "n": 793,
+   "shots": 36,
+   "raw_beta_clock": -0.14162966658008713,
+   "raw_beta_open": 0.2800644089986414,
+   "raw_ER": 1.9774417024435607,
+   "post_beta_clock": -0.08330094036928956,
+   "post_beta_open": 0.34030980254668486,
+   "ER": 4.0853056524695175,
+   "ER_ci": [
+    2.428966745148719,
+    10.495051266740525
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 2561,
+   "name": "David West",
+   "n": 312,
+   "shots": 53,
+   "raw_beta_clock": 0.05076240269903089,
+   "raw_beta_open": 0.43373882276861314,
+   "raw_ER": -8.544489616463599,
+   "post_beta_clock": -0.01454353410900885,
+   "post_beta_open": 0.4193231535577164,
+   "ER": 28.832273532330134,
+   "ER_ci": [
+    -208.4264423722166,
+    218.5633070189481
+   ],
+   "clock_sign_flip_share": 0.301,
+   "unresolved": true
+  },
+  {
+   "pid": 2564,
+   "name": "Boris Diaw",
+   "n": 457,
+   "shots": 33,
+   "raw_beta_clock": -0.17644225592701038,
+   "raw_beta_open": 0.6111889481720091,
+   "raw_ER": 3.4639601775713085,
+   "post_beta_clock": -0.10491309989813975,
+   "post_beta_open": 0.5322770820608335,
+   "ER": 5.073504477301899,
+   "ER_ci": [
+    3.161848596898206,
+    10.188187184695497
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 2571,
+   "name": "Leandro Barbosa",
+   "n": 303,
+   "shots": 47,
+   "raw_beta_clock": -0.015597567843841753,
+   "raw_beta_open": 0.34999513981040875,
+   "raw_ER": 22.43908430560821,
+   "post_beta_clock": -0.03296935243654846,
+   "post_beta_open": 0.3827546464243486,
+   "ER": 11.609407468981486,
+   "ER_ci": [
+    -84.8096277773897,
+    87.51690611283385
+   ],
+   "clock_sign_flip_share": 0.1175,
+   "unresolved": true
+  },
+  {
+   "pid": 2585,
+   "name": "Zaza Pachulia",
+   "n": 493,
+   "shots": 30,
+   "raw_beta_clock": -0.07679564716511933,
+   "raw_beta_open": 0.38108322865787814,
+   "raw_ER": 4.962302457566457,
+   "post_beta_clock": -0.06016648923005745,
+   "post_beta_open": 0.4201671627927315,
+   "ER": 6.98340834191183,
+   "ER_ci": [
+    3.246238076817423,
+    38.18756881365616
+   ],
+   "clock_sign_flip_share": 0.017,
+   "unresolved": false
+  },
+  {
+   "pid": 2594,
+   "name": "Kyle Korver",
+   "n": 641,
+   "shots": 166,
+   "raw_beta_clock": 0.037515367966874595,
+   "raw_beta_open": 0.16655194343426782,
+   "raw_ER": -4.439565768922492,
+   "post_beta_clock": 0.019803676852725362,
+   "post_beta_open": 0.19569628290667265,
+   "ER": -9.88181560232544,
+   "ER_ci": [
+    -109.17096074104668,
+    97.61163876361478
+   ],
+   "clock_sign_flip_share": 0.1555,
+   "unresolved": true
+  },
+  {
+   "pid": 2734,
+   "name": "Devin Harris",
+   "n": 442,
+   "shots": 54,
+   "raw_beta_clock": -0.06942966409202034,
+   "raw_beta_open": 0.4982839226330338,
+   "raw_ER": 7.176815978435683,
+   "post_beta_clock": -0.06445942119012352,
+   "post_beta_open": 0.4808810111868256,
+   "ER": 7.460212988392552,
+   "ER_ci": [
+    3.96624959890639,
+    28.402687766611837
+   ],
+   "clock_sign_flip_share": 0.004,
+   "unresolved": false
+  },
+  {
+   "pid": 2736,
+   "name": "Luol Deng",
+   "n": 592,
+   "shots": 122,
+   "raw_beta_clock": -0.047548761491320875,
+   "raw_beta_open": 0.47953349323094097,
+   "raw_ER": 10.085089036829503,
+   "post_beta_clock": -0.05163074859502208,
+   "post_beta_open": 0.4711945930594838,
+   "ER": 9.126239806348915,
+   "ER_ci": [
+    4.829422703229995,
+    36.72592278784992
+   ],
+   "clock_sign_flip_share": 0.005,
+   "unresolved": false
+  },
+  {
+   "pid": 2738,
+   "name": "Andre Iguodala",
+   "n": 481,
+   "shots": 54,
+   "raw_beta_clock": -0.12195562134649998,
+   "raw_beta_open": 0.3739811059144566,
+   "raw_ER": 3.0665343818133852,
+   "post_beta_clock": -0.08073402023769123,
+   "post_beta_open": 0.41026623035537707,
+   "ER": 5.081701978267663,
+   "ER_ci": [
+    2.999066489180442,
+    13.934355650605287
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 2747,
+   "name": "JR Smith",
+   "n": 469,
+   "shots": 109,
+   "raw_beta_clock": 0.00427103876435526,
+   "raw_beta_open": 0.3942387698560129,
+   "raw_ER": -92.30512566315369,
+   "post_beta_clock": -0.017525149205030482,
+   "post_beta_open": 0.4021494101433186,
+   "ER": 22.946989234641393,
+   "ER_ci": [
+    -248.70573474353483,
+    172.59839626270286
+   ],
+   "clock_sign_flip_share": 0.2305,
+   "unresolved": true
+  },
+  {
+   "pid": 2749,
+   "name": "Jameer Nelson",
+   "n": 517,
+   "shots": 57,
+   "raw_beta_clock": -0.11276226017640048,
+   "raw_beta_open": 0.3871960825527044,
+   "raw_ER": 3.4337382201012225,
+   "post_beta_clock": -0.08213885230486673,
+   "post_beta_open": 0.4114955200505734,
+   "ER": 5.00975492722087,
+   "ER_ci": [
+    3.1106185111977234,
+    11.39776026347136
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 2755,
+   "name": "Kevin Martin",
+   "n": 441,
+   "shots": 76,
+   "raw_beta_clock": -0.06218611050391174,
+   "raw_beta_open": 0.4039009564894752,
+   "raw_ER": 6.495034875417531,
+   "post_beta_clock": -0.056666852565264825,
+   "post_beta_open": 0.4189829066441756,
+   "ER": 7.393791743799801,
+   "ER_ci": [
+    3.7696990151651484,
+    30.554110732242385
+   ],
+   "clock_sign_flip_share": 0.0085,
+   "unresolved": false
+  },
+  {
+   "pid": 2772,
+   "name": "Trevor Ariza",
+   "n": 725,
+   "shots": 128,
+   "raw_beta_clock": 0.03567577493841452,
+   "raw_beta_open": 0.4824770144521069,
+   "raw_ER": -13.523939291717845,
+   "post_beta_clock": 0.004037409475892449,
+   "post_beta_open": 0.4619328266705194,
+   "ER": -114.4131724633681,
+   "ER_ci": [
+    -413.84783407790286,
+    363.88778615911764
+   ],
+   "clock_sign_flip_share": 0.41,
+   "unresolved": true
+  },
+  {
+   "pid": 101107,
+   "name": "Marvin Williams",
+   "n": 686,
+   "shots": 164,
+   "raw_beta_clock": 0.00014241051279406905,
+   "raw_beta_open": 0.5455743324510858,
+   "raw_ER": -3830.997598049568,
+   "post_beta_clock": -0.022167207923296513,
+   "post_beta_open": 0.513621023612436,
+   "ER": 23.170307482551674,
+   "ER_ci": [
+    -235.75938335347055,
+    193.31701104022537
+   ],
+   "clock_sign_flip_share": 0.149,
+   "unresolved": true
+  },
+  {
+   "pid": 101108,
+   "name": "Chris Paul",
+   "n": 501,
+   "shots": 36,
+   "raw_beta_clock": -0.09827808958145978,
+   "raw_beta_open": 0.3365025391090235,
+   "raw_ER": 3.4239833165469356,
+   "post_beta_clock": -0.0679457487369525,
+   "post_beta_open": 0.38614084547819033,
+   "ER": 5.683075875329732,
+   "ER_ci": [
+    2.991360173650166,
+    22.43874368992189
+   ],
+   "clock_sign_flip_share": 0.007,
+   "unresolved": false
+  },
+  {
+   "pid": 101109,
+   "name": "Raymond Felton",
+   "n": 602,
+   "shots": 81,
+   "raw_beta_clock": -0.11537263955516092,
+   "raw_beta_open": 0.43507984391842347,
+   "raw_ER": 3.771083383338968,
+   "post_beta_clock": -0.08853664146834694,
+   "post_beta_open": 0.4456667776309971,
+   "ER": 5.033698706431382,
+   "ER_ci": [
+    3.2517988044779282,
+    10.088713035844558
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 101112,
+   "name": "Channing Frye",
+   "n": 354,
+   "shots": 89,
+   "raw_beta_clock": -0.08664906133145882,
+   "raw_beta_open": 0.4337321942097985,
+   "raw_ER": 5.0056190747484495,
+   "post_beta_clock": -0.07175374668415763,
+   "post_beta_open": 0.4416493491605031,
+   "ER": 6.1550702168143925,
+   "ER_ci": [
+    3.6568348410353524,
+    16.65577070901705
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 101114,
+   "name": "Deron Williams",
+   "n": 671,
+   "shots": 95,
+   "raw_beta_clock": -0.032533958781190815,
+   "raw_beta_open": 0.43588336157553886,
+   "raw_ER": 13.397796576404975,
+   "post_beta_clock": -0.04087067551080425,
+   "post_beta_open": 0.43831539033643996,
+   "ER": 10.724446925781063,
+   "ER_ci": [
+    3.9815822322571117,
+    61.628175063115734
+   ],
+   "clock_sign_flip_share": 0.0245,
+   "unresolved": false
+  },
+  {
+   "pid": 101123,
+   "name": "Gerald Green",
+   "n": 484,
+   "shots": 127,
+   "raw_beta_clock": -0.0029921718999195612,
+   "raw_beta_open": 0.22053465853961313,
+   "raw_ER": 73.70387327865146,
+   "post_beta_clock": -0.012597267442581746,
+   "post_beta_open": 0.25759435795373725,
+   "ER": 20.44843130685686,
+   "ER_ci": [
+    -176.74113963393677,
+    160.2117339798068
+   ],
+   "clock_sign_flip_share": 0.267,
+   "unresolved": true
+  },
+  {
+   "pid": 101127,
+   "name": "Jarrett Jack",
+   "n": 470,
+   "shots": 46,
+   "raw_beta_clock": -0.12968522936728355,
+   "raw_beta_open": 0.2560047117502738,
+   "raw_ER": 1.9740467977678389,
+   "post_beta_clock": -0.07714843513471484,
+   "post_beta_open": 0.3296505410478667,
+   "ER": 4.272938789649309,
+   "ER_ci": [
+    2.3488682617932715,
+    11.862349831038253
+   ],
+   "clock_sign_flip_share": 0.002,
+   "unresolved": false
+  },
+  {
+   "pid": 101133,
+   "name": "Ian Mahinmi",
+   "n": 374,
+   "shots": 23,
+   "raw_beta_clock": -0.19370382712046055,
+   "raw_beta_open": 0.5921278889299797,
+   "raw_ER": 3.0568724311355355,
+   "post_beta_clock": -0.08865935099080849,
+   "post_beta_open": 0.49839967551278397,
+   "ER": 5.621512789603594,
+   "ER_ci": [
+    3.2238508956546785,
+    17.203828116716736
+   ],
+   "clock_sign_flip_share": 0.0015,
+   "unresolved": false
+  },
+  {
+   "pid": 101139,
+   "name": "CJ Miles",
+   "n": 491,
+   "shots": 158,
+   "raw_beta_clock": -0.03966512241306832,
+   "raw_beta_open": 0.3470877632726348,
+   "raw_ER": 8.750452340928137,
+   "post_beta_clock": -0.040573513455011256,
+   "post_beta_open": 0.3666801454114491,
+   "ER": 9.0374264929763,
+   "ER_ci": [
+    -14.84030197390264,
+    54.3372995026347
+   ],
+   "clock_sign_flip_share": 0.026,
+   "unresolved": false
+  },
+  {
+   "pid": 101141,
+   "name": "Ersan Ilyasova",
+   "n": 732,
+   "shots": 142,
+   "raw_beta_clock": 0.004522509469069934,
+   "raw_beta_open": 0.360961643574143,
+   "raw_ER": -79.81445833177564,
+   "post_beta_clock": -0.013575508484928896,
+   "post_beta_open": 0.3752467394463723,
+   "ER": 27.641450032089736,
+   "ER_ci": [
+    -236.22990620732375,
+    263.1962706184537
+   ],
+   "clock_sign_flip_share": 0.261,
+   "unresolved": true
+  },
+  {
+   "pid": 101145,
+   "name": "Monta Ellis",
+   "n": 671,
+   "shots": 80,
+   "raw_beta_clock": -0.15833831372870608,
+   "raw_beta_open": 0.3336688449056417,
+   "raw_ER": 2.1073158924588755,
+   "post_beta_clock": -0.11119062537502561,
+   "post_beta_open": 0.36633937839173064,
+   "ER": 3.294696627131424,
+   "ER_ci": [
+    2.2927956877553752,
+    5.599363656258558
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 101150,
+   "name": "Lou Williams",
+   "n": 457,
+   "shots": 82,
+   "raw_beta_clock": -0.06369830033377265,
+   "raw_beta_open": 0.29485536646662763,
+   "raw_ER": 4.628936171320355,
+   "post_beta_clock": -0.05475522299335711,
+   "post_beta_open": 0.32808091802085115,
+   "ER": 5.991773936536681,
+   "ER_ci": [
+    3.0998773934803845,
+    23.227177872485097
+   ],
+   "clock_sign_flip_share": 0.006,
+   "unresolved": false
+  },
+  {
+   "pid": 101161,
+   "name": "Amir Johnson",
+   "n": 416,
+   "shots": 20,
+   "raw_beta_clock": -0.08629827751100867,
+   "raw_beta_open": 0.48051995548365334,
+   "raw_ER": 5.568129160195064,
+   "post_beta_clock": -0.06332747843402338,
+   "post_beta_open": 0.46622698668548923,
+   "ER": 7.362159337691294,
+   "ER_ci": [
+    2.9034874629629654,
+    44.82135232867702
+   ],
+   "clock_sign_flip_share": 0.0235,
+   "unresolved": false
+  },
+  {
+   "pid": 101181,
+   "name": "Jose Calderon",
+   "n": 700,
+   "shots": 107,
+   "raw_beta_clock": -0.05964798050361004,
+   "raw_beta_open": 0.4944573353115211,
+   "raw_ER": 8.289590546684064,
+   "post_beta_clock": -0.05960875586778942,
+   "post_beta_open": 0.483151032160216,
+   "ER": 8.10537017802941,
+   "ER_ci": [
+    4.795066714066161,
+    22.25096411209239
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 200746,
+   "name": "LaMarcus Aldridge",
+   "n": 541,
+   "shots": 110,
+   "raw_beta_clock": -0.09048445428130017,
+   "raw_beta_open": 0.43128712544757314,
+   "raw_ER": 4.7664223525819995,
+   "post_beta_clock": -0.07433404554778203,
+   "post_beta_open": 0.44337997140880153,
+   "ER": 5.96469582869395,
+   "ER_ci": [
+    3.6560463693542102,
+    14.443945878654008
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 200751,
+   "name": "Randy Foye",
+   "n": 460,
+   "shots": 81,
+   "raw_beta_clock": -0.02566280474709172,
+   "raw_beta_open": 0.5379185708481856,
+   "raw_ER": 20.96102028400252,
+   "post_beta_clock": -0.04279907772506001,
+   "post_beta_open": 0.49974482749791627,
+   "ER": 11.676532627835162,
+   "ER_ci": [
+    -23.83553001317788,
+    85.07251550135585
+   ],
+   "clock_sign_flip_share": 0.0285,
+   "unresolved": false
+  },
+  {
+   "pid": 200752,
+   "name": "Rudy Gay",
+   "n": 592,
+   "shots": 101,
+   "raw_beta_clock": 0.022993600485568772,
+   "raw_beta_open": 0.5068976701665941,
+   "raw_ER": -22.045162978487554,
+   "post_beta_clock": -0.013765100688412454,
+   "post_beta_open": 0.47494121490260405,
+   "ER": 34.503286656116686,
+   "ER_ci": [
+    -256.4356834625645,
+    248.62431341023984
+   ],
+   "clock_sign_flip_share": 0.2665,
+   "unresolved": true
+  },
+  {
+   "pid": 200755,
+   "name": "JJ Redick",
+   "n": 739,
+   "shots": 195,
+   "raw_beta_clock": -0.005628928884859441,
+   "raw_beta_open": 0.31966427301182737,
+   "raw_ER": 56.78953839186932,
+   "post_beta_clock": -0.016098874095171363,
+   "post_beta_open": 0.3353887374045527,
+   "ER": 20.83305549331229,
+   "ER_ci": [
+    -205.52411307346148,
+    189.14184583428099
+   ],
+   "clock_sign_flip_share": 0.197,
+   "unresolved": true
+  },
+  {
+   "pid": 200757,
+   "name": "Thabo Sefolosha",
+   "n": 358,
+   "shots": 56,
+   "raw_beta_clock": -0.07666151317167783,
+   "raw_beta_open": 0.5825779546971438,
+   "raw_ER": 7.599353712109795,
+   "post_beta_clock": -0.06751202910825992,
+   "post_beta_open": 0.5183624218928744,
+   "ER": 7.678074985150374,
+   "ER_ci": [
+    4.246880332962322,
+    27.919409727081405
+   ],
+   "clock_sign_flip_share": 0.0055,
+   "unresolved": false
+  },
+  {
+   "pid": 200765,
+   "name": "Rajon Rondo",
+   "n": 488,
+   "shots": 62,
+   "raw_beta_clock": -0.03407472935309637,
+   "raw_beta_open": 0.4444618927269278,
+   "raw_ER": 13.043739485682506,
+   "post_beta_clock": -0.04409195746857168,
+   "post_beta_open": 0.44349961119280473,
+   "ER": 10.058514900567229,
+   "ER_ci": [
+    -32.30891024673443,
+    73.76044324035995
+   ],
+   "clock_sign_flip_share": 0.0355,
+   "unresolved": false
+  },
+  {
+   "pid": 200768,
+   "name": "Kyle Lowry",
+   "n": 821,
+   "shots": 128,
+   "raw_beta_clock": 0.03233839388924795,
+   "raw_beta_open": 0.3554728554592436,
+   "raw_ER": -10.992285413946707,
+   "post_beta_clock": 0.010092327455619667,
+   "post_beta_open": 0.3602628325719864,
+   "ER": -35.696704665620295,
+   "ER_ci": [
+    -273.057902419454,
+    221.75946118096724
+   ],
+   "clock_sign_flip_share": 0.285,
+   "unresolved": true
+  },
+  {
+   "pid": 200782,
+   "name": "PJ Tucker",
+   "n": 558,
+   "shots": 85,
+   "raw_beta_clock": -0.06810250751571333,
+   "raw_beta_open": 0.736531406376383,
+   "raw_ER": 10.815040932324596,
+   "post_beta_clock": -0.0737566386517192,
+   "post_beta_open": 0.5976839067796498,
+   "ER": 8.103459128634222,
+   "ER_ci": [
+    4.876218019547455,
+    22.503991742803784
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 200794,
+   "name": "Paul Millsap",
+   "n": 813,
+   "shots": 103,
+   "raw_beta_clock": -0.06923480294879779,
+   "raw_beta_open": 0.5250726438751853,
+   "raw_ER": 7.583940756840166,
+   "post_beta_clock": -0.06676159033971829,
+   "post_beta_open": 0.5048077141064,
+   "ER": 7.561349445656871,
+   "ER_ci": [
+    4.588801632886725,
+    20.477991542680535
+   ],
+   "clock_sign_flip_share": 0.0025,
+   "unresolved": false
+  },
+  {
+   "pid": 200826,
+   "name": "J.J. Barea",
+   "n": 373,
+   "shots": 53,
+   "raw_beta_clock": -0.14506014843080664,
+   "raw_beta_open": 0.659605970093185,
+   "raw_ER": 4.547120468498731,
+   "post_beta_clock": -0.09995082218872633,
+   "post_beta_open": 0.548537400667959,
+   "ER": 5.488072920823154,
+   "ER_ci": [
+    3.5763757654958472,
+    10.250441793678531
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201142,
+   "name": "Kevin Durant",
+   "n": 804,
+   "shots": 136,
+   "raw_beta_clock": -0.00615774984565477,
+   "raw_beta_open": 0.350108146125631,
+   "raw_ER": 56.85650682492171,
+   "post_beta_clock": -0.019709993981295026,
+   "post_beta_open": 0.3643121251779258,
+   "ER": 18.48362437470359,
+   "ER_ci": [
+    -142.53877257519525,
+    226.65735800900447
+   ],
+   "clock_sign_flip_share": 0.159,
+   "unresolved": true
+  },
+  {
+   "pid": 201143,
+   "name": "Al Horford",
+   "n": 789,
+   "shots": 172,
+   "raw_beta_clock": -0.005657320031106701,
+   "raw_beta_open": 0.4616245282359654,
+   "raw_ER": 81.59773986582496,
+   "post_beta_clock": -0.025714525610117382,
+   "post_beta_open": 0.4508553091731459,
+   "ER": 17.53309845217432,
+   "ER_ci": [
+    -174.09368468973437,
+    159.26201138059338
+   ],
+   "clock_sign_flip_share": 0.1195,
+   "unresolved": true
+  },
+  {
+   "pid": 201144,
+   "name": "Mike Conley",
+   "n": 735,
+   "shots": 91,
+   "raw_beta_clock": -0.10226770227959477,
+   "raw_beta_open": 0.42431063118931667,
+   "raw_ER": 4.149018915368536,
+   "post_beta_clock": -0.08235113097508184,
+   "post_beta_open": 0.4322882049383473,
+   "ER": 5.249329302704427,
+   "ER_ci": [
+    3.459445097999373,
+    11.088822280224527
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201145,
+   "name": "Jeff Green",
+   "n": 697,
+   "shots": 84,
+   "raw_beta_clock": -0.07841209599530498,
+   "raw_beta_open": 0.50219025691951,
+   "raw_ER": 6.404499848461891,
+   "post_beta_clock": -0.07053015877228364,
+   "post_beta_open": 0.48920536167334505,
+   "ER": 6.936115984834405,
+   "ER_ci": [
+    4.07307893406714,
+    18.519830868745675
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 201147,
+   "name": "Corey Brewer",
+   "n": 326,
+   "shots": 67,
+   "raw_beta_clock": -0.06479189425247253,
+   "raw_beta_open": 0.33811821154068566,
+   "raw_ER": 5.218526413553385,
+   "post_beta_clock": -0.056141112731366544,
+   "post_beta_open": 0.378485754422736,
+   "ER": 6.741686012419783,
+   "ER_ci": [
+    3.445402377246639,
+    30.14424448681459
+   ],
+   "clock_sign_flip_share": 0.0065,
+   "unresolved": false
+  },
+  {
+   "pid": 201149,
+   "name": "Joakim Noah",
+   "n": 331,
+   "shots": 5,
+   "raw_beta_clock": 0.11804074086541741,
+   "raw_beta_open": 0.36152952046516684,
+   "raw_ER": -3.0627520448838927,
+   "post_beta_clock": -0.04661211641217031,
+   "post_beta_open": 0.4345778205540309,
+   "ER": 9.323280168427702,
+   "ER_ci": [
+    -60.015406611537244,
+    83.15417087851866
+   ],
+   "clock_sign_flip_share": 0.0935,
+   "unresolved": true
+  },
+  {
+   "pid": 201150,
+   "name": "Spencer Hawes",
+   "n": 364,
+   "shots": 56,
+   "raw_beta_clock": -0.10685021655458266,
+   "raw_beta_open": 0.6083848483545616,
+   "raw_ER": 5.693810157546834,
+   "post_beta_clock": -0.07956726638170943,
+   "post_beta_open": 0.5291624799960994,
+   "ER": 6.650504712045015,
+   "ER_ci": [
+    3.867064651777893,
+    20.435161874412405
+   ],
+   "clock_sign_flip_share": 0.003,
+   "unresolved": false
+  },
+  {
+   "pid": 201152,
+   "name": "Thaddeus Young",
+   "n": 474,
+   "shots": 45,
+   "raw_beta_clock": -0.067392138996282,
+   "raw_beta_open": 0.5047356522622376,
+   "raw_ER": 7.489533049100633,
+   "post_beta_clock": -0.0630682300567553,
+   "post_beta_open": 0.48163944230607,
+   "ER": 7.6367997305876685,
+   "ER_ci": [
+    4.061774542171695,
+    33.981880557034046
+   ],
+   "clock_sign_flip_share": 0.0085,
+   "unresolved": false
+  },
+  {
+   "pid": 201155,
+   "name": "Rodney Stuckey",
+   "n": 420,
+   "shots": 38,
+   "raw_beta_clock": -0.04875067203584314,
+   "raw_beta_open": 0.46616135608013004,
+   "raw_ER": 9.562152409660987,
+   "post_beta_clock": -0.054134759158406126,
+   "post_beta_open": 0.4586992375842881,
+   "ER": 8.473284904474552,
+   "ER_ci": [
+    3.2678342002466616,
+    49.767455701346634
+   ],
+   "clock_sign_flip_share": 0.0225,
+   "unresolved": false
+  },
+  {
+   "pid": 201158,
+   "name": "Marco Belinelli",
+   "n": 701,
+   "shots": 189,
+   "raw_beta_clock": -0.048235736106886064,
+   "raw_beta_open": 0.311410771257049,
+   "raw_ER": 6.456017807357406,
+   "post_beta_clock": -0.04623893805476454,
+   "post_beta_open": 0.3324829827099898,
+   "ER": 7.190541061219943,
+   "ER_ci": [
+    3.83389994601369,
+    25.00088835836518
+   ],
+   "clock_sign_flip_share": 0.006,
+   "unresolved": false
+  },
+  {
+   "pid": 201162,
+   "name": "Jared Dudley",
+   "n": 659,
+   "shots": 152,
+   "raw_beta_clock": -0.019833036302468965,
+   "raw_beta_open": 0.6518992935272538,
+   "raw_ER": 32.86936420552513,
+   "post_beta_clock": -0.039320424252673465,
+   "post_beta_open": 0.5759365305231617,
+   "ER": 14.647261352578179,
+   "ER_ci": [
+    -20.13959857753892,
+    104.27084302675047
+   ],
+   "clock_sign_flip_share": 0.027,
+   "unresolved": false
+  },
+  {
+   "pid": 201167,
+   "name": "Arron Afflalo",
+   "n": 610,
+   "shots": 113,
+   "raw_beta_clock": -0.008055037361418162,
+   "raw_beta_open": 0.4845770808677813,
+   "raw_ER": 60.158266079409856,
+   "post_beta_clock": -0.027061801739969193,
+   "post_beta_open": 0.4685355936006986,
+   "ER": 17.31354024771715,
+   "ER_ci": [
+    -123.3821546381466,
+    211.53622605874122
+   ],
+   "clock_sign_flip_share": 0.086,
+   "unresolved": true
+  },
+  {
+   "pid": 201188,
+   "name": "Marc Gasol",
+   "n": 1087,
+   "shots": 126,
+   "raw_beta_clock": -0.11327251455987973,
+   "raw_beta_open": 0.5276942081760632,
+   "raw_ER": 4.658625353435638,
+   "post_beta_clock": -0.09296152298620194,
+   "post_beta_open": 0.5121089104775041,
+   "ER": 5.508826598651091,
+   "ER_ci": [
+    3.6656759635129865,
+    10.20442006574263
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201196,
+   "name": "Ramon Sessions",
+   "n": 393,
+   "shots": 51,
+   "raw_beta_clock": -0.0802479274718529,
+   "raw_beta_open": 0.5028648292877298,
+   "raw_ER": 6.266390237481342,
+   "post_beta_clock": -0.06901321405370184,
+   "post_beta_open": 0.48201662077203,
+   "ER": 6.984410556461757,
+   "ER_ci": [
+    4.004244391581271,
+    23.80121314531851
+   ],
+   "clock_sign_flip_share": 0.002,
+   "unresolved": false
+  },
+  {
+   "pid": 201229,
+   "name": "Anthony Tolliver",
+   "n": 486,
+   "shots": 134,
+   "raw_beta_clock": -0.07710563298964405,
+   "raw_beta_open": 0.5984395249578336,
+   "raw_ER": 7.76129449632051,
+   "post_beta_clock": -0.07170862930734845,
+   "post_beta_open": 0.5458142487421305,
+   "ER": 7.611556015144712,
+   "ER_ci": [
+    4.61020359894253,
+    19.271080330958707
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 201564,
+   "name": "O.J. Mayo",
+   "n": 434,
+   "shots": 79,
+   "raw_beta_clock": 0.018806059047283795,
+   "raw_beta_open": 0.3335312527644121,
+   "raw_ER": -17.73530817519074,
+   "post_beta_clock": -0.009356332283492926,
+   "post_beta_open": 0.35545041692780033,
+   "ER": 37.99035841799997,
+   "ER_ci": [
+    -189.55830343703425,
+    222.39604641699043
+   ],
+   "clock_sign_flip_share": 0.3365,
+   "unresolved": true
+  },
+  {
+   "pid": 201565,
+   "name": "Derrick Rose",
+   "n": 371,
+   "shots": 51,
+   "raw_beta_clock": -0.02659272162713416,
+   "raw_beta_open": 0.30659687197364355,
+   "raw_ER": 11.529352891085967,
+   "post_beta_clock": -0.03128212231900686,
+   "post_beta_open": 0.3476945679235948,
+   "ER": 11.114801111570918,
+   "ER_ci": [
+    -101.16336291411938,
+    72.5306737124951
+   ],
+   "clock_sign_flip_share": 0.0965,
+   "unresolved": true
+  },
+  {
+   "pid": 201566,
+   "name": "Russell Westbrook",
+   "n": 581,
+   "shots": 48,
+   "raw_beta_clock": -0.0555668011339057,
+   "raw_beta_open": 0.26278803111701077,
+   "raw_ER": 4.7292272679821945,
+   "post_beta_clock": -0.04771154461226159,
+   "post_beta_open": 0.3154489095454136,
+   "ER": 6.6115845150053065,
+   "ER_ci": [
+    2.3547428390872667,
+    37.02474544440531
+   ],
+   "clock_sign_flip_share": 0.024,
+   "unresolved": false
+  },
+  {
+   "pid": 201567,
+   "name": "Kevin Love",
+   "n": 595,
+   "shots": 137,
+   "raw_beta_clock": -0.04419597985930749,
+   "raw_beta_open": 0.45754649850902157,
+   "raw_ER": 10.352672346343832,
+   "post_beta_clock": -0.04860774160326025,
+   "post_beta_open": 0.45516451283355586,
+   "ER": 9.364033337500848,
+   "ER_ci": [
+    4.66610539259159,
+    40.2815548409841
+   ],
+   "clock_sign_flip_share": 0.01,
+   "unresolved": false
+  },
+  {
+   "pid": 201568,
+   "name": "Danilo Gallinari",
+   "n": 713,
+   "shots": 108,
+   "raw_beta_clock": -0.10043084208791331,
+   "raw_beta_open": 0.4163412473841226,
+   "raw_ER": 4.1455516923742755,
+   "post_beta_clock": -0.08224213243130009,
+   "post_beta_open": 0.4275394976833929,
+   "ER": 5.198545867478965,
+   "ER_ci": [
+    3.328798470648154,
+    10.34450521127724
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201569,
+   "name": "Eric Gordon",
+   "n": 850,
+   "shots": 181,
+   "raw_beta_clock": -0.06860258414246798,
+   "raw_beta_open": 0.5691722282506898,
+   "raw_ER": 8.296658724526784,
+   "post_beta_clock": -0.06825912668704566,
+   "post_beta_open": 0.5442407526397619,
+   "ER": 7.973157276608535,
+   "ER_ci": [
+    4.996282689347618,
+    19.52621011426005
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201572,
+   "name": "Brook Lopez",
+   "n": 504,
+   "shots": 84,
+   "raw_beta_clock": -0.10592949524275883,
+   "raw_beta_open": 0.4585585973142782,
+   "raw_ER": 4.328903826676401,
+   "post_beta_clock": -0.07862397245530493,
+   "post_beta_open": 0.4600470156479204,
+   "ER": 5.851230881388517,
+   "ER_ci": [
+    3.5032008487965327,
+    15.585785523581634
+   ],
+   "clock_sign_flip_share": 0.0015,
+   "unresolved": false
+  },
+  {
+   "pid": 201573,
+   "name": "Jerryd Bayless",
+   "n": 428,
+   "shots": 89,
+   "raw_beta_clock": -0.08464463618455557,
+   "raw_beta_open": 0.40306218894098145,
+   "raw_ER": 4.761816071394787,
+   "post_beta_clock": -0.06931054645107747,
+   "post_beta_open": 0.4176467335525415,
+   "ER": 6.0257313632253,
+   "ER_ci": [
+    3.5724212716767463,
+    17.97745718645106
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 201577,
+   "name": "Robin Lopez",
+   "n": 334,
+   "shots": 20,
+   "raw_beta_clock": -0.16019716743827195,
+   "raw_beta_open": 0.7659479386339135,
+   "raw_ER": 4.781282658627861,
+   "post_beta_clock": -0.0779364239916018,
+   "post_beta_open": 0.5198699981795158,
+   "ER": 6.670436896559886,
+   "ER_ci": [
+    3.549923941420923,
+    24.0084673351756
+   ],
+   "clock_sign_flip_share": 0.0115,
+   "unresolved": false
+  },
+  {
+   "pid": 201579,
+   "name": "Roy Hibbert",
+   "n": 380,
+   "shots": 41,
+   "raw_beta_clock": 0.016777079387956348,
+   "raw_beta_open": 0.6861470663154807,
+   "raw_ER": -40.897885171124635,
+   "post_beta_clock": -0.050026516491729525,
+   "post_beta_open": 0.5344438848260011,
+   "ER": 10.683212070429816,
+   "ER_ci": [
+    -45.63517360065625,
+    73.75022034544791
+   ],
+   "clock_sign_flip_share": 0.047,
+   "unresolved": false
+  },
+  {
+   "pid": 201583,
+   "name": "Ryan Anderson",
+   "n": 677,
+   "shots": 164,
+   "raw_beta_clock": -0.04301173304226632,
+   "raw_beta_open": 0.5338699228086535,
+   "raw_ER": 12.412192791302685,
+   "post_beta_clock": -0.05054549589357356,
+   "post_beta_open": 0.5125894483558406,
+   "ER": 10.141149855075655,
+   "ER_ci": [
+    5.153577943016951,
+    45.28998563363021
+   ],
+   "clock_sign_flip_share": 0.009,
+   "unresolved": false
+  },
+  {
+   "pid": 201584,
+   "name": "Courtney Lee",
+   "n": 707,
+   "shots": 110,
+   "raw_beta_clock": -0.0007726269108047231,
+   "raw_beta_open": 0.6099504191064519,
+   "raw_ER": 789.4501350867563,
+   "post_beta_clock": -0.02865540750236735,
+   "post_beta_open": 0.5466716255946151,
+   "ER": 19.077433309906766,
+   "ER_ci": [
+    -131.59948459216977,
+    150.75627004395116
+   ],
+   "clock_sign_flip_share": 0.1,
+   "unresolved": true
+  },
+  {
+   "pid": 201586,
+   "name": "Serge Ibaka",
+   "n": 740,
+   "shots": 242,
+   "raw_beta_clock": 0.05940903713626978,
+   "raw_beta_open": 0.5035421489007735,
+   "raw_ER": -8.475851035016293,
+   "post_beta_clock": 0.02331938080642269,
+   "post_beta_open": 0.47450406680414264,
+   "ER": -20.34805601156671,
+   "ER_ci": [
+    -212.53141969678975,
+    151.44959917920085
+   ],
+   "clock_sign_flip_share": 0.098,
+   "unresolved": true
+  },
+  {
+   "pid": 201587,
+   "name": "Nicolas Batum",
+   "n": 1076,
+   "shots": 136,
+   "raw_beta_clock": -0.07073375482253318,
+   "raw_beta_open": 0.2708323133353632,
+   "raw_ER": 3.8288977308622383,
+   "post_beta_clock": -0.05903830624895877,
+   "post_beta_open": 0.29655091182463555,
+   "ER": 5.023025399375608,
+   "ER_ci": [
+    3.0272175842440854,
+    14.716731345883998
+   ],
+   "clock_sign_flip_share": 0.002,
+   "unresolved": false
+  },
+  {
+   "pid": 201588,
+   "name": "George Hill",
+   "n": 510,
+   "shots": 85,
+   "raw_beta_clock": -0.08524160875706223,
+   "raw_beta_open": 0.555777048540933,
+   "raw_ER": 6.520020640681387,
+   "post_beta_clock": -0.07422074221767504,
+   "post_beta_open": 0.5176167591441622,
+   "ER": 6.974017554635774,
+   "ER_ci": [
+    4.407183863295212,
+    15.917250791059377
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 201589,
+   "name": "Darrell Arthur",
+   "n": 472,
+   "shots": 113,
+   "raw_beta_clock": -0.08003100021668307,
+   "raw_beta_open": 0.46086816707070655,
+   "raw_ER": 5.758620607301058,
+   "post_beta_clock": -0.0686231576876043,
+   "post_beta_open": 0.46136035548941823,
+   "ER": 6.72310005887059,
+   "ER_ci": [
+    3.8970358247136305,
+    19.96981253728319
+   ],
+   "clock_sign_flip_share": 0.0035,
+   "unresolved": false
+  },
+  {
+   "pid": 201596,
+   "name": "Mario Chalmers",
+   "n": 414,
+   "shots": 53,
+   "raw_beta_clock": -0.06356069852174549,
+   "raw_beta_open": 0.46537059582012213,
+   "raw_ER": 7.321672144004345,
+   "post_beta_clock": -0.05985723851913846,
+   "post_beta_open": 0.4609394433963276,
+   "ER": 7.700646651932482,
+   "ER_ci": [
+    3.9760134656101727,
+    36.89390728534697
+   ],
+   "clock_sign_flip_share": 0.0075,
+   "unresolved": false
+  },
+  {
+   "pid": 201609,
+   "name": "Goran Dragic",
+   "n": 653,
+   "shots": 73,
+   "raw_beta_clock": -0.10379514353408069,
+   "raw_beta_open": 0.5190710287796341,
+   "raw_ER": 5.000918261741209,
+   "post_beta_clock": -0.08304304034666049,
+   "post_beta_open": 0.5003469432924942,
+   "ER": 6.025152032052439,
+   "ER_ci": [
+    3.7066314893449155,
+    13.010448557052376
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 201627,
+   "name": "Anthony Morrow",
+   "n": 325,
+   "shots": 108,
+   "raw_beta_clock": -0.021767252715791587,
+   "raw_beta_open": 0.5348717597946454,
+   "raw_ER": 24.5723135931899,
+   "post_beta_clock": -0.04032743899830594,
+   "post_beta_open": 0.4997223264688956,
+   "ER": 12.391620665271796,
+   "ER_ci": [
+    -42.7096950830354,
+    98.90001486251093
+   ],
+   "clock_sign_flip_share": 0.0435,
+   "unresolved": false
+  },
+  {
+   "pid": 201933,
+   "name": "Blake Griffin",
+   "n": 792,
+   "shots": 156,
+   "raw_beta_clock": -0.16380182130602555,
+   "raw_beta_open": 0.4726762343188079,
+   "raw_ER": 2.8856592103192944,
+   "post_beta_clock": -0.12040054777005307,
+   "post_beta_open": 0.4687891913778712,
+   "ER": 3.8935802208573667,
+   "ER_ci": [
+    2.9179074282057043,
+    5.986955445605454
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201935,
+   "name": "James Harden",
+   "n": 596,
+   "shots": 72,
+   "raw_beta_clock": -0.003862957294298596,
+   "raw_beta_open": 0.46001702315611115,
+   "raw_ER": 119.0841596501877,
+   "post_beta_clock": -0.026216191817438693,
+   "post_beta_open": 0.4523276136544374,
+   "ER": 17.25374977434955,
+   "ER_ci": [
+    -148.72896645223958,
+    167.36499913255514
+   ],
+   "clock_sign_flip_share": 0.1225,
+   "unresolved": true
+  },
+  {
+   "pid": 201936,
+   "name": "Tyreke Evans",
+   "n": 394,
+   "shots": 33,
+   "raw_beta_clock": 0.027578577571885022,
+   "raw_beta_open": 0.5387678873508878,
+   "raw_ER": -19.53573877936818,
+   "post_beta_clock": -0.02837839484758793,
+   "post_beta_open": 0.4694166482398128,
+   "ER": 16.541338957362193,
+   "ER_ci": [
+    -141.5889414901072,
+    183.12948149800573
+   ],
+   "clock_sign_flip_share": 0.137,
+   "unresolved": true
+  },
+  {
+   "pid": 201937,
+   "name": "Ricky Rubio",
+   "n": 459,
+   "shots": 86,
+   "raw_beta_clock": -0.061403564231383066,
+   "raw_beta_open": 0.49605628581515765,
+   "raw_ER": 8.078623643831177,
+   "post_beta_clock": -0.061178202859214645,
+   "post_beta_open": 0.4829215173270293,
+   "ER": 7.89368590048885,
+   "ER_ci": [
+    4.4252614734219105,
+    29.400845306738404
+   ],
+   "clock_sign_flip_share": 0.004,
+   "unresolved": false
+  },
+  {
+   "pid": 201939,
+   "name": "Stephen Curry",
+   "n": 585,
+   "shots": 134,
+   "raw_beta_clock": -0.08832770215327425,
+   "raw_beta_open": 0.34748008874677677,
+   "raw_ER": 3.933987642334426,
+   "post_beta_clock": -0.071579787989594,
+   "post_beta_open": 0.3663830651890995,
+   "ER": 5.118526828304701,
+   "ER_ci": [
+    3.1953132374511997,
+    13.25373877087119
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201941,
+   "name": "Jordan Hill",
+   "n": 416,
+   "shots": 50,
+   "raw_beta_clock": -0.11985966067863034,
+   "raw_beta_open": 0.5658909088963675,
+   "raw_ER": 4.721279083324317,
+   "post_beta_clock": -0.0857783308991396,
+   "post_beta_open": 0.513484184993191,
+   "ER": 5.9861759911947825,
+   "ER_ci": [
+    3.5874582409950015,
+    14.54296111114709
+   ],
+   "clock_sign_flip_share": 0.003,
+   "unresolved": false
+  },
+  {
+   "pid": 201942,
+   "name": "DeMar DeRozan",
+   "n": 1031,
+   "shots": 81,
+   "raw_beta_clock": -0.1398558195779875,
+   "raw_beta_open": 0.39304773587500935,
+   "raw_ER": 2.810378124135442,
+   "post_beta_clock": -0.0994359706610917,
+   "post_beta_open": 0.4194978100027354,
+   "ER": 4.218773218722958,
+   "ER_ci": [
+    2.752917007401959,
+    7.605080455876975
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 201945,
+   "name": "Gerald Henderson",
+   "n": 379,
+   "shots": 55,
+   "raw_beta_clock": -0.027017651475221883,
+   "raw_beta_open": 0.6004108307759697,
+   "raw_ER": 22.222909764255842,
+   "post_beta_clock": -0.04820388853826295,
+   "post_beta_open": 0.522180133240017,
+   "ER": 10.83273879088664,
+   "ER_ci": [
+    -31.447540460448067,
+    69.9095863153705
+   ],
+   "clock_sign_flip_share": 0.0325,
+   "unresolved": false
+  },
+  {
+   "pid": 201950,
+   "name": "Jrue Holiday",
+   "n": 519,
+   "shots": 26,
+   "raw_beta_clock": -0.07554364829541481,
+   "raw_beta_open": 0.35719244687864565,
+   "raw_ER": 4.7282922514125625,
+   "post_beta_clock": -0.056335217701833876,
+   "post_beta_open": 0.4037711255226042,
+   "ER": 7.167295024218221,
+   "ER_ci": [
+    -20.17728467509756,
+    47.23959162839657
+   ],
+   "clock_sign_flip_share": 0.0285,
+   "unresolved": false
+  },
+  {
+   "pid": 201951,
+   "name": "Ty Lawson",
+   "n": 314,
+   "shots": 27,
+   "raw_beta_clock": -0.11490325695883284,
+   "raw_beta_open": 0.5920742008604335,
+   "raw_ER": 5.152806078182448,
+   "post_beta_clock": -0.079152531030221,
+   "post_beta_open": 0.5052010511589478,
+   "ER": 6.382626614505332,
+   "ER_ci": [
+    3.6394024061480708,
+    20.85775145508237
+   ],
+   "clock_sign_flip_share": 0.0045,
+   "unresolved": false
+  },
+  {
+   "pid": 201952,
+   "name": "Jeff Teague",
+   "n": 569,
+   "shots": 48,
+   "raw_beta_clock": 0.03660295281944591,
+   "raw_beta_open": 0.4706487888556286,
+   "raw_ER": -12.858219149073374,
+   "post_beta_clock": -0.014718625090725303,
+   "post_beta_open": 0.44535040141929155,
+   "ER": 30.257608891738244,
+   "ER_ci": [
+    -261.08356471752387,
+    204.39581515974663
+   ],
+   "clock_sign_flip_share": 0.299,
+   "unresolved": true
+  },
+  {
+   "pid": 201954,
+   "name": "Darren Collison",
+   "n": 416,
+   "shots": 61,
+   "raw_beta_clock": 0.021029151242479803,
+   "raw_beta_open": 0.3979352486327123,
+   "raw_ER": -18.923029467250476,
+   "post_beta_clock": -0.00941124681336979,
+   "post_beta_open": 0.4015170897604431,
+   "ER": 42.6635383943008,
+   "ER_ci": [
+    -253.8204615138236,
+    214.90509151577507
+   ],
+   "clock_sign_flip_share": 0.3425,
+   "unresolved": true
+  },
+  {
+   "pid": 201956,
+   "name": "Omri Casspi",
+   "n": 539,
+   "shots": 102,
+   "raw_beta_clock": -0.04424982839108886,
+   "raw_beta_open": 0.385922104958013,
+   "raw_ER": 8.721437325070642,
+   "post_beta_clock": -0.04577898747118103,
+   "post_beta_open": 0.4028568680435796,
+   "ER": 8.800038845271265,
+   "ER_ci": [
+    4.323897862550266,
+    42.25075821819936
+   ],
+   "clock_sign_flip_share": 0.011,
+   "unresolved": false
+  },
+  {
+   "pid": 201960,
+   "name": "DeMarre Carroll",
+   "n": 362,
+   "shots": 80,
+   "raw_beta_clock": 3.028272515024924e-05,
+   "raw_beta_open": 0.6285317032957745,
+   "raw_ER": -20755.453816566485,
+   "post_beta_clock": -0.03736054921087905,
+   "post_beta_open": 0.5363459137840012,
+   "ER": 14.355942969591629,
+   "ER_ci": [
+    -77.54411063498296,
+    125.53206770241846
+   ],
+   "clock_sign_flip_share": 0.0615,
+   "unresolved": true
+  },
+  {
+   "pid": 201961,
+   "name": "Wayne Ellington",
+   "n": 394,
+   "shots": 87,
+   "raw_beta_clock": -0.053760636794452546,
+   "raw_beta_open": 0.3913156003926931,
+   "raw_ER": 7.278849800251477,
+   "post_beta_clock": -0.051980033970877686,
+   "post_beta_open": 0.4093482059105492,
+   "ER": 7.87510462459279,
+   "ER_ci": [
+    3.728792074196437,
+    41.43063268422371
+   ],
+   "clock_sign_flip_share": 0.0125,
+   "unresolved": false
+  },
+  {
+   "pid": 201967,
+   "name": "Dante Cunningham",
+   "n": 318,
+   "shots": 76,
+   "raw_beta_clock": -0.11216928176254483,
+   "raw_beta_open": 0.6182549268829055,
+   "raw_ER": 5.511802493232608,
+   "post_beta_clock": -0.08552343673131871,
+   "post_beta_open": 0.5404092173000676,
+   "ER": 6.318843558612158,
+   "ER_ci": [
+    3.983658951905599,
+    15.181074669415878
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 201976,
+   "name": "Patrick Beverley",
+   "n": 347,
+   "shots": 72,
+   "raw_beta_clock": -0.02114690348232292,
+   "raw_beta_open": 0.5522362114737086,
+   "raw_ER": 26.114282496978003,
+   "post_beta_clock": -0.040488631576702905,
+   "post_beta_open": 0.5060256721370634,
+   "ER": 12.497969243006715,
+   "ER_ci": [
+    -48.784033993349944,
+    88.46617671522486
+   ],
+   "clock_sign_flip_share": 0.044,
+   "unresolved": false
+  },
+  {
+   "pid": 201977,
+   "name": "Marcus Thornton",
+   "n": 356,
+   "shots": 93,
+   "raw_beta_clock": -0.01654540546727944,
+   "raw_beta_open": 0.49106092163041537,
+   "raw_ER": 29.67959428987995,
+   "post_beta_clock": -0.03639848030168343,
+   "post_beta_open": 0.4741150189599407,
+   "ER": 13.02568170512363,
+   "ER_ci": [
+    -67.54002572336097,
+    110.01307896192034
+   ],
+   "clock_sign_flip_share": 0.0565,
+   "unresolved": true
+  },
+  {
+   "pid": 201978,
+   "name": "Chase Budinger",
+   "n": 305,
+   "shots": 56,
+   "raw_beta_clock": -0.050810102187583625,
+   "raw_beta_open": 0.588787108845114,
+   "raw_ER": 11.587993007205462,
+   "post_beta_clock": -0.05768872912618867,
+   "post_beta_open": 0.519112849826405,
+   "ER": 8.998514227812064,
+   "ER_ci": [
+    4.509902123173036,
+    52.11735392917027
+   ],
+   "clock_sign_flip_share": 0.0135,
+   "unresolved": false
+  },
+  {
+   "pid": 201980,
+   "name": "Danny Green",
+   "n": 636,
+   "shots": 127,
+   "raw_beta_clock": -0.009408696493918157,
+   "raw_beta_open": 0.6292004712959757,
+   "raw_ER": 66.87435094783798,
+   "post_beta_clock": -0.03504510807998807,
+   "post_beta_open": 0.556594935684309,
+   "ER": 15.882243376562542,
+   "ER_ci": [
+    -72.37684493059211,
+    123.5595937144056
+   ],
+   "clock_sign_flip_share": 0.0455,
+   "unresolved": false
+  },
+  {
+   "pid": 201988,
+   "name": "Patty Mills",
+   "n": 499,
+   "shots": 88,
+   "raw_beta_clock": -0.10525712548099476,
+   "raw_beta_open": 0.454956016091008,
+   "raw_ER": 4.3223298566438135,
+   "post_beta_clock": -0.08369388963856991,
+   "post_beta_open": 0.4576851761667457,
+   "ER": 5.46856142238398,
+   "ER_ci": [
+    3.5487311872689693,
+    11.784728721106184
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 202066,
+   "name": "Garrett Temple",
+   "n": 510,
+   "shots": 101,
+   "raw_beta_clock": -0.03350218404792223,
+   "raw_beta_open": 0.515059949870367,
+   "raw_ER": 15.373921566833204,
+   "post_beta_clock": -0.045032649256791804,
+   "post_beta_open": 0.49263264500210374,
+   "ER": 10.939455109401655,
+   "ER_ci": [
+    4.5397157540306985,
+    70.0047838862692
+   ],
+   "clock_sign_flip_share": 0.021,
+   "unresolved": false
+  },
+  {
+   "pid": 202083,
+   "name": "Wesley Matthews",
+   "n": 927,
+   "shots": 184,
+   "raw_beta_clock": -0.08928306666181526,
+   "raw_beta_open": 0.47713678074129945,
+   "raw_ER": 5.344090414687359,
+   "post_beta_clock": -0.08120873432559968,
+   "post_beta_open": 0.47436255862040283,
+   "ER": 5.841275111104251,
+   "ER_ci": [
+    4.042605319317241,
+    10.579928054093926
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 202322,
+   "name": "John Wall",
+   "n": 603,
+   "shots": 77,
+   "raw_beta_clock": -0.06866934923459539,
+   "raw_beta_open": 0.3638857483394512,
+   "raw_ER": 5.299099997239042,
+   "post_beta_clock": -0.05994360561608997,
+   "post_beta_open": 0.3920897052462242,
+   "ER": 6.540976326271907,
+   "ER_ci": [
+    3.5167972745200045,
+    24.370696599546104
+   ],
+   "clock_sign_flip_share": 0.004,
+   "unresolved": false
+  },
+  {
+   "pid": 202323,
+   "name": "Evan Turner",
+   "n": 545,
+   "shots": 49,
+   "raw_beta_clock": -0.16585908187679552,
+   "raw_beta_open": 0.4942292656072963,
+   "raw_ER": 2.979814309923787,
+   "post_beta_clock": -0.10380279717850903,
+   "post_beta_open": 0.47964277979017067,
+   "ER": 4.620711510936761,
+   "ER_ci": [
+    3.053634672411022,
+    8.857931248954852
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 202324,
+   "name": "Derrick Favors",
+   "n": 528,
+   "shots": 74,
+   "raw_beta_clock": -0.09144008287848239,
+   "raw_beta_open": 0.7141213506748397,
+   "raw_ER": 7.809718978753094,
+   "post_beta_clock": -0.07985863602684666,
+   "post_beta_open": 0.5642298534543055,
+   "ER": 7.065358006673496,
+   "ER_ci": [
+    4.0478252714638625,
+    18.03297020348232
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 202325,
+   "name": "Wesley Johnson",
+   "n": 308,
+   "shots": 121,
+   "raw_beta_clock": -0.019526750911956627,
+   "raw_beta_open": 0.294266444120908,
+   "raw_ER": 15.069913343377708,
+   "post_beta_clock": -0.026713372335211052,
+   "post_beta_open": 0.3295394167083987,
+   "ER": 12.336121870844096,
+   "ER_ci": [
+    -87.24693691994042,
+    105.64736118708741
+   ],
+   "clock_sign_flip_share": 0.105,
+   "unresolved": true
+  },
+  {
+   "pid": 202326,
+   "name": "DeMarcus Cousins",
+   "n": 657,
+   "shots": 119,
+   "raw_beta_clock": -0.049163873411083046,
+   "raw_beta_open": 0.3622958207121499,
+   "raw_ER": 7.369147212686405,
+   "post_beta_clock": -0.04825653855962248,
+   "post_beta_open": 0.38372021241923293,
+   "ER": 7.951672951948977,
+   "ER_ci": [
+    3.8383995124923995,
+    40.25735484845734
+   ],
+   "clock_sign_flip_share": 0.0125,
+   "unresolved": false
+  },
+  {
+   "pid": 202328,
+   "name": "Greg Monroe",
+   "n": 491,
+   "shots": 21,
+   "raw_beta_clock": -0.036046093735046136,
+   "raw_beta_open": 0.6954836202120526,
+   "raw_ER": 19.294285403687514,
+   "post_beta_clock": -0.05907193342839012,
+   "post_beta_open": 0.5154489603592539,
+   "ER": 8.725784487553742,
+   "ER_ci": [
+    -29.9940272859397,
+    51.582083989972645
+   ],
+   "clock_sign_flip_share": 0.033,
+   "unresolved": false
+  },
+  {
+   "pid": 202329,
+   "name": "Al-Farouq Aminu",
+   "n": 678,
+   "shots": 143,
+   "raw_beta_clock": -0.11992267310230467,
+   "raw_beta_open": 0.5099965341583891,
+   "raw_ER": 4.252711526229213,
+   "post_beta_clock": -0.09788463968234207,
+   "post_beta_open": 0.5000167467236671,
+   "ER": 5.10822482818893,
+   "ER_ci": [
+    3.538422928988068,
+    8.780111127901842
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 202330,
+   "name": "Gordon Hayward",
+   "n": 1234,
+   "shots": 155,
+   "raw_beta_clock": -0.11052500533896739,
+   "raw_beta_open": 0.4832691033678556,
+   "raw_ER": 4.372486586955823,
+   "post_beta_clock": -0.09584837320221365,
+   "post_beta_open": 0.4806326020041241,
+   "ER": 5.014509750625833,
+   "ER_ci": [
+    3.6351203445120053,
+    7.955552878606482
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 202331,
+   "name": "Paul George",
+   "n": 799,
+   "shots": 153,
+   "raw_beta_clock": -0.03632819579141341,
+   "raw_beta_open": 0.46088166718403795,
+   "raw_ER": 12.686610417712313,
+   "post_beta_clock": -0.04300885120157433,
+   "post_beta_open": 0.45831690212345444,
+   "ER": 10.656339086468737,
+   "ER_ci": [
+    5.319112407472072,
+    52.742376420168014
+   ],
+   "clock_sign_flip_share": 0.012,
+   "unresolved": false
+  },
+  {
+   "pid": 202335,
+   "name": "Patrick Patterson",
+   "n": 580,
+   "shots": 122,
+   "raw_beta_clock": -0.023744120875284824,
+   "raw_beta_open": 0.5605981922604177,
+   "raw_ER": 23.60997887455764,
+   "post_beta_clock": -0.040132300849070275,
+   "post_beta_open": 0.5158704484663357,
+   "ER": 12.854245521741287,
+   "ER_ci": [
+    -29.699330229365692,
+    78.3865759074381
+   ],
+   "clock_sign_flip_share": 0.032,
+   "unresolved": false
+  },
+  {
+   "pid": 202339,
+   "name": "Eric Bledsoe",
+   "n": 553,
+   "shots": 40,
+   "raw_beta_clock": 0.015194323429505595,
+   "raw_beta_open": 0.6098211712267362,
+   "raw_ER": -40.13480258308408,
+   "post_beta_clock": -0.03360322982593777,
+   "post_beta_open": 0.5221104756628385,
+   "ER": 15.537508696852415,
+   "ER_ci": [
+    -105.9395725922553,
+    139.5094609764867
+   ],
+   "clock_sign_flip_share": 0.113,
+   "unresolved": true
+  },
+  {
+   "pid": 202340,
+   "name": "Avery Bradley",
+   "n": 736,
+   "shots": 186,
+   "raw_beta_clock": -0.043247567743673124,
+   "raw_beta_open": 0.3919961849363339,
+   "raw_ER": 9.064005339206174,
+   "post_beta_clock": -0.04574827575596302,
+   "post_beta_open": 0.4018619873226521,
+   "ER": 8.784199637737641,
+   "ER_ci": [
+    4.470618624380542,
+    49.74463004072561
+   ],
+   "clock_sign_flip_share": 0.0115,
+   "unresolved": false
+  },
+  {
+   "pid": 202344,
+   "name": "Trevor Booker",
+   "n": 434,
+   "shots": 25,
+   "raw_beta_clock": -0.21856175731126698,
+   "raw_beta_open": 0.3837915228948029,
+   "raw_ER": 1.7559866264628456,
+   "post_beta_clock": -0.09019434605485674,
+   "post_beta_open": 0.43286809728208625,
+   "ER": 4.79928195298199,
+   "ER_ci": [
+    2.7810272578936392,
+    13.890608846838274
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 202357,
+   "name": "Nemanja Bjelica",
+   "n": 345,
+   "shots": 65,
+   "raw_beta_clock": -0.06558688937208793,
+   "raw_beta_open": 0.37314651374233915,
+   "raw_ER": 5.689346107350848,
+   "post_beta_clock": -0.05658161160463162,
+   "post_beta_open": 0.402618973914741,
+   "ER": 7.115721212185898,
+   "ER_ci": [
+    3.3942597846890217,
+    33.25880243103764
+   ],
+   "clock_sign_flip_share": 0.0125,
+   "unresolved": false
+  },
+  {
+   "pid": 202390,
+   "name": "Gary Neal",
+   "n": 434,
+   "shots": 55,
+   "raw_beta_clock": 0.0021610693052345332,
+   "raw_beta_open": 0.31134052241832755,
+   "raw_ER": -144.06781016425518,
+   "post_beta_clock": -0.019731616958448946,
+   "post_beta_open": 0.3472022037474346,
+   "ER": 17.596236764507278,
+   "ER_ci": [
+    -156.0731606191263,
+    283.85458079785815
+   ],
+   "clock_sign_flip_share": 0.2235,
+   "unresolved": true
+  },
+  {
+   "pid": 202391,
+   "name": "Jeremy Lin",
+   "n": 659,
+   "shots": 80,
+   "raw_beta_clock": -0.027960385304813682,
+   "raw_beta_open": 0.5886626090917941,
+   "raw_ER": 21.05345125521033,
+   "post_beta_clock": -0.04367244476953977,
+   "post_beta_open": 0.535134647773033,
+   "ER": 12.253370531394511,
+   "ER_ci": [
+    -42.600102480916135,
+    74.40456715693051
+   ],
+   "clock_sign_flip_share": 0.035,
+   "unresolved": false
+  },
+  {
+   "pid": 202397,
+   "name": "Ish Smith",
+   "n": 486,
+   "shots": 11,
+   "raw_beta_clock": -0.102999696644223,
+   "raw_beta_open": 0.44933396485374055,
+   "raw_ER": 4.362478526570909,
+   "post_beta_clock": -0.06664209671178789,
+   "post_beta_open": 0.4600761937525465,
+   "ER": 6.903687255553689,
+   "ER_ci": [
+    2.8879345286831963,
+    35.22699858023316
+   ],
+   "clock_sign_flip_share": 0.019,
+   "unresolved": false
+  },
+  {
+   "pid": 202498,
+   "name": "Lance Thomas",
+   "n": 535,
+   "shots": 63,
+   "raw_beta_clock": -0.07433415929901235,
+   "raw_beta_open": 0.4791585564899421,
+   "raw_ER": 6.446007609536636,
+   "post_beta_clock": -0.06647875469637657,
+   "post_beta_open": 0.4720247297594944,
+   "ER": 7.10038465544876,
+   "ER_ci": [
+    4.0953817065190625,
+    23.707618413769357
+   ],
+   "clock_sign_flip_share": 0.002,
+   "unresolved": false
+  },
+  {
+   "pid": 202682,
+   "name": "Derrick Williams",
+   "n": 465,
+   "shots": 71,
+   "raw_beta_clock": -0.095207514831576,
+   "raw_beta_open": 0.5859829557169568,
+   "raw_ER": 6.15479730516622,
+   "post_beta_clock": -0.0798674104740417,
+   "post_beta_open": 0.5318077391470505,
+   "ER": 6.658632551006487,
+   "ER_ci": [
+    4.15895163908088,
+    15.73616271938467
+   ],
+   "clock_sign_flip_share": 0.0015,
+   "unresolved": false
+  },
+  {
+   "pid": 202688,
+   "name": "Brandon Knight",
+   "n": 821,
+   "shots": 103,
+   "raw_beta_clock": -0.03457536875079642,
+   "raw_beta_open": 0.4181894197057072,
+   "raw_ER": 12.095009679284317,
+   "post_beta_clock": -0.040671050963176025,
+   "post_beta_open": 0.4229218682686476,
+   "ER": 10.398596993511804,
+   "ER_ci": [
+    4.422006405177147,
+    59.09304456722603
+   ],
+   "clock_sign_flip_share": 0.021,
+   "unresolved": false
+  },
+  {
+   "pid": 202689,
+   "name": "Kemba Walker",
+   "n": 726,
+   "shots": 102,
+   "raw_beta_clock": 0.0011243400155972075,
+   "raw_beta_open": 0.47951825849358376,
+   "raw_ER": -426.48865275766383,
+   "post_beta_clock": -0.02151852909214835,
+   "post_beta_open": 0.46424980758310064,
+   "ER": 21.574421076601162,
+   "ER_ci": [
+    -178.96649544342662,
+    234.06272442489592
+   ],
+   "clock_sign_flip_share": 0.151,
+   "unresolved": true
+  },
+  {
+   "pid": 202691,
+   "name": "Klay Thompson",
+   "n": 750,
+   "shots": 233,
+   "raw_beta_clock": -0.042655332694597,
+   "raw_beta_open": 0.39780215153091414,
+   "raw_ER": 9.325965275645414,
+   "post_beta_clock": -0.04495310477063386,
+   "post_beta_open": 0.40576707478061974,
+   "ER": 9.026452718916353,
+   "ER_ci": [
+    4.688917089831266,
+    38.52031887674875
+   ],
+   "clock_sign_flip_share": 0.0085,
+   "unresolved": false
+  },
+  {
+   "pid": 202692,
+   "name": "Alec Burks",
+   "n": 562,
+   "shots": 38,
+   "raw_beta_clock": -0.12366207990498422,
+   "raw_beta_open": 0.6614171040372198,
+   "raw_ER": 5.3485846635073555,
+   "post_beta_clock": -0.08407607808586924,
+   "post_beta_open": 0.5448471003386658,
+   "ER": 6.480405755632396,
+   "ER_ci": [
+    3.8446800808669064,
+    18.803762261830887
+   ],
+   "clock_sign_flip_share": 0.0015,
+   "unresolved": false
+  },
+  {
+   "pid": 202693,
+   "name": "Markieff Morris",
+   "n": 399,
+   "shots": 56,
+   "raw_beta_clock": -0.1261828153217732,
+   "raw_beta_open": 0.5819590673534254,
+   "raw_ER": 4.6120310905205075,
+   "post_beta_clock": -0.08781822123930941,
+   "post_beta_open": 0.5231440959813889,
+   "ER": 5.957124712829162,
+   "ER_ci": [
+    3.566454974604743,
+    13.943602090864943
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 202694,
+   "name": "Marcus Morris",
+   "n": 685,
+   "shots": 101,
+   "raw_beta_clock": -0.12645242935194478,
+   "raw_beta_open": 0.5289658526830309,
+   "raw_ER": 4.183121316007328,
+   "post_beta_clock": -0.09849715419023883,
+   "post_beta_open": 0.5091034237830938,
+   "ER": 5.168712009687144,
+   "ER_ci": [
+    3.498611123405441,
+    9.042942303817624
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 202695,
+   "name": "Kawhi Leonard",
+   "n": 767,
+   "shots": 114,
+   "raw_beta_clock": -0.0767384444160387,
+   "raw_beta_open": 0.4908945630491809,
+   "raw_ER": 6.396983503962996,
+   "post_beta_clock": -0.07054512669854496,
+   "post_beta_open": 0.48231205076106104,
+   "ER": 6.836929400128344,
+   "ER_ci": [
+    4.369472439979348,
+    15.688581404878917
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 202696,
+   "name": "Nikola Vucevic",
+   "n": 528,
+   "shots": 92,
+   "raw_beta_clock": -0.05496748341919115,
+   "raw_beta_open": 0.4976130800639281,
+   "raw_ER": 9.052862694641634,
+   "post_beta_clock": -0.05734841937976508,
+   "post_beta_open": 0.4826526655422477,
+   "ER": 8.416145915828812,
+   "ER_ci": [
+    4.3633000107823054,
+    39.64922748110639
+   ],
+   "clock_sign_flip_share": 0.007,
+   "unresolved": false
+  },
+  {
+   "pid": 202699,
+   "name": "Tobias Harris",
+   "n": 656,
+   "shots": 107,
+   "raw_beta_clock": -0.08265286493194335,
+   "raw_beta_open": 0.5463646959202044,
+   "raw_ER": 6.610353995231538,
+   "post_beta_clock": -0.07516781475494436,
+   "post_beta_open": 0.5198527069730888,
+   "ER": 6.9158949035284305,
+   "ER_ci": [
+    4.364042066232878,
+    16.247669784290757
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 202702,
+   "name": "Kenneth Faried",
+   "n": 300,
+   "shots": 30,
+   "raw_beta_clock": 0.030949897304244394,
+   "raw_beta_open": 0.24382818772527115,
+   "raw_ER": -7.878158215789399,
+   "post_beta_clock": -0.013296068751716347,
+   "post_beta_open": 0.33006301459599696,
+   "ER": 24.824105587855822,
+   "ER_ci": [
+    -147.8863520512758,
+    168.19651434482518
+   ],
+   "clock_sign_flip_share": 0.328,
+   "unresolved": true
+  },
+  {
+   "pid": 202703,
+   "name": "Nikola Mirotic",
+   "n": 497,
+   "shots": 132,
+   "raw_beta_clock": -0.018194289077370297,
+   "raw_beta_open": 0.2805605515604494,
+   "raw_ER": 15.420253595366095,
+   "post_beta_clock": -0.024212029465030115,
+   "post_beta_open": 0.3120733902653789,
+   "ER": 12.889187612963726,
+   "ER_ci": [
+    -118.16511666045547,
+    135.5678959310643
+   ],
+   "clock_sign_flip_share": 0.126,
+   "unresolved": true
+  },
+  {
+   "pid": 202704,
+   "name": "Reggie Jackson",
+   "n": 454,
+   "shots": 56,
+   "raw_beta_clock": -0.08839726775674028,
+   "raw_beta_open": 0.46099353988029823,
+   "raw_ER": 5.215020232852701,
+   "post_beta_clock": -0.07181174529839875,
+   "post_beta_open": 0.4592621139919885,
+   "ER": 6.395362096877335,
+   "ER_ci": [
+    3.722822501558326,
+    17.674810600696194
+   ],
+   "clock_sign_flip_share": 0.0025,
+   "unresolved": false
+  },
+  {
+   "pid": 202709,
+   "name": "Cory Joseph",
+   "n": 505,
+   "shots": 33,
+   "raw_beta_clock": -0.01955115013694197,
+   "raw_beta_open": 0.49761700212765236,
+   "raw_ER": 25.452057737892524,
+   "post_beta_clock": -0.042307814607107634,
+   "post_beta_open": 0.46595821859404474,
+   "ER": 11.013526057093117,
+   "ER_ci": [
+    -59.948586024695295,
+    105.30592445916241
+   ],
+   "clock_sign_flip_share": 0.057,
+   "unresolved": true
+  },
+  {
+   "pid": 202710,
+   "name": "Jimmy Butler",
+   "n": 900,
+   "shots": 81,
+   "raw_beta_clock": -0.0563704266071911,
+   "raw_beta_open": 0.3385378245829404,
+   "raw_ER": 6.00559273645365,
+   "post_beta_clock": -0.051407686812881784,
+   "post_beta_open": 0.3617012133820591,
+   "ER": 7.03593637073403,
+   "ER_ci": [
+    3.6138868628001752,
+    24.77230963626601
+   ],
+   "clock_sign_flip_share": 0.0065,
+   "unresolved": false
+  },
+  {
+   "pid": 202711,
+   "name": "Bojan Bogdanovic",
+   "n": 549,
+   "shots": 106,
+   "raw_beta_clock": -0.003932984913824585,
+   "raw_beta_open": 0.35826129929659806,
+   "raw_ER": 91.09145016989426,
+   "post_beta_clock": -0.018758794765057384,
+   "post_beta_open": 0.37319351522360666,
+   "ER": 19.894322630938227,
+   "ER_ci": [
+    -139.73892129724382,
+    192.83874552300662
+   ],
+   "clock_sign_flip_share": 0.193,
+   "unresolved": true
+  },
+  {
+   "pid": 202718,
+   "name": "Chandler Parsons",
+   "n": 726,
+   "shots": 74,
+   "raw_beta_clock": -0.04759855920017638,
+   "raw_beta_open": 0.4996141752178486,
+   "raw_ER": 10.496413832963189,
+   "post_beta_clock": -0.05293322562802811,
+   "post_beta_open": 0.484295706649175,
+   "ER": 9.14918184001129,
+   "ER_ci": [
+    4.686668746695888,
+    39.424271251720036
+   ],
+   "clock_sign_flip_share": 0.008,
+   "unresolved": false
+  },
+  {
+   "pid": 202720,
+   "name": "Jon Leuer",
+   "n": 456,
+   "shots": 95,
+   "raw_beta_clock": 0.028340292228566894,
+   "raw_beta_open": 0.5958709641204526,
+   "raw_ER": -21.025575859087905,
+   "post_beta_clock": -0.02460304123648927,
+   "post_beta_open": 0.5216548787942665,
+   "ER": 21.2028616210499,
+   "ER_ci": [
+    -192.7545837348209,
+    210.11770981155604
+   ],
+   "clock_sign_flip_share": 0.1575,
+   "unresolved": true
+  },
+  {
+   "pid": 202730,
+   "name": "Lavoy Allen",
+   "n": 349,
+   "shots": 56,
+   "raw_beta_clock": -0.06448886109465071,
+   "raw_beta_open": 0.6168526862994054,
+   "raw_ER": 9.565259423546754,
+   "post_beta_clock": -0.06483052196034789,
+   "post_beta_open": 0.5306143322708757,
+   "ER": 8.184637671055832,
+   "ER_ci": [
+    4.0674594795314,
+    35.844081761019076
+   ],
+   "clock_sign_flip_share": 0.0095,
+   "unresolved": false
+  },
+  {
+   "pid": 202738,
+   "name": "Isaiah Thomas",
+   "n": 773,
+   "shots": 104,
+   "raw_beta_clock": -0.05613346800560741,
+   "raw_beta_open": 0.48903422204696034,
+   "raw_ER": 8.711990180227394,
+   "post_beta_clock": -0.05708835565964711,
+   "post_beta_open": 0.4801113297972244,
+   "ER": 8.409969498150932,
+   "ER_ci": [
+    4.572993917801799,
+    28.98429915590037
+   ],
+   "clock_sign_flip_share": 0.007,
+   "unresolved": false
+  },
+  {
+   "pid": 203076,
+   "name": "Anthony Davis",
+   "n": 757,
+   "shots": 147,
+   "raw_beta_clock": -0.08842462452290328,
+   "raw_beta_open": 0.5659496166309009,
+   "raw_ER": 6.4003621127541415,
+   "post_beta_clock": -0.0772900758324979,
+   "post_beta_open": 0.5362829021400499,
+   "ER": 6.9385738901625045,
+   "ER_ci": [
+    4.327147202560724,
+    15.699860765257323
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203078,
+   "name": "Bradley Beal",
+   "n": 553,
+   "shots": 72,
+   "raw_beta_clock": -0.03373796007823442,
+   "raw_beta_open": 0.4357261972486586,
+   "raw_ER": 12.915013125816142,
+   "post_beta_clock": -0.043521570225123124,
+   "post_beta_open": 0.4379532860402312,
+   "ER": 10.06290176973945,
+   "ER_ci": [
+    -34.64166642270342,
+    86.84388542297532
+   ],
+   "clock_sign_flip_share": 0.035,
+   "unresolved": false
+  },
+  {
+   "pid": 203079,
+   "name": "Dion Waiters",
+   "n": 542,
+   "shots": 78,
+   "raw_beta_clock": -0.08456892810180715,
+   "raw_beta_open": 0.5398111829417231,
+   "raw_ER": 6.383091225797243,
+   "post_beta_clock": -0.07308883250016636,
+   "post_beta_open": 0.50774049871118,
+   "ER": 6.946895734174223,
+   "ER_ci": [
+    4.23628059044099,
+    19.602552688881374
+   ],
+   "clock_sign_flip_share": 0.0015,
+   "unresolved": false
+  },
+  {
+   "pid": 203081,
+   "name": "Damian Lillard",
+   "n": 583,
+   "shots": 115,
+   "raw_beta_clock": -0.08657668183094179,
+   "raw_beta_open": 0.3331631403785476,
+   "raw_ER": 3.848185600703836,
+   "post_beta_clock": -0.07404600447252747,
+   "post_beta_open": 0.3520465956617191,
+   "ER": 4.754430683593944,
+   "ER_ci": [
+    3.0913686828085147,
+    9.656952989509595
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203082,
+   "name": "Terrence Ross",
+   "n": 386,
+   "shots": 128,
+   "raw_beta_clock": -0.04019393992788397,
+   "raw_beta_open": 0.34784148475590854,
+   "raw_ER": 8.654077838102118,
+   "post_beta_clock": -0.04193581039855279,
+   "post_beta_open": 0.3720609777225397,
+   "ER": 8.872154232540588,
+   "ER_ci": [
+    -12.064643894959532,
+    53.65878540652882
+   ],
+   "clock_sign_flip_share": 0.0265,
+   "unresolved": false
+  },
+  {
+   "pid": 203085,
+   "name": "Austin Rivers",
+   "n": 301,
+   "shots": 56,
+   "raw_beta_clock": -0.08555936353927354,
+   "raw_beta_open": 0.3660598073982587,
+   "raw_ER": 4.278430697187568,
+   "post_beta_clock": -0.06595384643844948,
+   "post_beta_open": 0.3991678955633829,
+   "ER": 6.052230720704073,
+   "ER_ci": [
+    3.313962619780412,
+    21.696313130414747
+   ],
+   "clock_sign_flip_share": 0.0045,
+   "unresolved": false
+  },
+  {
+   "pid": 203086,
+   "name": "Meyers Leonard",
+   "n": 644,
+   "shots": 144,
+   "raw_beta_clock": -0.07308777919683473,
+   "raw_beta_open": 0.4666866014049499,
+   "raw_ER": 6.385289121292128,
+   "post_beta_clock": -0.066925253014844,
+   "post_beta_open": 0.46470937132162365,
+   "ER": 6.943707350924041,
+   "ER_ci": [
+    4.2451972922074726,
+    18.700035705091263
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 203087,
+   "name": "Jeremy Lamb",
+   "n": 485,
+   "shots": 95,
+   "raw_beta_clock": -0.029288824026569137,
+   "raw_beta_open": 0.30445719608141925,
+   "raw_ER": 10.394995572551263,
+   "post_beta_clock": -0.03373962412587076,
+   "post_beta_open": 0.33941292338282947,
+   "ER": 10.05977192029758,
+   "ER_ci": [
+    -58.50899517045353,
+    69.60340168449115
+   ],
+   "clock_sign_flip_share": 0.0615,
+   "unresolved": true
+  },
+  {
+   "pid": 203090,
+   "name": "Maurice Harkless",
+   "n": 354,
+   "shots": 57,
+   "raw_beta_clock": -0.14321361055127235,
+   "raw_beta_open": 0.4248832274044362,
+   "raw_ER": 2.966779664090114,
+   "post_beta_clock": -0.09421737804327228,
+   "post_beta_open": 0.4491233497113247,
+   "ER": 4.766884401145729,
+   "ER_ci": [
+    3.05477510475712,
+    10.660494722891949
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203095,
+   "name": "Evan Fournier",
+   "n": 999,
+   "shots": 137,
+   "raw_beta_clock": -0.06566298499658928,
+   "raw_beta_open": 0.5438564140014267,
+   "raw_ER": 8.2825417399114,
+   "post_beta_clock": -0.06602181828874842,
+   "post_beta_open": 0.5227787798396671,
+   "ER": 7.918272979900043,
+   "ER_ci": [
+    4.851828895569661,
+    18.522388049450363
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203096,
+   "name": "Jared Sullinger",
+   "n": 622,
+   "shots": 104,
+   "raw_beta_clock": -0.09748557045526718,
+   "raw_beta_open": 0.7171291368408803,
+   "raw_ER": 7.356259326296362,
+   "post_beta_clock": -0.0852442352004848,
+   "post_beta_open": 0.6064573484389052,
+   "ER": 7.11435027849785,
+   "ER_ci": [
+    4.470833593793528,
+    16.3477831172354
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 203109,
+   "name": "Jae Crowder",
+   "n": 738,
+   "shots": 155,
+   "raw_beta_clock": -0.1071592109010586,
+   "raw_beta_open": 0.39330006518861826,
+   "raw_ER": 3.6702404010025513,
+   "post_beta_clock": -0.0871909947618294,
+   "post_beta_open": 0.4061428562662079,
+   "ER": 4.65808260790723,
+   "ER_ci": [
+    3.1280647156369286,
+    8.64492904243677
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203110,
+   "name": "Draymond Green",
+   "n": 727,
+   "shots": 106,
+   "raw_beta_clock": -0.12381232956900383,
+   "raw_beta_open": 0.3010058872403403,
+   "raw_ER": 2.4311463025383255,
+   "post_beta_clock": -0.0899347975732977,
+   "post_beta_open": 0.3347770352289734,
+   "ER": 3.7224416384117283,
+   "ER_ci": [
+    2.415714336798348,
+    7.240032592291767
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203114,
+   "name": "Khris Middleton",
+   "n": 990,
+   "shots": 163,
+   "raw_beta_clock": -0.017305719787094637,
+   "raw_beta_open": 0.3573366127651617,
+   "raw_ER": 20.64846866592846,
+   "post_beta_clock": -0.025423075368639397,
+   "post_beta_open": 0.36811395698064303,
+   "ER": 14.479521129639947,
+   "ER_ci": [
+    -112.02632723119963,
+    118.51316364458444
+   ],
+   "clock_sign_flip_share": 0.094,
+   "unresolved": true
+  },
+  {
+   "pid": 203115,
+   "name": "Will Barton",
+   "n": 698,
+   "shots": 115,
+   "raw_beta_clock": -0.005756757427895254,
+   "raw_beta_open": 0.4582214131043189,
+   "raw_ER": 79.59713759762336,
+   "post_beta_clock": -0.02482209747580434,
+   "post_beta_open": 0.4481472655929657,
+   "ER": 18.054367324510064,
+   "ER_ci": [
+    -171.44769638097088,
+    222.8003083294451
+   ],
+   "clock_sign_flip_share": 0.1145,
+   "unresolved": true
+  },
+  {
+   "pid": 203138,
+   "name": "Hollis Thompson",
+   "n": 517,
+   "shots": 129,
+   "raw_beta_clock": -0.044707487635919786,
+   "raw_beta_open": 0.566156594264396,
+   "raw_ER": 12.663574363089978,
+   "post_beta_clock": -0.05299771945741737,
+   "post_beta_open": 0.5290938381299329,
+   "ER": 9.983332180077097,
+   "ER_ci": [
+    5.2575055365285674,
+    33.996260574556196
+   ],
+   "clock_sign_flip_share": 0.0095,
+   "unresolved": false
+  },
+  {
+   "pid": 203141,
+   "name": "Mirza Teletovic",
+   "n": 531,
+   "shots": 172,
+   "raw_beta_clock": -0.03880063995154699,
+   "raw_beta_open": 0.42549555593786087,
+   "raw_ER": 10.966199435607408,
+   "post_beta_clock": -0.044097544006406496,
+   "post_beta_open": 0.430868526876025,
+   "ER": 9.770805530880097,
+   "ER_ci": [
+    4.82050720538944,
+    46.505061913503695
+   ],
+   "clock_sign_flip_share": 0.0135,
+   "unresolved": false
+  },
+  {
+   "pid": 203145,
+   "name": "Kent Bazemore",
+   "n": 471,
+   "shots": 91,
+   "raw_beta_clock": -0.07764167843698194,
+   "raw_beta_open": 0.5446193336826414,
+   "raw_ER": 7.014522929520167,
+   "post_beta_clock": -0.07097307560022055,
+   "post_beta_open": 0.511795644438071,
+   "ER": 7.2111239383358585,
+   "ER_ci": [
+    4.331461166560048,
+    17.70097829997004
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 203457,
+   "name": "Nerlens Noel",
+   "n": 348,
+   "shots": 26,
+   "raw_beta_clock": -0.13502030575931595,
+   "raw_beta_open": 0.7582185843559542,
+   "raw_ER": 5.615589300379285,
+   "post_beta_clock": -0.08067690399404036,
+   "post_beta_open": 0.5303882308260718,
+   "ER": 6.574226384111763,
+   "ER_ci": [
+    3.737731162020068,
+    23.61078275715681
+   ],
+   "clock_sign_flip_share": 0.006,
+   "unresolved": false
+  },
+  {
+   "pid": 203459,
+   "name": "Allen Crabbe",
+   "n": 797,
+   "shots": 175,
+   "raw_beta_clock": 0.004214649049892315,
+   "raw_beta_open": 0.34795312423520586,
+   "raw_ER": -82.55803036414055,
+   "post_beta_clock": -0.008150791828522713,
+   "post_beta_open": 0.3593685261997708,
+   "ER": 44.090014045286246,
+   "ER_ci": [
+    -278.541556614128,
+    253.65084918345866
+   ],
+   "clock_sign_flip_share": 0.301,
+   "unresolved": true
+  },
+  {
+   "pid": 203460,
+   "name": "Andre Roberson",
+   "n": 340,
+   "shots": 51,
+   "raw_beta_clock": -0.06216584345429238,
+   "raw_beta_open": 0.48122971767085426,
+   "raw_ER": 7.741063113294358,
+   "post_beta_clock": -0.05972808342305733,
+   "post_beta_open": 0.46542745773412714,
+   "ER": 7.792439185390876,
+   "ER_ci": [
+    3.698007198335396,
+    33.562623826359086
+   ],
+   "clock_sign_flip_share": 0.01,
+   "unresolved": false
+  },
+  {
+   "pid": 203463,
+   "name": "Ben McLemore",
+   "n": 314,
+   "shots": 81,
+   "raw_beta_clock": 0.012503492206715216,
+   "raw_beta_open": 0.408183957142739,
+   "raw_ER": -32.64559615780916,
+   "post_beta_clock": -0.018231674804190464,
+   "post_beta_open": 0.4135823282797999,
+   "ER": 22.68482367756691,
+   "ER_ci": [
+    -220.68639297414882,
+    193.290054997601
+   ],
+   "clock_sign_flip_share": 0.228,
+   "unresolved": true
+  },
+  {
+   "pid": 203468,
+   "name": "CJ McCollum",
+   "n": 878,
+   "shots": 168,
+   "raw_beta_clock": -0.07246012977167846,
+   "raw_beta_open": 0.39543007535718694,
+   "raw_ER": 5.457209041761108,
+   "post_beta_clock": -0.06599431406496674,
+   "post_beta_open": 0.4039202769798497,
+   "ER": 6.120531483700532,
+   "ER_ci": [
+    3.9448352190120892,
+    14.066878298112705
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203469,
+   "name": "Cody Zeller",
+   "n": 304,
+   "shots": 32,
+   "raw_beta_clock": -0.025139899475642536,
+   "raw_beta_open": 0.5034352694031777,
+   "raw_ER": 20.025349341231234,
+   "post_beta_clock": -0.04871801554324826,
+   "post_beta_open": 0.46785649787409833,
+   "ER": 9.60335704681505,
+   "ER_ci": [
+    -38.33482775174645,
+    65.46215967629418
+   ],
+   "clock_sign_flip_share": 0.0435,
+   "unresolved": false
+  },
+  {
+   "pid": 203471,
+   "name": "Dennis Schroder",
+   "n": 535,
+   "shots": 63,
+   "raw_beta_clock": -0.1293607255558522,
+   "raw_beta_open": 0.5720019029935212,
+   "raw_ER": 4.421758617506796,
+   "post_beta_clock": -0.09569000226651633,
+   "post_beta_open": 0.5274004872450928,
+   "ER": 5.5115526674999336,
+   "ER_ci": [
+    3.5421524968082685,
+    11.293896777702209
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203476,
+   "name": "Gorgui Dieng",
+   "n": 376,
+   "shots": 44,
+   "raw_beta_clock": -0.05030687934861282,
+   "raw_beta_open": 0.4519399616914855,
+   "raw_ER": 8.983661231690919,
+   "post_beta_clock": -0.0537052307932013,
+   "post_beta_open": 0.4519885451227864,
+   "ER": 8.416099110777957,
+   "ER_ci": [
+    -17.320148744489103,
+    45.54767882698891
+   ],
+   "clock_sign_flip_share": 0.0275,
+   "unresolved": false
+  },
+  {
+   "pid": 203477,
+   "name": "Isaiah Canaan",
+   "n": 537,
+   "shots": 108,
+   "raw_beta_clock": -0.07725486075737471,
+   "raw_beta_open": 0.41773974274564235,
+   "raw_ER": 5.407293970247239,
+   "post_beta_clock": -0.0693042662107137,
+   "post_beta_open": 0.4281666258829608,
+   "ER": 6.178070258779694,
+   "ER_ci": [
+    3.8092650267471955,
+    14.363266914055355
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 203482,
+   "name": "Kelly Olynyk",
+   "n": 515,
+   "shots": 92,
+   "raw_beta_clock": 0.016418442427506695,
+   "raw_beta_open": 0.3847602681620443,
+   "raw_ER": -23.434638813084657,
+   "post_beta_clock": -0.016098668244243584,
+   "post_beta_open": 0.39539635472265877,
+   "ER": 24.560811411468215,
+   "ER_ci": [
+    -196.59824188179923,
+    182.77077962184282
+   ],
+   "clock_sign_flip_share": 0.251,
+   "unresolved": true
+  },
+  {
+   "pid": 203484,
+   "name": "Kentavious Caldwell-Pope",
+   "n": 834,
+   "shots": 157,
+   "raw_beta_clock": -0.016404929764700097,
+   "raw_beta_open": 0.36796079624156547,
+   "raw_ER": 22.42989159474114,
+   "post_beta_clock": -0.026247930236107195,
+   "post_beta_open": 0.3799502726950679,
+   "ER": 14.475437464109094,
+   "ER_ci": [
+    -84.6473341095385,
+    159.4837529227835
+   ],
+   "clock_sign_flip_share": 0.0825,
+   "unresolved": true
+  },
+  {
+   "pid": 203486,
+   "name": "Mason Plumlee",
+   "n": 559,
+   "shots": 18,
+   "raw_beta_clock": 0.06839107099859591,
+   "raw_beta_open": 0.3138702790004713,
+   "raw_ER": -4.589345866610499,
+   "post_beta_clock": -0.016805121738395472,
+   "post_beta_open": 0.3750493153667303,
+   "ER": 22.317560158450803,
+   "ER_ci": [
+    -154.13771784232543,
+    157.65923751527242
+   ],
+   "clock_sign_flip_share": 0.2875,
+   "unresolved": true
+  },
+  {
+   "pid": 203487,
+   "name": "Michael Carter-Williams",
+   "n": 475,
+   "shots": 37,
+   "raw_beta_clock": -0.007049683552666865,
+   "raw_beta_open": 0.42280513213114446,
+   "raw_ER": 59.97505121647611,
+   "post_beta_clock": -0.03472665301505812,
+   "post_beta_open": 0.4300936723671734,
+   "ER": 12.38511733856634,
+   "ER_ci": [
+    -123.70622969306396,
+    111.73855937125796
+   ],
+   "clock_sign_flip_share": 0.1055,
+   "unresolved": true
+  },
+  {
+   "pid": 203490,
+   "name": "Otto Porter",
+   "n": 556,
+   "shots": 140,
+   "raw_beta_clock": -0.08331866936468989,
+   "raw_beta_open": 0.4957014404993424,
+   "raw_ER": 5.949464199069634,
+   "post_beta_clock": -0.0743066638023777,
+   "post_beta_open": 0.4863412849909204,
+   "ER": 6.545056124230922,
+   "ER_ci": [
+    4.142842951459946,
+    15.011648829997988
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203496,
+   "name": "Robert Covington",
+   "n": 494,
+   "shots": 104,
+   "raw_beta_clock": -0.017501225072179688,
+   "raw_beta_open": 0.3286857763786007,
+   "raw_ER": 18.780729635954824,
+   "post_beta_clock": -0.02827465648229845,
+   "post_beta_open": 0.3554226802158373,
+   "ER": 12.570362452974528,
+   "ER_ci": [
+    -119.81300891588262,
+    128.29609306856815
+   ],
+   "clock_sign_flip_share": 0.104,
+   "unresolved": true
+  },
+  {
+   "pid": 203497,
+   "name": "Rudy Gobert",
+   "n": 344,
+   "shots": 3,
+   "raw_beta_clock": -0.5095052053025428,
+   "raw_beta_open": 0.5384223101960546,
+   "raw_ER": 1.056755268822702,
+   "post_beta_clock": -0.06337403655040307,
+   "post_beta_open": 0.45221455634995333,
+   "ER": 7.135643884547184,
+   "ER_ci": [
+    -26.131954506754933,
+    40.374272595313016
+   ],
+   "clock_sign_flip_share": 0.0425,
+   "unresolved": false
+  },
+  {
+   "pid": 203498,
+   "name": "Shabazz Muhammad",
+   "n": 319,
+   "shots": 72,
+   "raw_beta_clock": -0.11370363175744438,
+   "raw_beta_open": 0.5018760427323276,
+   "raw_ER": 4.413896328333143,
+   "post_beta_clock": -0.08183706392840022,
+   "post_beta_open": 0.4823570423370078,
+   "ER": 5.894114710163907,
+   "ER_ci": [
+    3.5580028926144363,
+    14.459304007276728
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 203499,
+   "name": "Shane Larkin",
+   "n": 343,
+   "shots": 33,
+   "raw_beta_clock": -0.005346844714042793,
+   "raw_beta_open": 0.2636717516412474,
+   "raw_ER": 49.313523347470294,
+   "post_beta_clock": -0.023235038576525573,
+   "post_beta_open": 0.3295761799008251,
+   "ER": 14.18444728702955,
+   "ER_ci": [
+    -116.50749745420826,
+    111.15752410391114
+   ],
+   "clock_sign_flip_share": 0.1755,
+   "unresolved": true
+  },
+  {
+   "pid": 203503,
+   "name": "Tony Snell",
+   "n": 368,
+   "shots": 85,
+   "raw_beta_clock": 0.005735168537176874,
+   "raw_beta_open": 0.4031721918902657,
+   "raw_ER": -70.29822912383435,
+   "post_beta_clock": -0.0201254828663207,
+   "post_beta_open": 0.4058077240078972,
+   "ER": 20.163875157847887,
+   "ER_ci": [
+    -162.53357370471363,
+    178.30613278380972
+   ],
+   "clock_sign_flip_share": 0.1855,
+   "unresolved": true
+  },
+  {
+   "pid": 203504,
+   "name": "Trey Burke",
+   "n": 662,
+   "shots": 118,
+   "raw_beta_clock": -0.1331786355775403,
+   "raw_beta_open": 0.5823483965606985,
+   "raw_ER": 4.372686309897198,
+   "post_beta_clock": -0.10350685140041528,
+   "post_beta_open": 0.5434653845256867,
+   "ER": 5.250525710837208,
+   "ER_ci": [
+    3.695476629397881,
+    8.951043191192536
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203506,
+   "name": "Victor Oladipo",
+   "n": 709,
+   "shots": 98,
+   "raw_beta_clock": -0.11200857706719626,
+   "raw_beta_open": 0.5182693441086691,
+   "raw_ER": 4.627050514156149,
+   "post_beta_clock": -0.09140254731854694,
+   "post_beta_open": 0.503696690508463,
+   "ER": 5.510751125491395,
+   "ER_ci": [
+    3.6915221909217113,
+    9.977587813409754
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203507,
+   "name": "Giannis Antetokounmpo",
+   "n": 732,
+   "shots": 64,
+   "raw_beta_clock": -0.11547144890635477,
+   "raw_beta_open": 0.45194804551294726,
+   "raw_ER": 3.9139375992369234,
+   "post_beta_clock": -0.08737140243000747,
+   "post_beta_open": 0.4598185016725201,
+   "ER": 5.262803261523437,
+   "ER_ci": [
+    3.2668431962436255,
+    11.695224537278083
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203521,
+   "name": "Matthew Dellavedova",
+   "n": 359,
+   "shots": 61,
+   "raw_beta_clock": -0.04239484984669708,
+   "raw_beta_open": 0.5518355147958909,
+   "raw_ER": 13.016569625588227,
+   "post_beta_clock": -0.05137902484890246,
+   "post_beta_open": 0.5035027558080722,
+   "ER": 9.799772519793706,
+   "ER_ci": [
+    4.6509346741384565,
+    52.84468603657985
+   ],
+   "clock_sign_flip_share": 0.0165,
+   "unresolved": false
+  },
+  {
+   "pid": 203526,
+   "name": "Raul Neto",
+   "n": 517,
+   "shots": 69,
+   "raw_beta_clock": -0.104512331103696,
+   "raw_beta_open": 0.5431610718122722,
+   "raw_ER": 5.197100342861492,
+   "post_beta_clock": -0.08455429165522907,
+   "post_beta_open": 0.5113737878196649,
+   "ER": 6.047875013899903,
+   "ER_ci": [
+    3.858881104104435,
+    12.734200220429354
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203798,
+   "name": "PJ Hairston",
+   "n": 412,
+   "shots": 113,
+   "raw_beta_clock": -0.03284313795916874,
+   "raw_beta_open": 0.606037964419845,
+   "raw_ER": 18.45249881948807,
+   "post_beta_clock": -0.049040832291262604,
+   "post_beta_open": 0.5429482167275773,
+   "ER": 11.07134996206645,
+   "ER_ci": [
+    5.319894377165852,
+    57.40128945922562
+   ],
+   "clock_sign_flip_share": 0.013,
+   "unresolved": false
+  },
+  {
+   "pid": 203897,
+   "name": "Zach LaVine",
+   "n": 374,
+   "shots": 52,
+   "raw_beta_clock": 0.0008486819277721782,
+   "raw_beta_open": 0.23171968550236233,
+   "raw_ER": -273.0347824309576,
+   "post_beta_clock": -0.014377554570218392,
+   "post_beta_open": 0.287410404269438,
+   "ER": 19.990214807793443,
+   "ER_ci": [
+    -116.73829486491002,
+    148.25284581638232
+   ],
+   "clock_sign_flip_share": 0.275,
+   "unresolved": true
+  },
+  {
+   "pid": 203901,
+   "name": "Elfrid Payton",
+   "n": 570,
+   "shots": 49,
+   "raw_beta_clock": -0.15568282295555022,
+   "raw_beta_open": 0.6549788331561073,
+   "raw_ER": 4.207136154918732,
+   "post_beta_clock": -0.10509668404881053,
+   "post_beta_open": 0.5620997974276002,
+   "ER": 5.348406588799144,
+   "ER_ci": [
+    3.482657028655431,
+    10.637864249606299
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203903,
+   "name": "Jordan Clarkson",
+   "n": 527,
+   "shots": 84,
+   "raw_beta_clock": -0.020426718304495113,
+   "raw_beta_open": 0.4944660941521294,
+   "raw_ER": 24.20682983831607,
+   "post_beta_clock": -0.035427622453315384,
+   "post_beta_open": 0.47586059765702265,
+   "ER": 13.431908909046498,
+   "ER_ci": [
+    -63.663845823002305,
+    93.72068534834021
+   ],
+   "clock_sign_flip_share": 0.0545,
+   "unresolved": true
+  },
+  {
+   "pid": 203914,
+   "name": "Gary Harris",
+   "n": 584,
+   "shots": 101,
+   "raw_beta_clock": -0.031017577572875762,
+   "raw_beta_open": 0.461093652230406,
+   "raw_ER": 14.865559734543002,
+   "post_beta_clock": -0.042236150716339044,
+   "post_beta_open": 0.45532032832832187,
+   "ER": 10.780346234349933,
+   "ER_ci": [
+    -41.17929071908493,
+    67.93795083718929
+   ],
+   "clock_sign_flip_share": 0.0335,
+   "unresolved": false
+  },
+  {
+   "pid": 203917,
+   "name": "Nik Stauskas",
+   "n": 468,
+   "shots": 91,
+   "raw_beta_clock": -0.020242246074797073,
+   "raw_beta_open": 0.46932037076586863,
+   "raw_ER": 23.185192445131044,
+   "post_beta_clock": -0.03707175499546642,
+   "post_beta_open": 0.45853154475586644,
+   "ER": 12.368757422246158,
+   "ER_ci": [
+    -65.22395729257555,
+    111.33444103383277
+   ],
+   "clock_sign_flip_share": 0.061,
+   "unresolved": true
+  },
+  {
+   "pid": 203918,
+   "name": "Rodney Hood",
+   "n": 1003,
+   "shots": 116,
+   "raw_beta_clock": -0.153442362667789,
+   "raw_beta_open": 0.5416615223437874,
+   "raw_ER": 3.530065054567192,
+   "post_beta_clock": -0.12010250006413528,
+   "post_beta_open": 0.521547935237904,
+   "ER": 4.342523552460565,
+   "ER_ci": [
+    3.2191249741603434,
+    6.500140923329106
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 203924,
+   "name": "Jerami Grant",
+   "n": 486,
+   "shots": 52,
+   "raw_beta_clock": -0.09404769536086054,
+   "raw_beta_open": 0.48701980901902014,
+   "raw_ER": 5.178434273698335,
+   "post_beta_clock": -0.07461673167478608,
+   "post_beta_open": 0.47624257249448493,
+   "ER": 6.382517188908358,
+   "ER_ci": [
+    3.7754484444973686,
+    18.787207783082785
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 203926,
+   "name": "Doug McDermott",
+   "n": 369,
+   "shots": 101,
+   "raw_beta_clock": -0.012560481333044512,
+   "raw_beta_open": 0.39446016853911536,
+   "raw_ER": 31.404860855241036,
+   "post_beta_clock": -0.027410250774133574,
+   "post_beta_open": 0.4024505292012888,
+   "ER": 14.682482568932649,
+   "ER_ci": [
+    -108.0124375955675,
+    142.99736088221485
+   ],
+   "clock_sign_flip_share": 0.1065,
+   "unresolved": true
+  },
+  {
+   "pid": 203933,
+   "name": "TJ Warren",
+   "n": 520,
+   "shots": 75,
+   "raw_beta_clock": -0.03736357710429206,
+   "raw_beta_open": 0.39677211786532796,
+   "raw_ER": 10.619221943279879,
+   "post_beta_clock": -0.042526225392316874,
+   "post_beta_open": 0.41071422615247716,
+   "ER": 9.657904560386402,
+   "ER_ci": [
+    -22.260064021633983,
+    66.35091494758426
+   ],
+   "clock_sign_flip_share": 0.03,
+   "unresolved": false
+  },
+  {
+   "pid": 203939,
+   "name": "Dwight Powell",
+   "n": 309,
+   "shots": 65,
+   "raw_beta_clock": -0.019510788789703706,
+   "raw_beta_open": 0.4446929382012427,
+   "raw_ER": 22.792155816679102,
+   "post_beta_clock": -0.03941189403256793,
+   "post_beta_open": 0.44171757562161357,
+   "ER": 11.2077226041611,
+   "ER_ci": [
+    -57.75239808065967,
+    83.20292433737188
+   ],
+   "clock_sign_flip_share": 0.059,
+   "unresolved": true
+  },
+  {
+   "pid": 203944,
+   "name": "Julius Randle",
+   "n": 539,
+   "shots": 41,
+   "raw_beta_clock": 0.0304959174557437,
+   "raw_beta_open": 0.5323640888684943,
+   "raw_ER": -17.456896964686237,
+   "post_beta_clock": -0.02450947534364864,
+   "post_beta_open": 0.48477791212328625,
+   "ER": 19.779203974225872,
+   "ER_ci": [
+    -149.39178098829038,
+    201.41276843352986
+   ],
+   "clock_sign_flip_share": 0.198,
+   "unresolved": true
+  },
+  {
+   "pid": 203952,
+   "name": "Andrew Wiggins",
+   "n": 775,
+   "shots": 98,
+   "raw_beta_clock": -0.024895170980665387,
+   "raw_beta_open": 0.4104333553733339,
+   "raw_ER": 16.486464611634656,
+   "post_beta_clock": -0.03523645942607238,
+   "post_beta_open": 0.41673088672719516,
+   "ER": 11.826695800737715,
+   "ER_ci": [
+    -58.58340143256588,
+    98.33284236857259
+   ],
+   "clock_sign_flip_share": 0.0515,
+   "unresolved": true
+  },
+  {
+   "pid": 203953,
+   "name": "Jabari Parker",
+   "n": 383,
+   "shots": 46,
+   "raw_beta_clock": -0.06484647520893033,
+   "raw_beta_open": 0.5174943399810388,
+   "raw_ER": 7.980300213908497,
+   "post_beta_clock": -0.06193833222074671,
+   "post_beta_open": 0.4862760015977214,
+   "ER": 7.850970217677892,
+   "ER_ci": [
+    4.020964602936092,
+    35.25851067913308
+   ],
+   "clock_sign_flip_share": 0.0085,
+   "unresolved": false
+  },
+  {
+   "pid": 203999,
+   "name": "Nikola Jokic",
+   "n": 374,
+   "shots": 31,
+   "raw_beta_clock": -0.1336297897252941,
+   "raw_beta_open": 0.4441985884309254,
+   "raw_ER": 3.3240985362925053,
+   "post_beta_clock": -0.07682214125238786,
+   "post_beta_open": 0.456206073414071,
+   "ER": 5.938471200838739,
+   "ER_ci": [
+    3.204804182411267,
+    24.252037110675982
+   ],
+   "clock_sign_flip_share": 0.0055,
+   "unresolved": false
+  },
+  {
+   "pid": 204001,
+   "name": "Kristaps Porzingis",
+   "n": 789,
+   "shots": 150,
+   "raw_beta_clock": -0.050515236534529155,
+   "raw_beta_open": 0.5065440216922426,
+   "raw_ER": 10.0275492394458,
+   "post_beta_clock": -0.05455658738328056,
+   "post_beta_open": 0.49346043096533776,
+   "ER": 9.044928479462847,
+   "ER_ci": [
+    4.895340182963,
+    36.79578969133042
+   ],
+   "clock_sign_flip_share": 0.0025,
+   "unresolved": false
+  },
+  {
+   "pid": 204020,
+   "name": "Tyler Johnson",
+   "n": 435,
+   "shots": 72,
+   "raw_beta_clock": -0.04130532779287663,
+   "raw_beta_open": 0.4475697813433791,
+   "raw_ER": 10.835642888193359,
+   "post_beta_clock": -0.047977015428743795,
+   "post_beta_open": 0.4465590456657511,
+   "ER": 9.307770432885462,
+   "ER_ci": [
+    4.0528162990399474,
+    47.95749509853381
+   ],
+   "clock_sign_flip_share": 0.0215,
+   "unresolved": false
+  },
+  {
+   "pid": 204038,
+   "name": "Langston Galloway",
+   "n": 601,
+   "shots": 103,
+   "raw_beta_clock": -0.0900712205020023,
+   "raw_beta_open": 0.5442554098897979,
+   "raw_ER": 6.042500666211124,
+   "post_beta_clock": -0.07856389303475594,
+   "post_beta_open": 0.5176575032291918,
+   "ER": 6.589000153037031,
+   "ER_ci": [
+    4.180224462614977,
+    15.027858586657059
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 204060,
+   "name": "Joe Ingles",
+   "n": 486,
+   "shots": 71,
+   "raw_beta_clock": -0.05720613793565243,
+   "raw_beta_open": 0.44229792112247274,
+   "raw_ER": 7.731651481524338,
+   "post_beta_clock": -0.05587373129858951,
+   "post_beta_open": 0.4464634443703359,
+   "ER": 7.9905786492839175,
+   "ER_ci": [
+    4.044301017480719,
+    38.35669049433665
+   ],
+   "clock_sign_flip_share": 0.0125,
+   "unresolved": false
+  },
+  {
+   "pid": 204456,
+   "name": "TJ McConnell",
+   "n": 384,
+   "shots": 40,
+   "raw_beta_clock": -0.10124104483198569,
+   "raw_beta_open": 0.5804923355967284,
+   "raw_ER": 5.733764764677043,
+   "post_beta_clock": -0.07838275738732015,
+   "post_beta_open": 0.5133549122037945,
+   "ER": 6.549334691903032,
+   "ER_ci": [
+    3.855350472280868,
+    19.17522703488458
+   ],
+   "clock_sign_flip_share": 0.001,
+   "unresolved": false
+  },
+  {
+   "pid": 1626143,
+   "name": "Jahlil Okafor",
+   "n": 524,
+   "shots": 25,
+   "raw_beta_clock": -0.10981921961089387,
+   "raw_beta_open": 0.3941298115263968,
+   "raw_ER": 3.5888964875443334,
+   "post_beta_clock": -0.07074604639161945,
+   "post_beta_open": 0.4311699115191057,
+   "ER": 6.094614943319036,
+   "ER_ci": [
+    3.2080408184157716,
+    22.095096165425517
+   ],
+   "clock_sign_flip_share": 0.005,
+   "unresolved": false
+  },
+  {
+   "pid": 1626144,
+   "name": "Emmanuel Mudiay",
+   "n": 422,
+   "shots": 41,
+   "raw_beta_clock": -0.02763271295525995,
+   "raw_beta_open": 0.3651841441305762,
+   "raw_ER": 13.215645699423174,
+   "post_beta_clock": -0.038681911397228444,
+   "post_beta_open": 0.39350812198259233,
+   "ER": 10.17292340964276,
+   "ER_ci": [
+    -81.61832410705486,
+    93.61954507814296
+   ],
+   "clock_sign_flip_share": 0.0795,
+   "unresolved": true
+  },
+  {
+   "pid": 1626156,
+   "name": "D'Angelo Russell",
+   "n": 479,
+   "shots": 125,
+   "raw_beta_clock": -0.09413460003642721,
+   "raw_beta_open": 0.4874404023862494,
+   "raw_ER": 5.178121564203012,
+   "post_beta_clock": -0.0801670211224428,
+   "post_beta_open": 0.47981907097119386,
+   "ER": 5.985242612898689,
+   "ER_ci": [
+    3.928768202265969,
+    12.333133476504166
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 1626157,
+   "name": "Karl-Anthony Towns",
+   "n": 572,
+   "shots": 114,
+   "raw_beta_clock": -0.06465222018009024,
+   "raw_beta_open": 0.40857339923812597,
+   "raw_ER": 6.319557133537493,
+   "post_beta_clock": -0.05858887765266438,
+   "post_beta_open": 0.41990223441180813,
+   "ER": 7.166927431195001,
+   "ER_ci": [
+    3.8680637676136955,
+    26.162520625076077
+   ],
+   "clock_sign_flip_share": 0.0055,
+   "unresolved": false
+  },
+  {
+   "pid": 1626159,
+   "name": "Justise Winslow",
+   "n": 464,
+   "shots": 73,
+   "raw_beta_clock": -0.12451375911465624,
+   "raw_beta_open": 0.6238296216824263,
+   "raw_ER": 5.010125998268063,
+   "post_beta_clock": -0.09175265971810691,
+   "post_beta_open": 0.5501708328620677,
+   "ER": 5.996238523791745,
+   "ER_ci": [
+    3.8588916762468415,
+    13.442502371150997
+   ],
+   "clock_sign_flip_share": 0.0,
+   "unresolved": false
+  },
+  {
+   "pid": 1626163,
+   "name": "Frank Kaminsky",
+   "n": 526,
+   "shots": 79,
+   "raw_beta_clock": -0.10071664451510058,
+   "raw_beta_open": 0.5655626961876518,
+   "raw_ER": 5.61538461602398,
+   "post_beta_clock": -0.0823724189231553,
+   "post_beta_open": 0.5223045905039891,
+   "ER": 6.340770337110577,
+   "ER_ci": [
+    3.9681089967638976,
+    14.769275587099656
+   ],
+   "clock_sign_flip_share": 0.0005,
+   "unresolved": false
+  },
+  {
+   "pid": 1626164,
+   "name": "Devin Booker",
+   "n": 420,
+   "shots": 79,
+   "raw_beta_clock": -0.0023343895895040186,
+   "raw_beta_open": 0.4774225625546283,
+   "raw_ER": 204.5170886218975,
+   "post_beta_clock": -0.028826964355019857,
+   "post_beta_open": 0.46225108927712383,
+   "ER": 16.035371729893182,
+   "ER_ci": [
+    -145.0137093011706,
+    145.33653749427998
+   ],
+   "clock_sign_flip_share": 0.12,
+   "unresolved": true
+  },
+  {
+   "pid": 1626168,
+   "name": "Trey Lyles",
+   "n": 404,
+   "shots": 56,
+   "raw_beta_clock": 0.002321892890026054,
+   "raw_beta_open": 0.4696816608934333,
+   "raw_ER": -202.28394811448987,
+   "post_beta_clock": -0.0324180720568436,
+   "post_beta_open": 0.4513845202590738,
+   "ER": 13.923854554570418,
+   "ER_ci": [
+    -136.74524347645607,
+    134.93191640291684
+   ],
+   "clock_sign_flip_share": 0.1125,
+   "unresolved": true
+  },
+  {
+   "pid": 1626169,
+   "name": "Stanley Johnson",
+   "n": 467,
+   "shots": 87,
+   "raw_beta_clock": -0.025577885934792117,
+   "raw_beta_open": 0.35976057386232013,
+   "raw_ER": 14.065297451849164,
+   "post_beta_clock": -0.03446838676691176,
+   "post_beta_open": 0.38166396814538167,
+   "ER": 11.072870068632382,
+   "ER_ci": [
+    -66.74706122936014,
+    85.09671365519633
+   ],
+   "clock_sign_flip_share": 0.0715,
+   "unresolved": true
+  },
+  {
+   "pid": 1626170,
+   "name": "Jerian Grant",
+   "n": 401,
+   "shots": 20,
+   "raw_beta_clock": 0.018165955058457275,
+   "raw_beta_open": 0.5404407782954272,
+   "raw_ER": -29.750199015483176,
+   "post_beta_clock": -0.04157838053798621,
+   "post_beta_open": 0.47133800337191845,
+   "ER": 11.336131837585684,
+   "ER_ci": [
+    -72.62550923371734,
+    112.96508955180258
+   ],
+   "clock_sign_flip_share": 0.0825,
+   "unresolved": true
+  }
+ ]
+}
