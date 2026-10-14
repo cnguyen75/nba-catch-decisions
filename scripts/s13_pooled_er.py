@@ -26,14 +26,17 @@ def main():
     assert not d.game.map(split).eq("test").any(), "test games present"
     counts = d.groupby("pid").size()
     elig = sorted(counts[counts >= 300].index)
-    est, S, ids = [], [], []
+    est, S, ids, dropped_cols = [], [], [], []
     for pid in elig:
         x = d[d.pid == pid]
         X, y = cov(x), (x.action == "shoot").to_numpy(float)
+        keep = [0] + [j for j in range(1, X.shape[1]) if X[:, j].std() > 0]  # drop all-constant columns (e.g. no corner catches)
+        assert 1 in keep and 2 in keep
+        X = X[:, keep]
         b = logit_fit(X, y)
         p = expit(X @ b)
         C = np.linalg.inv((X * (p * (1 - p))[:, None]).T @ X)
-        est.append(b[[1, 2]]); S.append(C[np.ix_([1, 2], [1, 2])]); ids.append(pid)
+        est.append(b[[1, 2]]); S.append(C[np.ix_([1, 2], [1, 2])]); ids.append(pid); dropped_cols.append(X.shape[1] < 8)
     B, S = np.array(est), np.array(S)
     n = len(B)
 
@@ -78,6 +81,7 @@ def main():
     res = {"n_eligible": n, "mu_beta_clock_open": mu.round(5).tolist(), "Tau": T.round(6).tolist(),
            "Tau_sd": np.sqrt(np.diag(T)).round(5).tolist(), "Tau_corr": round(float(T[0, 1] / np.sqrt(T[0, 0] * T[1, 1])), 3),
            "mu_ER": round(float(-mu[1] / mu[0]), 3), "optimizer_converged": bool(r.success),
+           "n_players_with_constant_columns_dropped": int(sum(dropped_cols)),
            "n_unresolved": int(t.unresolved.sum()), "share_unresolved": round(float(unres), 4)}
     res["median_ER_all"] = round(float(t.ER.median()), 3)
     res["median_ER_resolved_only"] = round(float(t[~t.unresolved].ER.median()), 3)
