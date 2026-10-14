@@ -2724,3 +2724,82 @@ league, so the median is over all of them.
 - **The three:** Curry 5.12 [3.20, 13.25], 11th percentile; LeBron 6.11
   [3.54, 16.98], 26th; Harden indeterminate (flip share 0.122).
 - **Site sentence unchanged** (within 1 s/ft of 7).
+
+---
+
+# Stage 9: does the pass find the most open teammate? (registered 2026-10-14, before running; descriptive, no gates)
+
+## Unit
+
+**Passes:** counted catches (any player; non-test games; frontcourt; shot
+clock running), from `out/s4/catches.csv`, that end in a teammate's catch
+within 1.5 s (`next_rel == "teammate"`, `next_gap <= 1.5`).
+
+- **Count:** 134,059, of which LeBron 639, Curry 420 and Harden 511 as
+  passer. Counted from the catch table before any frame extraction.
+- **Pass frame:** the passer's spell end frame (`end`).
+
+## Extraction
+
+One pass over the raw frames, in `scripts/s14_pass_frames.py`, committed
+before it runs. It writes `out/s9/passes.csv`.
+
+- It reuses `build.load_timeline()` and `nearest_opp()`.
+- The stem list is built from non-test games only, with an assert.
+
+**For each pass, at the pass frame, for each of the passer's four
+teammates:**
+
+- nearest-opponent distance ("openness");
+- distance to the attacking basket (the basket from `build_meta` attacking,
+  team × quarter);
+- distance from the passer;
+- position (x, y).
+
+**Receiver** = the owner of the next D3 possession spell after the passer's
+spell (the same rule that produced `next_rel`). It must be one of the four;
+otherwise the pass is dropped and counted.
+
+## Quantities
+
+For the **league** (non-gated passers) and for **each of the three as
+passer**:
+
+- **P(receiver is the most open teammate).** "Most open" is the teammate with
+  the largest openness at the pass frame.
+- **P(receiver is the most open, or within 1 ft of the most open's
+  openness).**
+- **The receiver's openness deficit** = the most open's openness − the
+  receiver's (ft), mean and median, over all passes.
+- **The receiver's basket-distance advantage** = the most open's distance
+  to the basket − the receiver's (ft; positive means the receiver is closer
+  to the basket), mean and median.
+- **The same, split by where the most open man stands:**
+  - rim (≤ 6 ft from the attacking basket);
+  - corner three (|y − 25| ≥ 22 and within 14 ft of the baseline, beyond
+    6 ft);
+  - 30+ ft;
+  - elsewhere.
+- **Intervals:** game bootstrap, 1,000 resamples, seed 0.
+
+## Registered comparison
+
+- **LeBron against the league** on P(most open): the difference, with its
+  bootstrap 95% interval.
+- **MDE, written down now from LeBron's pass count:** n = 639. Worst case,
+  p = 0.5, gives SE = 0.5/√639 = 0.0198 (the league's SE is negligible).
+  **MDE (80%) = 2.8 × SE = 0.055.**
+
+## Figure and caveats
+
+- **Figure** (`figures/stage9/`): receiver openness (y) against
+  most-open-teammate openness (x), one dot per pass (league subsampled for
+  legibility; the subsample is stated on the figure), with the 45° line and
+  LeBron's passes in colour.
+- **Caveats, stated:**
+  - "most open" is a snapshot at the pass frame, not at the ball's arrival;
+  - corner and rim catches are open for different reasons.
+
+## Record
+
+A table row, a full section, and results.json "stage9_pass_to_open_man".
