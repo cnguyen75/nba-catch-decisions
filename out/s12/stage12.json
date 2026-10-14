@@ -1,0 +1,457 @@
+{
+ "n_unit_catches": 150138,
+ "source_dropped": {
+  "oreb": 1276,
+  "inbound": 264
+ },
+ "cuts": {
+  "margin": {
+   "behind5+": {
+    "n_catches": 46985,
+    "n_eligible": 135,
+    "n_fit": 135,
+    "n_fit_failed": 0,
+    "optimizer_converged": true,
+    "mu_ER": 8.959,
+    "Tau_sd": [
+     0.02724,
+     0.09052
+    ],
+    "median_ER_all": 8.757,
+    "median_ER_determinate": 8.462,
+    "IQR_all": [
+     7.802,
+     10.49
+    ],
+    "share_indeterminate": 0.1926,
+    "gated": {
+     "Curry": {
+      "status": "too thin",
+      "n": 49
+     },
+     "LeBron": {
+      "status": "too thin",
+      "n": 131
+     },
+     "Harden": {
+      "ER": 8.11,
+      "ER_ci": [
+       4.033,
+       32.6
+      ],
+      "flip_share": 0.012,
+      "indeterminate": false,
+      "n": 184
+     }
+    },
+    "median_ER_all_ci": [
+     8.511,
+     9.19
+    ]
+   },
+   "within5": {
+    "n_catches": 61009,
+    "n_eligible": 179,
+    "n_fit": 179,
+    "n_fit_failed": 0,
+    "optimizer_converged": true,
+    "mu_ER": 7.606,
+    "Tau_sd": [
+     0.03352,
+     0.08344
+    ],
+    "median_ER_all": 7.845,
+    "median_ER_determinate": 7.162,
+    "IQR_all": [
+     6.378,
+     9.537
+    ],
+    "share_indeterminate": 0.1955,
+    "gated": {
+     "Curry": {
+      "ER": 6.38,
+      "ER_ci": [
+       3.038,
+       33.308
+      ],
+      "flip_share": 0.011,
+      "indeterminate": false,
+      "n": 230
+     },
+     "LeBron": {
+      "ER": 6.512,
+      "ER_ci": [
+       3.311,
+       23.034
+      ],
+      "flip_share": 0.003,
+      "indeterminate": false,
+      "n": 277
+     },
+     "Harden": {
+      "ER": 16.758,
+      "ER_ci": [
+       -127.361,
+       139.714
+      ],
+      "flip_share": 0.1455,
+      "indeterminate": true,
+      "n": 280
+     }
+    },
+    "median_ER_all_ci": [
+     7.409,
+     8.27
+    ]
+   },
+   "ahead5+": {
+    "n_catches": 42144,
+    "n_eligible": 101,
+    "n_fit": 100,
+    "n_fit_failed": 1,
+    "optimizer_converged": true,
+    "mu_ER": 7.067,
+    "Tau_sd": [
+     0.05608,
+     0.09771
+    ],
+    "median_ER_all": 6.64,
+    "median_ER_determinate": 5.06,
+    "IQR_all": [
+     4.516,
+     10.966
+    ],
+    "share_indeterminate": 0.47,
+    "gated": {
+     "Curry": {
+      "ER": 3.856,
+      "ER_ci": [
+       2.347,
+       9.948
+      ],
+      "flip_share": 0.0,
+      "indeterminate": false,
+      "n": 306
+     },
+     "LeBron": {
+      "ER": 5.97,
+      "ER_ci": [
+       -26.042,
+       49.011
+      ],
+      "flip_share": 0.049,
+      "indeterminate": false,
+      "n": 202
+     },
+     "Harden": {
+      "status": "too thin",
+      "n": 132
+     }
+    },
+    "median_ER_all_ci": [
+     5.744,
+     7.405
+    ]
+   }
+  },
+  "period": {
+   "Q1-3": {
+    "n_catches": 114622,
+    "n_eligible": 267,
+    "n_fit": 267,
+    "n_fit_failed": 0,
+    "optimizer_converged": true,
+    "mu_ER": 8.255,
+    "Tau_sd": [
+     0.03537,
+     0.08463
+    ],
+    "median_ER_all": 8.203,
+    "median_ER_determinate": 7.244,
+    "IQR_all": [
+     6.582,
+     10.591
+    ],
+    "share_indeterminate": 0.2921,
+    "gated": {
+     "Curry": {
+      "ER": 6.39,
+      "ER_ci": [
+       3.485,
+       22.178
+      ],
+      "flip_share": 0.005,
+      "indeterminate": false,
+      "n": 515
+     },
+     "LeBron": {
+      "ER": 6.125,
+      "ER_ci": [
+       3.468,
+       19.032
+      ],
+      "flip_share": 0.0025,
+      "indeterminate": false,
+      "n": 466
+     },
+     "Harden": {
+      "ER": 24.783,
+      "ER_ci": [
+       -183.77,
+       222.346
+      ],
+      "flip_share": 0.224,
+      "indeterminate": true,
+      "n": 475
+     }
+    },
+    "median_ER_all_ci": [
+     7.773,
+     8.719
+    ]
+   },
+   "Q4+OT": {
+    "n_catches": 35516,
+    "n_eligible": 54,
+    "n_fit": 54,
+    "n_fit_failed": 0,
+    "optimizer_converged": true,
+    "mu_ER": 8.064,
+    "Tau_sd": [
+     0.03599,
+     0.08978
+    ],
+    "median_ER_all": 8.254,
+    "median_ER_determinate": 6.809,
+    "IQR_all": [
+     6.541,
+     10.362
+    ],
+    "share_indeterminate": 0.3333,
+    "gated": {
+     "Curry": {
+      "status": "too thin",
+      "n": 70
+     },
+     "LeBron": {
+      "status": "too thin",
+      "n": 144
+     },
+     "Harden": {
+      "status": "too thin",
+      "n": 121
+     }
+    },
+    "median_ER_all_ci": [
+     7.057,
+     8.631
+    ]
+   }
+  },
+  "home": {
+   "home": {
+    "n_catches": 74963,
+    "n_eligible": 215,
+    "n_fit": 215,
+    "n_fit_failed": 0,
+    "optimizer_converged": true,
+    "mu_ER": 8.105,
+    "Tau_sd": [
+     0.03963,
+     0.0874
+    ],
+    "median_ER_all": 7.803,
+    "median_ER_determinate": 6.863,
+    "IQR_all": [
+     6.097,
+     11.101
+    ],
+    "share_indeterminate": 0.3488,
+    "gated": {
+     "Curry": {
+      "ER": 8.912,
+      "ER_ci": [
+       -37.068,
+       70.688
+      ],
+      "flip_share": 0.046,
+      "indeterminate": false,
+      "n": 285
+     },
+     "LeBron": {
+      "ER": 7.083,
+      "ER_ci": [
+       -21.593,
+       50.169
+      ],
+      "flip_share": 0.0355,
+      "indeterminate": false,
+      "n": 270
+     },
+     "Harden": {
+      "ER": 18.032,
+      "ER_ci": [
+       -141.976,
+       200.075
+      ],
+      "flip_share": 0.1775,
+      "indeterminate": true,
+      "n": 267
+     }
+    },
+    "median_ER_all_ci": [
+     7.316,
+     8.128
+    ]
+   },
+   "away": {
+    "n_catches": 75175,
+    "n_eligible": 213,
+    "n_fit": 213,
+    "n_fit_failed": 0,
+    "optimizer_converged": true,
+    "mu_ER": 7.65,
+    "Tau_sd": [
+     0.03618,
+     0.08249
+    ],
+    "median_ER_all": 7.641,
+    "median_ER_determinate": 6.906,
+    "IQR_all": [
+     6.213,
+     10.099
+    ],
+    "share_indeterminate": 0.3099,
+    "gated": {
+     "Curry": {
+      "ER": 3.849,
+      "ER_ci": [
+       2.361,
+       8.704
+      ],
+      "flip_share": 0.0005,
+      "indeterminate": false,
+      "n": 300
+     },
+     "LeBron": {
+      "ER": 6.219,
+      "ER_ci": [
+       3.471,
+       21.542
+      ],
+      "flip_share": 0.0045,
+      "indeterminate": false,
+      "n": 340
+     },
+     "Harden": {
+      "ER": 10.551,
+      "ER_ci": [
+       -46.044,
+       78.492
+      ],
+      "flip_share": 0.049,
+      "indeterminate": false,
+      "n": 329
+     }
+    },
+    "median_ER_all_ci": [
+     7.26,
+     7.947
+    ]
+   }
+  },
+  "source": {
+   "pass": {
+    "n_catches": 144279,
+    "n_eligible": 303,
+    "n_fit": 302,
+    "n_fit_failed": 1,
+    "optimizer_converged": true,
+    "mu_ER": 8.606,
+    "Tau_sd": [
+     0.03552,
+     0.08456
+    ],
+    "median_ER_all": 8.171,
+    "median_ER_determinate": 7.329,
+    "IQR_all": [
+     6.774,
+     11.735
+    ],
+    "share_indeterminate": 0.3046,
+    "gated": {
+     "Curry": {
+      "ER": 5.411,
+      "ER_ci": [
+       3.266,
+       14.164
+      ],
+      "flip_share": 0.0005,
+      "indeterminate": false,
+      "n": 546
+     },
+     "LeBron": {
+      "ER": 6.594,
+      "ER_ci": [
+       3.832,
+       21.813
+      ],
+      "flip_share": 0.0035,
+      "indeterminate": false,
+      "n": 578
+     },
+     "Harden": {
+      "ER": 17.647,
+      "ER_ci": [
+       -151.104,
+       168.14
+      ],
+      "flip_share": 0.125,
+      "indeterminate": true,
+      "n": 556
+     }
+    },
+    "median_ER_all_ci": [
+     7.836,
+     8.606
+    ]
+   },
+   "other": {
+    "n_catches": 4319,
+    "n_eligible": 0,
+    "status": "too thin to pool"
+   }
+  }
+ },
+ "differences": {
+  "margin: behind5+ - ahead5+": {
+   "diff": 2.117,
+   "ci95": [
+    1.244,
+    3.061
+   ]
+  },
+  "margin: behind5+ - within5": {
+   "diff": 0.912,
+   "ci95": [
+    0.487,
+    1.493
+   ]
+  },
+  "period: Q4+OT - Q1-3": {
+   "diff": 0.051,
+   "ci95": [
+    -1.188,
+    0.6
+   ]
+  },
+  "home: home - away": {
+   "diff": 0.162,
+   "ci95": [
+    -0.355,
+    0.681
+   ]
+  },
+  "source: other - pass": "a level too thin to pool"
+ }
+}

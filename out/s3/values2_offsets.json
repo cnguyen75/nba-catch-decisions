@@ -1,0 +1,56 @@
+{
+ "Curry": {
+  "rim": {
+   "n": 6,
+   "offset_logit": 0.0787
+  },
+  "mid": {
+   "n": 57,
+   "offset_logit": -0.1209
+  },
+  "above_break3": {
+   "n": 53,
+   "offset_logit": 0.3556
+  },
+  "corner3": {
+   "n": 12,
+   "offset_logit": 0.0161
+  }
+ },
+ "LeBron": {
+  "rim": {
+   "n": 9,
+   "offset_logit": 0.0554
+  },
+  "mid": {
+   "n": 17,
+   "offset_logit": 0.0259
+  },
+  "above_break3": {
+   "n": 16,
+   "offset_logit": 0.1539
+  },
+  "corner3": {
+   "n": 3,
+   "offset_logit": -0.097
+  }
+ },
+ "Harden": {
+  "rim": {
+   "n": 3,
+   "offset_logit": 0.0803
+  },
+  "mid": {
+   "n": 23,
+   "offset_logit": 0.0203
+  },
+  "above_break3": {
+   "n": 40,
+   "offset_logit": -0.0027
+  },
+  "corner3": {
+   "n": 5,
+   "offset_logit": -0.075
+  }
+ }
+}

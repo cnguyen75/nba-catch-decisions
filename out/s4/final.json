@@ -1,0 +1,203 @@
+{
+ "unit": "16-30 ft",
+ "b_open_continue_pts_per_ft": 0.01002,
+ "players": {
+  "Curry": {
+   "gated": true,
+   "v_shoot_reproduction_max_abs_diff": 6.661338147750939e-16,
+   "n_train": 432,
+   "n_train_shoot": 103,
+   "check1_gap_slope_22_30": {
+    "slope": 0.005,
+    "ci95": [
+     -0.0059,
+     0.0183
+    ],
+    "n": 330,
+    "passes": false
+   },
+   "power_passes": false,
+   "proceeds": false,
+   "descriptive": {
+    "n": 585,
+    "n_shoot": 134,
+    "ref_open_cf": 2.82,
+    "sd_gap_dz": 0.243,
+    "sd_open_cf": 2.461,
+    "a_measured_pts_per_ft": [
+     0.0189,
+     [
+      0.015,
+      0.0242
+     ]
+    ],
+    "b_logodds_per_ft": [
+     0.1787,
+     [
+      0.1012,
+      0.2855
+     ]
+    ],
+    "c_logodds_per_point_gap_dz": [
+     -0.0194,
+     [
+      -0.8088,
+      0.8499
+     ]
+    ],
+    "d_revealed_pts_per_ft": [
+     -9.1875,
+     [
+      -7.607,
+      6.039
+     ]
+    ],
+    "c_ci_includes_0": true
+   }
+  },
+  "LeBron": {
+   "gated": false,
+   "v_shoot_reproduction_max_abs_diff": 6.661338147750939e-16,
+   "n_train": 429,
+   "n_train_shoot": 24,
+   "check1_gap_slope_22_30": {
+    "slope": 0.0162,
+    "ci95": [
+     0.0109,
+     0.0216
+    ],
+    "n": 305,
+    "passes": true
+   },
+   "power": {
+    "pilot_T": 0.7319,
+    "c_shoot=-0.2": {
+     "se_c": 0.1789,
+     "se_T": 0.4114,
+     "mde80": 0.501
+    },
+    "c_shoot=+0.0": {
+     "se_c": 0.088,
+     "se_T": 0.4027,
+     "mde80": 0.2463
+    },
+    "c_shoot=+0.2": {
+     "se_c": 0.0907,
+     "se_T": 0.4014,
+     "mde80": 0.254
+    },
+    "mde80_at_c0": 0.2463
+   },
+   "power_passes": false,
+   "proceeds": false,
+   "descriptive": {
+    "n": 610,
+    "n_shoot": 38,
+    "ref_open_cf": 4.16,
+    "sd_gap_dz": 0.1228,
+    "sd_open_cf": 2.49,
+    "a_measured_pts_per_ft": [
+     0.0205,
+     [
+      0.0172,
+      0.024
+     ]
+    ],
+    "b_logodds_per_ft": [
+     0.2738,
+     [
+      0.185,
+      0.3816
+     ]
+    ],
+    "c_logodds_per_point_gap_dz": [
+     -0.4632,
+     [
+      -3.2443,
+      2.2313
+     ]
+    ],
+    "d_revealed_pts_per_ft": [
+     -0.5912,
+     [
+      -3.0861,
+      3.0994
+     ]
+    ],
+    "c_ci_includes_0": true
+   }
+  },
+  "Harden": {
+   "gated": true,
+   "v_shoot_reproduction_max_abs_diff": 4.440892098500626e-16,
+   "n_train": 450,
+   "n_train_shoot": 59,
+   "check1_gap_slope_22_30": {
+    "slope": 0.0187,
+    "ci95": [
+     0.0097,
+     0.0293
+    ],
+    "n": 312,
+    "passes": true
+   },
+   "power": {
+    "pilot_T": 509.5522,
+    "c_shoot=-0.2": {
+     "se_c": 113.3801,
+     "se_T": 177946.3527,
+     "mde80": 317.4644
+    },
+    "c_shoot=+0.0": {
+     "se_c": 58.2013,
+     "se_T": 177946.3432,
+     "mde80": 162.9636
+    },
+    "c_shoot=+0.2": {
+     "se_c": 60.6312,
+     "se_T": 177946.3407,
+     "mde80": 169.7675
+    },
+    "mde80_at_c0": 162.9636
+   },
+   "power_passes": false,
+   "proceeds": false,
+   "descriptive": {
+    "n": 596,
+    "n_shoot": 72,
+    "ref_open_cf": 3.46,
+    "sd_gap_dz": 0.1246,
+    "sd_open_cf": 1.928,
+    "a_measured_pts_per_ft": [
+     0.029,
+     [
+      0.0241,
+      0.0337
+     ]
+    ],
+    "b_logodds_per_ft": [
+     0.1398,
+     [
+      0.0279,
+      0.2615
+     ]
+    ],
+    "c_logodds_per_point_gap_dz": [
+     0.9022,
+     [
+      -1.2744,
+      2.9665
+     ]
+    ],
+    "d_revealed_pts_per_ft": [
+     0.1549,
+     [
+      -1.2445,
+      1.296
+     ]
+    ],
+    "c_ci_includes_0": true
+   }
+  }
+ }
+}

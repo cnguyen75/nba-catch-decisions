@@ -1,0 +1,19 @@
+{
+ "n": 101532,
+ "n_shoot": 16018,
+ "made_rate_shots": 0.3997,
+ "shoot_dropped_no_outcome": 0,
+ "LR": 129.98,
+ "df": 5,
+ "LR_per_df": 26.0,
+ "partial_pseudo_R2": 0.00196,
+ "threshold_LR_per_df": 10,
+ "passes": true,
+ "excluded_coefs_std": {
+  "best_tm_open": 0.0317,
+  "margin": -0.0253,
+  "oreb": -0.0535,
+  "inbound": -0.0163,
+  "other": -0.0118
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "confirmatory_games": 183,
+ "confirmatory_shots_0_24": 11989,
+ "confirmatory_shots_main_4_24": 10837,
+ "confirmatory_catches_0_24": 46297,
+ "shots_dropped_missing_motion_confirmatory": 214,
+ "bootstrap_ok": 1000,
+ "m_marginal_share": [
+  0.5031,
+  [
+   0.4682,
+   0.5357
+  ]
+ ],
+ "ame_4_8_vs_12_20": [
+  -0.0069,
+  [
+   -0.0297,
+   0.0171
+  ]
+ ],
+ "delta": [
+  -0.0136,
+  [
+   -0.0603,
+   0.0343
+  ]
+ ],
+ "reading": "Unresolved at this sample size",
+ "info_ame_0_4_vs_12_20": [
+  -0.0595,
+  [
+   -0.0873,
+   -0.0308
+  ]
+ ],
+ "info_ame_catch_and_shoot_only": [
+  -0.0149,
+  [
+   -0.0471,
+   0.0139
+  ]
+ ],
+ "adjusted_make_by_bin": {
+  "[4,8)": [
+   0.3743,
+   [
+    0.3524,
+    0.3959
+   ]
+  ],
+  "[8,12)": [
+   0.376,
+   [
+    0.3572,
+    0.394
+   ]
+  ],
+  "[12,16)": [
+   0.375,
+   [
+    0.3606,
+    0.3919
+   ]
+  ],
+  "[16,20)": [
+   0.3905,
+   [
+    0.37,
+    0.4118
+   ]
+  ],
+  "[20,24)": [
+   0.4182,
+   [
+    0.3747,
+    0.458
+   ]
+  ]
+ },
+ "adjusted_make_0_4": [
+  0.3196,
+  [
+   0.2951,
+   0.346
+  ]
+ ],
+ "raw_table": [
+  {
+   "bin": "[0,4)",
+   "shots": 1152,
+   "raw_make": 0.3021,
+   "catches": 956,
+   "shoot_rate": 0.4017
+  },
+  {
+   "bin": "[4,8)",
+   "shots": 2077,
+   "raw_make": 0.3717,
+   "catches": 4160,
+   "shoot_rate": 0.2538
+  },
+  {
+   "bin": "[8,12)",
+   "shots": 3040,
+   "raw_make": 0.3799,
+   "catches": 9928,
+   "shoot_rate": 0.179
+  },
+  {
+   "bin": "[12,16)",
+   "shots": 3141,
+   "raw_make": 0.3789,
+   "catches": 16028,
+   "shoot_rate": 0.1304
+  },
+  {
+   "bin": "[16,20)",
+   "shots": 2076,
+   "raw_make": 0.3825,
+   "catches": 12166,
+   "shoot_rate": 0.1205
+  },
+  {
+   "bin": "[20,24)",
+   "shots": 503,
+   "raw_make": 0.4135,
+   "catches": 3059,
+   "shoot_rate": 0.1867
+  }
+ ]
+}

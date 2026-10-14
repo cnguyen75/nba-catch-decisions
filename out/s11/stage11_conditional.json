@@ -1,0 +1,109 @@
+{
+ "post_hoc": true,
+ "n_passes_included": 127162,
+ "groups": {
+  "League": {
+   "n_recv_cand": 101009,
+   "p_most_open_given_cand": [
+    0.3479,
+    [
+     0.3438,
+     0.352
+    ]
+   ],
+   "baseline_given_cand": [
+    0.3107,
+    [
+     0.309,
+     0.3124
+    ]
+   ],
+   "minus_baseline": [
+    0.0372,
+    [
+     0.0332,
+     0.041
+    ]
+   ]
+  },
+  "Curry": {
+   "n_recv_cand": 289,
+   "p_most_open_given_cand": [
+    0.3495,
+    [
+     0.3027,
+     0.4034
+    ]
+   ],
+   "baseline_given_cand": [
+    0.3385,
+    [
+     0.3298,
+     0.3479
+    ]
+   ],
+   "minus_baseline": [
+    0.011,
+    [
+     -0.0348,
+     0.0615
+    ]
+   ]
+  },
+  "LeBron": {
+   "n_recv_cand": 436,
+   "p_most_open_given_cand": [
+    0.5046,
+    [
+     0.4589,
+     0.5479
+    ]
+   ],
+   "baseline_given_cand": [
+    0.3723,
+    [
+     0.3616,
+     0.3831
+    ]
+   ],
+   "minus_baseline": [
+    0.1323,
+    [
+     0.0844,
+     0.1744
+    ]
+   ]
+  },
+  "Harden": {
+   "n_recv_cand": 371,
+   "p_most_open_given_cand": [
+    0.5391,
+    [
+     0.4896,
+     0.5911
+    ]
+   ],
+   "baseline_given_cand": [
+    0.3717,
+    [
+     0.3599,
+     0.3837
+    ]
+   ],
+   "minus_baseline": [
+    0.1673,
+    [
+     0.1162,
+     0.2184
+    ]
+   ]
+  }
+ },
+ "lebron_minus_league_given_cand": [
+  0.1567,
+  [
+   0.1104,
+   0.2009
+  ]
+ ]
+}

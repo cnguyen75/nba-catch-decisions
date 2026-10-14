@@ -1,0 +1,369 @@
+{
+ "rho": 0.6,
+ "covers": 20,
+ "cf_within_0.03": 7,
+ "mean_se_rho": 0.0926,
+ "runs": [
+  {
+   "seed": 700,
+   "rho": 0.6455,
+   "rho_ci": [
+    0.4695,
+    0.7721
+   ],
+   "se_rho_delta": 0.0768,
+   "converged": true,
+   "nit": 135,
+   "covers": true,
+   "cf_true": 0.3263,
+   "cf_est": 0.2861,
+   "cf_err": 0.0402,
+   "cf_naive_err": 0.4942,
+   "shoot_rate": 0.159,
+   "sec": 85.1
+  },
+  {
+   "seed": 701,
+   "rho": 0.5693,
+   "rho_ci": [
+    0.3523,
+    0.7282
+   ],
+   "se_rho_delta": 0.096,
+   "converged": true,
+   "nit": 142,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.3416,
+   "cf_err": 0.0155,
+   "cf_naive_err": 0.4789,
+   "shoot_rate": 0.157,
+   "sec": 97.7
+  },
+  {
+   "seed": 702,
+   "rho": 0.5346,
+   "rho_ci": [
+    0.3051,
+    0.7054
+   ],
+   "se_rho_delta": 0.1026,
+   "converged": true,
+   "nit": 131,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.3947,
+   "cf_err": 0.0686,
+   "cf_naive_err": 0.4916,
+   "shoot_rate": 0.157,
+   "sec": 83.4
+  },
+  {
+   "seed": 703,
+   "rho": 0.5718,
+   "rho_ci": [
+    0.3567,
+    0.7293
+   ],
+   "se_rho_delta": 0.0951,
+   "converged": true,
+   "nit": 131,
+   "covers": true,
+   "cf_true": 0.3262,
+   "cf_est": 0.3344,
+   "cf_err": 0.0082,
+   "cf_naive_err": 0.4771,
+   "shoot_rate": 0.158,
+   "sec": 90.9
+  },
+  {
+   "seed": 704,
+   "rho": 0.5804,
+   "rho_ci": [
+    0.3846,
+    0.7262
+   ],
+   "se_rho_delta": 0.0872,
+   "converged": true,
+   "nit": 89,
+   "covers": true,
+   "cf_true": 0.3262,
+   "cf_est": 0.3473,
+   "cf_err": 0.0211,
+   "cf_naive_err": 0.4901,
+   "shoot_rate": 0.157,
+   "sec": 54.3
+  },
+  {
+   "seed": 705,
+   "rho": 0.5068,
+   "rho_ci": [
+    0.272,
+    0.6846
+   ],
+   "se_rho_delta": 0.1059,
+   "converged": true,
+   "nit": 116,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.4173,
+   "cf_err": 0.0912,
+   "cf_naive_err": 0.4893,
+   "shoot_rate": 0.157,
+   "sec": 76.3
+  },
+  {
+   "seed": 706,
+   "rho": 0.4874,
+   "rho_ci": [
+    0.2474,
+    0.671
+   ],
+   "se_rho_delta": 0.1089,
+   "converged": true,
+   "nit": 102,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.4449,
+   "cf_err": 0.1188,
+   "cf_naive_err": 0.4935,
+   "shoot_rate": 0.158,
+   "sec": 71.4
+  },
+  {
+   "seed": 707,
+   "rho": 0.5074,
+   "rho_ci": [
+    0.2641,
+    0.69
+   ],
+   "se_rho_delta": 0.1094,
+   "converged": true,
+   "nit": 117,
+   "covers": true,
+   "cf_true": 0.326,
+   "cf_est": 0.4286,
+   "cf_err": 0.1027,
+   "cf_naive_err": 0.4958,
+   "shoot_rate": 0.157,
+   "sec": 66.8
+  },
+  {
+   "seed": 708,
+   "rho": 0.4629,
+   "rho_ci": [
+    0.2027,
+    0.6621
+   ],
+   "se_rho_delta": 0.1185,
+   "converged": true,
+   "nit": 85,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.4734,
+   "cf_err": 0.1473,
+   "cf_naive_err": 0.4965,
+   "shoot_rate": 0.158,
+   "sec": 31.9
+  },
+  {
+   "seed": 709,
+   "rho": 0.7384,
+   "rho_ci": [
+    0.5919,
+    0.8377
+   ],
+   "se_rho_delta": 0.0618,
+   "converged": true,
+   "nit": 102,
+   "covers": true,
+   "cf_true": 0.326,
+   "cf_est": 0.1899,
+   "cf_err": 0.1362,
+   "cf_naive_err": 0.4889,
+   "shoot_rate": 0.158,
+   "sec": 63.5
+  },
+  {
+   "seed": 710,
+   "rho": 0.6393,
+   "rho_ci": [
+    0.4408,
+    0.7782
+   ],
+   "se_rho_delta": 0.0856,
+   "converged": true,
+   "nit": 94,
+   "covers": true,
+   "cf_true": 0.3259,
+   "cf_est": 0.2925,
+   "cf_err": 0.0334,
+   "cf_naive_err": 0.4921,
+   "shoot_rate": 0.157,
+   "sec": 63.7
+  },
+  {
+   "seed": 711,
+   "rho": 0.6839,
+   "rho_ci": [
+    0.5185,
+    0.8
+   ],
+   "se_rho_delta": 0.0712,
+   "converged": true,
+   "nit": 109,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.2377,
+   "cf_err": 0.0885,
+   "cf_naive_err": 0.4875,
+   "shoot_rate": 0.157,
+   "sec": 72.4
+  },
+  {
+   "seed": 712,
+   "rho": 0.6381,
+   "rho_ci": [
+    0.4449,
+    0.7746
+   ],
+   "se_rho_delta": 0.0837,
+   "converged": true,
+   "nit": 150,
+   "covers": true,
+   "cf_true": 0.3262,
+   "cf_est": 0.2836,
+   "cf_err": 0.0426,
+   "cf_naive_err": 0.4886,
+   "shoot_rate": 0.157,
+   "sec": 82.7
+  },
+  {
+   "seed": 713,
+   "rho": 0.5995,
+   "rho_ci": [
+    0.397,
+    0.7464
+   ],
+   "se_rho_delta": 0.089,
+   "converged": true,
+   "nit": 77,
+   "covers": true,
+   "cf_true": 0.3262,
+   "cf_est": 0.3165,
+   "cf_err": 0.0097,
+   "cf_naive_err": 0.4821,
+   "shoot_rate": 0.158,
+   "sec": 44.9
+  },
+  {
+   "seed": 714,
+   "rho": 0.4766,
+   "rho_ci": [
+    0.218,
+    0.6727
+   ],
+   "se_rho_delta": 0.1171,
+   "converged": true,
+   "nit": 112,
+   "covers": true,
+   "cf_true": 0.3259,
+   "cf_est": 0.4558,
+   "cf_err": 0.1299,
+   "cf_naive_err": 0.4929,
+   "shoot_rate": 0.159,
+   "sec": 65.2
+  },
+  {
+   "seed": 715,
+   "rho": 0.6933,
+   "rho_ci": [
+    0.5395,
+    0.8024
+   ],
+   "se_rho_delta": 0.0665,
+   "converged": true,
+   "nit": 147,
+   "covers": true,
+   "cf_true": 0.326,
+   "cf_est": 0.2424,
+   "cf_err": 0.0836,
+   "cf_naive_err": 0.498,
+   "shoot_rate": 0.156,
+   "sec": 70.2
+  },
+  {
+   "seed": 716,
+   "rho": 0.5857,
+   "rho_ci": [
+    0.372,
+    0.7405
+   ],
+   "se_rho_delta": 0.094,
+   "converged": true,
+   "nit": 114,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.3358,
+   "cf_err": 0.0097,
+   "cf_naive_err": 0.4856,
+   "shoot_rate": 0.158,
+   "sec": 49.1
+  },
+  {
+   "seed": 717,
+   "rho": 0.5825,
+   "rho_ci": [
+    0.3728,
+    0.7356
+   ],
+   "se_rho_delta": 0.0926,
+   "converged": true,
+   "nit": 102,
+   "covers": true,
+   "cf_true": 0.3261,
+   "cf_est": 0.3482,
+   "cf_err": 0.0221,
+   "cf_naive_err": 0.4931,
+   "shoot_rate": 0.158,
+   "sec": 38.6
+  },
+  {
+   "seed": 718,
+   "rho": 0.5307,
+   "rho_ci": [
+    0.3138,
+    0.6949
+   ],
+   "se_rho_delta": 0.0976,
+   "converged": true,
+   "nit": 111,
+   "covers": true,
+   "cf_true": 0.3263,
+   "cf_est": 0.4163,
+   "cf_err": 0.09,
+   "cf_naive_err": 0.4999,
+   "shoot_rate": 0.159,
+   "sec": 34.9
+  },
+  {
+   "seed": 719,
+   "rho": 0.5725,
+   "rho_ci": [
+    0.3629,
+    0.727
+   ],
+   "se_rho_delta": 0.093,
+   "converged": true,
+   "nit": 84,
+   "covers": true,
+   "cf_true": 0.326,
+   "cf_est": 0.3343,
+   "cf_err": 0.0083,
+   "cf_naive_err": 0.4774,
+   "shoot_rate": 0.157,
+   "sec": 44.7
+  }
+ ],
+ "passes": false
+}

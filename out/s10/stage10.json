@@ -1,0 +1,582 @@
+{
+ "n_shots": 24324,
+ "n_league": 24059,
+ "dropped_missing_motion": 102,
+ "n_rush_sample_league": 24020,
+ "n_excluded_under_0p3s_league": 39,
+ "closing_speed_quartile_cuts": [
+  5.172,
+  7.958,
+  10.477
+ ],
+ "league": {
+  "by_quartile": {
+   "Q1": {
+    "n": 6015,
+    "median_closing_speed": 3.2479,
+    "median_release_time": [
+     1.04,
+     [
+      1.04,
+      1.04
+     ]
+    ],
+    "median_release_openness": [
+     5.3394,
+     [
+      5.2448,
+      5.432
+     ]
+    ],
+    "make_rate": [
+     0.3839,
+     [
+      0.3718,
+      0.3962
+     ]
+    ]
+   },
+   "Q2": {
+    "n": 6014,
+    "median_closing_speed": 6.6842,
+    "median_release_time": [
+     0.96,
+     [
+      0.95,
+      0.96
+     ]
+    ],
+    "median_release_openness": [
+     4.6465,
+     [
+      4.5894,
+      4.6921
+     ]
+    ],
+    "make_rate": [
+     0.3721,
+     [
+      0.3598,
+      0.3845
+     ]
+    ]
+   },
+   "Q3": {
+    "n": 6015,
+    "median_closing_speed": 9.1805,
+    "median_release_time": [
+     0.92,
+     [
+      0.92,
+      0.92
+     ]
+    ],
+    "median_release_openness": [
+     4.9297,
+     [
+      4.8649,
+      4.9753
+     ]
+    ],
+    "make_rate": [
+     0.3875,
+     [
+      0.3745,
+      0.4
+     ]
+    ]
+   },
+   "Q4": {
+    "n": 6015,
+    "median_closing_speed": 12.0761,
+    "median_release_time": [
+     0.92,
+     [
+      0.92,
+      0.92
+     ]
+    ],
+    "median_release_openness": [
+     5.2403,
+     [
+      5.1789,
+      5.3152
+     ]
+    ],
+    "make_rate": [
+     0.3945,
+     [
+      0.3829,
+      0.4075
+     ]
+    ]
+   }
+  },
+  "slope_s_per_ftps": [
+   -0.0106,
+   [
+    -0.0113,
+    -0.0099
+   ]
+  ],
+  "top_quartile_median_closing_speed": [
+   12.0761,
+   [
+    12.0139,
+    12.1212
+   ]
+  ],
+  "space_preserved_ft": [
+   0.1283,
+   [
+    0.1189,
+    0.1369
+   ]
+  ],
+  "rush_ame_vs_0.9-1.1": {
+   "0.3-0.7": [
+    -0.0248,
+    [
+     -0.0549,
+     0.0061
+    ]
+   ],
+   "0.7-0.9": [
+    -0.0108,
+    [
+     -0.0256,
+     0.0046
+    ]
+   ],
+   "0.9-1.1": [
+    0.0,
+    [
+     0.0,
+     0.0
+    ]
+   ],
+   "1.1-1.5": [
+    -0.0043,
+    [
+     -0.0208,
+     0.0132
+    ]
+   ]
+  },
+  "rush_bin_counts": {
+   "0.3-0.7": 1104,
+   "0.7-0.9": 7968,
+   "0.9-1.1": 9535,
+   "1.1-1.5": 5413
+  },
+  "deciles": [
+   {
+    "median_closing_speed": 1.1999,
+    "median_release_time": [
+     1.08,
+     [
+      1.05,
+      1.08
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 3.7146,
+    "median_release_time": [
+     1.04,
+     [
+      1.01,
+      1.04
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 5.1721,
+    "median_release_time": [
+     0.99,
+     [
+      0.97,
+      1.0
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 6.4241,
+    "median_release_time": [
+     0.96,
+     [
+      0.95,
+      0.96
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 7.4773,
+    "median_release_time": [
+     0.93,
+     [
+      0.92,
+      0.95
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 8.4293,
+    "median_release_time": [
+     0.92,
+     [
+      0.92,
+      0.92
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 9.4267,
+    "median_release_time": [
+     0.92,
+     [
+      0.92,
+      0.92
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 10.4774,
+    "median_release_time": [
+     0.92,
+     [
+      0.9049,
+      0.92
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 11.6994,
+    "median_release_time": [
+     0.92,
+     [
+      0.92,
+      0.92
+     ]
+    ]
+   },
+   {
+    "median_closing_speed": 13.5244,
+    "median_release_time": [
+     0.92,
+     [
+      0.92,
+      0.93
+     ]
+    ]
+   }
+  ]
+ },
+ "registered_reading": {
+  "dP_dopen_attempt2_at_4to6ft": 0.0164,
+  "n_shots_4to6ft": 9610,
+  "attempt2_refit_train_shots": 37373,
+  "loss_per_0.1s": [
+   0.0198,
+   [
+    0.0197,
+    0.0199
+   ]
+  ],
+  "gain_per_0.1s_0.7to1.1": [
+   0.0054,
+   [
+    -0.0023,
+    0.0128
+   ]
+  ],
+  "gain_minus_loss_0.7to1.1": [
+   -0.0144,
+   [
+    -0.022,
+    -0.0069
+   ]
+  ],
+  "info_gain_per_0.1s_1.0to1.3": [
+   0.0014,
+   [
+    -0.0044,
+    0.0069
+   ]
+  ]
+ },
+ "players": {
+  "Curry": {
+   "n": 146,
+   "median_closing_speed": 9.3113,
+   "median_release_time": [
+    0.8,
+    [
+     0.76,
+     0.85
+    ]
+   ],
+   "slope_s_per_ftps": [
+    -0.0148,
+    [
+     -0.0266,
+     0.0007
+    ]
+   ],
+   "by_quartile": {
+    "Q1": {
+     "n": 35,
+     "median_release_time": [
+      0.96,
+      [
+       0.84,
+       1.1605
+      ]
+     ],
+     "median_release_openness": [
+      5.8384,
+      [
+       4.3567,
+       6.881
+      ]
+     ]
+    },
+    "Q2": {
+     "n": 21,
+     "median_release_time": [
+      0.75,
+      [
+       0.695,
+       0.89
+      ]
+     ],
+     "median_release_openness": [
+      4.4206,
+      [
+       3.6147,
+       5.8598
+      ]
+     ]
+    },
+    "Q3": {
+     "n": 36,
+     "median_release_time": [
+      0.76,
+      [
+       0.7,
+       0.8501
+      ]
+     ],
+     "median_release_openness": [
+      4.4818,
+      [
+       3.9476,
+       5.0095
+      ]
+     ]
+    },
+    "Q4": {
+     "n": 54,
+     "median_release_time": [
+      0.78,
+      [
+       0.72,
+       0.84
+      ]
+     ],
+     "median_release_openness": [
+      4.7037,
+      [
+       4.0681,
+       5.2642
+      ]
+     ]
+    }
+   }
+  },
+  "LeBron": {
+   "n": 37,
+   "status": "too thin"
+  },
+  "Harden": {
+   "n": 82,
+   "status": "too thin"
+  },
+  "Thompson": {
+   "n": 246,
+   "median_closing_speed": 7.7328,
+   "median_release_time": [
+    0.8,
+    [
+     0.76,
+     0.82
+    ]
+   ],
+   "slope_s_per_ftps": [
+    -0.0037,
+    [
+     -0.01,
+     0.0047
+    ]
+   ],
+   "by_quartile": {
+    "Q1": {
+     "n": 52,
+     "median_release_time": [
+      0.84,
+      [
+       0.8,
+       0.885
+      ]
+     ],
+     "median_release_openness": [
+      4.5274,
+      [
+       3.9169,
+       4.7143
+      ]
+     ]
+    },
+    "Q2": {
+     "n": 80,
+     "median_release_time": [
+      0.795,
+      [
+       0.74,
+       0.81
+      ]
+     ],
+     "median_release_openness": [
+      3.7338,
+      [
+       3.3371,
+       4.1338
+      ]
+     ]
+    },
+    "Q3": {
+     "n": 57,
+     "median_release_time": [
+      0.76,
+      [
+       0.72,
+       0.81
+      ]
+     ],
+     "median_release_openness": [
+      3.9924,
+      [
+       3.7542,
+       4.6135
+      ]
+     ]
+    },
+    "Q4": {
+     "n": 57,
+     "median_release_time": [
+      0.84,
+      [
+       0.77,
+       0.88
+      ]
+     ],
+     "median_release_openness": [
+      4.9426,
+      [
+       4.4124,
+       5.6812
+      ]
+     ]
+    }
+   }
+  },
+  "Redick": {
+   "n": 204,
+   "median_closing_speed": 7.6419,
+   "median_release_time": [
+    0.96,
+    [
+     0.95,
+     1.0
+    ]
+   ],
+   "slope_s_per_ftps": [
+    -0.0114,
+    [
+     -0.0186,
+     -0.0043
+    ]
+   ],
+   "by_quartile": {
+    "Q1": {
+     "n": 44,
+     "median_release_time": [
+      1.03,
+      [
+       1.0,
+       1.1004
+      ]
+     ],
+     "median_release_openness": [
+      5.5811,
+      [
+       4.9477,
+       6.3504
+      ]
+     ]
+    },
+    "Q2": {
+     "n": 65,
+     "median_release_time": [
+      0.96,
+      [
+       0.935,
+       1.04
+      ]
+     ],
+     "median_release_openness": [
+      3.9614,
+      [
+       3.2875,
+       4.3851
+      ]
+     ]
+    },
+    "Q3": {
+     "n": 44,
+     "median_release_time": [
+      0.995,
+      [
+       0.92,
+       1.0401
+      ]
+     ],
+     "median_release_openness": [
+      3.6366,
+      [
+       3.224,
+       4.1101
+      ]
+     ]
+    },
+    "Q4": {
+     "n": 51,
+     "median_release_time": [
+      0.92,
+      [
+       0.88,
+       0.955
+      ]
+     ],
+     "median_release_openness": [
+      4.5054,
+      [
+       3.901,
+       4.9891
+      ]
+     ]
+    }
+   }
+  }
+ }
+}

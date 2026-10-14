@@ -1,5 +1,25 @@
+# environment
 .venv/
 __pycache__/
+*.pyc
+.DS_Store
+
+# raw data and parsed frames (never committed; see README "Data and provenance")
 data/
+*.7z
 *.json.raw
-out/
+**/json/
+
+# model files
+*.npz
+*.pkl
+*.pt
+*.joblib
+
+# outputs: ignored except the small result JSONs and the stem lists
+out/*
+!out/s*/
+out/s*/*
+!out/s*/*.json
+out/s*/build_meta.json
+!out/s4/stems*.txt

@@ -1,0 +1,369 @@
+{
+ "rho": 0.3,
+ "covers": 19,
+ "cf_within_0.03": 4,
+ "mean_se_rho": 0.133,
+ "runs": [
+  {
+   "seed": 600,
+   "rho": 0.1684,
+   "rho_ci": [
+    -0.1386,
+    0.4459
+   ],
+   "se_rho_delta": 0.1534,
+   "converged": true,
+   "nit": 76,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.4661,
+   "cf_err": 0.1131,
+   "cf_naive_err": 0.2511,
+   "shoot_rate": 0.157,
+   "sec": 52.4
+  },
+  {
+   "seed": 601,
+   "rho": 0.111,
+   "rho_ci": [
+    -0.1953,
+    0.3976
+   ],
+   "se_rho_delta": 0.1559,
+   "converged": true,
+   "nit": 53,
+   "covers": true,
+   "cf_true": 0.3531,
+   "cf_est": 0.5186,
+   "cf_err": 0.1655,
+   "cf_naive_err": 0.2554,
+   "shoot_rate": 0.159,
+   "sec": 35.6
+  },
+  {
+   "seed": 602,
+   "rho": 0.3498,
+   "rho_ci": [
+    0.0769,
+    0.5739
+   ],
+   "se_rho_delta": 0.129,
+   "converged": true,
+   "nit": 78,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.3268,
+   "cf_err": 0.0262,
+   "cf_naive_err": 0.2601,
+   "shoot_rate": 0.159,
+   "sec": 54.3
+  },
+  {
+   "seed": 603,
+   "rho": 0.3627,
+   "rho_ci": [
+    0.0688,
+    0.5987
+   ],
+   "se_rho_delta": 0.1378,
+   "converged": true,
+   "nit": 70,
+   "covers": true,
+   "cf_true": 0.3528,
+   "cf_est": 0.2987,
+   "cf_err": 0.0541,
+   "cf_naive_err": 0.2424,
+   "shoot_rate": 0.156,
+   "sec": 49.6
+  },
+  {
+   "seed": 604,
+   "rho": 0.4785,
+   "rho_ci": [
+    0.2336,
+    0.6662
+   ],
+   "se_rho_delta": 0.1113,
+   "converged": true,
+   "nit": 104,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.2106,
+   "cf_err": 0.1424,
+   "cf_naive_err": 0.236,
+   "shoot_rate": 0.158,
+   "sec": 64.4
+  },
+  {
+   "seed": 605,
+   "rho": 0.2559,
+   "rho_ci": [
+    -0.0262,
+    0.5003
+   ],
+   "se_rho_delta": 0.1373,
+   "converged": true,
+   "nit": 101,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.3766,
+   "cf_err": 0.0236,
+   "cf_naive_err": 0.2348,
+   "shoot_rate": 0.158,
+   "sec": 72.3
+  },
+  {
+   "seed": 606,
+   "rho": 0.2675,
+   "rho_ci": [
+    -0.0297,
+    0.5212
+   ],
+   "se_rho_delta": 0.1439,
+   "converged": true,
+   "nit": 69,
+   "covers": true,
+   "cf_true": 0.3531,
+   "cf_est": 0.3868,
+   "cf_err": 0.0338,
+   "cf_naive_err": 0.2542,
+   "shoot_rate": 0.157,
+   "sec": 43.2
+  },
+  {
+   "seed": 607,
+   "rho": 0.5252,
+   "rho_ci": [
+    0.2913,
+    0.6998
+   ],
+   "se_rho_delta": 0.1047,
+   "converged": true,
+   "nit": 103,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.1853,
+   "cf_err": 0.1677,
+   "cf_naive_err": 0.2429,
+   "shoot_rate": 0.157,
+   "sec": 69.7
+  },
+  {
+   "seed": 608,
+   "rho": 0.2185,
+   "rho_ci": [
+    -0.0677,
+    0.4715
+   ],
+   "se_rho_delta": 0.1409,
+   "converged": true,
+   "nit": 83,
+   "covers": true,
+   "cf_true": 0.3531,
+   "cf_est": 0.4153,
+   "cf_err": 0.0622,
+   "cf_naive_err": 0.2431,
+   "shoot_rate": 0.158,
+   "sec": 50.3
+  },
+  {
+   "seed": 609,
+   "rho": 0.4605,
+   "rho_ci": [
+    0.196,
+    0.6626
+   ],
+   "se_rho_delta": 0.1204,
+   "converged": true,
+   "nit": 69,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.2235,
+   "cf_err": 0.1295,
+   "cf_naive_err": 0.2358,
+   "shoot_rate": 0.157,
+   "sec": 44.5
+  },
+  {
+   "seed": 610,
+   "rho": 0.3789,
+   "rho_ci": [
+    0.1073,
+    0.5979
+   ],
+   "se_rho_delta": 0.1272,
+   "converged": true,
+   "nit": 105,
+   "covers": true,
+   "cf_true": 0.3529,
+   "cf_est": 0.2862,
+   "cf_err": 0.0667,
+   "cf_naive_err": 0.2413,
+   "shoot_rate": 0.157,
+   "sec": 66.0
+  },
+  {
+   "seed": 611,
+   "rho": 0.3476,
+   "rho_ci": [
+    0.0685,
+    0.5762
+   ],
+   "se_rho_delta": 0.1319,
+   "converged": true,
+   "nit": 74,
+   "covers": true,
+   "cf_true": 0.3528,
+   "cf_est": 0.3149,
+   "cf_err": 0.0379,
+   "cf_naive_err": 0.2461,
+   "shoot_rate": 0.158,
+   "sec": 39.7
+  },
+  {
+   "seed": 612,
+   "rho": 0.4136,
+   "rho_ci": [
+    0.152,
+    0.621
+   ],
+   "se_rho_delta": 0.1213,
+   "converged": true,
+   "nit": 77,
+   "covers": true,
+   "cf_true": 0.3529,
+   "cf_est": 0.2793,
+   "cf_err": 0.0736,
+   "cf_naive_err": 0.2644,
+   "shoot_rate": 0.158,
+   "sec": 23.0
+  },
+  {
+   "seed": 613,
+   "rho": 0.4522,
+   "rho_ci": [
+    0.1922,
+    0.6528
+   ],
+   "se_rho_delta": 0.1188,
+   "converged": true,
+   "nit": 102,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.2498,
+   "cf_err": 0.1032,
+   "cf_naive_err": 0.2638,
+   "shoot_rate": 0.157,
+   "sec": 68.4
+  },
+  {
+   "seed": 614,
+   "rho": 0.5464,
+   "rho_ci": [
+    0.3145,
+    0.7167
+   ],
+   "se_rho_delta": 0.1029,
+   "converged": true,
+   "nit": 74,
+   "covers": false,
+   "cf_true": 0.353,
+   "cf_est": 0.1705,
+   "cf_err": 0.1825,
+   "cf_naive_err": 0.2394,
+   "shoot_rate": 0.159,
+   "sec": 52.1
+  },
+  {
+   "seed": 615,
+   "rho": 0.2552,
+   "rho_ci": [
+    -0.0557,
+    0.5209
+   ],
+   "se_rho_delta": 0.151,
+   "converged": true,
+   "nit": 78,
+   "covers": true,
+   "cf_true": 0.3529,
+   "cf_est": 0.3767,
+   "cf_err": 0.0238,
+   "cf_naive_err": 0.2337,
+   "shoot_rate": 0.156,
+   "sec": 50.7
+  },
+  {
+   "seed": 616,
+   "rho": 0.1262,
+   "rho_ci": [
+    -0.1793,
+    0.4095
+   ],
+   "se_rho_delta": 0.1547,
+   "converged": true,
+   "nit": 55,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.5029,
+   "cf_err": 0.15,
+   "cf_naive_err": 0.2523,
+   "shoot_rate": 0.159,
+   "sec": 31.6
+  },
+  {
+   "seed": 617,
+   "rho": 0.3115,
+   "rho_ci": [
+    0.0128,
+    0.5592
+   ],
+   "se_rho_delta": 0.1425,
+   "converged": true,
+   "nit": 70,
+   "covers": true,
+   "cf_true": 0.3529,
+   "cf_est": 0.3369,
+   "cf_err": 0.016,
+   "cf_naive_err": 0.2399,
+   "shoot_rate": 0.156,
+   "sec": 43.7
+  },
+  {
+   "seed": 618,
+   "rho": 0.4523,
+   "rho_ci": [
+    0.2016,
+    0.6474
+   ],
+   "se_rho_delta": 0.1149,
+   "converged": true,
+   "nit": 74,
+   "covers": true,
+   "cf_true": 0.353,
+   "cf_est": 0.2326,
+   "cf_err": 0.1204,
+   "cf_naive_err": 0.2405,
+   "shoot_rate": 0.158,
+   "sec": 40.7
+  },
+  {
+   "seed": 619,
+   "rho": 0.0002,
+   "rho_ci": [
+    -0.3055,
+    0.3059
+   ],
+   "se_rho_delta": 0.1611,
+   "converged": true,
+   "nit": 2,
+   "covers": true,
+   "cf_true": 0.3529,
+   "cf_est": 0.5913,
+   "cf_err": 0.2384,
+   "cf_naive_err": 0.2384,
+   "shoot_rate": 0.157,
+   "sec": 4.4
+  }
+ ],
+ "passes": false
+}

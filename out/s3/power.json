@@ -1,0 +1,152 @@
+{
+ "primary_model": "binary",
+ "players": {
+  "Curry": {
+   "n_train_catches": 493,
+   "n_train_games": 23,
+   "actions": {
+    "pass": 191,
+    "hold": 151,
+    "shoot": 122,
+    "drive": 29
+   },
+   "pilot_T": 1090.8313,
+   "fisher": {
+    "c_shoot=-0.2": {
+     "se_c": {
+      "c_shoot": 216.628
+     },
+     "se_T": 498329.2641,
+     "mde80_c_shoot": 606.5583
+    },
+    "c_shoot=+0.0": {
+     "se_c": {
+      "c_shoot": 141.409
+     },
+     "se_T": 498329.2588,
+     "mde80_c_shoot": 395.9452
+    },
+    "c_shoot=+0.2": {
+     "se_c": {
+      "c_shoot": 98.7985
+     },
+     "se_T": 498329.2576,
+     "mde80_c_shoot": 276.6359
+    }
+   },
+   "mde80_at_c0": 395.9452,
+   "proceed": false,
+   "games_needed_if_underpowered": 160256437,
+   "secondary_se_c_shoot_by_zone": {
+    "rim": 562.3943,
+    "mid": 149.2024,
+    "above_break3": 421.5349,
+    "corner3": 508.2479
+   },
+   "zone_counts_train": {
+    "above_break3": 237,
+    "mid": 216,
+    "corner3": 22,
+    "rim": 18
+   }
+  },
+  "LeBron": {
+   "n_train_catches": 535,
+   "n_train_games": 22,
+   "actions": {
+    "pass": 234,
+    "hold": 213,
+    "shoot": 44,
+    "drive": 44
+   },
+   "pilot_T": 0.5797,
+   "fisher": {
+    "c_shoot=-0.2": {
+     "se_c": {
+      "c_shoot": 0.2083
+     },
+     "se_T": 0.2557,
+     "mde80_c_shoot": 0.5832
+    },
+    "c_shoot=+0.0": {
+     "se_c": {
+      "c_shoot": 0.121
+     },
+     "se_T": 0.244,
+     "mde80_c_shoot": 0.3387
+    },
+    "c_shoot=+0.2": {
+     "se_c": {
+      "c_shoot": 0.057
+     },
+     "se_T": 0.239,
+     "mde80_c_shoot": 0.1596
+    }
+   },
+   "mde80_at_c0": 0.3387,
+   "proceed": false,
+   "games_needed_if_underpowered": 113,
+   "secondary_se_c_shoot_by_zone": {
+    "rim": 0.2275,
+    "mid": 0.126,
+    "above_break3": 0.1564,
+    "corner3": 0.2459
+   },
+   "zone_counts_train": {
+    "above_break3": 242,
+    "mid": 223,
+    "rim": 44,
+    "corner3": 26
+   }
+  },
+  "Harden": {
+   "n_train_catches": 500,
+   "n_train_games": 25,
+   "actions": {
+    "hold": 233,
+    "pass": 160,
+    "shoot": 64,
+    "drive": 43
+   },
+   "pilot_T": 531.8483,
+   "fisher": {
+    "c_shoot=-0.2": {
+     "se_c": {
+      "c_shoot": 209.7013
+     },
+     "se_T": 261667.0592,
+     "mde80_c_shoot": 587.1637
+    },
+    "c_shoot=+0.0": {
+     "se_c": {
+      "c_shoot": 116.0346
+     },
+     "se_T": 261667.0415,
+     "mde80_c_shoot": 324.8968
+    },
+    "c_shoot=+0.2": {
+     "se_c": {
+      "c_shoot": 48.1477
+     },
+     "se_T": 261667.0331,
+     "mde80_c_shoot": 134.8135
+    }
+   },
+   "mde80_at_c0": 324.8968,
+   "proceed": false,
+   "games_needed_if_underpowered": 117286590,
+   "secondary_se_c_shoot_by_zone": {
+    "rim": 308.3415,
+    "mid": 121.2748,
+    "above_break3": 136.071,
+    "corner3": 295.4538
+   },
+   "zone_counts_train": {
+    "mid": 239,
+    "above_break3": 229,
+    "rim": 17,
+    "corner3": 15
+   }
+  }
+ }
+}

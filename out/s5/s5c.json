@@ -1,0 +1,4906 @@
+{
+ "n_unit_catches": 150138,
+ "map": {
+  "n_eligible": 219,
+  "n_resolved": 98,
+  "ER_resolved_median_iqr": [
+   5.082,
+   3.987,
+   6.127
+  ],
+  "histogram_resolved": {
+   "(-inf, 0.0]": 1,
+   "(0.0, 2.0]": 3,
+   "(2.0, 4.0]": 21,
+   "(4.0, 6.0]": 46,
+   "(6.0, 8.0]": 19,
+   "(8.0, 10.0]": 7,
+   "(10.0, 15.0]": 1,
+   "(15.0, inf]": 0
+  },
+  "ten_highest": [
+   {
+    "name": "Luol Deng",
+    "ER": 10.085,
+    "ER_ci": [
+     3.369,
+     45.841
+    ],
+    "n": 592,
+    "shots": 122
+   },
+   {
+    "name": "Klay Thompson",
+    "ER": 9.326,
+    "ER_ci": [
+     4.43,
+     70.116
+    ],
+    "n": 750,
+    "shots": 233
+   },
+   {
+    "name": "Avery Bradley",
+    "ER": 9.064,
+    "ER_ci": [
+     4.333,
+     59.632
+    ],
+    "n": 736,
+    "shots": 186
+   },
+   {
+    "name": "Omri Casspi",
+    "ER": 8.721,
+    "ER_ci": [
+     4.228,
+     35.482
+    ],
+    "n": 539,
+    "shots": 102
+   },
+   {
+    "name": "Eric Gordon",
+    "ER": 8.297,
+    "ER_ci": [
+     4.81,
+     22.628
+    ],
+    "n": 850,
+    "shots": 181
+   },
+   {
+    "name": "Jose Calderon",
+    "ER": 8.29,
+    "ER_ci": [
+     4.309,
+     31.554
+    ],
+    "n": 700,
+    "shots": 107
+   },
+   {
+    "name": "Evan Fournier",
+    "ER": 8.283,
+    "ER_ci": [
+     3.917,
+     39.298
+    ],
+    "n": 999,
+    "shots": 137
+   },
+   {
+    "name": "Carmelo Anthony",
+    "ER": 8.246,
+    "ER_ci": [
+     4.455,
+     40.831
+    ],
+    "n": 935,
+    "shots": 117
+   },
+   {
+    "name": "Anthony Tolliver",
+    "ER": 7.761,
+    "ER_ci": [
+     3.449,
+     38.352
+    ],
+    "n": 486,
+    "shots": 134
+   },
+   {
+    "name": "Paul Millsap",
+    "ER": 7.584,
+    "ER_ci": [
+     3.864,
+     46.223
+    ],
+    "n": 813,
+    "shots": 103
+   }
+  ],
+  "ten_lowest": [
+   {
+    "name": "Serge Ibaka",
+    "ER": -8.476,
+    "ER_ci": [
+     -37.053,
+     -4.522
+    ],
+    "n": 740,
+    "shots": 242
+   },
+   {
+    "name": "Trevor Booker",
+    "ER": 1.756,
+    "ER_ci": [
+     0.749,
+     6.817
+    ],
+    "n": 434,
+    "shots": 25
+   },
+   {
+    "name": "Jarrett Jack",
+    "ER": 1.974,
+    "ER_ci": [
+     0.823,
+     4.122
+    ],
+    "n": 470,
+    "shots": 46
+   },
+   {
+    "name": "Dwyane Wade",
+    "ER": 1.977,
+    "ER_ci": [
+     0.839,
+     5.797
+    ],
+    "n": 793,
+    "shots": 36
+   },
+   {
+    "name": "Monta Ellis",
+    "ER": 2.107,
+    "ER_ci": [
+     1.387,
+     3.571
+    ],
+    "n": 671,
+    "shots": 80
+   },
+   {
+    "name": "Draymond Green",
+    "ER": 2.431,
+    "ER_ci": [
+     1.53,
+     4.875
+    ],
+    "n": 727,
+    "shots": 106
+   },
+   {
+    "name": "DeMar DeRozan",
+    "ER": 2.81,
+    "ER_ci": [
+     1.665,
+     4.962
+    ],
+    "n": 1031,
+    "shots": 81
+   },
+   {
+    "name": "Blake Griffin",
+    "ER": 2.886,
+    "ER_ci": [
+     2.118,
+     3.966
+    ],
+    "n": 792,
+    "shots": 156
+   },
+   {
+    "name": "Maurice Harkless",
+    "ER": 2.967,
+    "ER_ci": [
+     2.077,
+     4.983
+    ],
+    "n": 354,
+    "shots": 57
+   },
+   {
+    "name": "Evan Turner",
+    "ER": 2.98,
+    "ER_ci": [
+     1.819,
+     5.23
+    ],
+    "n": 545,
+    "shots": 49
+   }
+  ],
+  "gated": {
+   "Curry": {
+    "ER": 3.934,
+    "ER_ci": [
+     2.266,
+     10.067
+    ],
+    "resolved": true,
+    "n": 585,
+    "shots": 134,
+    "beta_clock_ci": [
+     -0.1554,
+     -0.0345
+    ],
+    "percentile_among_resolved": 24.5
+   },
+   "LeBron": {
+    "ER": 4.629,
+    "ER_ci": [
+     2.588,
+     10.076
+    ],
+    "resolved": true,
+    "n": 610,
+    "shots": 38,
+    "beta_clock_ci": [
+     -0.1848,
+     -0.0436
+    ],
+    "percentile_among_resolved": 41.8
+   },
+   "Harden": {
+    "ER": 119.084,
+    "ER_ci": [
+     -250.788,
+     255.594
+    ],
+    "resolved": false,
+    "n": 596,
+    "shots": 72,
+    "beta_clock_ci": [
+     -0.0545,
+     0.0642
+    ],
+    "percentile_among_resolved": "unresolved"
+   }
+  },
+  "all": [
+   {
+    "n": 843,
+    "shots": 122,
+    "beta_clock": -0.0604,
+    "beta_clock_ci": [
+     -0.1097,
+     -0.0092
+    ],
+    "beta_open": 0.3327,
+    "ER": 5.505,
+    "ER_ci": [
+     2.977,
+     23.547
+    ],
+    "resolved": true,
+    "pid": 977,
+    "name": "Kobe Bryant"
+   },
+   {
+    "n": 380,
+    "shots": 26,
+    "beta_clock": -0.1878,
+    "beta_clock_ci": [
+     -0.4271,
+     -0.0258
+    ],
+    "beta_open": 0.5642,
+    "ER": 3.004,
+    "ER_ci": [
+     1.574,
+     10.942
+    ],
+    "resolved": true,
+    "pid": 1495,
+    "name": "Tim Duncan"
+   },
+   {
+    "n": 894,
+    "shots": 201,
+    "beta_clock": -0.0175,
+    "beta_clock_ci": [
+     -0.0633,
+     0.0274
+    ],
+    "beta_open": 0.5279,
+    "ER": 30.176,
+    "ER_ci": [
+     -312.229,
+     390.374
+    ],
+    "resolved": false,
+    "pid": 1717,
+    "name": "Dirk Nowitzki"
+   },
+   {
+    "n": 344,
+    "shots": 95,
+    "beta_clock": -0.0059,
+    "beta_clock_ci": [
+     -0.0629,
+     0.0573
+    ],
+    "beta_open": 0.3865,
+    "ER": 65.962,
+    "ER_ci": [
+     -239.681,
+     190.249
+    ],
+    "resolved": false,
+    "pid": 1718,
+    "name": "Paul Pierce"
+   },
+   {
+    "n": 554,
+    "shots": 65,
+    "beta_clock": -0.0584,
+    "beta_clock_ci": [
+     -0.1293,
+     0.0187
+    ],
+    "beta_open": 0.3917,
+    "ER": 6.707,
+    "ER_ci": [
+     -36.998,
+     44.725
+    ],
+    "resolved": false,
+    "pid": 1938,
+    "name": "Manu Ginobili"
+   },
+   {
+    "n": 503,
+    "shots": 82,
+    "beta_clock": 0.0201,
+    "beta_clock_ci": [
+     -0.0466,
+     0.0807
+    ],
+    "beta_open": 0.3423,
+    "ER": -17.031,
+    "ER_ci": [
+     -151.87,
+     115.279
+    ],
+    "resolved": false,
+    "pid": 2037,
+    "name": "Jamal Crawford"
+   },
+   {
+    "n": 809,
+    "shots": 175,
+    "beta_clock": -0.0959,
+    "beta_clock_ci": [
+     -0.167,
+     -0.0367
+    ],
+    "beta_open": 0.497,
+    "ER": 5.182,
+    "ER_ci": [
+     3.095,
+     13.674
+    ],
+    "resolved": true,
+    "pid": 2200,
+    "name": "Pau Gasol"
+   },
+   {
+    "n": 809,
+    "shots": 103,
+    "beta_clock": -0.0857,
+    "beta_clock_ci": [
+     -0.1367,
+     -0.0376
+    ],
+    "beta_open": 0.4782,
+    "ER": 5.581,
+    "ER_ci": [
+     3.43,
+     13.453
+    ],
+    "resolved": true,
+    "pid": 2207,
+    "name": "Joe Johnson"
+   },
+   {
+    "n": 526,
+    "shots": 58,
+    "beta_clock": -0.1289,
+    "beta_clock_ci": [
+     -0.2478,
+     -0.0281
+    ],
+    "beta_open": 0.5721,
+    "ER": 4.436,
+    "ER_ci": [
+     2.215,
+     17.191
+    ],
+    "resolved": true,
+    "pid": 2216,
+    "name": "Zach Randolph"
+   },
+   {
+    "n": 556,
+    "shots": 34,
+    "beta_clock": -0.1254,
+    "beta_clock_ci": [
+     -0.2289,
+     -0.0413
+    ],
+    "beta_open": 0.493,
+    "ER": 3.933,
+    "ER_ci": [
+     1.774,
+     13.192
+    ],
+    "resolved": true,
+    "pid": 2225,
+    "name": "Tony Parker"
+   },
+   {
+    "n": 649,
+    "shots": 150,
+    "beta_clock": -0.0948,
+    "beta_clock_ci": [
+     -0.1487,
+     -0.0472
+    ],
+    "beta_open": 0.504,
+    "ER": 5.314,
+    "ER_ci": [
+     3.538,
+     11.069
+    ],
+    "resolved": true,
+    "pid": 2440,
+    "name": "Matt Barnes"
+   },
+   {
+    "n": 678,
+    "shots": 118,
+    "beta_clock": -0.0729,
+    "beta_clock_ci": [
+     -0.1572,
+     0.0095
+    ],
+    "beta_open": 0.6725,
+    "ER": 9.231,
+    "ER_ci": [
+     -39.633,
+     71.431
+    ],
+    "resolved": false,
+    "pid": 2449,
+    "name": "Luis Scola"
+   },
+   {
+    "n": 610,
+    "shots": 38,
+    "beta_clock": -0.1003,
+    "beta_clock_ci": [
+     -0.1848,
+     -0.0436
+    ],
+    "beta_open": 0.4645,
+    "ER": 4.629,
+    "ER_ci": [
+     2.588,
+     10.076
+    ],
+    "resolved": true,
+    "pid": 2544,
+    "name": "LeBron James"
+   },
+   {
+    "n": 935,
+    "shots": 117,
+    "beta_clock": -0.0712,
+    "beta_clock_ci": [
+     -0.1316,
+     -0.0111
+    ],
+    "beta_open": 0.5869,
+    "ER": 8.246,
+    "ER_ci": [
+     4.455,
+     40.831
+    ],
+    "resolved": true,
+    "pid": 2546,
+    "name": "Carmelo Anthony"
+   },
+   {
+    "n": 1226,
+    "shots": 223,
+    "beta_clock": -0.0117,
+    "beta_clock_ci": [
+     -0.0577,
+     0.037
+    ],
+    "beta_open": 0.5111,
+    "ER": 43.841,
+    "ER_ci": [
+     -335.799,
+     384.761
+    ],
+    "resolved": false,
+    "pid": 2547,
+    "name": "Chris Bosh"
+   },
+   {
+    "n": 793,
+    "shots": 36,
+    "beta_clock": -0.1416,
+    "beta_clock_ci": [
+     -0.2574,
+     -0.0468
+    ],
+    "beta_open": 0.2801,
+    "ER": 1.977,
+    "ER_ci": [
+     0.839,
+     5.797
+    ],
+    "resolved": true,
+    "pid": 2548,
+    "name": "Dwyane Wade"
+   },
+   {
+    "n": 312,
+    "shots": 53,
+    "beta_clock": 0.0508,
+    "beta_clock_ci": [
+     -0.0137,
+     0.1301
+    ],
+    "beta_open": 0.4337,
+    "ER": -8.544,
+    "ER_ci": [
+     -65.366,
+     55.777
+    ],
+    "resolved": false,
+    "pid": 2561,
+    "name": "David West"
+   },
+   {
+    "n": 457,
+    "shots": 33,
+    "beta_clock": -0.1764,
+    "beta_clock_ci": [
+     -0.305,
+     -0.0776
+    ],
+    "beta_open": 0.6112,
+    "ER": 3.464,
+    "ER_ci": [
+     1.751,
+     9.788
+    ],
+    "resolved": true,
+    "pid": 2564,
+    "name": "Boris Diaw"
+   },
+   {
+    "n": 303,
+    "shots": 47,
+    "beta_clock": -0.0156,
+    "beta_clock_ci": [
+     -0.1015,
+     0.0762
+    ],
+    "beta_open": 0.35,
+    "ER": 22.439,
+    "ER_ci": [
+     -123.437,
+     125.156
+    ],
+    "resolved": false,
+    "pid": 2571,
+    "name": "Leandro Barbosa"
+   },
+   {
+    "n": 493,
+    "shots": 30,
+    "beta_clock": -0.0768,
+    "beta_clock_ci": [
+     -0.203,
+     0.0265
+    ],
+    "beta_open": 0.3811,
+    "ER": 4.962,
+    "ER_ci": [
+     -40.098,
+     36.923
+    ],
+    "resolved": false,
+    "pid": 2585,
+    "name": "Zaza Pachulia"
+   },
+   {
+    "n": 641,
+    "shots": 166,
+    "beta_clock": 0.0375,
+    "beta_clock_ci": [
+     -0.0047,
+     0.0818
+    ],
+    "beta_open": 0.1666,
+    "ER": -4.44,
+    "ER_ci": [
+     -30.623,
+     18.42
+    ],
+    "resolved": false,
+    "pid": 2594,
+    "name": "Kyle Korver"
+   },
+   {
+    "n": 442,
+    "shots": 54,
+    "beta_clock": -0.0694,
+    "beta_clock_ci": [
+     -0.1467,
+     -0.0101
+    ],
+    "beta_open": 0.4983,
+    "ER": 7.177,
+    "ER_ci": [
+     2.569,
+     31.044
+    ],
+    "resolved": true,
+    "pid": 2734,
+    "name": "Devin Harris"
+   },
+   {
+    "n": 592,
+    "shots": 122,
+    "beta_clock": -0.0475,
+    "beta_clock_ci": [
+     -0.1089,
+     -0.0006
+    ],
+    "beta_open": 0.4795,
+    "ER": 10.085,
+    "ER_ci": [
+     3.369,
+     45.841
+    ],
+    "resolved": true,
+    "pid": 2736,
+    "name": "Luol Deng"
+   },
+   {
+    "n": 481,
+    "shots": 54,
+    "beta_clock": -0.122,
+    "beta_clock_ci": [
+     -0.2376,
+     -0.0379
+    ],
+    "beta_open": 0.374,
+    "ER": 3.067,
+    "ER_ci": [
+     1.406,
+     9.948
+    ],
+    "resolved": true,
+    "pid": 2738,
+    "name": "Andre Iguodala"
+   },
+   {
+    "n": 469,
+    "shots": 109,
+    "beta_clock": 0.0043,
+    "beta_clock_ci": [
+     -0.05,
+     0.0531
+    ],
+    "beta_open": 0.3942,
+    "ER": -92.305,
+    "ER_ci": [
+     -252.645,
+     251.758
+    ],
+    "resolved": false,
+    "pid": 2747,
+    "name": "JR Smith"
+   },
+   {
+    "n": 517,
+    "shots": 57,
+    "beta_clock": -0.1128,
+    "beta_clock_ci": [
+     -0.1961,
+     -0.0508
+    ],
+    "beta_open": 0.3872,
+    "ER": 3.434,
+    "ER_ci": [
+     1.89,
+     8.8
+    ],
+    "resolved": true,
+    "pid": 2749,
+    "name": "Jameer Nelson"
+   },
+   {
+    "n": 441,
+    "shots": 76,
+    "beta_clock": -0.0622,
+    "beta_clock_ci": [
+     -0.1277,
+     -0.0119
+    ],
+    "beta_open": 0.4039,
+    "ER": 6.495,
+    "ER_ci": [
+     2.897,
+     28.468
+    ],
+    "resolved": true,
+    "pid": 2755,
+    "name": "Kevin Martin"
+   },
+   {
+    "n": 725,
+    "shots": 128,
+    "beta_clock": 0.0357,
+    "beta_clock_ci": [
+     -0.012,
+     0.0842
+    ],
+    "beta_open": 0.4825,
+    "ER": -13.524,
+    "ER_ci": [
+     -143.718,
+     117.023
+    ],
+    "resolved": false,
+    "pid": 2772,
+    "name": "Trevor Ariza"
+   },
+   {
+    "n": 686,
+    "shots": 164,
+    "beta_clock": 0.0001,
+    "beta_clock_ci": [
+     -0.062,
+     0.0686
+    ],
+    "beta_open": 0.5456,
+    "ER": -3830.998,
+    "ER_ci": [
+     -300.894,
+     251.92
+    ],
+    "resolved": false,
+    "pid": 101107,
+    "name": "Marvin Williams"
+   },
+   {
+    "n": 501,
+    "shots": 36,
+    "beta_clock": -0.0983,
+    "beta_clock_ci": [
+     -0.1878,
+     -0.0174
+    ],
+    "beta_open": 0.3365,
+    "ER": 3.424,
+    "ER_ci": [
+     1.351,
+     18.473
+    ],
+    "resolved": true,
+    "pid": 101108,
+    "name": "Chris Paul"
+   },
+   {
+    "n": 602,
+    "shots": 81,
+    "beta_clock": -0.1154,
+    "beta_clock_ci": [
+     -0.1757,
+     -0.0614
+    ],
+    "beta_open": 0.4351,
+    "ER": 3.771,
+    "ER_ci": [
+     2.097,
+     7.666
+    ],
+    "resolved": true,
+    "pid": 101109,
+    "name": "Raymond Felton"
+   },
+   {
+    "n": 354,
+    "shots": 89,
+    "beta_clock": -0.0866,
+    "beta_clock_ci": [
+     -0.1813,
+     -0.025
+    ],
+    "beta_open": 0.4337,
+    "ER": 5.006,
+    "ER_ci": [
+     2.693,
+     16.874
+    ],
+    "resolved": true,
+    "pid": 101112,
+    "name": "Channing Frye"
+   },
+   {
+    "n": 671,
+    "shots": 95,
+    "beta_clock": -0.0325,
+    "beta_clock_ci": [
+     -0.0972,
+     0.02
+    ],
+    "beta_open": 0.4359,
+    "ER": 13.398,
+    "ER_ci": [
+     -194.671,
+     136.328
+    ],
+    "resolved": false,
+    "pid": 101114,
+    "name": "Deron Williams"
+   },
+   {
+    "n": 484,
+    "shots": 127,
+    "beta_clock": -0.003,
+    "beta_clock_ci": [
+     -0.0548,
+     0.0547
+    ],
+    "beta_open": 0.2205,
+    "ER": 73.704,
+    "ER_ci": [
+     -92.352,
+     110.981
+    ],
+    "resolved": false,
+    "pid": 101123,
+    "name": "Gerald Green"
+   },
+   {
+    "n": 470,
+    "shots": 46,
+    "beta_clock": -0.1297,
+    "beta_clock_ci": [
+     -0.2193,
+     -0.0609
+    ],
+    "beta_open": 0.256,
+    "ER": 1.974,
+    "ER_ci": [
+     0.823,
+     4.122
+    ],
+    "resolved": true,
+    "pid": 101127,
+    "name": "Jarrett Jack"
+   },
+   {
+    "n": 374,
+    "shots": 23,
+    "beta_clock": -0.1937,
+    "beta_clock_ci": [
+     -0.3681,
+     -0.0626
+    ],
+    "beta_open": 0.5921,
+    "ER": 3.057,
+    "ER_ci": [
+     1.886,
+     8.679
+    ],
+    "resolved": true,
+    "pid": 101133,
+    "name": "Ian Mahinmi"
+   },
+   {
+    "n": 491,
+    "shots": 158,
+    "beta_clock": -0.0397,
+    "beta_clock_ci": [
+     -0.0876,
+     0.0119
+    ],
+    "beta_open": 0.3471,
+    "ER": 8.75,
+    "ER_ci": [
+     -57.25,
+     67.805
+    ],
+    "resolved": false,
+    "pid": 101139,
+    "name": "CJ Miles"
+   },
+   {
+    "n": 732,
+    "shots": 142,
+    "beta_clock": 0.0045,
+    "beta_clock_ci": [
+     -0.043,
+     0.0504
+    ],
+    "beta_open": 0.361,
+    "ER": -79.814,
+    "ER_ci": [
+     -155.207,
+     458.978
+    ],
+    "resolved": false,
+    "pid": 101141,
+    "name": "Ersan Ilyasova"
+   },
+   {
+    "n": 671,
+    "shots": 80,
+    "beta_clock": -0.1583,
+    "beta_clock_ci": [
+     -0.2274,
+     -0.1062
+    ],
+    "beta_open": 0.3337,
+    "ER": 2.107,
+    "ER_ci": [
+     1.387,
+     3.571
+    ],
+    "resolved": true,
+    "pid": 101145,
+    "name": "Monta Ellis"
+   },
+   {
+    "n": 457,
+    "shots": 82,
+    "beta_clock": -0.0637,
+    "beta_clock_ci": [
+     -0.1322,
+     0.0004
+    ],
+    "beta_open": 0.2949,
+    "ER": 4.629,
+    "ER_ci": [
+     -8.032,
+     25.287
+    ],
+    "resolved": false,
+    "pid": 101150,
+    "name": "Lou Williams"
+   },
+   {
+    "n": 416,
+    "shots": 20,
+    "beta_clock": -0.0863,
+    "beta_clock_ci": [
+     -0.3127,
+     0.0982
+    ],
+    "beta_open": 0.4805,
+    "ER": 5.568,
+    "ER_ci": [
+     -28.036,
+     39.035
+    ],
+    "resolved": false,
+    "pid": 101161,
+    "name": "Amir Johnson"
+   },
+   {
+    "n": 700,
+    "shots": 107,
+    "beta_clock": -0.0596,
+    "beta_clock_ci": [
+     -0.1091,
+     -0.0142
+    ],
+    "beta_open": 0.4945,
+    "ER": 8.29,
+    "ER_ci": [
+     4.309,
+     31.554
+    ],
+    "resolved": true,
+    "pid": 101181,
+    "name": "Jose Calderon"
+   },
+   {
+    "n": 541,
+    "shots": 110,
+    "beta_clock": -0.0905,
+    "beta_clock_ci": [
+     -0.1604,
+     -0.0296
+    ],
+    "beta_open": 0.4313,
+    "ER": 4.766,
+    "ER_ci": [
+     2.349,
+     16.19
+    ],
+    "resolved": true,
+    "pid": 200746,
+    "name": "LaMarcus Aldridge"
+   },
+   {
+    "n": 460,
+    "shots": 81,
+    "beta_clock": -0.0257,
+    "beta_clock_ci": [
+     -0.0876,
+     0.0249
+    ],
+    "beta_open": 0.5379,
+    "ER": 20.961,
+    "ER_ci": [
+     -222.732,
+     155.737
+    ],
+    "resolved": false,
+    "pid": 200751,
+    "name": "Randy Foye"
+   },
+   {
+    "n": 592,
+    "shots": 101,
+    "beta_clock": 0.023,
+    "beta_clock_ci": [
+     -0.0331,
+     0.099
+    ],
+    "beta_open": 0.5069,
+    "ER": -22.045,
+    "ER_ci": [
+     -198.904,
+     205.977
+    ],
+    "resolved": false,
+    "pid": 200752,
+    "name": "Rudy Gay"
+   },
+   {
+    "n": 739,
+    "shots": 195,
+    "beta_clock": -0.0056,
+    "beta_clock_ci": [
+     -0.0551,
+     0.0398
+    ],
+    "beta_open": 0.3197,
+    "ER": 56.79,
+    "ER_ci": [
+     -206.802,
+     199.062
+    ],
+    "resolved": false,
+    "pid": 200755,
+    "name": "JJ Redick"
+   },
+   {
+    "n": 358,
+    "shots": 56,
+    "beta_clock": -0.0767,
+    "beta_clock_ci": [
+     -0.1868,
+     0.0162
+    ],
+    "beta_open": 0.5826,
+    "ER": 7.599,
+    "ER_ci": [
+     -32.371,
+     96.304
+    ],
+    "resolved": false,
+    "pid": 200757,
+    "name": "Thabo Sefolosha"
+   },
+   {
+    "n": 488,
+    "shots": 62,
+    "beta_clock": -0.0341,
+    "beta_clock_ci": [
+     -0.1231,
+     0.049
+    ],
+    "beta_open": 0.4445,
+    "ER": 13.044,
+    "ER_ci": [
+     -148.744,
+     118.057
+    ],
+    "resolved": false,
+    "pid": 200765,
+    "name": "Rajon Rondo"
+   },
+   {
+    "n": 821,
+    "shots": 128,
+    "beta_clock": 0.0323,
+    "beta_clock_ci": [
+     -0.0113,
+     0.0753
+    ],
+    "beta_open": 0.3555,
+    "ER": -10.992,
+    "ER_ci": [
+     -96.797,
+     73.987
+    ],
+    "resolved": false,
+    "pid": 200768,
+    "name": "Kyle Lowry"
+   },
+   {
+    "n": 558,
+    "shots": 85,
+    "beta_clock": -0.0681,
+    "beta_clock_ci": [
+     -0.1534,
+     0.0105
+    ],
+    "beta_open": 0.7365,
+    "ER": 10.815,
+    "ER_ci": [
+     -60.101,
+     87.869
+    ],
+    "resolved": false,
+    "pid": 200782,
+    "name": "PJ Tucker"
+   },
+   {
+    "n": 813,
+    "shots": 103,
+    "beta_clock": -0.0692,
+    "beta_clock_ci": [
+     -0.1357,
+     -0.0081
+    ],
+    "beta_open": 0.5251,
+    "ER": 7.584,
+    "ER_ci": [
+     3.864,
+     46.223
+    ],
+    "resolved": true,
+    "pid": 200794,
+    "name": "Paul Millsap"
+   },
+   {
+    "n": 373,
+    "shots": 53,
+    "beta_clock": -0.1451,
+    "beta_clock_ci": [
+     -0.2358,
+     -0.0644
+    ],
+    "beta_open": 0.6596,
+    "ER": 4.547,
+    "ER_ci": [
+     2.845,
+     11.831
+    ],
+    "resolved": true,
+    "pid": 200826,
+    "name": "J.J. Barea"
+   },
+   {
+    "n": 804,
+    "shots": 136,
+    "beta_clock": -0.0062,
+    "beta_clock_ci": [
+     -0.0615,
+     0.0535
+    ],
+    "beta_open": 0.3501,
+    "ER": 56.857,
+    "ER_ci": [
+     -237.465,
+     197.838
+    ],
+    "resolved": false,
+    "pid": 201142,
+    "name": "Kevin Durant"
+   },
+   {
+    "n": 789,
+    "shots": 172,
+    "beta_clock": -0.0057,
+    "beta_clock_ci": [
+     -0.0527,
+     0.042
+    ],
+    "beta_open": 0.4616,
+    "ER": 81.598,
+    "ER_ci": [
+     -256.336,
+     292.73
+    ],
+    "resolved": false,
+    "pid": 201143,
+    "name": "Al Horford"
+   },
+   {
+    "n": 735,
+    "shots": 91,
+    "beta_clock": -0.1023,
+    "beta_clock_ci": [
+     -0.1585,
+     -0.0517
+    ],
+    "beta_open": 0.4243,
+    "ER": 4.149,
+    "ER_ci": [
+     2.596,
+     8.14
+    ],
+    "resolved": true,
+    "pid": 201144,
+    "name": "Mike Conley"
+   },
+   {
+    "n": 697,
+    "shots": 84,
+    "beta_clock": -0.0784,
+    "beta_clock_ci": [
+     -0.1408,
+     -0.0155
+    ],
+    "beta_open": 0.5022,
+    "ER": 6.404,
+    "ER_ci": [
+     3.336,
+     30.912
+    ],
+    "resolved": true,
+    "pid": 201145,
+    "name": "Jeff Green"
+   },
+   {
+    "n": 326,
+    "shots": 67,
+    "beta_clock": -0.0648,
+    "beta_clock_ci": [
+     -0.1204,
+     -0.0082
+    ],
+    "beta_open": 0.3381,
+    "ER": 5.219,
+    "ER_ci": [
+     2.114,
+     28.869
+    ],
+    "resolved": true,
+    "pid": 201147,
+    "name": "Corey Brewer"
+   },
+   {
+    "n": 331,
+    "shots": 5,
+    "beta_clock": 0.118,
+    "beta_clock_ci": [
+     -1.1875,
+     12.3388
+    ],
+    "beta_open": 0.3615,
+    "ER": -3.063,
+    "ER_ci": [
+     -14.774,
+     9.445
+    ],
+    "resolved": false,
+    "pid": 201149,
+    "name": "Joakim Noah"
+   },
+   {
+    "n": 364,
+    "shots": 56,
+    "beta_clock": -0.1069,
+    "beta_clock_ci": [
+     -0.2009,
+     -0.0259
+    ],
+    "beta_open": 0.6084,
+    "ER": 5.694,
+    "ER_ci": [
+     3.175,
+     23.498
+    ],
+    "resolved": true,
+    "pid": 201150,
+    "name": "Spencer Hawes"
+   },
+   {
+    "n": 474,
+    "shots": 45,
+    "beta_clock": -0.0674,
+    "beta_clock_ci": [
+     -0.1723,
+     0.0298
+    ],
+    "beta_open": 0.5047,
+    "ER": 7.49,
+    "ER_ci": [
+     -34.892,
+     62.652
+    ],
+    "resolved": false,
+    "pid": 201152,
+    "name": "Thaddeus Young"
+   },
+   {
+    "n": 420,
+    "shots": 38,
+    "beta_clock": -0.0488,
+    "beta_clock_ci": [
+     -0.1521,
+     0.0403
+    ],
+    "beta_open": 0.4662,
+    "ER": 9.562,
+    "ER_ci": [
+     -110.737,
+     149.996
+    ],
+    "resolved": false,
+    "pid": 201155,
+    "name": "Rodney Stuckey"
+   },
+   {
+    "n": 701,
+    "shots": 189,
+    "beta_clock": -0.0482,
+    "beta_clock_ci": [
+     -0.096,
+     0.001
+    ],
+    "beta_open": 0.3114,
+    "ER": 6.456,
+    "ER_ci": [
+     -16.237,
+     47.785
+    ],
+    "resolved": false,
+    "pid": 201158,
+    "name": "Marco Belinelli"
+   },
+   {
+    "n": 659,
+    "shots": 152,
+    "beta_clock": -0.0198,
+    "beta_clock_ci": [
+     -0.0603,
+     0.0161
+    ],
+    "beta_open": 0.6519,
+    "ER": 32.869,
+    "ER_ci": [
+     -266.417,
+     360.722
+    ],
+    "resolved": false,
+    "pid": 201162,
+    "name": "Jared Dudley"
+   },
+   {
+    "n": 610,
+    "shots": 113,
+    "beta_clock": -0.0081,
+    "beta_clock_ci": [
+     -0.0771,
+     0.0588
+    ],
+    "beta_open": 0.4846,
+    "ER": 60.158,
+    "ER_ci": [
+     -212.977,
+     264.194
+    ],
+    "resolved": false,
+    "pid": 201167,
+    "name": "Arron Afflalo"
+   },
+   {
+    "n": 1087,
+    "shots": 126,
+    "beta_clock": -0.1133,
+    "beta_clock_ci": [
+     -0.1876,
+     -0.0429
+    ],
+    "beta_open": 0.5277,
+    "ER": 4.659,
+    "ER_ci": [
+     2.698,
+     11.87
+    ],
+    "resolved": true,
+    "pid": 201188,
+    "name": "Marc Gasol"
+   },
+   {
+    "n": 393,
+    "shots": 51,
+    "beta_clock": -0.0802,
+    "beta_clock_ci": [
+     -0.1605,
+     -0.013
+    ],
+    "beta_open": 0.5029,
+    "ER": 6.266,
+    "ER_ci": [
+     2.65,
+     25.238
+    ],
+    "resolved": true,
+    "pid": 201196,
+    "name": "Ramon Sessions"
+   },
+   {
+    "n": 486,
+    "shots": 134,
+    "beta_clock": -0.0771,
+    "beta_clock_ci": [
+     -0.1552,
+     -0.0031
+    ],
+    "beta_open": 0.5984,
+    "ER": 7.761,
+    "ER_ci": [
+     3.449,
+     38.352
+    ],
+    "resolved": true,
+    "pid": 201229,
+    "name": "Anthony Tolliver"
+   },
+   {
+    "n": 434,
+    "shots": 79,
+    "beta_clock": 0.0188,
+    "beta_clock_ci": [
+     -0.063,
+     0.1069
+    ],
+    "beta_open": 0.3335,
+    "ER": -17.735,
+    "ER_ci": [
+     -91.65,
+     90.126
+    ],
+    "resolved": false,
+    "pid": 201564,
+    "name": "O.J. Mayo"
+   },
+   {
+    "n": 371,
+    "shots": 51,
+    "beta_clock": -0.0266,
+    "beta_clock_ci": [
+     -0.0963,
+     0.0719
+    ],
+    "beta_open": 0.3066,
+    "ER": 11.529,
+    "ER_ci": [
+     -91.529,
+     90.779
+    ],
+    "resolved": false,
+    "pid": 201565,
+    "name": "Derrick Rose"
+   },
+   {
+    "n": 581,
+    "shots": 48,
+    "beta_clock": -0.0556,
+    "beta_clock_ci": [
+     -0.1224,
+     0.0075
+    ],
+    "beta_open": 0.2628,
+    "ER": 4.729,
+    "ER_ci": [
+     -18.779,
+     27.036
+    ],
+    "resolved": false,
+    "pid": 201566,
+    "name": "Russell Westbrook"
+   },
+   {
+    "n": 595,
+    "shots": 137,
+    "beta_clock": -0.0442,
+    "beta_clock_ci": [
+     -0.0926,
+     0.0063
+    ],
+    "beta_open": 0.4575,
+    "ER": 10.353,
+    "ER_ci": [
+     -33.291,
+     76.306
+    ],
+    "resolved": false,
+    "pid": 201567,
+    "name": "Kevin Love"
+   },
+   {
+    "n": 713,
+    "shots": 108,
+    "beta_clock": -0.1004,
+    "beta_clock_ci": [
+     -0.163,
+     -0.0381
+    ],
+    "beta_open": 0.4163,
+    "ER": 4.146,
+    "ER_ci": [
+     2.434,
+     10.853
+    ],
+    "resolved": true,
+    "pid": 201568,
+    "name": "Danilo Gallinari"
+   },
+   {
+    "n": 850,
+    "shots": 181,
+    "beta_clock": -0.0686,
+    "beta_clock_ci": [
+     -0.1212,
+     -0.0252
+    ],
+    "beta_open": 0.5692,
+    "ER": 8.297,
+    "ER_ci": [
+     4.81,
+     22.628
+    ],
+    "resolved": true,
+    "pid": 201569,
+    "name": "Eric Gordon"
+   },
+   {
+    "n": 504,
+    "shots": 84,
+    "beta_clock": -0.1059,
+    "beta_clock_ci": [
+     -0.2117,
+     -0.0187
+    ],
+    "beta_open": 0.4586,
+    "ER": 4.329,
+    "ER_ci": [
+     2.027,
+     23.681
+    ],
+    "resolved": true,
+    "pid": 201572,
+    "name": "Brook Lopez"
+   },
+   {
+    "n": 428,
+    "shots": 89,
+    "beta_clock": -0.0846,
+    "beta_clock_ci": [
+     -0.1595,
+     -0.0274
+    ],
+    "beta_open": 0.4031,
+    "ER": 4.762,
+    "ER_ci": [
+     2.766,
+     13.674
+    ],
+    "resolved": true,
+    "pid": 201573,
+    "name": "Jerryd Bayless"
+   },
+   {
+    "n": 334,
+    "shots": 20,
+    "beta_clock": -0.1602,
+    "beta_clock_ci": [
+     -0.3744,
+     0.029
+    ],
+    "beta_open": 0.7659,
+    "ER": 4.781,
+    "ER_ci": [
+     -12.069,
+     34.313
+    ],
+    "resolved": false,
+    "pid": 201577,
+    "name": "Robin Lopez"
+   },
+   {
+    "n": 380,
+    "shots": 41,
+    "beta_clock": 0.0168,
+    "beta_clock_ci": [
+     -0.1429,
+     0.1947
+    ],
+    "beta_open": 0.6861,
+    "ER": -40.898,
+    "ER_ci": [
+     -122.88,
+     108.477
+    ],
+    "resolved": false,
+    "pid": 201579,
+    "name": "Roy Hibbert"
+   },
+   {
+    "n": 677,
+    "shots": 164,
+    "beta_clock": -0.043,
+    "beta_clock_ci": [
+     -0.0977,
+     0.0119
+    ],
+    "beta_open": 0.5339,
+    "ER": 12.412,
+    "ER_ci": [
+     -67.635,
+     135.469
+    ],
+    "resolved": false,
+    "pid": 201583,
+    "name": "Ryan Anderson"
+   },
+   {
+    "n": 707,
+    "shots": 110,
+    "beta_clock": -0.0008,
+    "beta_clock_ci": [
+     -0.07,
+     0.0661
+    ],
+    "beta_open": 0.61,
+    "ER": 789.45,
+    "ER_ci": [
+     -219.751,
+     256.498
+    ],
+    "resolved": false,
+    "pid": 201584,
+    "name": "Courtney Lee"
+   },
+   {
+    "n": 740,
+    "shots": 242,
+    "beta_clock": 0.0594,
+    "beta_clock_ci": [
+     0.0089,
+     0.1108
+    ],
+    "beta_open": 0.5035,
+    "ER": -8.476,
+    "ER_ci": [
+     -37.053,
+     -4.522
+    ],
+    "resolved": true,
+    "pid": 201586,
+    "name": "Serge Ibaka"
+   },
+   {
+    "n": 1076,
+    "shots": 136,
+    "beta_clock": -0.0707,
+    "beta_clock_ci": [
+     -0.1356,
+     -0.0168
+    ],
+    "beta_open": 0.2708,
+    "ER": 3.829,
+    "ER_ci": [
+     1.951,
+     15.66
+    ],
+    "resolved": true,
+    "pid": 201587,
+    "name": "Nicolas Batum"
+   },
+   {
+    "n": 510,
+    "shots": 85,
+    "beta_clock": -0.0852,
+    "beta_clock_ci": [
+     -0.1469,
+     -0.0345
+    ],
+    "beta_open": 0.5558,
+    "ER": 6.52,
+    "ER_ci": [
+     3.776,
+     17.061
+    ],
+    "resolved": true,
+    "pid": 201588,
+    "name": "George Hill"
+   },
+   {
+    "n": 472,
+    "shots": 113,
+    "beta_clock": -0.08,
+    "beta_clock_ci": [
+     -0.1527,
+     -0.0052
+    ],
+    "beta_open": 0.4609,
+    "ER": 5.759,
+    "ER_ci": [
+     2.375,
+     31.681
+    ],
+    "resolved": true,
+    "pid": 201589,
+    "name": "Darrell Arthur"
+   },
+   {
+    "n": 414,
+    "shots": 53,
+    "beta_clock": -0.0636,
+    "beta_clock_ci": [
+     -0.132,
+     0.0143
+    ],
+    "beta_open": 0.4654,
+    "ER": 7.322,
+    "ER_ci": [
+     -15.854,
+     38.677
+    ],
+    "resolved": false,
+    "pid": 201596,
+    "name": "Mario Chalmers"
+   },
+   {
+    "n": 653,
+    "shots": 73,
+    "beta_clock": -0.1038,
+    "beta_clock_ci": [
+     -0.1893,
+     -0.0309
+    ],
+    "beta_open": 0.5191,
+    "ER": 5.001,
+    "ER_ci": [
+     2.625,
+     17.402
+    ],
+    "resolved": true,
+    "pid": 201609,
+    "name": "Goran Dragic"
+   },
+   {
+    "n": 325,
+    "shots": 108,
+    "beta_clock": -0.0218,
+    "beta_clock_ci": [
+     -0.0984,
+     0.047
+    ],
+    "beta_open": 0.5349,
+    "ER": 24.572,
+    "ER_ci": [
+     -208.682,
+     249.93
+    ],
+    "resolved": false,
+    "pid": 201627,
+    "name": "Anthony Morrow"
+   },
+   {
+    "n": 792,
+    "shots": 156,
+    "beta_clock": -0.1638,
+    "beta_clock_ci": [
+     -0.2183,
+     -0.1133
+    ],
+    "beta_open": 0.4727,
+    "ER": 2.886,
+    "ER_ci": [
+     2.118,
+     3.966
+    ],
+    "resolved": true,
+    "pid": 201933,
+    "name": "Blake Griffin"
+   },
+   {
+    "n": 596,
+    "shots": 72,
+    "beta_clock": -0.0039,
+    "beta_clock_ci": [
+     -0.0545,
+     0.0642
+    ],
+    "beta_open": 0.46,
+    "ER": 119.084,
+    "ER_ci": [
+     -250.788,
+     255.594
+    ],
+    "resolved": false,
+    "pid": 201935,
+    "name": "James Harden"
+   },
+   {
+    "n": 394,
+    "shots": 33,
+    "beta_clock": 0.0276,
+    "beta_clock_ci": [
+     -0.0527,
+     0.099
+    ],
+    "beta_open": 0.5388,
+    "ER": -19.536,
+    "ER_ci": [
+     -220.427,
+     145.018
+    ],
+    "resolved": false,
+    "pid": 201936,
+    "name": "Tyreke Evans"
+   },
+   {
+    "n": 459,
+    "shots": 86,
+    "beta_clock": -0.0614,
+    "beta_clock_ci": [
+     -0.1516,
+     0.015
+    ],
+    "beta_open": 0.4961,
+    "ER": 8.079,
+    "ER_ci": [
+     -33.022,
+     65.428
+    ],
+    "resolved": false,
+    "pid": 201937,
+    "name": "Ricky Rubio"
+   },
+   {
+    "n": 585,
+    "shots": 134,
+    "beta_clock": -0.0883,
+    "beta_clock_ci": [
+     -0.1554,
+     -0.0345
+    ],
+    "beta_open": 0.3475,
+    "ER": 3.934,
+    "ER_ci": [
+     2.266,
+     10.067
+    ],
+    "resolved": true,
+    "pid": 201939,
+    "name": "Stephen Curry"
+   },
+   {
+    "n": 416,
+    "shots": 50,
+    "beta_clock": -0.1199,
+    "beta_clock_ci": [
+     -0.2292,
+     -0.0303
+    ],
+    "beta_open": 0.5659,
+    "ER": 4.721,
+    "ER_ci": [
+     2.352,
+     19.565
+    ],
+    "resolved": true,
+    "pid": 201941,
+    "name": "Jordan Hill"
+   },
+   {
+    "n": 1031,
+    "shots": 81,
+    "beta_clock": -0.1399,
+    "beta_clock_ci": [
+     -0.2176,
+     -0.0806
+    ],
+    "beta_open": 0.393,
+    "ER": 2.81,
+    "ER_ci": [
+     1.665,
+     4.962
+    ],
+    "resolved": true,
+    "pid": 201942,
+    "name": "DeMar DeRozan"
+   },
+   {
+    "n": 379,
+    "shots": 55,
+    "beta_clock": -0.027,
+    "beta_clock_ci": [
+     -0.1137,
+     0.0761
+    ],
+    "beta_open": 0.6004,
+    "ER": 22.223,
+    "ER_ci": [
+     -160.393,
+     206.602
+    ],
+    "resolved": false,
+    "pid": 201945,
+    "name": "Gerald Henderson"
+   },
+   {
+    "n": 519,
+    "shots": 26,
+    "beta_clock": -0.0755,
+    "beta_clock_ci": [
+     -0.1827,
+     0.0341
+    ],
+    "beta_open": 0.3572,
+    "ER": 4.728,
+    "ER_ci": [
+     -37.276,
+     44.539
+    ],
+    "resolved": false,
+    "pid": 201950,
+    "name": "Jrue Holiday"
+   },
+   {
+    "n": 314,
+    "shots": 27,
+    "beta_clock": -0.1149,
+    "beta_clock_ci": [
+     -0.257,
+     -0.0293
+    ],
+    "beta_open": 0.5921,
+    "ER": 5.153,
+    "ER_ci": [
+     2.697,
+     18.105
+    ],
+    "resolved": true,
+    "pid": 201951,
+    "name": "Ty Lawson"
+   },
+   {
+    "n": 569,
+    "shots": 48,
+    "beta_clock": 0.0366,
+    "beta_clock_ci": [
+     -0.0503,
+     0.1275
+    ],
+    "beta_open": 0.4706,
+    "ER": -12.858,
+    "ER_ci": [
+     -129.219,
+     76.748
+    ],
+    "resolved": false,
+    "pid": 201952,
+    "name": "Jeff Teague"
+   },
+   {
+    "n": 416,
+    "shots": 61,
+    "beta_clock": 0.021,
+    "beta_clock_ci": [
+     -0.0366,
+     0.0926
+    ],
+    "beta_open": 0.3979,
+    "ER": -18.923,
+    "ER_ci": [
+     -158.772,
+     231.171
+    ],
+    "resolved": false,
+    "pid": 201954,
+    "name": "Darren Collison"
+   },
+   {
+    "n": 539,
+    "shots": 102,
+    "beta_clock": -0.0442,
+    "beta_clock_ci": [
+     -0.0854,
+     -0.0065
+    ],
+    "beta_open": 0.3859,
+    "ER": 8.721,
+    "ER_ci": [
+     4.228,
+     35.482
+    ],
+    "resolved": true,
+    "pid": 201956,
+    "name": "Omri Casspi"
+   },
+   {
+    "n": 362,
+    "shots": 80,
+    "beta_clock": 0.0,
+    "beta_clock_ci": [
+     -0.0794,
+     0.0823
+    ],
+    "beta_open": 0.6285,
+    "ER": -20755.454,
+    "ER_ci": [
+     -289.863,
+     303.011
+    ],
+    "resolved": false,
+    "pid": 201960,
+    "name": "DeMarre Carroll"
+   },
+   {
+    "n": 394,
+    "shots": 87,
+    "beta_clock": -0.0538,
+    "beta_clock_ci": [
+     -0.1322,
+     0.0135
+    ],
+    "beta_open": 0.3913,
+    "ER": 7.279,
+    "ER_ci": [
+     -33.387,
+     69.009
+    ],
+    "resolved": false,
+    "pid": 201961,
+    "name": "Wayne Ellington"
+   },
+   {
+    "n": 318,
+    "shots": 76,
+    "beta_clock": -0.1122,
+    "beta_clock_ci": [
+     -0.2141,
+     -0.0326
+    ],
+    "beta_open": 0.6183,
+    "ER": 5.512,
+    "ER_ci": [
+     3.03,
+     18.624
+    ],
+    "resolved": true,
+    "pid": 201967,
+    "name": "Dante Cunningham"
+   },
+   {
+    "n": 347,
+    "shots": 72,
+    "beta_clock": -0.0211,
+    "beta_clock_ci": [
+     -0.092,
+     0.0435
+    ],
+    "beta_open": 0.5522,
+    "ER": 26.114,
+    "ER_ci": [
+     -220.745,
+     201.082
+    ],
+    "resolved": false,
+    "pid": 201976,
+    "name": "Patrick Beverley"
+   },
+   {
+    "n": 356,
+    "shots": 93,
+    "beta_clock": -0.0165,
+    "beta_clock_ci": [
+     -0.0714,
+     0.0365
+    ],
+    "beta_open": 0.4911,
+    "ER": 29.68,
+    "ER_ci": [
+     -244.393,
+     228.284
+    ],
+    "resolved": false,
+    "pid": 201977,
+    "name": "Marcus Thornton"
+   },
+   {
+    "n": 305,
+    "shots": 56,
+    "beta_clock": -0.0508,
+    "beta_clock_ci": [
+     -0.1616,
+     0.0484
+    ],
+    "beta_open": 0.5888,
+    "ER": 11.588,
+    "ER_ci": [
+     -92.764,
+     106.371
+    ],
+    "resolved": false,
+    "pid": 201978,
+    "name": "Chase Budinger"
+   },
+   {
+    "n": 636,
+    "shots": 127,
+    "beta_clock": -0.0094,
+    "beta_clock_ci": [
+     -0.0638,
+     0.0519
+    ],
+    "beta_open": 0.6292,
+    "ER": 66.874,
+    "ER_ci": [
+     -315.025,
+     390.404
+    ],
+    "resolved": false,
+    "pid": 201980,
+    "name": "Danny Green"
+   },
+   {
+    "n": 499,
+    "shots": 88,
+    "beta_clock": -0.1053,
+    "beta_clock_ci": [
+     -0.1711,
+     -0.0479
+    ],
+    "beta_open": 0.455,
+    "ER": 4.322,
+    "ER_ci": [
+     2.621,
+     9.354
+    ],
+    "resolved": true,
+    "pid": 201988,
+    "name": "Patty Mills"
+   },
+   {
+    "n": 510,
+    "shots": 101,
+    "beta_clock": -0.0335,
+    "beta_clock_ci": [
+     -0.0971,
+     0.041
+    ],
+    "beta_open": 0.5151,
+    "ER": 15.374,
+    "ER_ci": [
+     -128.752,
+     174.25
+    ],
+    "resolved": false,
+    "pid": 202066,
+    "name": "Garrett Temple"
+   },
+   {
+    "n": 927,
+    "shots": 184,
+    "beta_clock": -0.0893,
+    "beta_clock_ci": [
+     -0.1289,
+     -0.0489
+    ],
+    "beta_open": 0.4771,
+    "ER": 5.344,
+    "ER_ci": [
+     3.725,
+     9.92
+    ],
+    "resolved": true,
+    "pid": 202083,
+    "name": "Wesley Matthews"
+   },
+   {
+    "n": 603,
+    "shots": 77,
+    "beta_clock": -0.0687,
+    "beta_clock_ci": [
+     -0.1315,
+     -0.014
+    ],
+    "beta_open": 0.3639,
+    "ER": 5.299,
+    "ER_ci": [
+     2.561,
+     23.919
+    ],
+    "resolved": true,
+    "pid": 202322,
+    "name": "John Wall"
+   },
+   {
+    "n": 545,
+    "shots": 49,
+    "beta_clock": -0.1659,
+    "beta_clock_ci": [
+     -0.2703,
+     -0.0992
+    ],
+    "beta_open": 0.4942,
+    "ER": 2.98,
+    "ER_ci": [
+     1.819,
+     5.23
+    ],
+    "resolved": true,
+    "pid": 202323,
+    "name": "Evan Turner"
+   },
+   {
+    "n": 528,
+    "shots": 74,
+    "beta_clock": -0.0914,
+    "beta_clock_ci": [
+     -0.2037,
+     0.0002
+    ],
+    "beta_open": 0.7141,
+    "ER": 7.81,
+    "ER_ci": [
+     -14.594,
+     53.429
+    ],
+    "resolved": false,
+    "pid": 202324,
+    "name": "Derrick Favors"
+   },
+   {
+    "n": 308,
+    "shots": 121,
+    "beta_clock": -0.0195,
+    "beta_clock_ci": [
+     -0.0847,
+     0.0481
+    ],
+    "beta_open": 0.2943,
+    "ER": 15.07,
+    "ER_ci": [
+     -110.076,
+     148.858
+    ],
+    "resolved": false,
+    "pid": 202325,
+    "name": "Wesley Johnson"
+   },
+   {
+    "n": 657,
+    "shots": 119,
+    "beta_clock": -0.0492,
+    "beta_clock_ci": [
+     -0.0904,
+     -0.0079
+    ],
+    "beta_open": 0.3623,
+    "ER": 7.369,
+    "ER_ci": [
+     3.703,
+     32.013
+    ],
+    "resolved": true,
+    "pid": 202326,
+    "name": "DeMarcus Cousins"
+   },
+   {
+    "n": 491,
+    "shots": 21,
+    "beta_clock": -0.036,
+    "beta_clock_ci": [
+     -0.2265,
+     0.2522
+    ],
+    "beta_open": 0.6955,
+    "ER": 19.294,
+    "ER_ci": [
+     -144.329,
+     156.947
+    ],
+    "resolved": false,
+    "pid": 202328,
+    "name": "Greg Monroe"
+   },
+   {
+    "n": 678,
+    "shots": 143,
+    "beta_clock": -0.1199,
+    "beta_clock_ci": [
+     -0.1743,
+     -0.0666
+    ],
+    "beta_open": 0.51,
+    "ER": 4.253,
+    "ER_ci": [
+     2.852,
+     7.61
+    ],
+    "resolved": true,
+    "pid": 202329,
+    "name": "Al-Farouq Aminu"
+   },
+   {
+    "n": 1234,
+    "shots": 155,
+    "beta_clock": -0.1105,
+    "beta_clock_ci": [
+     -0.1654,
+     -0.0587
+    ],
+    "beta_open": 0.4833,
+    "ER": 4.372,
+    "ER_ci": [
+     2.959,
+     8.225
+    ],
+    "resolved": true,
+    "pid": 202330,
+    "name": "Gordon Hayward"
+   },
+   {
+    "n": 799,
+    "shots": 153,
+    "beta_clock": -0.0363,
+    "beta_clock_ci": [
+     -0.0853,
+     0.0122
+    ],
+    "beta_open": 0.4609,
+    "ER": 12.687,
+    "ER_ci": [
+     -123.204,
+     95.165
+    ],
+    "resolved": false,
+    "pid": 202331,
+    "name": "Paul George"
+   },
+   {
+    "n": 580,
+    "shots": 122,
+    "beta_clock": -0.0237,
+    "beta_clock_ci": [
+     -0.0861,
+     0.0362
+    ],
+    "beta_open": 0.5606,
+    "ER": 23.61,
+    "ER_ci": [
+     -261.258,
+     204.735
+    ],
+    "resolved": false,
+    "pid": 202335,
+    "name": "Patrick Patterson"
+   },
+   {
+    "n": 553,
+    "shots": 40,
+    "beta_clock": 0.0152,
+    "beta_clock_ci": [
+     -0.0562,
+     0.1083
+    ],
+    "beta_open": 0.6098,
+    "ER": -40.135,
+    "ER_ci": [
+     -209.742,
+     205.754
+    ],
+    "resolved": false,
+    "pid": 202339,
+    "name": "Eric Bledsoe"
+   },
+   {
+    "n": 736,
+    "shots": 186,
+    "beta_clock": -0.0432,
+    "beta_clock_ci": [
+     -0.0825,
+     -0.0026
+    ],
+    "beta_open": 0.392,
+    "ER": 9.064,
+    "ER_ci": [
+     4.333,
+     59.632
+    ],
+    "resolved": true,
+    "pid": 202340,
+    "name": "Avery Bradley"
+   },
+   {
+    "n": 434,
+    "shots": 25,
+    "beta_clock": -0.2186,
+    "beta_clock_ci": [
+     -0.4343,
+     -0.07
+    ],
+    "beta_open": 0.3838,
+    "ER": 1.756,
+    "ER_ci": [
+     0.749,
+     6.817
+    ],
+    "resolved": true,
+    "pid": 202344,
+    "name": "Trevor Booker"
+   },
+   {
+    "n": 345,
+    "shots": 65,
+    "beta_clock": -0.0656,
+    "beta_clock_ci": [
+     -0.1478,
+     0.0077
+    ],
+    "beta_open": 0.3731,
+    "ER": 5.689,
+    "ER_ci": [
+     -19.768,
+     33.844
+    ],
+    "resolved": false,
+    "pid": 202357,
+    "name": "Nemanja Bjelica"
+   },
+   {
+    "n": 434,
+    "shots": 55,
+    "beta_clock": 0.0022,
+    "beta_clock_ci": [
+     -0.0591,
+     0.0673
+    ],
+    "beta_open": 0.3113,
+    "ER": -144.068,
+    "ER_ci": [
+     -152.706,
+     126.783
+    ],
+    "resolved": false,
+    "pid": 202390,
+    "name": "Gary Neal"
+   },
+   {
+    "n": 659,
+    "shots": 80,
+    "beta_clock": -0.028,
+    "beta_clock_ci": [
+     -0.084,
+     0.0303
+    ],
+    "beta_open": 0.5887,
+    "ER": 21.053,
+    "ER_ci": [
+     -300.147,
+     282.589
+    ],
+    "resolved": false,
+    "pid": 202391,
+    "name": "Jeremy Lin"
+   },
+   {
+    "n": 486,
+    "shots": 11,
+    "beta_clock": -0.103,
+    "beta_clock_ci": [
+     -0.3126,
+     0.0419
+    ],
+    "beta_open": 0.4493,
+    "ER": 4.362,
+    "ER_ci": [
+     -37.264,
+     37.707
+    ],
+    "resolved": false,
+    "pid": 202397,
+    "name": "Ish Smith"
+   },
+   {
+    "n": 535,
+    "shots": 63,
+    "beta_clock": -0.0743,
+    "beta_clock_ci": [
+     -0.1338,
+     -0.0149
+    ],
+    "beta_open": 0.4792,
+    "ER": 6.446,
+    "ER_ci": [
+     3.235,
+     31.143
+    ],
+    "resolved": true,
+    "pid": 202498,
+    "name": "Lance Thomas"
+   },
+   {
+    "n": 465,
+    "shots": 71,
+    "beta_clock": -0.0952,
+    "beta_clock_ci": [
+     -0.1783,
+     -0.0275
+    ],
+    "beta_open": 0.586,
+    "ER": 6.155,
+    "ER_ci": [
+     3.451,
+     20.5
+    ],
+    "resolved": true,
+    "pid": 202682,
+    "name": "Derrick Williams"
+   },
+   {
+    "n": 821,
+    "shots": 103,
+    "beta_clock": -0.0346,
+    "beta_clock_ci": [
+     -0.0951,
+     0.0166
+    ],
+    "beta_open": 0.4182,
+    "ER": 12.095,
+    "ER_ci": [
+     -81.44,
+     134.936
+    ],
+    "resolved": false,
+    "pid": 202688,
+    "name": "Brandon Knight"
+   },
+   {
+    "n": 726,
+    "shots": 102,
+    "beta_clock": 0.0011,
+    "beta_clock_ci": [
+     -0.0519,
+     0.0613
+    ],
+    "beta_open": 0.4795,
+    "ER": -426.489,
+    "ER_ci": [
+     -293.409,
+     316.263
+    ],
+    "resolved": false,
+    "pid": 202689,
+    "name": "Kemba Walker"
+   },
+   {
+    "n": 750,
+    "shots": 233,
+    "beta_clock": -0.0427,
+    "beta_clock_ci": [
+     -0.0858,
+     -0.0033
+    ],
+    "beta_open": 0.3978,
+    "ER": 9.326,
+    "ER_ci": [
+     4.43,
+     70.116
+    ],
+    "resolved": true,
+    "pid": 202691,
+    "name": "Klay Thompson"
+   },
+   {
+    "n": 562,
+    "shots": 38,
+    "beta_clock": -0.1237,
+    "beta_clock_ci": [
+     -0.2759,
+     -0.0201
+    ],
+    "beta_open": 0.6614,
+    "ER": 5.349,
+    "ER_ci": [
+     2.159,
+     29.21
+    ],
+    "resolved": true,
+    "pid": 202692,
+    "name": "Alec Burks"
+   },
+   {
+    "n": 399,
+    "shots": 56,
+    "beta_clock": -0.1262,
+    "beta_clock_ci": [
+     -0.2258,
+     -0.0565
+    ],
+    "beta_open": 0.582,
+    "ER": 4.612,
+    "ER_ci": [
+     2.967,
+     10.134
+    ],
+    "resolved": true,
+    "pid": 202693,
+    "name": "Markieff Morris"
+   },
+   {
+    "n": 685,
+    "shots": 101,
+    "beta_clock": -0.1265,
+    "beta_clock_ci": [
+     -0.199,
+     -0.0708
+    ],
+    "beta_open": 0.529,
+    "ER": 4.183,
+    "ER_ci": [
+     2.721,
+     7.918
+    ],
+    "resolved": true,
+    "pid": 202694,
+    "name": "Marcus Morris"
+   },
+   {
+    "n": 767,
+    "shots": 114,
+    "beta_clock": -0.0767,
+    "beta_clock_ci": [
+     -0.1286,
+     -0.0276
+    ],
+    "beta_open": 0.4909,
+    "ER": 6.397,
+    "ER_ci": [
+     3.766,
+     17.854
+    ],
+    "resolved": true,
+    "pid": 202695,
+    "name": "Kawhi Leonard"
+   },
+   {
+    "n": 528,
+    "shots": 92,
+    "beta_clock": -0.055,
+    "beta_clock_ci": [
+     -0.1262,
+     0.0108
+    ],
+    "beta_open": 0.4976,
+    "ER": 9.053,
+    "ER_ci": [
+     -60.504,
+     86.196
+    ],
+    "resolved": false,
+    "pid": 202696,
+    "name": "Nikola Vucevic"
+   },
+   {
+    "n": 656,
+    "shots": 107,
+    "beta_clock": -0.0827,
+    "beta_clock_ci": [
+     -0.1464,
+     -0.03
+    ],
+    "beta_open": 0.5464,
+    "ER": 6.61,
+    "ER_ci": [
+     3.87,
+     19.618
+    ],
+    "resolved": true,
+    "pid": 202699,
+    "name": "Tobias Harris"
+   },
+   {
+    "n": 300,
+    "shots": 30,
+    "beta_clock": 0.0309,
+    "beta_clock_ci": [
+     -0.0786,
+     0.1523
+    ],
+    "beta_open": 0.2438,
+    "ER": -7.878,
+    "ER_ci": [
+     -69.12,
+     103.051
+    ],
+    "resolved": false,
+    "pid": 202702,
+    "name": "Kenneth Faried"
+   },
+   {
+    "n": 497,
+    "shots": 132,
+    "beta_clock": -0.0182,
+    "beta_clock_ci": [
+     -0.0874,
+     0.06
+    ],
+    "beta_open": 0.2806,
+    "ER": 15.42,
+    "ER_ci": [
+     -136.66,
+     90.248
+    ],
+    "resolved": false,
+    "pid": 202703,
+    "name": "Nikola Mirotic"
+   },
+   {
+    "n": 454,
+    "shots": 56,
+    "beta_clock": -0.0884,
+    "beta_clock_ci": [
+     -0.158,
+     -0.0156
+    ],
+    "beta_open": 0.461,
+    "ER": 5.215,
+    "ER_ci": [
+     2.66,
+     18.6
+    ],
+    "resolved": true,
+    "pid": 202704,
+    "name": "Reggie Jackson"
+   },
+   {
+    "n": 505,
+    "shots": 33,
+    "beta_clock": -0.0196,
+    "beta_clock_ci": [
+     -0.114,
+     0.0675
+    ],
+    "beta_open": 0.4976,
+    "ER": 25.452,
+    "ER_ci": [
+     -114.458,
+     197.551
+    ],
+    "resolved": false,
+    "pid": 202709,
+    "name": "Cory Joseph"
+   },
+   {
+    "n": 900,
+    "shots": 81,
+    "beta_clock": -0.0564,
+    "beta_clock_ci": [
+     -0.1096,
+     -0.0112
+    ],
+    "beta_open": 0.3385,
+    "ER": 6.006,
+    "ER_ci": [
+     2.513,
+     26.281
+    ],
+    "resolved": true,
+    "pid": 202710,
+    "name": "Jimmy Butler"
+   },
+   {
+    "n": 549,
+    "shots": 106,
+    "beta_clock": -0.0039,
+    "beta_clock_ci": [
+     -0.0517,
+     0.0385
+    ],
+    "beta_open": 0.3583,
+    "ER": 91.091,
+    "ER_ci": [
+     -280.316,
+     223.043
+    ],
+    "resolved": false,
+    "pid": 202711,
+    "name": "Bojan Bogdanovic"
+   },
+   {
+    "n": 726,
+    "shots": 74,
+    "beta_clock": -0.0476,
+    "beta_clock_ci": [
+     -0.1088,
+     0.0036
+    ],
+    "beta_open": 0.4996,
+    "ER": 10.496,
+    "ER_ci": [
+     -59.108,
+     68.086
+    ],
+    "resolved": false,
+    "pid": 202718,
+    "name": "Chandler Parsons"
+   },
+   {
+    "n": 456,
+    "shots": 95,
+    "beta_clock": 0.0283,
+    "beta_clock_ci": [
+     -0.0455,
+     0.0967
+    ],
+    "beta_open": 0.5959,
+    "ER": -21.026,
+    "ER_ci": [
+     -201.6,
+     208.264
+    ],
+    "resolved": false,
+    "pid": 202720,
+    "name": "Jon Leuer"
+   },
+   {
+    "n": 349,
+    "shots": 56,
+    "beta_clock": -0.0645,
+    "beta_clock_ci": [
+     -0.174,
+     0.0534
+    ],
+    "beta_open": 0.6169,
+    "ER": 9.565,
+    "ER_ci": [
+     -68.44,
+     100.222
+    ],
+    "resolved": false,
+    "pid": 202730,
+    "name": "Lavoy Allen"
+   },
+   {
+    "n": 773,
+    "shots": 104,
+    "beta_clock": -0.0561,
+    "beta_clock_ci": [
+     -0.1275,
+     0.0037
+    ],
+    "beta_open": 0.489,
+    "ER": 8.712,
+    "ER_ci": [
+     -21.926,
+     60.134
+    ],
+    "resolved": false,
+    "pid": 202738,
+    "name": "Isaiah Thomas"
+   },
+   {
+    "n": 757,
+    "shots": 147,
+    "beta_clock": -0.0884,
+    "beta_clock_ci": [
+     -0.1794,
+     -0.0007
+    ],
+    "beta_open": 0.5659,
+    "ER": 6.4,
+    "ER_ci": [
+     2.516,
+     32.704
+    ],
+    "resolved": true,
+    "pid": 203076,
+    "name": "Anthony Davis"
+   },
+   {
+    "n": 553,
+    "shots": 72,
+    "beta_clock": -0.0337,
+    "beta_clock_ci": [
+     -0.1178,
+     0.0557
+    ],
+    "beta_open": 0.4357,
+    "ER": 12.915,
+    "ER_ci": [
+     -83.364,
+     142.618
+    ],
+    "resolved": false,
+    "pid": 203078,
+    "name": "Bradley Beal"
+   },
+   {
+    "n": 542,
+    "shots": 78,
+    "beta_clock": -0.0846,
+    "beta_clock_ci": [
+     -0.1828,
+     -0.0048
+    ],
+    "beta_open": 0.5398,
+    "ER": 6.383,
+    "ER_ci": [
+     2.814,
+     28.612
+    ],
+    "resolved": true,
+    "pid": 203079,
+    "name": "Dion Waiters"
+   },
+   {
+    "n": 583,
+    "shots": 115,
+    "beta_clock": -0.0866,
+    "beta_clock_ci": [
+     -0.1422,
+     -0.0302
+    ],
+    "beta_open": 0.3332,
+    "ER": 3.848,
+    "ER_ci": [
+     2.352,
+     11.135
+    ],
+    "resolved": true,
+    "pid": 203081,
+    "name": "Damian Lillard"
+   },
+   {
+    "n": 386,
+    "shots": 128,
+    "beta_clock": -0.0402,
+    "beta_clock_ci": [
+     -0.0893,
+     0.0111
+    ],
+    "beta_open": 0.3478,
+    "ER": 8.654,
+    "ER_ci": [
+     -41.518,
+     67.182
+    ],
+    "resolved": false,
+    "pid": 203082,
+    "name": "Terrence Ross"
+   },
+   {
+    "n": 301,
+    "shots": 56,
+    "beta_clock": -0.0856,
+    "beta_clock_ci": [
+     -0.1684,
+     -0.0162
+    ],
+    "beta_open": 0.3661,
+    "ER": 4.278,
+    "ER_ci": [
+     1.935,
+     17.292
+    ],
+    "resolved": true,
+    "pid": 203085,
+    "name": "Austin Rivers"
+   },
+   {
+    "n": 644,
+    "shots": 144,
+    "beta_clock": -0.0731,
+    "beta_clock_ci": [
+     -0.1269,
+     -0.0289
+    ],
+    "beta_open": 0.4667,
+    "ER": 6.385,
+    "ER_ci": [
+     3.832,
+     16.065
+    ],
+    "resolved": true,
+    "pid": 203086,
+    "name": "Meyers Leonard"
+   },
+   {
+    "n": 485,
+    "shots": 95,
+    "beta_clock": -0.0293,
+    "beta_clock_ci": [
+     -0.0854,
+     0.0274
+    ],
+    "beta_open": 0.3045,
+    "ER": 10.395,
+    "ER_ci": [
+     -70.281,
+     91.746
+    ],
+    "resolved": false,
+    "pid": 203087,
+    "name": "Jeremy Lamb"
+   },
+   {
+    "n": 354,
+    "shots": 57,
+    "beta_clock": -0.1432,
+    "beta_clock_ci": [
+     -0.2231,
+     -0.087
+    ],
+    "beta_open": 0.4249,
+    "ER": 2.967,
+    "ER_ci": [
+     2.077,
+     4.983
+    ],
+    "resolved": true,
+    "pid": 203090,
+    "name": "Maurice Harkless"
+   },
+   {
+    "n": 999,
+    "shots": 137,
+    "beta_clock": -0.0657,
+    "beta_clock_ci": [
+     -0.1293,
+     -0.0076
+    ],
+    "beta_open": 0.5439,
+    "ER": 8.283,
+    "ER_ci": [
+     3.917,
+     39.298
+    ],
+    "resolved": true,
+    "pid": 203095,
+    "name": "Evan Fournier"
+   },
+   {
+    "n": 622,
+    "shots": 104,
+    "beta_clock": -0.0975,
+    "beta_clock_ci": [
+     -0.1929,
+     -0.0085
+    ],
+    "beta_open": 0.7171,
+    "ER": 7.356,
+    "ER_ci": [
+     3.4,
+     39.105
+    ],
+    "resolved": true,
+    "pid": 203096,
+    "name": "Jared Sullinger"
+   },
+   {
+    "n": 738,
+    "shots": 155,
+    "beta_clock": -0.1072,
+    "beta_clock_ci": [
+     -0.1714,
+     -0.0508
+    ],
+    "beta_open": 0.3933,
+    "ER": 3.67,
+    "ER_ci": [
+     2.377,
+     7.809
+    ],
+    "resolved": true,
+    "pid": 203109,
+    "name": "Jae Crowder"
+   },
+   {
+    "n": 727,
+    "shots": 106,
+    "beta_clock": -0.1238,
+    "beta_clock_ci": [
+     -0.1869,
+     -0.0644
+    ],
+    "beta_open": 0.301,
+    "ER": 2.431,
+    "ER_ci": [
+     1.53,
+     4.875
+    ],
+    "resolved": true,
+    "pid": 203110,
+    "name": "Draymond Green"
+   },
+   {
+    "n": 990,
+    "shots": 163,
+    "beta_clock": -0.0173,
+    "beta_clock_ci": [
+     -0.0753,
+     0.0369
+    ],
+    "beta_open": 0.3573,
+    "ER": 20.648,
+    "ER_ci": [
+     -166.918,
+     226.74
+    ],
+    "resolved": false,
+    "pid": 203114,
+    "name": "Khris Middleton"
+   },
+   {
+    "n": 698,
+    "shots": 115,
+    "beta_clock": -0.0058,
+    "beta_clock_ci": [
+     -0.0736,
+     0.055
+    ],
+    "beta_open": 0.4582,
+    "ER": 79.597,
+    "ER_ci": [
+     -204.255,
+     218.385
+    ],
+    "resolved": false,
+    "pid": 203115,
+    "name": "Will Barton"
+   },
+   {
+    "n": 517,
+    "shots": 129,
+    "beta_clock": -0.0447,
+    "beta_clock_ci": [
+     -0.0995,
+     0.0146
+    ],
+    "beta_open": 0.5662,
+    "ER": 12.664,
+    "ER_ci": [
+     -48.654,
+     176.163
+    ],
+    "resolved": false,
+    "pid": 203138,
+    "name": "Hollis Thompson"
+   },
+   {
+    "n": 531,
+    "shots": 172,
+    "beta_clock": -0.0388,
+    "beta_clock_ci": [
+     -0.0842,
+     0.007
+    ],
+    "beta_open": 0.4255,
+    "ER": 10.966,
+    "ER_ci": [
+     -60.979,
+     89.425
+    ],
+    "resolved": false,
+    "pid": 203141,
+    "name": "Mirza Teletovic"
+   },
+   {
+    "n": 471,
+    "shots": 91,
+    "beta_clock": -0.0776,
+    "beta_clock_ci": [
+     -0.1539,
+     -0.012
+    ],
+    "beta_open": 0.5446,
+    "ER": 7.015,
+    "ER_ci": [
+     3.48,
+     33.651
+    ],
+    "resolved": true,
+    "pid": 203145,
+    "name": "Kent Bazemore"
+   },
+   {
+    "n": 348,
+    "shots": 26,
+    "beta_clock": -0.135,
+    "beta_clock_ci": [
+     -0.273,
+     -0.0292
+    ],
+    "beta_open": 0.7582,
+    "ER": 5.616,
+    "ER_ci": [
+     2.761,
+     22.118
+    ],
+    "resolved": true,
+    "pid": 203457,
+    "name": "Nerlens Noel"
+   },
+   {
+    "n": 797,
+    "shots": 175,
+    "beta_clock": 0.0042,
+    "beta_clock_ci": [
+     -0.0361,
+     0.0448
+    ],
+    "beta_open": 0.348,
+    "ER": -82.558,
+    "ER_ci": [
+     -303.094,
+     284.507
+    ],
+    "resolved": false,
+    "pid": 203459,
+    "name": "Allen Crabbe"
+   },
+   {
+    "n": 340,
+    "shots": 51,
+    "beta_clock": -0.0622,
+    "beta_clock_ci": [
+     -0.1689,
+     0.0285
+    ],
+    "beta_open": 0.4812,
+    "ER": 7.741,
+    "ER_ci": [
+     -43.002,
+     60.311
+    ],
+    "resolved": false,
+    "pid": 203460,
+    "name": "Andre Roberson"
+   },
+   {
+    "n": 314,
+    "shots": 81,
+    "beta_clock": 0.0125,
+    "beta_clock_ci": [
+     -0.0634,
+     0.1004
+    ],
+    "beta_open": 0.4082,
+    "ER": -32.646,
+    "ER_ci": [
+     -144.393,
+     159.163
+    ],
+    "resolved": false,
+    "pid": 203463,
+    "name": "Ben McLemore"
+   },
+   {
+    "n": 878,
+    "shots": 168,
+    "beta_clock": -0.0725,
+    "beta_clock_ci": [
+     -0.1325,
+     -0.0204
+    ],
+    "beta_open": 0.3954,
+    "ER": 5.457,
+    "ER_ci": [
+     2.981,
+     18.073
+    ],
+    "resolved": true,
+    "pid": 203468,
+    "name": "CJ McCollum"
+   },
+   {
+    "n": 304,
+    "shots": 32,
+    "beta_clock": -0.0251,
+    "beta_clock_ci": [
+     -0.1656,
+     0.1201
+    ],
+    "beta_open": 0.5034,
+    "ER": 20.025,
+    "ER_ci": [
+     -118.946,
+     76.159
+    ],
+    "resolved": false,
+    "pid": 203469,
+    "name": "Cody Zeller"
+   },
+   {
+    "n": 535,
+    "shots": 63,
+    "beta_clock": -0.1294,
+    "beta_clock_ci": [
+     -0.2242,
+     -0.061
+    ],
+    "beta_open": 0.572,
+    "ER": 4.422,
+    "ER_ci": [
+     2.485,
+     9.294
+    ],
+    "resolved": true,
+    "pid": 203471,
+    "name": "Dennis Schroder"
+   },
+   {
+    "n": 376,
+    "shots": 44,
+    "beta_clock": -0.0503,
+    "beta_clock_ci": [
+     -0.1453,
+     0.0255
+    ],
+    "beta_open": 0.4519,
+    "ER": 8.984,
+    "ER_ci": [
+     -60.804,
+     80.418
+    ],
+    "resolved": false,
+    "pid": 203476,
+    "name": "Gorgui Dieng"
+   },
+   {
+    "n": 537,
+    "shots": 108,
+    "beta_clock": -0.0773,
+    "beta_clock_ci": [
+     -0.135,
+     -0.0215
+    ],
+    "beta_open": 0.4177,
+    "ER": 5.407,
+    "ER_ci": [
+     2.521,
+     23.069
+    ],
+    "resolved": true,
+    "pid": 203477,
+    "name": "Isaiah Canaan"
+   },
+   {
+    "n": 515,
+    "shots": 92,
+    "beta_clock": 0.0164,
+    "beta_clock_ci": [
+     -0.0557,
+     0.102
+    ],
+    "beta_open": 0.3848,
+    "ER": -23.435,
+    "ER_ci": [
+     -138.279,
+     149.717
+    ],
+    "resolved": false,
+    "pid": 203482,
+    "name": "Kelly Olynyk"
+   },
+   {
+    "n": 834,
+    "shots": 157,
+    "beta_clock": -0.0164,
+    "beta_clock_ci": [
+     -0.0669,
+     0.0369
+    ],
+    "beta_open": 0.368,
+    "ER": 22.43,
+    "ER_ci": [
+     -147.87,
+     198.753
+    ],
+    "resolved": false,
+    "pid": 203484,
+    "name": "Kentavious Caldwell-Pope"
+   },
+   {
+    "n": 559,
+    "shots": 18,
+    "beta_clock": 0.0684,
+    "beta_clock_ci": [
+     -0.0564,
+     0.2086
+    ],
+    "beta_open": 0.3139,
+    "ER": -4.589,
+    "ER_ci": [
+     -59.277,
+     57.74
+    ],
+    "resolved": false,
+    "pid": 203486,
+    "name": "Mason Plumlee"
+   },
+   {
+    "n": 475,
+    "shots": 37,
+    "beta_clock": -0.007,
+    "beta_clock_ci": [
+     -0.1283,
+     0.0997
+    ],
+    "beta_open": 0.4228,
+    "ER": 59.975,
+    "ER_ci": [
+     -100.189,
+     92.337
+    ],
+    "resolved": false,
+    "pid": 203487,
+    "name": "Michael Carter-Williams"
+   },
+   {
+    "n": 556,
+    "shots": 140,
+    "beta_clock": -0.0833,
+    "beta_clock_ci": [
+     -0.1416,
+     -0.0295
+    ],
+    "beta_open": 0.4957,
+    "ER": 5.949,
+    "ER_ci": [
+     3.377,
+     17.138
+    ],
+    "resolved": true,
+    "pid": 203490,
+    "name": "Otto Porter"
+   },
+   {
+    "n": 494,
+    "shots": 104,
+    "beta_clock": -0.0175,
+    "beta_clock_ci": [
+     -0.0712,
+     0.0418
+    ],
+    "beta_open": 0.3287,
+    "ER": 18.781,
+    "ER_ci": [
+     -177.239,
+     131.271
+    ],
+    "resolved": false,
+    "pid": 203496,
+    "name": "Robert Covington"
+   },
+   {
+    "n": 344,
+    "shots": 3,
+    "beta_clock": -0.5095,
+    "beta_clock_ci": [
+     -435145019.7161,
+     6.006
+    ],
+    "beta_open": 0.5384,
+    "ER": 1.057,
+    "ER_ci": [
+     -3.242,
+     8.566
+    ],
+    "resolved": false,
+    "pid": 203497,
+    "name": "Rudy Gobert"
+   },
+   {
+    "n": 319,
+    "shots": 72,
+    "beta_clock": -0.1137,
+    "beta_clock_ci": [
+     -0.2276,
+     -0.039
+    ],
+    "beta_open": 0.5019,
+    "ER": 4.414,
+    "ER_ci": [
+     2.804,
+     12.073
+    ],
+    "resolved": true,
+    "pid": 203498,
+    "name": "Shabazz Muhammad"
+   },
+   {
+    "n": 343,
+    "shots": 33,
+    "beta_clock": -0.0053,
+    "beta_clock_ci": [
+     -0.111,
+     0.0826
+    ],
+    "beta_open": 0.2637,
+    "ER": 49.314,
+    "ER_ci": [
+     -91.662,
+     88.079
+    ],
+    "resolved": false,
+    "pid": 203499,
+    "name": "Shane Larkin"
+   },
+   {
+    "n": 368,
+    "shots": 85,
+    "beta_clock": 0.0057,
+    "beta_clock_ci": [
+     -0.0654,
+     0.077
+    ],
+    "beta_open": 0.4032,
+    "ER": -70.298,
+    "ER_ci": [
+     -177.212,
+     173.588
+    ],
+    "resolved": false,
+    "pid": 203503,
+    "name": "Tony Snell"
+   },
+   {
+    "n": 662,
+    "shots": 118,
+    "beta_clock": -0.1332,
+    "beta_clock_ci": [
+     -0.204,
+     -0.0787
+    ],
+    "beta_open": 0.5823,
+    "ER": 4.373,
+    "ER_ci": [
+     3.183,
+     7.226
+    ],
+    "resolved": true,
+    "pid": 203504,
+    "name": "Trey Burke"
+   },
+   {
+    "n": 709,
+    "shots": 98,
+    "beta_clock": -0.112,
+    "beta_clock_ci": [
+     -0.1911,
+     -0.0491
+    ],
+    "beta_open": 0.5183,
+    "ER": 4.627,
+    "ER_ci": [
+     2.922,
+     10.618
+    ],
+    "resolved": true,
+    "pid": 203506,
+    "name": "Victor Oladipo"
+   },
+   {
+    "n": 732,
+    "shots": 64,
+    "beta_clock": -0.1155,
+    "beta_clock_ci": [
+     -0.2197,
+     -0.0274
+    ],
+    "beta_open": 0.4519,
+    "ER": 3.914,
+    "ER_ci": [
+     2.019,
+     14.776
+    ],
+    "resolved": true,
+    "pid": 203507,
+    "name": "Giannis Antetokounmpo"
+   },
+   {
+    "n": 359,
+    "shots": 61,
+    "beta_clock": -0.0424,
+    "beta_clock_ci": [
+     -0.1209,
+     0.029
+    ],
+    "beta_open": 0.5518,
+    "ER": 13.017,
+    "ER_ci": [
+     -134.98,
+     144.874
+    ],
+    "resolved": false,
+    "pid": 203521,
+    "name": "Matthew Dellavedova"
+   },
+   {
+    "n": 517,
+    "shots": 69,
+    "beta_clock": -0.1045,
+    "beta_clock_ci": [
+     -0.1923,
+     -0.0322
+    ],
+    "beta_open": 0.5432,
+    "ER": 5.197,
+    "ER_ci": [
+     2.584,
+     16.938
+    ],
+    "resolved": true,
+    "pid": 203526,
+    "name": "Raul Neto"
+   },
+   {
+    "n": 412,
+    "shots": 113,
+    "beta_clock": -0.0328,
+    "beta_clock_ci": [
+     -0.0856,
+     0.0126
+    ],
+    "beta_open": 0.606,
+    "ER": 18.452,
+    "ER_ci": [
+     -145.735,
+     178.019
+    ],
+    "resolved": false,
+    "pid": 203798,
+    "name": "PJ Hairston"
+   },
+   {
+    "n": 374,
+    "shots": 52,
+    "beta_clock": 0.0008,
+    "beta_clock_ci": [
+     -0.0707,
+     0.0661
+    ],
+    "beta_open": 0.2317,
+    "ER": -273.035,
+    "ER_ci": [
+     -95.217,
+     139.969
+    ],
+    "resolved": false,
+    "pid": 203897,
+    "name": "Zach LaVine"
+   },
+   {
+    "n": 570,
+    "shots": 49,
+    "beta_clock": -0.1557,
+    "beta_clock_ci": [
+     -0.2333,
+     -0.0855
+    ],
+    "beta_open": 0.655,
+    "ER": 4.207,
+    "ER_ci": [
+     2.593,
+     9.39
+    ],
+    "resolved": true,
+    "pid": 203901,
+    "name": "Elfrid Payton"
+   },
+   {
+    "n": 527,
+    "shots": 84,
+    "beta_clock": -0.0204,
+    "beta_clock_ci": [
+     -0.0882,
+     0.0459
+    ],
+    "beta_open": 0.4945,
+    "ER": 24.207,
+    "ER_ci": [
+     -131.627,
+     197.756
+    ],
+    "resolved": false,
+    "pid": 203903,
+    "name": "Jordan Clarkson"
+   },
+   {
+    "n": 584,
+    "shots": 101,
+    "beta_clock": -0.031,
+    "beta_clock_ci": [
+     -0.104,
+     0.0296
+    ],
+    "beta_open": 0.4611,
+    "ER": 14.866,
+    "ER_ci": [
+     -89.326,
+     151.755
+    ],
+    "resolved": false,
+    "pid": 203914,
+    "name": "Gary Harris"
+   },
+   {
+    "n": 468,
+    "shots": 91,
+    "beta_clock": -0.0202,
+    "beta_clock_ci": [
+     -0.0881,
+     0.0322
+    ],
+    "beta_open": 0.4693,
+    "ER": 23.185,
+    "ER_ci": [
+     -224.862,
+     156.677
+    ],
+    "resolved": false,
+    "pid": 203917,
+    "name": "Nik Stauskas"
+   },
+   {
+    "n": 1003,
+    "shots": 116,
+    "beta_clock": -0.1534,
+    "beta_clock_ci": [
+     -0.2126,
+     -0.1036
+    ],
+    "beta_open": 0.5417,
+    "ER": 3.53,
+    "ER_ci": [
+     2.4,
+     5.847
+    ],
+    "resolved": true,
+    "pid": 203918,
+    "name": "Rodney Hood"
+   },
+   {
+    "n": 486,
+    "shots": 52,
+    "beta_clock": -0.094,
+    "beta_clock_ci": [
+     -0.1754,
+     -0.0266
+    ],
+    "beta_open": 0.487,
+    "ER": 5.178,
+    "ER_ci": [
+     2.371,
+     19.28
+    ],
+    "resolved": true,
+    "pid": 203924,
+    "name": "Jerami Grant"
+   },
+   {
+    "n": 369,
+    "shots": 101,
+    "beta_clock": -0.0126,
+    "beta_clock_ci": [
+     -0.0586,
+     0.0372
+    ],
+    "beta_open": 0.3945,
+    "ER": 31.405,
+    "ER_ci": [
+     -160.444,
+     241.765
+    ],
+    "resolved": false,
+    "pid": 203926,
+    "name": "Doug McDermott"
+   },
+   {
+    "n": 520,
+    "shots": 75,
+    "beta_clock": -0.0374,
+    "beta_clock_ci": [
+     -0.1056,
+     0.0273
+    ],
+    "beta_open": 0.3968,
+    "ER": 10.619,
+    "ER_ci": [
+     -81.353,
+     106.246
+    ],
+    "resolved": false,
+    "pid": 203933,
+    "name": "TJ Warren"
+   },
+   {
+    "n": 309,
+    "shots": 65,
+    "beta_clock": -0.0195,
+    "beta_clock_ci": [
+     -0.1105,
+     0.0542
+    ],
+    "beta_open": 0.4447,
+    "ER": 22.792,
+    "ER_ci": [
+     -148.462,
+     180.531
+    ],
+    "resolved": false,
+    "pid": 203939,
+    "name": "Dwight Powell"
+   },
+   {
+    "n": 539,
+    "shots": 41,
+    "beta_clock": 0.0305,
+    "beta_clock_ci": [
+     -0.0688,
+     0.1236
+    ],
+    "beta_open": 0.5324,
+    "ER": -17.457,
+    "ER_ci": [
+     -161.125,
+     127.835
+    ],
+    "resolved": false,
+    "pid": 203944,
+    "name": "Julius Randle"
+   },
+   {
+    "n": 775,
+    "shots": 98,
+    "beta_clock": -0.0249,
+    "beta_clock_ci": [
+     -0.0872,
+     0.0324
+    ],
+    "beta_open": 0.4104,
+    "ER": 16.486,
+    "ER_ci": [
+     -172.505,
+     172.856
+    ],
+    "resolved": false,
+    "pid": 203952,
+    "name": "Andrew Wiggins"
+   },
+   {
+    "n": 383,
+    "shots": 46,
+    "beta_clock": -0.0648,
+    "beta_clock_ci": [
+     -0.1666,
+     0.0172
+    ],
+    "beta_open": 0.5175,
+    "ER": 7.98,
+    "ER_ci": [
+     -46.394,
+     57.615
+    ],
+    "resolved": false,
+    "pid": 203953,
+    "name": "Jabari Parker"
+   },
+   {
+    "n": 374,
+    "shots": 31,
+    "beta_clock": -0.1336,
+    "beta_clock_ci": [
+     -0.2685,
+     -0.0197
+    ],
+    "beta_open": 0.4442,
+    "ER": 3.324,
+    "ER_ci": [
+     1.073,
+     15.722
+    ],
+    "resolved": true,
+    "pid": 203999,
+    "name": "Nikola Jokic"
+   },
+   {
+    "n": 789,
+    "shots": 150,
+    "beta_clock": -0.0505,
+    "beta_clock_ci": [
+     -0.1129,
+     0.0068
+    ],
+    "beta_open": 0.5065,
+    "ER": 10.028,
+    "ER_ci": [
+     -40.589,
+     103.683
+    ],
+    "resolved": false,
+    "pid": 204001,
+    "name": "Kristaps Porzingis"
+   },
+   {
+    "n": 435,
+    "shots": 72,
+    "beta_clock": -0.0413,
+    "beta_clock_ci": [
+     -0.1078,
+     0.0096
+    ],
+    "beta_open": 0.4476,
+    "ER": 10.836,
+    "ER_ci": [
+     -52.698,
+     72.925
+    ],
+    "resolved": false,
+    "pid": 204020,
+    "name": "Tyler Johnson"
+   },
+   {
+    "n": 601,
+    "shots": 103,
+    "beta_clock": -0.0901,
+    "beta_clock_ci": [
+     -0.1554,
+     -0.037
+    ],
+    "beta_open": 0.5443,
+    "ER": 6.043,
+    "ER_ci": [
+     3.25,
+     17.022
+    ],
+    "resolved": true,
+    "pid": 204038,
+    "name": "Langston Galloway"
+   },
+   {
+    "n": 486,
+    "shots": 71,
+    "beta_clock": -0.0572,
+    "beta_clock_ci": [
+     -0.139,
+     0.0179
+    ],
+    "beta_open": 0.4423,
+    "ER": 7.732,
+    "ER_ci": [
+     -70.266,
+     76.333
+    ],
+    "resolved": false,
+    "pid": 204060,
+    "name": "Joe Ingles"
+   },
+   {
+    "n": 384,
+    "shots": 40,
+    "beta_clock": -0.1012,
+    "beta_clock_ci": [
+     -0.2242,
+     -0.0242
+    ],
+    "beta_open": 0.5805,
+    "ER": 5.734,
+    "ER_ci": [
+     2.645,
+     25.144
+    ],
+    "resolved": true,
+    "pid": 204456,
+    "name": "TJ McConnell"
+   },
+   {
+    "n": 524,
+    "shots": 25,
+    "beta_clock": -0.1098,
+    "beta_clock_ci": [
+     -0.225,
+     0.0015
+    ],
+    "beta_open": 0.3941,
+    "ER": 3.589,
+    "ER_ci": [
+     -7.581,
+     25.828
+    ],
+    "resolved": false,
+    "pid": 1626143,
+    "name": "Jahlil Okafor"
+   },
+   {
+    "n": 422,
+    "shots": 41,
+    "beta_clock": -0.0276,
+    "beta_clock_ci": [
+     -0.1293,
+     0.0697
+    ],
+    "beta_open": 0.3652,
+    "ER": 13.216,
+    "ER_ci": [
+     -88.352,
+     144.377
+    ],
+    "resolved": false,
+    "pid": 1626144,
+    "name": "Emmanuel Mudiay"
+   },
+   {
+    "n": 479,
+    "shots": 125,
+    "beta_clock": -0.0941,
+    "beta_clock_ci": [
+     -0.1656,
+     -0.0306
+    ],
+    "beta_open": 0.4874,
+    "ER": 5.178,
+    "ER_ci": [
+     3.175,
+     15.311
+    ],
+    "resolved": true,
+    "pid": 1626156,
+    "name": "D'Angelo Russell"
+   },
+   {
+    "n": 572,
+    "shots": 114,
+    "beta_clock": -0.0647,
+    "beta_clock_ci": [
+     -0.1453,
+     0.013
+    ],
+    "beta_open": 0.4086,
+    "ER": 6.32,
+    "ER_ci": [
+     -33.742,
+     50.747
+    ],
+    "resolved": false,
+    "pid": 1626157,
+    "name": "Karl-Anthony Towns"
+   },
+   {
+    "n": 464,
+    "shots": 73,
+    "beta_clock": -0.1245,
+    "beta_clock_ci": [
+     -0.2242,
+     -0.0388
+    ],
+    "beta_open": 0.6238,
+    "ER": 5.01,
+    "ER_ci": [
+     3.209,
+     15.084
+    ],
+    "resolved": true,
+    "pid": 1626159,
+    "name": "Justise Winslow"
+   },
+   {
+    "n": 526,
+    "shots": 79,
+    "beta_clock": -0.1007,
+    "beta_clock_ci": [
+     -0.1954,
+     -0.0288
+    ],
+    "beta_open": 0.5656,
+    "ER": 5.615,
+    "ER_ci": [
+     3.228,
+     19.666
+    ],
+    "resolved": true,
+    "pid": 1626163,
+    "name": "Frank Kaminsky"
+   },
+   {
+    "n": 420,
+    "shots": 79,
+    "beta_clock": -0.0023,
+    "beta_clock_ci": [
+     -0.0691,
+     0.0659
+    ],
+    "beta_open": 0.4774,
+    "ER": 204.517,
+    "ER_ci": [
+     -245.478,
+     243.14
+    ],
+    "resolved": false,
+    "pid": 1626164,
+    "name": "Devin Booker"
+   },
+   {
+    "n": 404,
+    "shots": 56,
+    "beta_clock": 0.0023,
+    "beta_clock_ci": [
+     -0.1073,
+     0.0888
+    ],
+    "beta_open": 0.4697,
+    "ER": -202.284,
+    "ER_ci": [
+     -166.458,
+     148.574
+    ],
+    "resolved": false,
+    "pid": 1626168,
+    "name": "Trey Lyles"
+   },
+   {
+    "n": 467,
+    "shots": 87,
+    "beta_clock": -0.0256,
+    "beta_clock_ci": [
+     -0.0932,
+     0.0491
+    ],
+    "beta_open": 0.3598,
+    "ER": 14.065,
+    "ER_ci": [
+     -90.596,
+     112.249
+    ],
+    "resolved": false,
+    "pid": 1626169,
+    "name": "Stanley Johnson"
+   },
+   {
+    "n": 401,
+    "shots": 20,
+    "beta_clock": 0.0182,
+    "beta_clock_ci": [
+     -0.0747,
+     0.1569
+    ],
+    "beta_open": 0.5404,
+    "ER": -29.75,
+    "ER_ci": [
+     -158.677,
+     176.493
+    ],
+    "resolved": false,
+    "pid": 1626170,
+    "name": "Jerian Grant"
+   }
+  ]
+ },
+ "within": {
+  "League": {
+   "margin": {
+    "ahead5+": {
+     "n": 41504,
+     "shots": 6466,
+     "beta_clock": -0.0578,
+     "beta_clock_ci": [
+      -0.0644,
+      -0.0514
+     ],
+     "beta_open": 0.4029,
+     "ER": 6.97,
+     "ER_ci": [
+      6.263,
+      7.896
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "behind5+": {
+     "n": 46621,
+     "shots": 7405,
+     "beta_clock": -0.0477,
+     "beta_clock_ci": [
+      -0.0546,
+      -0.041
+     ],
+     "beta_open": 0.3872,
+     "ER": 8.121,
+     "ER_ci": [
+      7.079,
+      9.478
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "within5": {
+     "n": 60222,
+     "shots": 9519,
+     "beta_clock": -0.0588,
+     "beta_clock_ci": [
+      -0.0646,
+      -0.0533
+     ],
+     "beta_open": 0.3941,
+     "ER": 6.701,
+     "ER_ci": [
+      6.092,
+      7.422
+     ],
+     "resolved": true,
+     "thin": false
+    }
+   },
+   "period": {
+    "Q1-3": {
+     "n": 113166,
+     "shots": 17803,
+     "beta_clock": -0.0539,
+     "beta_clock_ci": [
+      -0.0583,
+      -0.0496
+     ],
+     "beta_open": 0.4006,
+     "ER": 7.438,
+     "ER_ci": [
+      6.862,
+      8.068
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "Q4+OT": {
+     "n": 35181,
+     "shots": 5587,
+     "beta_clock": -0.0564,
+     "beta_clock_ci": [
+      -0.0636,
+      -0.0494
+     ],
+     "beta_open": 0.3749,
+     "ER": 6.643,
+     "ER_ci": [
+      5.892,
+      7.636
+     ],
+     "resolved": true,
+     "thin": false
+    }
+   },
+   "home": {
+    "away": {
+     "n": 74206,
+     "shots": 11592,
+     "beta_clock": -0.0544,
+     "beta_clock_ci": [
+      -0.0593,
+      -0.0494
+     ],
+     "beta_open": 0.3905,
+     "ER": 7.174,
+     "ER_ci": [
+      6.567,
+      7.929
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "home": {
+     "n": 74141,
+     "shots": 11798,
+     "beta_clock": -0.0549,
+     "beta_clock_ci": [
+      -0.06,
+      -0.0498
+     ],
+     "beta_open": 0.3978,
+     "ER": 7.245,
+     "ER_ci": [
+      6.64,
+      7.981
+     ],
+     "resolved": true,
+     "thin": false
+    }
+   },
+   "source": {
+    "inbound": {
+     "n": 257,
+     "shots": 47,
+     "beta_clock": -0.0545,
+     "beta_clock_ci": [
+      -0.1409,
+      0.0192
+     ],
+     "beta_open": 0.3832,
+     "ER": 7.037,
+     "ER_ci": [
+      -28.563,
+      68.741
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "oreb": {
+     "n": 1260,
+     "shots": 114,
+     "beta_clock": -0.0377,
+     "beta_clock_ci": [
+      -0.0771,
+      0.0077
+     ],
+     "beta_open": 0.314,
+     "ER": 8.317,
+     "ER_ci": [
+      -22.619,
+      65.932
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "other": {
+     "n": 4231,
+     "shots": 443,
+     "beta_clock": -0.0987,
+     "beta_clock_ci": [
+      -0.1239,
+      -0.0763
+     ],
+     "beta_open": 0.2648,
+     "ER": 2.682,
+     "ER_ci": [
+      2.134,
+      3.53
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "pass": {
+     "n": 142599,
+     "shots": 22786,
+     "beta_clock": -0.0515,
+     "beta_clock_ci": [
+      -0.0555,
+      -0.0477
+     ],
+     "beta_open": 0.401,
+     "ER": 7.79,
+     "ER_ci": [
+      7.239,
+      8.415
+     ],
+     "resolved": true,
+     "thin": false
+    }
+   }
+  },
+  "Curry": {
+   "margin": {
+    "ahead5+": {
+     "n": 306,
+     "shots": 75,
+     "beta_clock": -0.1164,
+     "beta_clock_ci": [
+      -0.2189,
+      -0.036
+     ],
+     "beta_open": 0.3647,
+     "ER": 3.132,
+     "ER_ci": [
+      1.642,
+      9.349
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "behind5+": {
+     "n": 49,
+     "shots": 9,
+     "beta_clock": -0.057,
+     "beta_clock_ci": [
+      -11.4116,
+      16.097
+     ],
+     "beta_open": 0.5961,
+     "ER": 10.465,
+     "ER_ci": [
+      -81.215,
+      49.045
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "within5": {
+     "n": 230,
+     "shots": 50,
+     "beta_clock": -0.0618,
+     "beta_clock_ci": [
+      -0.1579,
+      0.0589
+     ],
+     "beta_open": 0.3462,
+     "ER": 5.6,
+     "ER_ci": [
+      -40.598,
+      43.53
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   },
+   "period": {
+    "Q1-3": {
+     "n": 515,
+     "shots": 117,
+     "beta_clock": -0.0647,
+     "beta_clock_ci": [
+      -0.1171,
+      -0.017
+     ],
+     "beta_open": 0.3443,
+     "ER": 5.324,
+     "ER_ci": [
+      2.832,
+      17.426
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "Q4+OT": {
+     "n": 70,
+     "shots": 17,
+     "beta_clock": -0.2002,
+     "beta_clock_ci": [
+      -5.6093,
+      -0.0551
+     ],
+     "beta_open": 0.3279,
+     "ER": 1.638,
+     "ER_ci": [
+      -1.325,
+      4.959
+     ],
+     "resolved": true,
+     "thin": true
+    }
+   },
+   "home": {
+    "away": {
+     "n": 300,
+     "shots": 65,
+     "beta_clock": -0.1578,
+     "beta_clock_ci": [
+      -0.2625,
+      -0.0714
+     ],
+     "beta_open": 0.3318,
+     "ER": 2.102,
+     "ER_ci": [
+      1.226,
+      5.474
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "home": {
+     "n": 285,
+     "shots": 69,
+     "beta_clock": -0.0355,
+     "beta_clock_ci": [
+      -0.1144,
+      0.0462
+     ],
+     "beta_open": 0.3884,
+     "ER": 10.925,
+     "ER_ci": [
+      -63.748,
+      89.781
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   },
+   "source": {
+    "oreb": {
+     "n": 8,
+     "shots": 2,
+     "note": "too thin to fit"
+    },
+    "other": {
+     "n": 31,
+     "shots": 5,
+     "beta_clock": 0.1245,
+     "beta_clock_ci": [
+      -24.9794,
+      36.1051
+     ],
+     "beta_open": 0.2457,
+     "ER": -1.974,
+     "ER_ci": [
+      -17.529,
+      38.731
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "pass": {
+     "n": 546,
+     "shots": 127,
+     "beta_clock": -0.0934,
+     "beta_clock_ci": [
+      -0.1594,
+      -0.0302
+     ],
+     "beta_open": 0.3622,
+     "ER": 3.876,
+     "ER_ci": [
+      2.323,
+      11.41
+     ],
+     "resolved": true,
+     "thin": false
+    }
+   }
+  },
+  "LeBron": {
+   "margin": {
+    "ahead5+": {
+     "n": 202,
+     "shots": 15,
+     "beta_clock": -0.0649,
+     "beta_clock_ci": [
+      -0.3368,
+      0.0633
+     ],
+     "beta_open": 0.3304,
+     "ER": 5.091,
+     "ER_ci": [
+      -32.273,
+      40.324
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "behind5+": {
+     "n": 131,
+     "shots": 9,
+     "beta_clock": -0.2234,
+     "beta_clock_ci": [
+      -25.2912,
+      0.0123
+     ],
+     "beta_open": 1.1587,
+     "ER": 5.186,
+     "ER_ci": [
+      -15.356,
+      31.867
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "within5": {
+     "n": 277,
+     "shots": 14,
+     "beta_clock": -0.1258,
+     "beta_clock_ci": [
+      -0.5395,
+      0.0727
+     ],
+     "beta_open": 0.5276,
+     "ER": 4.195,
+     "ER_ci": [
+      -16.327,
+      28.001
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   },
+   "period": {
+    "Q1-3": {
+     "n": 466,
+     "shots": 31,
+     "beta_clock": -0.1048,
+     "beta_clock_ci": [
+      -0.2125,
+      -0.0389
+     ],
+     "beta_open": 0.4431,
+     "ER": 4.23,
+     "ER_ci": [
+      1.848,
+      10.987
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "Q4+OT": {
+     "n": 144,
+     "shots": 7,
+     "beta_clock": -0.1083,
+     "beta_clock_ci": [
+      -40.3736,
+      1.6606
+     ],
+     "beta_open": 0.8154,
+     "ER": 7.528,
+     "ER_ci": [
+      -36.235,
+      43.774
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   },
+   "home": {
+    "away": {
+     "n": 340,
+     "shots": 26,
+     "beta_clock": -0.1023,
+     "beta_clock_ci": [
+      -0.2252,
+      -0.0276
+     ],
+     "beta_open": 0.4873,
+     "ER": 4.765,
+     "ER_ci": [
+      2.153,
+      12.01
+     ],
+     "resolved": true,
+     "thin": false
+    },
+    "home": {
+     "n": 270,
+     "shots": 12,
+     "beta_clock": -0.1136,
+     "beta_clock_ci": [
+      -0.5414,
+      -0.0407
+     ],
+     "beta_open": 0.5235,
+     "ER": 4.607,
+     "ER_ci": [
+      1.919,
+      17.509
+     ],
+     "resolved": true,
+     "thin": true
+    }
+   },
+   "source": {
+    "inbound": {
+     "n": 6,
+     "shots": 0,
+     "note": "too thin to fit"
+    },
+    "oreb": {
+     "n": 5,
+     "shots": 0,
+     "note": "too thin to fit"
+    },
+    "other": {
+     "n": 21,
+     "shots": 0,
+     "note": "too thin to fit"
+    },
+    "pass": {
+     "n": 578,
+     "shots": 38,
+     "beta_clock": -0.0952,
+     "beta_clock_ci": [
+      -0.1879,
+      -0.0438
+     ],
+     "beta_open": 0.4579,
+     "ER": 4.808,
+     "ER_ci": [
+      2.415,
+      11.118
+     ],
+     "resolved": true,
+     "thin": false
+    }
+   }
+  },
+  "Harden": {
+   "margin": {
+    "ahead5+": {
+     "n": 132,
+     "shots": 11,
+     "beta_clock": 0.0819,
+     "beta_clock_ci": [
+      -0.2408,
+      34.5459
+     ],
+     "beta_open": 0.5164,
+     "ER": -6.302,
+     "ER_ci": [
+      -54.429,
+      94.167
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "behind5+": {
+     "n": 184,
+     "shots": 25,
+     "beta_clock": -0.0769,
+     "beta_clock_ci": [
+      -0.2269,
+      0.0942
+     ],
+     "beta_open": 0.4229,
+     "ER": 5.497,
+     "ER_ci": [
+      -41.492,
+      79.797
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "within5": {
+     "n": 280,
+     "shots": 36,
+     "beta_clock": 0.0274,
+     "beta_clock_ci": [
+      -0.0707,
+      0.1625
+     ],
+     "beta_open": 0.5197,
+     "ER": -18.977,
+     "ER_ci": [
+      -141.912,
+      138.311
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   },
+   "period": {
+    "Q1-3": {
+     "n": 475,
+     "shots": 60,
+     "beta_clock": 0.0178,
+     "beta_clock_ci": [
+      -0.0384,
+      0.0834
+     ],
+     "beta_open": 0.4538,
+     "ER": -25.535,
+     "ER_ci": [
+      -192.288,
+      212.999
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "Q4+OT": {
+     "n": 121,
+     "shots": 12,
+     "beta_clock": -0.1252,
+     "beta_clock_ci": [
+      -1.1038,
+      0.1613
+     ],
+     "beta_open": 0.4294,
+     "ER": 3.43,
+     "ER_ci": [
+      -13.967,
+      16.042
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   },
+   "home": {
+    "away": {
+     "n": 329,
+     "shots": 40,
+     "beta_clock": -0.0217,
+     "beta_clock_ci": [
+      -0.0812,
+      0.0576
+     ],
+     "beta_open": 0.4109,
+     "ER": 18.942,
+     "ER_ci": [
+      -89.644,
+      157.545
+     ],
+     "resolved": false,
+     "thin": true
+    },
+    "home": {
+     "n": 267,
+     "shots": 32,
+     "beta_clock": 0.0241,
+     "beta_clock_ci": [
+      -0.0855,
+      0.1629
+     ],
+     "beta_open": 0.5377,
+     "ER": -22.354,
+     "ER_ci": [
+      -146.024,
+      159.72
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   },
+   "source": {
+    "inbound": {
+     "n": 1,
+     "shots": 0,
+     "note": "too thin to fit"
+    },
+    "oreb": {
+     "n": 3,
+     "shots": 0,
+     "note": "too thin to fit"
+    },
+    "other": {
+     "n": 36,
+     "shots": 3,
+     "note": "too thin to fit"
+    },
+    "pass": {
+     "n": 556,
+     "shots": 69,
+     "beta_clock": -0.0023,
+     "beta_clock_ci": [
+      -0.0535,
+      0.0683
+     ],
+     "beta_open": 0.4544,
+     "ER": 199.184,
+     "ER_ci": [
+      -325.602,
+      274.649
+     ],
+     "resolved": false,
+     "thin": true
+    }
+   }
+  }
+ }
+}
