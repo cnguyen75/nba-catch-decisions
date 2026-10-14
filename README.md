@@ -2950,3 +2950,77 @@ larger.
 A table row, a section, and results.json "stage10_release_timing".
 Script: `scripts/s16_release_timing.py`, committed before it runs, run
 once.
+
+# Stage 11: Stage 9 with a deliberate-choice baseline (registered 2026-10-14, before running; descriptive, no gates)
+
+Why: Stage 9's "most open teammate" counts players who are open because the
+defence ignores them (30+ ft out, or a non-shooter in the corner). Stage 11
+restricts the candidate set, so that the headline measures a real choice.
+
+## Unit
+
+**Passes:** the Stage 9 pass table (`out/s9/passes_*.csv`, 133,882 passes,
+non-test games). It is asserted free of test games at load. No new frame
+extraction.
+
+**Shooter:** a player with at least 50 jump-shot attempts in non-test games.
+
+- **Count:** located shots in `out/s4/shots.csv` with `jump` true, any
+  distance, loaded with `load()`. Test rows are dropped at load and asserted
+  absent.
+- **The list is built from shot counts only,** before any pass is examined.
+
+**Candidate teammate** (of the passer's four), at the pass frame:
+
+- distance to the attacking basket ≤ 30 ft and > 6 ft;
+- a shooter.
+
+**Exclusion:** a pass with fewer than two candidates is excluded, and the
+count is reported. The receiver need not be a candidate. If he is not, the
+pass counts as "not the most open candidate". The share of passes whose
+receiver is a candidate is reported.
+
+## Quantities
+
+For the **league** (non-gated passers) and for **each of the three as
+passer**, over the included passes:
+
+- **P(receiver is the most open candidate)** ("most open" = the largest
+  openness among candidates).
+- **Baseline:** the mean of 1 / (the number of candidates).
+- **Openness deficit** = the most open candidate's openness − the
+  receiver's (ft), mean and median.
+- **Basket-proximity gain** = the most open candidate's basket distance −
+  the receiver's (ft; positive means the receiver is closer), mean and
+  median.
+- **The corner split, candidates only:**
+  - the most open candidate in the corner three (Stage 9's corner rule)
+    vs elsewhere;
+  - per cell: the share, P(most open candidate) and the mean deficit.
+- **Intervals:** game bootstrap, 1,000 resamples, seed 0.
+
+## Registered comparison
+
+**LeBron against the league** on P(most open candidate): the difference,
+with its bootstrap 95% interval.
+
+**MDE, written down now:**
+
+- **Formula:** 2.8 × 0.5 / √n_LeBron (worst case p = 0.5; the league's SE is
+  negligible).
+- **At Stage 9's n = 639:** MDE = 0.055.
+- **The exclusions will shrink n.** The MDE at the realized n is reported by
+  the same formula. It is computed from the count only, not from any
+  outcome.
+
+## Figure and record
+
+- **Figure** (`figures/stage11/`): Stage 9's scatter redrawn on candidates
+  only. It plots the receiver's openness against the most open candidate's,
+  for the league (random 3,000 passes) and LeBron.
+- **Record:** a table row, a section, and results.json
+  "stage11_pass_to_open_shooter".
+- **Reporting:** the Stage 9 numbers stay; Stage 11's are the ones for the
+  page.
+- **Script:** `scripts/s17_pass_open_shooter.py`, committed before it runs,
+  run once.
