@@ -2626,3 +2626,22 @@ registered reading bound of 0.05. Unless the true Δ is far from −0.05, an
 "unresolved at this sample size" reading is likely.
 
 214 shots across all non-test splits lack motion features, and are dropped.
+
+### Stage 7 results (confirmatory, scored once)
+
+**183 games;** 10,837 jump shots and 42,281 catches in the 4–24 s range.
+
+| Statistic | Estimate [95% CI] |
+|---|---|
+| m | 0.503 [0.468, 0.536] |
+| AME, [4,8) against [12,20) | −0.0069 [−0.0297, +0.0171] |
+| **Δ** | **−0.0136 [−0.0603, +0.0343]** |
+| Information: [0,4) against [12,20) | −0.0595 [−0.0873, −0.0308] |
+| Information: catch-and-shoot only | −0.0149 [−0.0471, +0.0139] |
+
+**Registered reading: "unresolved at this sample size".**
+
+The record is in the track folder's `feasibility.md` (Stage 7 row and
+section, updated site paragraph) and `results.json`
+("stage7_clock_added_shots"). The figure is at
+`out/s7/stage7_clock_added.svg`, copied to the track's `figures/stage7/`.
