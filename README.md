@@ -3048,3 +3048,17 @@ with its bootstrap 95% interval.
   page.
 - **Script:** `scripts/s17_pass_open_shooter.py`, committed before it runs,
   run once.
+
+### Stage 11 results (run once, `6257eba`)
+
+- **Passes:** 6,720 excluded (fewer than two candidates), leaving 127,162.
+  There are 289 shooters.
+- **League:** P(most open candidate) = 0.280 [0.276, 0.283], against a
+  baseline of 0.330. Receivers are candidates 80% of the time. Deficit 3.2
+  ft; proximity gain 1.6 ft. Corner: 0.141.
+- **The three:** Curry 0.252 [0.216, 0.291], LeBron 0.375 [0.336, 0.411],
+  Harden 0.412 [0.367, 0.453].
+- **LeBron − league:** +0.096 [+0.057, +0.133]. The MDE at the realized n =
+  586 is 0.058.
+- **Record:** `feasibility.md` (Stage 11 row and section) and results.json
+  "stage11_pass_to_open_shooter".
