@@ -3139,3 +3139,20 @@ they have ≥ 150 catches. Otherwise "too thin".
   "stage12_exchange_rate_by_situation".
 - **Script:** `scripts/s18_er_by_situation.py`, committed before it runs,
   run once.
+
+### Stage 12 results (run once, `40258aa`)
+
+- **Median posterior ER, all players** (bootstrap over players, posteriors
+  fixed):
+  - behind 5+: 8.76 [8.51, 9.19]; within 5: 7.85 [7.41, 8.27]; ahead 5+:
+    6.64 [5.74, 7.41];
+  - Q1-3: 8.20; Q4+OT: 8.25; home: 7.80; away: 7.64; pass: 8.17.
+- **Loose ball / steal:** too thin to pool (4,319 catches, 0 players with
+  ≥ 150).
+- **Differences:**
+  - behind − ahead +2.12 [+1.24, +3.06];
+  - behind − within +0.91 [+0.49, +1.49];
+  - Q4 − Q1-3 +0.05 [−1.19, +0.60];
+  - home − away +0.16 [−0.36, +0.68].
+- **Record:** `feasibility.md` (Stage 12 row and section) and results.json
+  "stage12_exchange_rate_by_situation".
