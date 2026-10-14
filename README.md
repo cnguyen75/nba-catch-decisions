@@ -2951,6 +2951,30 @@ A table row, a section, and results.json "stage10_release_timing".
 Script: `scripts/s16_release_timing.py`, committed before it runs, run
 once.
 
+### Stage 10 results (run once, `11f8a5e`)
+
+- **24,324 shots:** 24,059 league; 102 dropped for missing motion features.
+- **Median release time by closing-speed quartile:** 1.04, 0.96, 0.92 and
+  0.92 s. The intervals are degenerate, because the median sits on one 0.04 s
+  frame step.
+- **Slope:** −0.0106 s per ft/s [−0.0113, −0.0099]. **Space preserved:**
+  0.13 ft [0.12, 0.14].
+- **Rush AMEs vs the 0.9-1.1 s bin:**
+  - 0.3-0.7 s: −2.5 [−5.5, +0.6] points;
+  - 0.7-0.9 s: −1.1 [−2.6, +0.5];
+  - 1.1-1.5 s: −0.4 [−2.1, +1.3].
+- **Registered reading:** dP/d(openness) = 0.0164 per ft. Loss per 0.1 s =
+  2.0 points; gain = 0.5 [−0.2, +1.3]; gain − loss = −1.4 [−2.2, −0.7]. The
+  loss is larger, and the rush penalty is flat above 0.7 s: the floor is
+  mechanics.
+- **The named players:** Curry 0.80 s, Thompson 0.80, Redick 0.96. LeBron
+  (37 shots) and Harden (82) are too thin.
+- **Bug, caught after the result commit:** `11f8a5e` force-added
+  `scripts/__pycache__`. It was untracked in `4f0399c`; no analysis was
+  affected.
+- **Record:** `feasibility.md` (Stage 10 row and section) and results.json
+  "stage10_release_timing".
+
 # Stage 11: Stage 9 with a deliberate-choice baseline (registered 2026-10-14, before running; descriptive, no gates)
 
 Why: Stage 9's "most open teammate" counts players who are open because the
