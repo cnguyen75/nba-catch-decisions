@@ -2136,3 +2136,57 @@ registration, **stop. No real fit; steps 3–5 not run.**
 
 **Step 3 (power, from the synthetic runs, for the record):** expected SE(ρ)
 is about 0.16 at ρ = 0, so the minimum detectable |ρ| is about 0.45.
+
+---
+
+# Stage 5b, second and last identification strategy (registered 2026-10-13, before running)
+
+## Variables
+
+- **late** = 1[shot clock ≤ 4 s]. It enters **both** equations.
+- **clock_mid** = clip(shot clock, 4, 24) − 4: the shot clock over 5–24 s,
+  linear, and 0 at ≤ 4 s. It enters the **selection equation only** (the new
+  exclusion).
+- **Still excluded from the outcome:** best teammate openness, score margin,
+  catch source.
+- **The outcome equation is X as in 5b with shot clock replaced by late.**
+  Selection is Z = X + clock_mid + the other exclusions.
+
+## Step 1: falsification test (first)
+
+- **Data:** league **training** jump shots (414 games), located, with
+  release motion features.
+- **Model:** logistic make model on:
+  - a distance spline, zone, and the release-openness spline (knots 2, 4, 6,
+    8, 12) plus the log-openness interactions;
+  - shot type (C&S);
+  - motion (closing_pre, shooter speed, set, defenders within 6 ft);
+  - **late** and **clock_mid** (both at release).
+- **Statistic:** the average marginal effect of clock_mid on make probability
+  per second, over shots with release clock > 4 s, with a game-bootstrap 95%
+  interval (1,000 resamples, seed 0).
+- **Pass:** the interval covers 0 **and** both ends lie within ±0.01 per
+  second.
+- **Fail:** the exclusion is invalid; stop and report.
+- **Information only:** the same statistic on the 16–30 ft subset.
+
+## Step 2: exclusion strength
+
+The probit of shoot-now on Z against X, now with **df = 6**. Same threshold
+(LR/df ≥ 10) and partial pseudo-R².
+
+## Step 3: synthetic validation, exactly as before, at the new real strength
+
+- True γ is from the real selection probit (with clock_mid), and β from the
+  real naive outcome probit.
+- ρ ∈ {0, 0.3, 0.6}, seeds 800–819, 900–919 and 1000–1019.
+- **Gate, per setting:** ρ covered in ≥ 18/20, **and** the passed-up make
+  rate within 0.03 in ≥ 18/20.
+- **Information only:** the count within 0.05.
+
+## Step 4
+
+- **Pass:** real fit and validation once, then the per-player sequence, as
+  registered in 5b.
+- **Fail:** **stop; this closes 5b.** The record will state that the
+  strongest available lever could not resolve the selection.
