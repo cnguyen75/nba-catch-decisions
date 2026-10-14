@@ -124,8 +124,6 @@ def synth(rho):
     print("SUMMARY", {k: v for k, v in out.items() if k != "runs"})
 
 
-if __name__ == "__main__":
-    {"falsify": falsify, "excl": excl, "synth": lambda: synth(float(sys.argv[2]))}[sys.argv[1]]()
 
 
 def real():
@@ -191,5 +189,5 @@ def real():
     print(_j.dumps(out, indent=1, default=float))
 
 
-if __name__ == "__main__" and sys.argv[1] == "real":
-    real()
+if __name__ == "__main__":
+    {"falsify": falsify, "excl": excl, "synth": lambda: synth(float(sys.argv[2])), "real": real}[sys.argv[1]]()
