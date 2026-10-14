@@ -3156,3 +3156,31 @@ they have ≥ 150 catches. Otherwise "too thin".
   - home − away +0.16 [−0.36, +0.68].
 - **Record:** `feasibility.md` (Stage 12 row and section) and results.json
   "stage12_exchange_rate_by_situation".
+
+# Record corrections (2026-10-14; no reruns)
+
+1. **Stage 10, the units of (iii).** The registered formula "−slope × median
+   top-quartile closing speed, in ft" yields seconds. This is a
+   registration error, from the brief.
+   - **Release brought forward** at a top-quartile closeout: 0.128 s
+     [0.119, 0.137].
+   - **Space preserved** = 0.128 s × 12.08 ft/s = **1.55 ft**. The
+     approximate interval is [1.43, 1.66], the products of the interval
+     ends.
+   - Both come from `checks/s10_stage10.json`. The figure annotation
+     ("0.13 ft") is corrected in the record only, not redrawn.
+2. **Stage 11, like-for-like** (post hoc, not registered):
+   P(receiver is the most open candidate | receiver is a candidate),
+   against mean(1/n) over the same passes.
+   - **Method:** Stage 11's per-pass table, rebuilt with its own `build()`
+     (no fitting), with a game bootstrap of 1,000 resamples, seed 0. The
+     script is `scripts/s17b_conditional.py`; the output is
+     `checks/s11_conditional.json`.
+   - **League:** 0.348 [0.344, 0.352] vs 0.311.
+   - **The three:** Curry 0.350 [0.303, 0.403] vs 0.339; LeBron 0.505
+     [0.459, 0.548] vs 0.372; Harden 0.539 [0.490, 0.591] vs 0.372.
+   - **LeBron − league:** +0.157 [+0.110, +0.201].
+3. **Site paragraph and thread.md:** "the record shows why no instrument in
+   this data could" becomes "the record shows the precision any instrument
+   would need (SE on rho of about 0.02) against what the three sets
+   achieved (0.06-0.16)".
