@@ -2110,3 +2110,29 @@ A player continues only if **both** hold:
 - **Final:** everything in plain terms, including **one paragraph on what
   the result depends on** (the normality of the errors, and the exclusion
   restrictions).
+
+## Stage 5b results: STOPPED at step 2 (synthetic validation fails); no real fit
+
+**Step 1, exclusion strength** (league training catches, n = 101,532,
+16,018 shots):
+
+- LR = 129.98 on 5 df, so **LR/df = 26.0 ≥ 10: passes.**
+- Partial pseudo-R² = **0.00196.** That is statistically clear but
+  practically weak.
+- Standardized excluded coefficients: best teammate openness +0.032, margin
+  −0.025, offensive rebound −0.054, inbound −0.016, other −0.012.
+
+**Step 2, synthetic validation at the real exclusion strength** (true γ and β
+from the real probits; 20 seeds each):
+
+| True ρ | Interval covers ρ | Counterfactual error ≤ 0.03 | Median counterfactual error (corrected / naive) | Mean SE(ρ) |
+|---|---|---|---|---|
+| 0 | 20/20 | **10/20** | 0.034 / 0.005 | 0.161 |
+| 0.3 | 19/20 | **4/20** | 0.088 / 0.243 | 0.133 |
+| 0.6 | 20/20 | **7/20** | 0.056 / 0.491 | 0.093 |
+
+**FAIL** (the counterfactual criterion fails in every setting). Per the
+registration, **stop. No real fit; steps 3–5 not run.**
+
+**Step 3 (power, from the synthetic runs, for the record):** expected SE(ρ)
+is about 0.16 at ρ = 0, so the minimum detectable |ρ| is about 0.45.
