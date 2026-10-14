@@ -1,0 +1,28 @@
+{
+ "instruments": [
+  "clock_mid",
+  "window",
+  "first_made",
+  "best_tm_open",
+  "margin",
+  "source(3)"
+ ],
+ "window": "m5",
+ "n": 101532,
+ "n_shoot": 16018,
+ "LR": 579.32,
+ "df": 8,
+ "LR_per_df": 72.42,
+ "partial_pseudo_R2": 0.00875,
+ "passes": true,
+ "instrument_coefs_std": [
+  -0.1182,
+  -0.0133,
+  -0.0003,
+  0.0245,
+  -0.0292,
+  -0.0577,
+  -0.0167,
+  -0.0138
+ ]
+}
