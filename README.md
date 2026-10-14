@@ -3062,3 +3062,80 @@ with its bootstrap 95% interval.
   586 is 0.058.
 - **Record:** `feasibility.md` (Stage 11 row and section) and results.json
   "stage11_pass_to_open_shooter".
+
+# Stage 12: the exchange rate by situation, with partial pooling (registered 2026-10-14, before running; descriptive, no gates)
+
+Why: 5c's within-player cuts pooled catches across players. Stage 8 showed
+that pooling and filtering move the number. Stage 12 applies Stage 8's
+shrinkage within each cut.
+
+## Unit and cuts
+
+**Catches:** the Stage 8 unit, `unit(vshoot.csv)` (16-30 ft, shot clock
+recorded, shoot vs continue, non-test games, asserted at load). Catch source
+comes from `out/s5/motion_catches_*.csv` (`source5`); home is from the PBP,
+as in 5c (`scripts/s7_map.py`).
+
+**The cuts are exactly 5c's:**
+
+- **margin:** behind 5+ (margin ≤ −5), within 5, ahead 5+ (margin ≥ 5);
+- **period:** Q1-3, Q4+OT;
+- **home / away;**
+- **catch source:** pass vs other (5c's "loose ball / steal / own spell /
+  no previous owner"). The thin sources, offensive rebound and inbound, are
+  dropped, and the drop is said in the record. A missing source counts as
+  other, as in 5c.
+
+## Per cut level
+
+1. **Eligible players:** those with ≥ 150 catches in that level.
+2. **Per-player fit:** Stage 8's (`cov()` logit on the level's catches,
+   all-constant columns dropped, Fisher 2×2 block for clock and openness).
+3. **Prior:** a bivariate normal fitted by maximum marginal likelihood
+   within the level (Stage 8's code).
+4. **Posterior:** posterior means, ER = −β_open/β_clock, and 2,000 draws,
+   seed 0. A player is "indeterminate" if his clock sign flips in more than
+   5% of draws.
+5. **Reported:**
+   - n players;
+   - **median posterior ER over all eligible players** (the headline);
+   - the median over determinate players only;
+   - the IQR;
+   - the share indeterminate;
+   - the prior's μ ER.
+6. **A level with fewer than 10 eligible players** is reported "too thin to
+   pool", with no prior fitted.
+
+## Differences between levels
+
+Each difference is the median posterior ER of level A minus that of level
+B:
+
+- behind 5+ − ahead 5+;
+- behind 5+ − within 5;
+- Q4+OT − Q1-3;
+- home − away;
+- other − pass.
+
+**Interval:** a bootstrap over players, 1,000 resamples, seed 0.
+
+- Resample, with replacement, the players eligible in either level.
+- In each resample, take each level's median over the resampled players
+  eligible in it.
+- Posteriors (and priors) are held fixed within the bootstrap.
+
+The same bootstrap gives each level's median interval.
+
+## The three players
+
+Their posterior ER (with 95% interval and flip share) in each level where
+they have ≥ 150 catches. Otherwise "too thin".
+
+## Figure and record
+
+- **Figure** (`figures/stage12/`): one panel per cut, showing each level's
+  median with its interval.
+- **Record:** a table row, a section, and results.json
+  "stage12_exchange_rate_by_situation".
+- **Script:** `scripts/s18_er_by_situation.py`, committed before it runs,
+  run once.
