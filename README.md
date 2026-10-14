@@ -2410,3 +2410,85 @@ prior attempts this game:
 
 `feasibility.md` gets its chronological table and site paragraph updated,
 with nothing removed.
+
+## Stage 6 results
+
+**A. State.**
+
+- Height coverage for nearest defenders at the catch: **99.99%** (name join;
+  the PBP's id–name pairs include some old-player errors, which matter only
+  for non-appearing ids).
+- Back-to-back flags for all catches (22% of catches).
+- Rhythm features over 239,824 catches and 100,948 attempts.
+- **Code note:** a column-index error in the falsification statistics was
+  caught before any result was used (`s11_b` fix plus an assertion). All
+  results below are from the corrected run.
+
+**B6. Decision model** (league train n = 101,570; validation n = 31,517).
+
+| Variant | Held-out log loss |
+|---|---|
+| Absolute openness | 0.32942 |
+| Relative openness | 0.33257 |
+| Both | **0.32936** |
+
+- **Absolute openness predicts better than relative.** Adding relative on
+  top barely helps (rel_open +0.054 [0.026, 0.084]).
+- **Rhythm** is unchanged across variants. last_made **+0.14** [0.09,
+  0.20]; m5 −0.028 [−0.064, 0.011].
+- **Other effects:** defender height −0.135 per 10 cm [−0.156, −0.113];
+  closing_pre −0.051 per ft/s; minutes +0.038 per 10 min; b2b and clutch
+  ≈ 0.
+- **Identity effects add nothing held-out:** log loss changes by +0.00001
+  [−0.00008, +0.00010].
+- **Window chosen: m5** (|coef × SD| 0.035 vs 0.0045).
+
+**B7. Falsification** (37,122 league train jump shots; average marginal
+effect on make probability):
+
+| Candidate | AME [95% CI] | Outcome |
+|---|---|---|
+| clock_mid | +0.00095/s [−0.00007, +0.00208] | valid |
+| m5 | −0.0045 per make [−0.0115, +0.0017] | valid |
+| first_made | −0.0034 [−0.0148, +0.0074] | valid |
+
+**Hot hand: none positive.** last_made gives **−0.019** [−0.032, −0.007]:
+after a make, the next shot is about 2 points *less* likely to go in, given
+openness, distance and motion.
+
+**C. Strategy 3** (instruments: clock_mid, m5, first_made, best teammate
+openness, margin, source).
+
+- LR = 579.3 on 8 df (72.4/df). Partial pseudo-R² **0.00875** (strategy 2:
+  0.00907).
+- The new instruments add almost nothing: standardized m5 −0.013,
+  first_made −0.0003.
+- **Synthetic: FAIL.**
+
+| True ρ | ρ covered | Within 0.03 | Within 0.05 | Median error (corrected / naive) |
+|---|---|---|---|---|
+| 0 | 20 | **6** | 8 | 0.055 / 0.004 |
+| 0.3 | 19 | **1** | 8 | 0.062 / 0.244 |
+| 0.6 | 18 | **8** | 11 | 0.047 / 0.487 |
+
+**5b is closed for good. No real fit.**
+
+**D. Descriptive.**
+
+- **Exchange rate by zone (league):** threes **8.8** s/ft [8.0, 10.0];
+  mid-range **5.3** [4.7, 6.1]. Curry mid 3.1 [1.9, 6.6] (threes
+  unresolved); LeBron threes 4.0 [1.5, 18.6] (mid unresolved); Harden
+  unresolved in both.
+- **Rhythm response** (catches with ≥ 3 prior attempts):
+  - Curry shoot-now rate after 2–3 of his last 3 made: 25.5% against 20.1%
+    (+5.4 points [−1.5, +12.7]).
+  - **Curry, first shot made: 17.6% against 26.7% (−9.1 [−15.1, −3.0]).**
+  - LeBron and Harden: no clear rhythm response.
+- **Defenders:**
+  - Most negative jump-shot effects (≥ 100 contests): A. Davis, Aldridge,
+    Howard, Belinelli, Curry, Roberson, Mudiay, Redick, Kanter, Dragic.
+  - Rim protectors (≥ 50): Gobert, D. Jordan, R. Lopez, Porzingis, Hawes,
+    Bogut, Ibaka, Gortat, Millsap, Withey.
+  - Identity improves held-out decision prediction by nothing measurable.
+  - **Caveat:** shots over the best defenders are the ones players chose to
+    take.
