@@ -2629,7 +2629,7 @@ registered reading bound of 0.05. Unless the true Δ is far from −0.05, an
 
 ### Stage 7 results (confirmatory, scored once)
 
-**183 games;** 10,837 jump shots and 42,281 catches in the 4–24 s range.
+**183 games;** 10,837 jump shots and 45,341 catches in the 4–24 s range.
 
 | Statistic | Estimate [95% CI] |
 |---|---|
