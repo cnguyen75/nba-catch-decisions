@@ -33,7 +33,7 @@ TYPES = {
 }
 
 
-def main():
+def main() -> None:
     j = pd.read_csv(b.OUT / "join_check.csv", dtype={"game": str})
     shots = pd.read_csv(b.OUT / "shots.csv", dtype={"game": str})
     pick = j[j.joined].sample(20, random_state=0)

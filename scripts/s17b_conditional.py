@@ -8,6 +8,7 @@ from pathlib import Path
 import sys
 
 import numpy as np
+import pandas as pd
 
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -15,7 +16,7 @@ from s4_data import GATED  # noqa: E402
 from s17_pass_open_shooter import NB, OUT, build, shooters  # noqa: E402
 
 
-def summ(x):
+def summ(x: pd.DataFrame) -> dict[str, float]:
     c = x[x.recv_cand.astype(bool)]
     return {
         "p_most_open_given_cand": c.is_mo.mean(),
@@ -24,7 +25,7 @@ def summ(x):
     }
 
 
-def main():
+def main() -> None:
     shoot, _, _ = shooters()
     d, _, _ = build(shoot)
     groups = {"League": ~d.passer.isin(GATED), **{n: d.passer == p for p, n in GATED.items()}}

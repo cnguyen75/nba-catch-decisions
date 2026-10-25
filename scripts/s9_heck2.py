@@ -25,12 +25,12 @@ import s8_heck as h  # noqa: E402
 S5 = h.S5
 
 
-def late_mid(sc):
+def late_mid(sc: pd.Series | np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     sc = np.asarray(sc, float)
     return (sc <= 4).astype(float), np.clip(sc, 4, 24) - 4
 
 
-def falsify():
+def falsify() -> None:
     _, s = load()
     ms = pd.concat(
         [pd.read_csv(f, dtype={"game": str}) for f in sorted(S5.glob("motion_shots_*.csv"))]
@@ -49,7 +49,7 @@ def falsify():
         & (s.split == "train")
     ].reset_index(drop=True)
 
-    def feats(d):
+    def feats(d: pd.DataFrame) -> np.ndarray:
         base = X2(d.d_release, d.zone_release, d.three, d.open_release_all, d.cs, d.sc_release)[
             :, :-2
         ]  # drop sc, sc^2
@@ -67,7 +67,7 @@ def falsify():
             ]
         )
 
-    def ame(d):
+    def ame(d: pd.DataFrame) -> float:
         X = feats(d)
         m, sd = X.mean(0), X.std(0)
         sd[sd == 0] = 1
@@ -78,7 +78,7 @@ def falsify():
         sel = d.sc_release.to_numpy(float) > 4
         return float(np.mean(p[sel] * (1 - p[sel])) * beta_mid)
 
-    def boot(d, seed):
+    def boot(d: pd.DataFrame, seed: int) -> np.ndarray:
         gi = {g: np.where(d.game.to_numpy() == g)[0] for g in d.game.unique()}
         gl = list(gi)
         r = np.random.default_rng(seed)
@@ -113,7 +113,7 @@ def falsify():
     print(json.dumps(res, indent=1))
 
 
-def design2(d):
+def design2(d: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
     Xo = h.X_out(d)
     late, mid = late_mid(d.shot_clock)
     Xo[:, 6] = late  # shot clock column -> late indicator
@@ -121,7 +121,7 @@ def design2(d):
     return h.Std(Xo)(Xo), h.Std(Xz)(Xz)
 
 
-def excl():
+def excl() -> None:
     d, nd = h.build_frame("train")
     X, Z = design2(d)
     s, y = d.s.to_numpy(float), d.y.to_numpy(float)
@@ -149,7 +149,7 @@ def excl():
     print(json.dumps(res, indent=1))
 
 
-def synth(rho):
+def synth(rho: float) -> None:
     d, _ = h.build_frame("train")
     X, Z = design2(d)
     t = np.load(S5 / "heck2_true.npz")
@@ -202,7 +202,7 @@ def synth(rho):
     print("SUMMARY", {k: v for k, v in out.items() if k != "runs"})
 
 
-def real():
+def real() -> None:
     """Step 4 (only if steps 1-3 pass): real fit on league training catches, validation once, reports, player check."""
     import json as _j
 
@@ -214,7 +214,7 @@ def real():
     dv, _ = h.build_frame("validation")
     dg, _ = h.build_frame("gated")
 
-    def raw(dd):
+    def raw(dd: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
         Xo = h.X_out(dd)
         late, mid = late_mid(dd.shot_clock)
         Xo[:, 6] = late

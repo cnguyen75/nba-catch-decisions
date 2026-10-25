@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -30,7 +31,7 @@ CURRY_GAMES = [
 PLAYERS = {"Curry": 201939, "LeBron": 2544, "Harden": 201935}
 
 
-def label(n, c1, c2, c3, ci):
+def label(n: int, c1: bool, c2: bool, c3: bool, ci: list[float]) -> str:
     lo, hi = ci
     if n < MIN_CATCHES:
         return "sample too small"
@@ -50,7 +51,7 @@ def label(n, c1, c2, c3, ci):
     return "unlabelled: " + ("; ".join(reasons) or "other")
 
 
-def evaluate(cnt, rng):
+def evaluate(cnt: pd.DataFrame, rng: np.random.Generator) -> dict[str, Any]:
     r = {
         "counted_catches": int(len(cnt)),
         "games": sorted(cnt.game.unique().tolist()),
@@ -113,7 +114,7 @@ def evaluate(cnt, rng):
     return r
 
 
-def main():
+def main() -> None:
     c = pd.read_csv(OUT / "catches.csv", dtype={"game": str})
     s = pd.read_csv(OUT / "shots.csv", dtype={"game": str})
     old = pd.read_csv(ROOT / "out" / "catches.csv", dtype={"game": str})

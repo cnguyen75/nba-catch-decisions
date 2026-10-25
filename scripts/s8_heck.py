@@ -24,7 +24,7 @@ S5 = ROOT / "out" / "s5"
 GLx, GLw = np.polynomial.legendre.leggauss(20)
 
 
-def build_frame(split):
+def build_frame(split: str) -> tuple[pd.DataFrame, int]:
     vs = pd.read_csv(S4 / "vshoot.csv", dtype={"game": str})
     mc = pd.concat(
         [pd.read_csv(f, dtype={"game": str}) for f in sorted(S5.glob("motion_catches_*.csv"))]
@@ -49,7 +49,7 @@ def build_frame(split):
     return d.reset_index(drop=True), n_drop
 
 
-def X_out(d):
+def X_out(d: pd.DataFrame) -> np.ndarray:
     dd = d.d_basket.to_numpy(float) / 10
     sp = d.catcher_speed.clip(0, 25).to_numpy(float)
     return np.column_stack(
@@ -72,7 +72,7 @@ def X_out(d):
     ).astype(float)
 
 
-def X_excl(d):
+def X_excl(d: pd.DataFrame) -> np.ndarray:
     src = d.source5.fillna("other")
     return np.column_stack(
         [
@@ -86,16 +86,16 @@ def X_excl(d):
 
 
 class Std:
-    def __init__(self, X):
+    def __init__(self, X: np.ndarray) -> None:
         self.m, self.s = X.mean(0), X.std(0)
         self.s[self.s == 0] = 1
 
-    def __call__(self, X):
+    def __call__(self, X: np.ndarray) -> np.ndarray:
         return np.column_stack([np.ones(len(X)), (X - self.m) / self.s])
 
 
-def probit(X, y):
-    def f(b):
+def probit(X: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, float]:
+    def f(b: np.ndarray) -> tuple[float, np.ndarray]:
         xb = X @ b
         ll = y * log_ndtr(xb) + (1 - y) * log_ndtr(-xb)
         lam1 = np.exp(-0.5 * xb**2 - 0.5 * np.log(2 * np.pi) - log_ndtr(xb))
@@ -107,7 +107,7 @@ def probit(X, y):
     return r.x, -r.fun
 
 
-def phi2(a, b, r):
+def phi2(a: np.ndarray, b: np.ndarray, r: float) -> np.ndarray:
     """Bivariate normal CDF via Gauss-Legendre in the correlation (vectorized)."""
     base = ndtr(a) * ndtr(b)
     if abs(r) < 1e-12:
@@ -121,7 +121,9 @@ def phi2(a, b, r):
     return base + dens @ w
 
 
-def ll_vec(theta, Z, X, s, y):
+def ll_vec(
+    theta: np.ndarray, Z: np.ndarray, X: np.ndarray, s: np.ndarray, y: np.ndarray
+) -> np.ndarray:
     kz = Z.shape[1]
     g, b, rho = theta[:kz], theta[kz:-1], np.tanh(theta[-1])
     zg = Z @ g
@@ -136,7 +138,9 @@ def ll_vec(theta, Z, X, s, y):
     return out
 
 
-def fit_heck(Z, X, s, y, g0, b0):
+def fit_heck(
+    Z: np.ndarray, X: np.ndarray, s: np.ndarray, y: np.ndarray, g0: np.ndarray, b0: np.ndarray
+) -> tuple[np.ndarray, dict[str, object], np.ndarray]:
     th0 = np.r_[g0, b0, 0.0]
     f = lambda th: -ll_vec(th, Z, X, s, y).sum()
     r = minimize(f, th0, method="L-BFGS-B", options={"maxiter": 500})
@@ -163,7 +167,7 @@ def fit_heck(Z, X, s, y, g0, b0):
     )
 
 
-def cf_rate(theta, Z, X, s):
+def cf_rate(theta: np.ndarray, Z: np.ndarray, X: np.ndarray, s: np.ndarray) -> float:
     kz = Z.shape[1]
     g, b, rho = theta[:kz], theta[kz:-1], np.tanh(theta[-1])
     m0 = s == 0
@@ -171,7 +175,9 @@ def cf_rate(theta, Z, X, s):
     return float(np.mean(phi2(xb, -zg, -rho) / ndtr(-zg)))
 
 
-def design(d, sx=None, sz=None):
+def design(
+    d: pd.DataFrame, sx: Std | None = None, sz: Std | None = None
+) -> tuple[np.ndarray, np.ndarray, Std, Std]:
     Xo = X_out(d)
     Xz = np.column_stack([Xo, X_excl(d)])
     sx = sx or Std(Xo)
@@ -179,7 +185,7 @@ def design(d, sx=None, sz=None):
     return sx(Xo), sz(Xz), sx, sz
 
 
-def excl():
+def excl() -> None:
     d, nd = build_frame("train")
     X, Z, sx, sz = design(d)
     s, y = d.s.to_numpy(float), d.y.to_numpy(float)
@@ -210,7 +216,7 @@ def excl():
     print(json.dumps(res, indent=1))
 
 
-def synth(rho):
+def synth(rho: float) -> None:
     d, _ = build_frame("train")
     X, Z, _, _ = design(d)
     t = np.load(S5 / "heck_true.npz")

@@ -1,6 +1,7 @@
 """Stage 5a analysis (registered 0437efd): make-model comparison (current vs motion) on the fresh calibration games,
 and the Stage 4 behavioural logistic refit with motion features. Writes out/s5/s5a.json."""
 
+from collections.abc import Callable
 import json
 from pathlib import Path
 import sys
@@ -24,7 +25,7 @@ S5 = Path(__file__).resolve().parent.parent / "out" / "s5"
 NB = 1000
 
 
-def motion_X(d):
+def motion_X(d: pd.DataFrame) -> np.ndarray:
     sp = d.s_speed.clip(0, 25).to_numpy(float)
     return np.column_stack(
         [
@@ -36,7 +37,9 @@ def motion_X(d):
     )
 
 
-def fit_platt(tr, Xf):
+def fit_platt(
+    tr: pd.DataFrame, Xf: Callable[[pd.DataFrame], np.ndarray]
+) -> Callable[[pd.DataFrame], np.ndarray]:
     games = np.array(sorted(tr.game.unique()))
     perm = np.random.default_rng(5).permutation(len(games))
     fold = {g: i % 5 for i, g in zip(range(len(games)), games[perm])}
@@ -55,7 +58,7 @@ def fit_platt(tr, Xf):
     return lambda d: expit(A * m.decision_function(sc.transform(Xf(d))) + B)
 
 
-def criteria(ev, p):
+def criteria(ev: pd.DataFrame, p: np.ndarray) -> dict[str, float | bool]:
     out = ev.assign(pred=p)
     lvl = abs(out.pred.mean() - out.made.mean())
     t = out.groupby(pd.cut(out.open_release_all, BINS, right=False), observed=True).agg(
@@ -76,7 +79,7 @@ def criteria(ev, p):
     }
 
 
-def main():
+def main() -> None:
     c, s = load()
     ms = pd.concat(
         [pd.read_csv(f, dtype={"game": str}) for f in sorted(S5.glob("motion_shots_*.csv"))]
@@ -141,7 +144,7 @@ def main():
     pv = pd.read_csv(S4 / "values.csv", dtype={"game": str})
     groups = {"League": lg, **{n: unit(pv[pv.pid == p]) for p, n in GATED.items()}}
 
-    def motion_cov(d, post=True):
+    def motion_cov(d: pd.DataFrame, post: bool = True) -> np.ndarray:
         src = d.source5.fillna("other")
         cols = [
             d.closing_pre.clip(-15, 15),

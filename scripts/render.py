@@ -6,10 +6,15 @@ and held for 0.5 s in the GIF. Upstream code is read from ~/Documents/nba-tracki
 (commit f7d4cf2); it draws ball height as ball circle size.
 """
 
+from collections.abc import Callable
 from pathlib import Path
 import sys
+from typing import Any
 
 import matplotlib
+from matplotlib.animation import FuncAnimation
+from matplotlib.figure import Figure
+from matplotlib.table import Table
 
 
 matplotlib.use("Agg")
@@ -31,13 +36,13 @@ import Event as up_event  # noqa: E402
 class _TableShim:
     """Upstream reads table.properties()['child_artists'], removed in newer matplotlib."""
 
-    def __init__(self, t):
+    def __init__(self, t: Table) -> None:
         self._t = t
 
-    def __getattr__(self, k):
+    def __getattr__(self, k: str) -> Any:
         return getattr(self._t, k)
 
-    def properties(self):
+    def properties(self) -> dict[str, list[Any]]:
         return {"child_artists": self._t.get_children()}
 
 
@@ -45,7 +50,7 @@ _real_table = plt.table
 _real_imread = plt.imread
 
 
-def moments(tl, lo, hi):
+def moments(tl: dict[str, Any], lo: int, hi: int) -> list[list[Any]]:
     out = []
     for i in range(lo, hi + 1):
         rows = [[-1, -1, *tl["B"][i]]]
@@ -60,7 +65,9 @@ def moments(tl, lo, hi):
     return out
 
 
-def render(gid, lo, hi, stem, marks, player=None):
+def render(
+    gid: str, lo: int, hi: int, stem: str, marks: dict[int, str], player: int | None = None
+) -> None:
     g, events, tl, _ = b.load_timeline(gid)
     roster = {}
     for ev in g["events"]:
@@ -83,7 +90,7 @@ def render(gid, lo, hi, stem, marks, player=None):
     for k, i in enumerate(frame_ids):
         seq += [k] * (12 if i in marks else 1)
 
-    def update(k, *a):
+    def update(k: int, *a: Any) -> Any:
         res = orig_update(k, *a)
         clock = a[3]
         i = frame_ids[k]
@@ -96,7 +103,9 @@ def render(gid, lo, hi, stem, marks, player=None):
 
     E.update_radius = update
 
-    def fa(fig, func, fargs, frames, interval):
+    def fa(
+        fig: Figure, func: Callable[..., Any], fargs: tuple, frames: Any, interval: int
+    ) -> FuncAnimation:
         captured["fig"], captured["func"], captured["fargs"] = fig, func, fargs
         captured["anim"] = real_fa(fig, func, fargs=fargs, frames=seq, interval=40)
         return captured["anim"]

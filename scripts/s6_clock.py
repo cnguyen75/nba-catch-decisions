@@ -1,9 +1,11 @@
 """Stage 4 (registered ea99d0c): openness priced in shot-clock seconds. Power first, then gradients, exchange rate,
 Skinner's test. Writes out/s4/stage4.json."""
 
+from collections.abc import Callable
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -20,7 +22,7 @@ BINS = [0, 4, 8, 12, 16, 20, 24.01]
 NAMES = ["intercept", "shot_clock", "open", "d10", "d10sq", "ab3", "corner3", "best_tm"]
 
 
-def cov(d):
+def cov(d: pd.DataFrame) -> np.ndarray:
     dd = d.d_basket.to_numpy(float) / 10
     return np.column_stack(
         [
@@ -36,11 +38,11 @@ def cov(d):
     )
 
 
-def ols(X, y):
+def ols(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     return np.linalg.lstsq(X, y, rcond=None)[0]
 
 
-def unit(d):
+def unit(d: pd.DataFrame) -> pd.DataFrame:
     return d[
         (d.d_basket >= 16)
         & (d.d_basket <= 30)
@@ -49,7 +51,7 @@ def unit(d):
     ].copy()
 
 
-def boot_games(d, fn, seed):
+def boot_games(d: pd.DataFrame, fn: Callable[[pd.DataFrame], Any], seed: int) -> list[Any]:
     games = d.game.unique()
     gi = {g: np.where(d.game.to_numpy() == g)[0] for g in games}
     r = np.random.default_rng(seed)
@@ -58,13 +60,13 @@ def boot_games(d, fn, seed):
     ]
 
 
-def ci(x):
+def ci(x: np.ndarray) -> list[float]:
     x = np.asarray(x, float)
     x = x[np.isfinite(x)]
     return [round(float(v), 4) for v in np.quantile(x, [0.025, 0.975])]
 
 
-def main():
+def main() -> None:
     vs = pd.read_csv(S4 / "vshoot.csv", dtype={"game": str})
     lt_all = vs[~vs.pid.isin(GATED) & (vs.split == "train")]
     c_ = lt_all[lt_all.action == "continue"]
@@ -107,11 +109,11 @@ def main():
     print("POWER", json.dumps(pw, indent=1))
 
     # ---- 1-3 point estimates and bootstrap
-    def meas(d):
+    def meas(d: pd.DataFrame) -> tuple[float, float]:
         g = ols(cov(d), d.gap.to_numpy())
         return g[1], g[2]
 
-    def beh(d):
+    def beh(d: pd.DataFrame) -> tuple[float, float]:
         b = logit_fit(cov(d), d.y.to_numpy())
         return b[1], b[2]
 
@@ -147,7 +149,7 @@ def main():
         }
 
         # ---- 4. Skinner's test
-        def skin(dd):
+        def skin(dd: pd.DataFrame) -> tuple[np.ndarray, pd.DataFrame]:
             b = pd.cut(dd.shot_clock, BINS, right=False)
             t = dd.groupby(b, observed=False).agg(
                 obs=("y", "mean"), imp=("gap", lambda x: float((x > 0).mean())), n=("y", "size")

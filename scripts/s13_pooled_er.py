@@ -21,7 +21,7 @@ OUT = ROOT / "out" / "s8"
 HBINS = [-np.inf, 0, 2, 4, 6, 8, 10, 15, np.inf]
 
 
-def main():
+def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     vs = pd.read_csv(S4 / "vshoot.csv", dtype={"game": str})
@@ -48,12 +48,12 @@ def main():
     B, S = np.array(est), np.array(S)
     n = len(B)
 
-    def unpack(th):
+    def unpack(th: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         mu = th[:2]
         L = np.array([[np.exp(th[2]), 0], [th[3], np.exp(th[4])]])
         return mu, L @ L.T
 
-    def nll(th):
+    def nll(th: np.ndarray) -> float:
         mu, T = unpack(th)
         tot = 0.0
         for i in range(n):

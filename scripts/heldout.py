@@ -24,12 +24,12 @@ STEMS = {
 }
 
 
-def counted(path):
+def counted(path: Path) -> pd.DataFrame:
     c = pd.read_csv(path, dtype={"game": str})
     return c[(c.pid == CURRY) & c.valid_catch & c.frontcourt & c.sc_running]
 
 
-def sample():
+def sample() -> None:
     a = counted(ROOT / "out/heldout_sticky/catches.csv").assign(src="sticky")
     b = counted(ROOT / "out/heldout_nearest/catches.csv").assign(src="nearest")
     rows = a[["game", "start", "open_catch", "src"]].to_dict("records")
@@ -67,7 +67,7 @@ def sample():
     print(meta)
 
 
-def score():
+def score() -> None:
     picks = pd.read_csv(ROOT / "checks/heldout_sample.csv", dtype={"game": str})
     labels = {
         x["cid"]: x for x in json.loads((ROOT / "checks/heldout_labels.json").read_text())["labels"]

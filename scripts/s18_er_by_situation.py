@@ -4,6 +4,7 @@ within each cut level. Writes out/s12/stage12.json and the figure."""
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -41,7 +42,7 @@ DIFFS = [
 ]
 
 
-def player_fit(x):
+def player_fit(x: pd.DataFrame) -> tuple[np.ndarray, np.ndarray] | None:
     X, y = cov(x), (x.action == "shoot").to_numpy(float)
     keep = [0] + [j for j in range(1, X.shape[1]) if X[:, j].std() > 0]
     if 1 not in keep or 2 not in keep:
@@ -58,14 +59,16 @@ def player_fit(x):
     return b[[1, 2]], C[np.ix_([1, 2], [1, 2])]
 
 
-def pool(B, S, rng):
+def pool(
+    B: np.ndarray, S: np.ndarray, rng: np.random.Generator
+) -> tuple[np.ndarray, np.ndarray, bool, list[dict[str, Any]]]:
     n = len(B)
 
-    def unpack(th):
+    def unpack(th: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         L = np.array([[np.exp(th[2]), 0], [th[3], np.exp(th[4])]])
         return th[:2], L @ L.T
 
-    def nll(th):
+    def nll(th: np.ndarray) -> float:
         mu, T = unpack(th)
         tot = 0.0
         for i in range(n):
@@ -99,7 +102,7 @@ def pool(B, S, rng):
     return mu, T, bool(r.success), post
 
 
-def main():
+def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     vs = pd.read_csv(S4 / "vshoot.csv", dtype={"game": str})

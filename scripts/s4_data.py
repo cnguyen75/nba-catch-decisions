@@ -13,7 +13,7 @@ GATED = {201939: "Curry", 2544: "LeBron", 201935: "Harden"}
 ZONES = ["rim", "mid", "above_break3", "corner3"]
 
 
-def merge_parts():
+def merge_parts() -> None:
     parts = sorted(S4.glob("part*"))
     for name in ("catches.csv", "shots.csv", "join_check.csv"):
         pd.concat(
@@ -45,7 +45,7 @@ def merge_parts():
     print(out["counts"], "new", len(new_games), "skipped", len(meta["skipped_games"]))
 
 
-def load():
+def load() -> tuple[pd.DataFrame, pd.DataFrame]:
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     c = pd.read_csv(S4 / "catches.csv", dtype={"game": str})
     s = pd.read_csv(S4 / "shots.csv", dtype={"game": str})

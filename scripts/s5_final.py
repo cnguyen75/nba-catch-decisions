@@ -21,12 +21,12 @@ from s4_make import X2  # noqa: E402
 GATED_NAMES = {"Curry", "Harden"}
 
 
-def main():
+def main() -> None:
     m = np.load(S4 / "make_model.npz")
     mk = json.loads((S4 / "make_report.json").read_text())
     g_zone, offs, kf = mk["g_zone"], mk["player_offsets"], int(m["kf"])
 
-    def v_shoot(d, op, name):
+    def v_shoot(d: pd.DataFrame, op: pd.Series | np.ndarray, name: str) -> np.ndarray:
         Xr = X2(
             d.d_basket,
             d.zone,
@@ -85,7 +85,7 @@ def main():
             d.gap_open.to_numpy(float),
         )
 
-        def est(ix):
+        def est(ix: np.ndarray) -> tuple[float, float, float, float]:
             a = np.polyfit(Xo[ix], gop[ix], 1)[0]
             lr = LogisticRegression(C=1e6, max_iter=1000).fit(
                 np.column_stack([Xo[ix], gdz[ix]]), y[ix]

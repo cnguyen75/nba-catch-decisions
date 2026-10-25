@@ -7,6 +7,7 @@ out/join_check.csv and out/build_meta.json. Raw data is read from ~/Documents/nb
 import json
 from pathlib import Path
 import re
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -46,12 +47,17 @@ CLEANUP = False
 R3 = False
 ALL_PLAYERS = False
 
+Timeline = dict[str, Any]
+Spell = tuple[int, int, int]
+
 
 class EmptyGame(Exception):
     pass
 
 
-def load_timeline(game_id):
+def load_timeline(
+    game_id: str,
+) -> tuple[dict[str, Any], dict[int, tuple[int, float, float, dict[str, Any]]], Timeline, int]:
     path = DATA / "json" / GAMES[game_id] / f"{game_id}.json"
     if not path.exists():
         import py7zr
@@ -116,17 +122,19 @@ def load_timeline(game_id):
 CLOSE_RE = re.compile(r"Layup|Dunk|Tip|Hook|Putback|Finger Roll|Alley Oop")
 
 
-def is_close(desc):
+def is_close(desc: str) -> bool:
     m = re.search(r"(\d+)' ", desc)
     return bool(CLOSE_RE.search(desc)) or (m is not None and int(m.group(1)) <= 8)
 
 
-def pc_seconds(s):
+def pc_seconds(s: str) -> int:
     m, sec = s.split(":")
     return int(m) * 60 + int(sec)
 
 
-def sticky_ctrl(dist, B, PID, prev_ok):
+def sticky_ctrl(
+    dist: np.ndarray, B: np.ndarray, PID: np.ndarray, prev_ok: np.ndarray
+) -> np.ndarray:
     """C1: the holder keeps control while the ball is within 3 ft of him and z <= 8, whoever is nearer;
     otherwise control goes to the nearest player within 3 ft (z <= 8) or to nobody. Resets at data gaps."""
     n = len(B)
@@ -147,7 +155,7 @@ def sticky_ctrl(dist, B, PID, prev_ok):
     return out
 
 
-def despike(B, prev_ok, win=5, tol=3.0):
+def despike(B: np.ndarray, prev_ok: np.ndarray, win: int = 5, tol: float = 3.0) -> np.ndarray:
     """D1: within contiguous runs, replace a ball coordinate by its centred 5-frame median where they differ
     by more than 3 ft."""
     B = B.copy()
@@ -164,7 +172,14 @@ def despike(B, prev_ok, win=5, tol=3.0):
     return B
 
 
-def hyst_ctrl(dist, B, PID, prev_ok, keep_d=5.0, take_frames=6):
+def hyst_ctrl(
+    dist: np.ndarray,
+    B: np.ndarray,
+    PID: np.ndarray,
+    prev_ok: np.ndarray,
+    keep_d: float = 5.0,
+    take_frames: int = 6,
+) -> np.ndarray:
     """D2: acquire within 3 ft (nearest, z <= 8); holder keeps while within 5 ft and z <= 8; another player
     takes over after being the nearest within 3 ft for 6 consecutive frames (assigned from the first)."""
     n = len(B)
@@ -196,7 +211,7 @@ def hyst_ctrl(dist, B, PID, prev_ok, keep_d=5.0, take_frames=6):
     return out
 
 
-def min_run(ctrl, prev_ok, k=MIN_RUN):
+def min_run(ctrl: np.ndarray, prev_ok: np.ndarray, k: int = MIN_RUN) -> np.ndarray:
     """D3: runs of the same controller shorter than 5 frames become 'no controller'."""
     out = ctrl.copy()
     n = len(ctrl)
@@ -211,21 +226,29 @@ def min_run(ctrl, prev_ok, k=MIN_RUN):
     return out
 
 
-def window(tl, q, gmax, gmin):
+def window(tl: Timeline, q: int, gmax: float, gmin: float) -> np.ndarray:
     return np.where((tl["Q"] == q) & (tl["GC"] <= gmax) & (tl["GC"] >= gmin))[0]
 
 
-def player_xy(tl, i, pid):
+def player_xy(tl: Timeline, i: int, pid: int) -> np.ndarray | None:
     j = np.where(tl["PID"][i] == pid)[0]
     return None if len(j) == 0 else tl["PXY"][i, j[0]]
 
 
-def ball_to_player(tl, i, pid):
+def ball_to_player(tl: Timeline, i: int, pid: int) -> float:
     j = np.where(tl["PID"][i] == pid)[0]
     return np.inf if len(j) == 0 else tl["dist"][i, j[0]]
 
 
-def _release_before(tl, idx, lo, a, bk, shooter, close=False):
+def _release_before(
+    tl: Timeline,
+    idx: np.ndarray,
+    lo: int,
+    a: int,
+    bk: int,
+    shooter: int,
+    close: bool = False,
+) -> tuple[int | None, str]:
     """Last frame in idx[lo:a] with ball within 3 ft (4 ft for close-range under R3) of shooter, plus checks."""
     d_sh = np.array([ball_to_player(tl, i, shooter) for i in idx[lo:a]])
     cand = np.where(d_sh <= (4.0 if close else 3.0))[0]
@@ -251,7 +274,9 @@ def _release_before(tl, idx, lo, a, bk, shooter, close=False):
     return t_r, "ok"
 
 
-def locate_release(tl, idx, shooter, target_gc, close=False):
+def locate_release(
+    tl: Timeline, idx: np.ndarray, shooter: int, target_gc: float, close: bool = False
+) -> tuple[int | None, int | None, int | None, str]:
     """Release rule as amended by R1 and R2. Returns (t_r, t_a, basket_index, reason)."""
     if len(idx) == 0:
         return None, None, None, "empty_window"
@@ -286,7 +311,7 @@ def locate_release(tl, idx, shooter, target_gc, close=False):
     return None, idx[a], bk, reason if episodes else reason_air
 
 
-def spells(tl):
+def spells(tl: Timeline) -> list[Spell]:
     """All possession spells, any player: list of (owner, start, end)."""
     ctrl, Q, GC, Z = tl["ctrl"], tl["Q"], tl["GC"], tl["B"][:, 2]
     cf = np.where(ctrl != 0)[0]
@@ -328,7 +353,7 @@ def spells(tl):
     return res
 
 
-def is_brief_opp(tl, s, pid, at):
+def is_brief_opp(tl: Timeline, s: Spell, pid: int, at: int) -> bool:
     """Spell s is an opponent's (relative to pid at frame `at`) and lasts <= 12 frames."""
     return (
         s[2] - s[1] + 1 <= BRIEF_FRAMES
@@ -337,7 +362,7 @@ def is_brief_opp(tl, s, pid, at):
     )
 
 
-def zone_of(pxy, bk, d_b):
+def zone_of(pxy: np.ndarray, bk: int, d_b: float) -> str:
     """Registered zones: rim <= 6 ft; corner three: |y-25| >= 22 and within 14 ft of baseline; three >= 23.75 ft."""
     corner = abs(pxy[1] - 25.0) >= 22.0 and abs(pxy[0] - (0.0 if bk == 0 else 94.0)) <= 14.0
     if d_b <= 6.0:
@@ -349,7 +374,16 @@ def zone_of(pxy, bk, d_b):
     return "mid"
 
 
-def stage3_features(tl, sp, k, p, team, bk, pxy, unloc):
+def stage3_features(
+    tl: Timeline,
+    sp: list[Spell],
+    k: int,
+    p: int,
+    team: int,
+    bk: int,
+    pxy: np.ndarray,
+    unloc: list[tuple[int, int]],
+) -> dict[str, Any]:
     """Stage 3a features for a counted catch: zone, best teammate openness, drive/pass flags (registered rules),
     next-owner relation, F1 unknown flag."""
     o, st, en = sp[k]
@@ -403,17 +437,17 @@ def stage3_features(tl, sp, k, p, team, bk, pxy, unloc):
     return out
 
 
-def team_of(tl, i, pid):
+def team_of(tl: Timeline, i: int, pid: int) -> int | None:
     j = np.where(tl["PID"][i] == pid)[0]
     return None if len(j) == 0 else tl["TEAM"][i, j[0]]
 
 
-def nearest_opp(tl, i, team, point):
+def nearest_opp(tl: Timeline, i: int, team: int, point: np.ndarray) -> float:
     m = tl["TEAM"][i] != team
     return float(np.linalg.norm(tl["PXY"][i][m] - point, axis=1).min())
 
 
-def main():
+def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     pbp = pd.read_csv(DATA / "pbp" / "2015-16_pbp.csv", dtype={"GAME_ID": str})
     pbp = pbp[pbp.GAME_ID.isin(GAMES)].copy()

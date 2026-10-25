@@ -15,11 +15,13 @@ BANDS = [("0-10", 0, 10), ("10-22", 10, 22), ("22-30", 22, 30), ("30-47", 30, 47
 N_BOOT = 10_000
 
 
-def q(x, ps=(0.25, 0.5, 0.75)):
+def q(
+    x: list[float] | np.ndarray | pd.Series, ps: tuple[float, ...] = (0.25, 0.5, 0.75)
+) -> list[float] | None:
     return [round(float(v), 2) for v in np.quantile(x, ps)] if len(x) else None
 
 
-def prop_ci(y, rng):
+def prop_ci(y: np.ndarray, rng: np.random.Generator) -> list[float | list[float]] | None:
     y = np.asarray(y)
     if len(y) == 0:
         return None
@@ -27,8 +29,8 @@ def prop_ci(y, rng):
     return [round(float(y.mean()), 3), [round(float(v), 3) for v in np.quantile(b, [0.025, 0.975])]]
 
 
-def gap_ci(o, y, rng):
-    def gap(o, y):
+def gap_ci(o: np.ndarray, y: np.ndarray, rng: np.random.Generator) -> list[float | list[float]]:
+    def gap(o: np.ndarray, y: np.ndarray) -> float:
         lo, hi = np.quantile(o, [1 / 3, 2 / 3])
         return y[o > hi].mean() - y[o <= lo].mean()
 
@@ -42,7 +44,7 @@ def gap_ci(o, y, rng):
     ]
 
 
-def main():
+def main() -> None:
     c = pd.read_csv(OUT / "catches.csv", dtype={"game": str})
     s = pd.read_csv(OUT / "shots.csv", dtype={"game": str})
     meta = json.loads((OUT / "build_meta.json").read_text())

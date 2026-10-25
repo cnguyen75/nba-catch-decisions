@@ -17,7 +17,7 @@ S9 = ROOT / "out" / "s9"
 NB = 1000
 
 
-def build():
+def build() -> pd.DataFrame:
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     t = pd.concat([pd.read_csv(f, dtype={"game": str}) for f in sorted(S9.glob("passes_*.csv"))])
     assert not t.game.map(split).eq("test").any(), "test games present"
@@ -56,7 +56,7 @@ def build():
     return d
 
 
-def summ(x):
+def summ(x: pd.DataFrame) -> dict[str, float]:
     out = {
         "n": len(x),
         "p_most_open": x.is_most_open.mean(),
@@ -74,7 +74,7 @@ def summ(x):
     return out
 
 
-def main():
+def main() -> None:
     d = build()
     drops = sum(json.loads(f.read_text())["dropped"] for f in S9.glob("drop_*.json"))
     groups = {"League": ~d.passer.isin(GATED), **{n: d.passer == p for p, n in GATED.items()}}

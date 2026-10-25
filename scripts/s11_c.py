@@ -22,7 +22,7 @@ import s8_heck as h  # noqa: E402
 S6 = ROOT / "out" / "s6"
 
 
-def frame(split):
+def frame(split: str) -> pd.DataFrame:
     c = pd.read_csv(S6 / "catch_state.csv", dtype={"game": str}, low_memory=False)
     vs = pd.read_csv(
         S4 / "vshoot.csv", dtype={"game": str}, usecols=["game", "pid", "start", "open_cf"]
@@ -46,7 +46,9 @@ def frame(split):
     return d.reset_index(drop=True)
 
 
-def design(d, instruments, window):
+def design(
+    d: pd.DataFrame, instruments: list[str], window: str
+) -> tuple[np.ndarray, np.ndarray, int]:
     Xo = h.X_out(d)
     sc = d.shot_clock.to_numpy(float)
     Xo[:, 6] = sc <= 4
@@ -78,12 +80,12 @@ def design(d, instruments, window):
     return h.Std(X)(X), h.Std(Z)(Z), len(inst) + 5
 
 
-def load_b():
+def load_b() -> tuple[list[str], str]:
     b = json.loads((S6 / "b.json").read_text())
     return b["make_falsification"]["valid_instruments"], b["make_falsification"]["window_used"]
 
 
-def excl():
+def excl() -> None:
     inst, w = load_b()
     d = frame("train")
     X, Z, k = design(d, inst, w)
@@ -109,7 +111,7 @@ def excl():
     print(json.dumps(res, indent=1))
 
 
-def synth(rho):
+def synth(rho: float) -> None:
     inst, w = load_b()
     d = frame("train")
     X, Z, _ = design(d, inst, w)

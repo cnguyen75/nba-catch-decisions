@@ -5,6 +5,7 @@ import json
 import math
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -19,7 +20,7 @@ BINS = [0, 4, 6, 8, 12, 99]
 GATED_NAMES = {"Curry", "Harden"}
 
 
-def gap_slope(d, nb=2000, seed=0):
+def gap_slope(d: pd.DataFrame, nb: int = 2000, seed: int = 0) -> dict[str, Any]:
     x, y = d.open_cf.to_numpy(float), (d.V_shoot - d.V_continue).to_numpy(float)
     s = np.polyfit(x, y, 1)[0]
     r = np.random.default_rng(seed)
@@ -33,7 +34,7 @@ def gap_slope(d, nb=2000, seed=0):
     }
 
 
-def power_one(d, vcol):
+def power_one(d: pd.DataFrame, vcol: str) -> tuple[dict[str, Any], np.ndarray, np.ndarray, float]:
     V = np.column_stack([d.V_shoot.to_numpy(float), d[vcol].to_numpy(float)])
     avail = np.ones_like(V, bool)
     y = np.where(d.action == "shoot", 0, 1)
@@ -51,7 +52,9 @@ def power_one(d, vcol):
     return out, V, avail, T_p
 
 
-def synth_one(d, V, avail, T_p):
+def synth_one(
+    d: pd.DataFrame, V: np.ndarray, avail: np.ndarray, T_p: float
+) -> tuple[dict[str, Any], bool]:
     res = {}
     rng = np.random.default_rng(7)
     Vimm = V.copy()
@@ -100,7 +103,7 @@ def synth_one(d, V, avail, T_p):
     return res, all(s["passes"] for s in res.values())
 
 
-def main():
+def main() -> None:
     rep = {"cont_main": json.loads((S4 / "cont_report.json").read_text())["main_V_continue"]}
     main_col = "V_cont_dmf" if rep["cont_main"] == "dmf" else "V_cont_naive"
     sens_col = "V_cont_naive" if main_col == "V_cont_dmf" else "V_cont_dmf"

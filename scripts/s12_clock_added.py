@@ -7,9 +7,11 @@ Nuisance terms of the make model are fitted on TRAINING shots only and held fixe
 estimated on the confirmatory sample (validation + calibration games). Test rows are dropped at load and asserted absent.
 """
 
+from collections.abc import Callable
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -31,7 +33,7 @@ CONF = {"validation", "calib"}
 NB = 1000
 
 
-def frames():
+def frames() -> tuple[pd.DataFrame, pd.DataFrame, int]:
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     c, s = load()  # load() drops test rows on read
     ms = pd.concat(
@@ -73,7 +75,7 @@ def frames():
     return sh, ca, int(dropped)
 
 
-def nuisance_X(d):
+def nuisance_X(d: pd.DataFrame) -> np.ndarray:
     op = d.open_release_all.clip(upper=30).to_numpy(float)
     z = np.stack([(d.zone_release == q).to_numpy() for q in ZONES3[1:]], 1).astype(
         float
@@ -92,14 +94,14 @@ def nuisance_X(d):
     )
 
 
-def bin_D(d, labels):
+def bin_D(d: pd.DataFrame, labels: list[str]) -> np.ndarray:
     return np.stack([(d.bin.astype(str) == b).to_numpy() for b in labels], 1).astype(float)
 
 
 class Nuisance:
     """Full model on training shots (all bins 0-24, [20,24) reference); keeps the nuisance part as a fixed offset."""
 
-    def __init__(self, tr):
+    def __init__(self, tr: pd.DataFrame) -> None:
         Xn = nuisance_X(tr)
         self.mu, self.sd = Xn.mean(0), Xn.std(0)
         self.sd[self.sd == 0] = 1
@@ -110,11 +112,11 @@ class Nuisance:
         )
         self.beta = b[1 : 1 + Xn.shape[1]]
 
-    def offset(self, d):
+    def offset(self, d: pd.DataFrame) -> np.ndarray:
         return ((nuisance_X(d) - self.mu) / self.sd) @ self.beta
 
 
-def clock_fit(d, off, labels):
+def clock_fit(d: pd.DataFrame, off: np.ndarray, labels: list[str]) -> Callable[[str], float]:
     """Intercept + bin dummies (reference = last of LAB) with fixed offset. Returns per-bin adjusted mean prob function."""
     D = bin_D(d, labels)
     X = np.column_stack([np.ones(len(d)), D])
@@ -130,13 +132,15 @@ def clock_fit(d, off, labels):
             break
     coef = dict(zip(labels, b[1:]))
 
-    def adj(label):  # mean predicted prob over these shots with every shot set to bin `label`
+    def adj(
+        label: str,
+    ) -> float:  # mean predicted prob over these shots with every shot set to bin `label`
         return float(np.mean(expit(b[0] + coef.get(label, 0.0) + off)))
 
     return adj
 
 
-def stats(sh, ca, nu):
+def stats(sh: pd.DataFrame, ca: pd.DataFrame, nu: Nuisance) -> dict[str, Any]:
     main = sh[sh.sc_release >= 4]
     off = nu.offset(main)
     adj = clock_fit(main, off, LAB[1:-1])
@@ -168,7 +172,7 @@ def stats(sh, ca, nu):
     return out
 
 
-def boot(sh, ca, nu, seed):
+def boot(sh: pd.DataFrame, ca: pd.DataFrame, nu: Nuisance, seed: int) -> np.ndarray:
     games = np.array(sorted(set(sh.game) | set(ca.game)))
     gs = {g: np.where(sh.game.to_numpy() == g)[0] for g in games}
     gc = {g: np.where(ca.game.to_numpy() == g)[0] for g in games}
@@ -190,7 +194,7 @@ def boot(sh, ca, nu, seed):
     return np.array(rows)
 
 
-def raw_table(sh, ca):
+def raw_table(sh: pd.DataFrame, ca: pd.DataFrame) -> list[dict[str, Any]]:
     t = []
     for b in LAB:
         s_, c_ = sh[sh.bin.astype(str) == b], ca[ca.bin.astype(str) == b]
@@ -206,11 +210,11 @@ def raw_table(sh, ca):
     return t
 
 
-def ci(x):
+def ci(x: np.ndarray) -> list[float]:
     return [round(float(v), 4) for v in np.quantile(x, [0.025, 0.975])]
 
 
-def power():
+def power() -> None:
     sh, ca, dropped = frames()
     tr_s, tr_c = sh[sh.split == "train"], ca[ca.split == "train"]
     cf_s, cf_c = sh[sh.split.isin(CONF)], ca[ca.split.isin(CONF)]
@@ -242,7 +246,7 @@ def power():
     print(json.dumps(res, indent=1))
 
 
-def confirm():
+def confirm() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     sh, ca, dropped = frames()
     tr_s = sh[sh.split == "train"]

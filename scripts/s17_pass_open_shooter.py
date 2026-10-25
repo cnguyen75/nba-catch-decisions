@@ -18,7 +18,7 @@ OUT = ROOT / "out" / "s11"
 NB = 1000
 
 
-def shooters():
+def shooters() -> tuple[set[int], int, int]:
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     _, s = load()
     assert not (s.split == "test").any() and not s.game.map(split).eq("test").any(), (
@@ -29,7 +29,7 @@ def shooters():
     return set(int(p) for p in n[n >= 50].index), int(len(n)), int((n >= 50).sum())
 
 
-def build(shoot):
+def build(shoot: set[int]) -> tuple[pd.DataFrame, int, int]:
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     t = pd.concat([pd.read_csv(f, dtype={"game": str}) for f in sorted(S9.glob("passes_*.csv"))])
     assert not t.game.map(split).eq("test").any(), "test games present"
@@ -67,7 +67,7 @@ def build(shoot):
     return d, n_all, n_excl
 
 
-def summ(x):
+def summ(x: pd.DataFrame) -> dict[str, float]:
     out = {
         "p_most_open_cand": x.is_mo.mean(),
         "baseline": x.base.mean(),
@@ -85,7 +85,7 @@ def summ(x):
     return out
 
 
-def main():
+def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     shoot, n_shooters_any, n_shooters = shooters()
     d, n_all, n_excl = build(shoot)

@@ -24,7 +24,7 @@ import build as b  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def pool():
+def pool() -> pd.DataFrame:
     split = json.loads((ROOT / "checks/split.json").read_text())["split"]
     c = pd.read_csv(ROOT / "out/s3/catches.csv", dtype={"game": str})
     c = c[c.game.map(lambda g: split[g] == "validation")]
@@ -35,7 +35,7 @@ def pool():
     return c
 
 
-def sample():
+def sample() -> None:
     b.RULE = "d3"
     c = pool()
     pick = pd.concat(
@@ -117,7 +117,7 @@ def sample():
     print(pick.stratum.value_counts().to_dict())
 
 
-def score():
+def score() -> None:
     smp = pd.read_csv(ROOT / "checks/dp_sample.csv", dtype={"game": str})
     lab = {x["did"]: x for x in json.loads((ROOT / "checks/dp_labels.json").read_text())["labels"]}
     c = pd.read_csv(ROOT / "out/s3/catches.csv", dtype={"game": str}).set_index(

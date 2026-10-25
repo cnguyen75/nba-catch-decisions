@@ -4,6 +4,7 @@ import json
 import math
 from pathlib import Path
 import subprocess
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -16,12 +17,12 @@ MIN_CATCHES = 60
 N_BOOT = 10_000
 
 
-def iqr(x):
+def iqr(x: np.ndarray) -> tuple[float, float, float]:
     q1, q3 = np.quantile(x, [0.25, 0.75])
     return float(q3 - q1), float(q1), float(q3)
 
 
-def tercile_gap(openness, cs):
+def tercile_gap(openness: np.ndarray, cs: np.ndarray) -> tuple[float, int, int]:
     lo, hi = np.quantile(openness, [1 / 3, 2 / 3])
     bot, top = cs[openness <= lo], cs[openness > hi]
     if len(bot) == 0 or len(top) == 0:
@@ -29,14 +30,14 @@ def tercile_gap(openness, cs):
     return float(top.mean() - bot.mean()), len(bot), len(top)
 
 
-def counted(c, pid):
+def counted(c: pd.DataFrame, pid: int) -> pd.DataFrame:
     cnt = c[(c.pid == pid) & c.valid_catch & c.frontcourt & c.sc_running].copy()
     cnt["cs"] = (cnt.catch_to_shot.notna() & (cnt.catch_to_shot <= 1.5)).astype(int)
     cnt["shot4"] = (cnt.catch_to_shot.notna() & (cnt.catch_to_shot <= 4.0)).astype(int)
     return cnt
 
 
-def crit2(far, rng):
+def crit2(far: pd.DataFrame, rng: np.random.Generator) -> dict[str, Any]:
     o, y = far.open_catch.values, far.cs.values
     gap = tercile_gap(o, y)[0]
     boots = np.array(
@@ -55,7 +56,7 @@ def crit2(far, rng):
     )
 
 
-def sensitivity(c, rng):
+def sensitivity(c: pd.DataFrame, rng: np.random.Generator) -> dict[str, Any]:
     """POST HOC, not part of the verdict. (a) catches from a teammate's pass only (drops 'opponent' catches,
     mostly a defender momentarily nearest the ball); (b) criterion 2 on catches 22-30 ft out."""
     out = {}
@@ -78,7 +79,7 @@ def sensitivity(c, rng):
     return out
 
 
-def power_crit2(res, reps=500, seed=0):
+def power_crit2(res: dict[str, Any], reps: int = 500, seed: int = 0) -> dict[str, Any]:
     """Simulated power of criterion 2 for a true top-minus-bottom tercile gap of 15 or 20 pp centred on the
     player's own 22+ catch-and-shoot rate. (A true gap of exactly 10 pp caps power at 50%, since the rule
     needs the estimate itself to reach 10 pp.) Planning number only; 200 bootstrap draws per replicate."""
@@ -116,7 +117,7 @@ def power_crit2(res, reps=500, seed=0):
     return out
 
 
-def main():
+def main() -> None:
     c = pd.read_csv(OUT / "catches.csv", dtype={"game": str})
     s = pd.read_csv(OUT / "shots.csv", dtype={"game": str})
     rng = np.random.default_rng(0)

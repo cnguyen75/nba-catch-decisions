@@ -12,7 +12,7 @@ import sys
 
 import numpy as np
 import pandas as pd
-from scipy.optimize import minimize
+from scipy.optimize import OptimizeResult, minimize
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -21,7 +21,7 @@ PLAYERS = {"Curry": 201939, "LeBron": 2544, "Harden": 201935}
 ZONES = ["rim", "mid", "above_break3", "corner3"]
 
 
-def primary_model():
+def primary_model() -> str:
     dp = json.loads((ROOT / "checks/dp2_score.json").read_text())  # the registered retest decides
     return "fourway" if dp["passes"] else "binary"
 
@@ -29,12 +29,12 @@ def primary_model():
 D_MAX = 30.0  # scope rule: support of the shot model
 
 
-def load_values():
+def load_values() -> pd.DataFrame:
     v = pd.read_csv(S3 / "values2.csv", dtype={"game": str})
     return v[v.d_basket <= D_MAX]
 
 
-def design(df, model):
+def design(df: pd.DataFrame, model: str) -> tuple[np.ndarray, np.ndarray, np.ndarray, list[str]]:
     """Return V (n x A), avail mask (n x A), observed action index y, action names. Last action is the reference."""
     if model == "fourway":
         acts = ["shoot", "drive", "pass", "hold"]
@@ -50,7 +50,7 @@ def design(df, model):
     return V, avail, y, acts
 
 
-def probs(V, avail, c, T):
+def probs(V: np.ndarray, avail: np.ndarray, c: np.ndarray, T: float) -> np.ndarray:
     cc = np.r_[c, 0.0]
     u = (V - cc) / T
     u = np.where(avail, u, -np.inf)
@@ -59,19 +59,28 @@ def probs(V, avail, c, T):
     return e / e.sum(1, keepdims=True)
 
 
-def nll(theta, V, avail, y):
+def nll(theta: np.ndarray, V: np.ndarray, avail: np.ndarray, y: np.ndarray) -> float:
     c, T = theta[:-1], math.exp(theta[-1])
     p = probs(V, avail, c, T)
     return -np.sum(np.log(p[np.arange(len(y)), y] + 1e-300))
 
 
-def fit(V, avail, y, k):
+def fit(
+    V: np.ndarray, avail: np.ndarray, y: np.ndarray, k: int
+) -> tuple[np.ndarray, float, OptimizeResult]:
     x0 = np.r_[np.zeros(k), 0.0]
     r = minimize(nll, x0, args=(V, avail, y), method="BFGS")
     return r.x[:-1], math.exp(r.x[-1]), r
 
 
-def fisher(V, avail, c, T, zone_idx=None, nz=0):
+def fisher(
+    V: np.ndarray,
+    avail: np.ndarray,
+    c: np.ndarray,
+    T: float,
+    zone_idx: np.ndarray | None = None,
+    nz: int = 0,
+) -> np.ndarray:
     """Fisher information in (c..., T). If zone_idx given, c_shoot is split by zone (secondary)."""
     n, A = V.shape
     k = A - 1
@@ -104,7 +113,7 @@ def fisher(V, avail, c, T, zone_idx=None, nz=0):
     return I
 
 
-def power():
+def power() -> None:
     model = primary_model()
     v = load_values()
     split = json.loads((ROOT / "checks/split.json").read_text())
@@ -155,7 +164,7 @@ def power():
     print(json.dumps(out, indent=1))
 
 
-def settings(model, T_p):
+def settings(model: str, T_p: float) -> dict[str, tuple[np.ndarray, float]]:
     if model == "fourway":
         return {
             "S1": (np.array([-0.2, 0.1, -0.1]), T_p),
@@ -169,7 +178,7 @@ def settings(model, T_p):
     }
 
 
-def synth():
+def synth() -> None:
     pw = json.loads((S3 / "power.json").read_text())
     model = pw["primary_model"]
     v = load_values()

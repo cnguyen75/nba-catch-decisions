@@ -18,12 +18,12 @@ TARGET_IDS = {201939, 2544, 201935}
 OUTDIR = sys.argv[2] if len(sys.argv) > 2 else "out/s3"
 
 
-def secs(s):
+def secs(s: str) -> int:
     m, x = s.split(":")
     return int(m) * 60 + int(x)
 
 
-def load_pbp(games):
+def load_pbp(games: set[str]) -> dict[str, pd.DataFrame]:
     p = pd.read_csv(DATA / "pbp" / "2015-16_pbp.csv", dtype={"GAME_ID": str})
     p = p[p.GAME_ID.isin(games)].copy()
     p["gc"] = p.PCTIMESTRING.map(secs)
@@ -35,7 +35,9 @@ def load_pbp(games):
     return {g: d.sort_values("EVENTNUM").reset_index(drop=True) for g, d in p.groupby("GAME_ID")}
 
 
-def possession(rows, period, gc_catch, off, home):
+def possession(
+    rows: pd.DataFrame, period: int, gc_catch: float, off: int, home: int
+) -> tuple[int, str, int | None, int]:
     """Return (points, end_type, end_eventnum, margin_offence)."""
     per = rows[period == rows.PERIOD]
     after = per[per.gc < gc_catch]
@@ -91,7 +93,7 @@ def possession(rows, period, gc_catch, off, home):
     return pts, "no_end_found", None, margin
 
 
-def build():
+def build() -> None:
     c = pd.read_csv(ROOT / OUTDIR / "catches.csv", dtype={"game": str})
     meta = json.loads((ROOT / OUTDIR / "build_meta.json").read_text())["games"]
     pbp = load_pbp(set(c.game))
@@ -113,7 +115,7 @@ def build():
     )
 
 
-def check():
+def check() -> None:
     split = json.loads((ROOT / "checks/split.json").read_text())["split"]
     c = pd.read_csv(ROOT / OUTDIR / "catches.csv", dtype={"game": str})
     ps = pd.read_csv(ROOT / OUTDIR / "poss.csv", dtype={"game": str})

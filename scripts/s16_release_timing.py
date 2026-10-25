@@ -4,6 +4,7 @@ figure. Test rows are dropped at load and asserted absent."""
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -27,7 +28,7 @@ RLAB = ["0.3-0.7", "0.7-0.9", "0.9-1.1", "1.1-1.5"]
 REF = "0.9-1.1"
 
 
-def frames():
+def frames() -> tuple[pd.DataFrame, pd.DataFrame, int]:
     split = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     _, s = load()
     ms = pd.concat(
@@ -59,20 +60,20 @@ def frames():
     return s, d, n0 - len(d)
 
 
-def ctrl(x):
+def ctrl(x: pd.DataFrame) -> np.ndarray:
     z = np.stack([(x.zone_release == q).to_numpy() for q in ("above_break3", "corner3")], 1).astype(
         float
     )
     return np.column_stack([ns_basis(x.d_release.to_numpy(float)), z])
 
 
-def ols_slope(x):
+def ols_slope(x: pd.DataFrame) -> float:
     X = np.column_stack([np.ones(len(x)), x.v.to_numpy(float), ctrl(x)])
     b = np.linalg.lstsq(X, x.rt.to_numpy(float), rcond=None)[0]
     return float(b[1])
 
 
-def quart(x, cuts):
+def quart(x: pd.DataFrame, cuts: np.ndarray) -> dict[str, dict[str, float]]:
     q = np.digitize(x.v.to_numpy(float), cuts)  # 0..3, slowest closeout first
     out = {}
     for k in range(4):
@@ -87,7 +88,7 @@ def quart(x, cuts):
     return out
 
 
-def rush(x):
+def rush(x: pd.DataFrame) -> dict[str, float]:
     y = x[x.rbin.notna()]
     op = y.open_release_all.clip(upper=30).to_numpy(float)
     Xn = np.column_stack(
@@ -115,7 +116,7 @@ def rush(x):
     return {lab: float(expit(lin + coef.get(lab, 0.0)).mean() - p_ref) for lab in RLAB}
 
 
-def stats(d, cuts):
+def stats(d: pd.DataFrame, cuts: np.ndarray) -> dict[str, Any]:
     lg = d[~d.shooter.isin(GATED)]
     out = {"lg_q": quart(lg, cuts), "lg_slope": ols_slope(lg)}
     vtop = lg[lg.v >= cuts[2]].v.median()
@@ -141,7 +142,7 @@ def stats(d, cuts):
     return out
 
 
-def open_slope(s, d):
+def open_slope(s: pd.DataFrame, d: pd.DataFrame) -> tuple[float, int, int]:
     """Attempt-2 make model refitted identically on league training jump shots; dP/dopen at release openness 4-6 ft."""
     lg = s[
         s.reason.astype(str).str.startswith("ok")
@@ -151,7 +152,7 @@ def open_slope(s, d):
     ]
     tr = lg[lg.jump.astype(bool) & lg.sc_release.notna() & (lg.split == "train")]
 
-    def fit_base(x):
+    def fit_base(x: pd.DataFrame) -> tuple[StandardScaler, LogisticRegression]:
         sc_ = StandardScaler().fit(shots_X(x))
         return sc_, LogisticRegression(C=1.0, max_iter=5000).fit(
             sc_.transform(shots_X(x)), x.made.astype(int)
@@ -175,17 +176,17 @@ def open_slope(s, d):
     return float(np.mean(up - dn)), int(len(w)), int(len(tr))
 
 
-def r4(v):
+def r4(v: float | None) -> float | None:
     return None if v is None or (isinstance(v, float) and np.isnan(v)) else round(float(v), 4)
 
 
-def ci(a):
+def ci(a: list[float] | np.ndarray) -> list[float | None]:
     a = np.asarray(a, float)
     a = a[~np.isnan(a)]
     return [r4(np.quantile(a, 0.025)), r4(np.quantile(a, 0.975))] if len(a) else [None, None]
 
 
-def main():
+def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     s, d, dropped = frames()
     lg = d[~d.shooter.isin(GATED)]

@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -18,7 +19,7 @@ S5 = ROOT / "out" / "s5"
 NB = 1000
 
 
-def er_boot(d, seed):
+def er_boot(d: pd.DataFrame, seed: int) -> dict[str, Any]:
     X, y = cov(d), (d.action == "shoot").to_numpy(float)
     b = logit_fit(X, y)
     gi = {g: np.where(d.game.to_numpy() == g)[0] for g in d.game.unique()}
@@ -47,7 +48,7 @@ def er_boot(d, seed):
     }
 
 
-def home_teams():
+def home_teams() -> dict[str, int]:
     p = pd.read_csv(
         ROOT.parent / "nba-tracking" / "pbp" / "2015-16_pbp.csv",
         dtype={"GAME_ID": str},
@@ -57,7 +58,7 @@ def home_teams():
     return h.groupby("GAME_ID").PLAYER1_TEAM_ID.agg(lambda x: int(x.mode().iloc[0])).to_dict()
 
 
-def main():
+def main() -> None:
     vs = pd.read_csv(S4 / "vshoot.csv", dtype={"game": str})
     d = unit(vs)
     mc = pd.concat(

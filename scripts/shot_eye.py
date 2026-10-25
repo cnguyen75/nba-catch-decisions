@@ -24,12 +24,12 @@ CLOSE = re.compile(r"Layup|Dunk|Tip|Hook|Putback|Finger Roll|Alley Oop")
 PASS1 = {"0021500003", "0021500035", "0021500002", "0021500011", "0021500010"}
 
 
-def is_close(desc):
+def is_close(desc: str) -> bool:
     m = re.search(r"(\d+)' ", desc)
     return bool(CLOSE.search(desc)) or (m is not None and int(m.group(1)) <= 8)
 
 
-def descs():
+def descs() -> pd.Series:
     pbp = pd.read_csv(
         b.DATA / "pbp" / "2015-16_pbp.csv",
         dtype={"GAME_ID": str},
@@ -39,7 +39,7 @@ def descs():
     return pbp.set_index(["GAME_ID", "EVENTNUM"]).desc
 
 
-def sample():
+def sample() -> None:
     split = json.loads((ROOT / "checks/split.json").read_text())
     s = pd.read_csv(ROOT / "out/full/shots.csv", dtype={"game": str})
     d = descs()
@@ -117,7 +117,7 @@ def sample():
     print(pick["loc"].value_counts().to_dict())
 
 
-def score():
+def score() -> None:
     lab = {x["sid"]: x for x in json.loads((ROOT / "checks/r3_labels.json").read_text())["labels"]}
     smp = pd.read_csv(ROOT / "checks/r3_sample.csv", dtype={"game": str})
     r3 = pd.read_csv(ROOT / "out/r3_check/shots.csv", dtype={"game": str})

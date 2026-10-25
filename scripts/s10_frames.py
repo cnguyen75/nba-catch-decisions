@@ -20,7 +20,7 @@ OUT = ROOT / "out" / "s6"
 KEEP = set(b.GAMES.values()) | set(b.GAMES_PASS2.values())
 
 
-def main(worker, nw):
+def main(worker: int, nw: int) -> None:
     b.RULE = "d3"
     OUT.mkdir(parents=True, exist_ok=True)
     sp = json.loads((ROOT / "checks/split_all.json").read_text())
@@ -56,14 +56,14 @@ def main(worker, nw):
         dt[1:] = np.where(ok[1:], GC[:-1] - GC[1:], 0.0)
         cum = {}
 
-        def minutes(pid, i):
+        def minutes(pid: int, i: int) -> float:
             if pid not in cum:
                 pres = (pid == PID).any(1)
                 inc = dt * pres * np.r_[False, pres[:-1]]
                 cum[pid] = np.cumsum(inc)
             return float(cum[pid][i] / 60.0)
 
-        def nearest_opp_to(i, team, point):
+        def nearest_opp_to(i: int, team: int, point: np.ndarray) -> int:
             m = TEAM[i] != team
             d = np.linalg.norm(PXY[i][m] - point, axis=1)
             return int(PID[i][m][d.argmin()])

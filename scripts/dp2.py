@@ -9,6 +9,7 @@ dp2.py all      classify every counted catch in non-test games -> out/s3/actions
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import matplotlib
 
@@ -29,11 +30,11 @@ TOUCH_D, TOUCH_Z, TOUCH_N = 3.0, 12.0, 2
 SHOTS = pd.read_csv(S3 / "shots.csv", dtype={"game": str})
 
 
-def att_basket(meta, game, team, q):
+def att_basket(meta: dict[str, Any], game: str, team: int, q: int) -> int | None:
     return meta[game]["attacking"].get(f"{team}_{q}")
 
 
-def first_touch(tl, p, e):
+def first_touch(tl: dict[str, Any], p: int, e: int) -> tuple[int | None, int | None]:
     """First non-P player with the ball within 3 ft and z <= 12 for 2 consecutive frames, within 2.0 s after e."""
     GC, Q = tl["GC"], tl["Q"]
     run_pid, run_n = None, 0
@@ -56,7 +57,9 @@ def first_touch(tl, p, e):
     return None, None
 
 
-def classify(tl, r, bk, ctx):
+def classify(
+    tl: dict[str, Any], r: Any, bk: int, ctx: dict[str, Any]
+) -> tuple[bool, bool, int | None, int | None]:
     """Return (drive, pass, touch_pid, touch_frame). r has pid, start, end."""
     p, st, en = int(r.pid), int(r.start), int(r.end)
     GC = tl["GC"]
@@ -83,7 +86,9 @@ def classify(tl, r, bk, ctx):
     return drive, bool(passed), tp, tf
 
 
-def next_receiver(tl, p, en, team, ctx):
+def next_receiver(
+    tl: dict[str, Any], p: int, en: int, team: int, ctx: dict[str, Any]
+) -> tuple[int | None, int | None]:
     """D-v2 (amendment 2): the owner of the next D3 spell starting within 2.0 s after e; or, if a located FG release by
     a teammate falls in (e, e + 2.0 s] before any other spell starts, that shooter (lob / alley-oop)."""
     GC, Q = tl["GC"], tl["Q"]
@@ -105,13 +110,13 @@ def next_receiver(tl, p, en, team, ctx):
     return None, None
 
 
-def load_ctx():
+def load_ctx() -> tuple[dict[str, Any], dict[str, Any]]:
     split = json.loads((ROOT / "checks/split.json").read_text())
     meta = json.loads((S3 / "build_meta.json").read_text())["games"]
     return split, meta
 
 
-def run_on(rows, split, meta):
+def run_on(rows: pd.DataFrame, split: dict[str, Any], meta: dict[str, Any]) -> pd.DataFrame:
     out, cache = [], {}
     for r in rows.sort_values("game").itertuples():
         b.GAMES[r.game] = split["files"][r.game]
@@ -134,11 +139,11 @@ def run_on(rows, split, meta):
     return pd.DataFrame(out)
 
 
-def cls(row):
+def cls(row: pd.Series) -> str:
     return "drive" if row.drive_v2 else ("pass" if row.pass_v2 else "hold")
 
 
-def tune():
+def tune() -> None:
     b.RULE = "d3"
     split, meta = load_ctx()
     c = pd.read_csv(S3 / "catches.csv", dtype={"game": str})
@@ -155,7 +160,7 @@ def tune():
     print(det[det.eye != det.det][["did", "eye", "det"]].to_string())
 
 
-def sample():
+def sample() -> None:
     b.RULE = "d3"
     split, meta = load_ctx()
     c = pd.read_csv(S3 / "catches.csv", dtype={"game": str})
@@ -261,7 +266,7 @@ def sample():
     print(pick.stratum.value_counts().to_dict())
 
 
-def score():
+def score() -> None:
     b.RULE = "d3"
     split, meta = load_ctx()
     smp = pd.read_csv(ROOT / "checks/dp2_sample.csv", dtype={"game": str})
@@ -284,7 +289,7 @@ def score():
     print(json.dumps(res, indent=1))
 
 
-def all_catches():
+def all_catches() -> None:
     b.RULE = "d3"
     split, meta = load_ctx()
     c = pd.read_csv(S3 / "catches.csv", dtype={"game": str})

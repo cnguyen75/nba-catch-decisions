@@ -21,11 +21,11 @@ S3 = ROOT / "out" / "s3"
 KNOTS = np.array([0.0, 4.0, 10.0, 18.0, 23.75, 28.0, 47.0])
 
 
-def ns_basis(x, k=KNOTS):
+def ns_basis(x: np.ndarray, k: np.ndarray = KNOTS) -> np.ndarray:
     """Natural cubic spline basis (ESL 5.4): N1 = x, N_{j+2} = d_j - d_{K-1}, j = 1..K-2."""
     K = len(k)
 
-    def d(j):
+    def d(j: int) -> np.ndarray:
         return (np.clip(x - k[j], 0, None) ** 3 - np.clip(x - k[K - 1], 0, None) ** 3) / (
             k[K - 1] - k[j]
         )
@@ -34,7 +34,7 @@ def ns_basis(x, k=KNOTS):
     return np.column_stack(cols)
 
 
-def X(df):
+def X(df: pd.DataFrame) -> np.ndarray:
     dist = df.d_basket.to_numpy(float)
     z = np.stack([(df.zone == q).to_numpy() for q in ZONES], 1).astype(float)
     lo = np.log1p(df.open_catch.clip(upper=30).to_numpy(float))
@@ -43,7 +43,7 @@ def X(df):
     return np.column_stack([ns_basis(dist), z, lo, lo * dist / 10.0, lo * three, sc, sc**2 / 100.0])
 
 
-def fit_base(df):
+def fit_base(df: pd.DataFrame) -> tuple[StandardScaler, LogisticRegression]:
     sc = StandardScaler().fit(X(df))
     lr = LogisticRegression(C=1.0, solver="lbfgs", max_iter=5000).fit(
         sc.transform(X(df)), df.made.astype(int)
@@ -51,11 +51,11 @@ def fit_base(df):
     return sc, lr
 
 
-def logit_of(sc, lr, df):
+def logit_of(sc: StandardScaler, lr: LogisticRegression, df: pd.DataFrame) -> np.ndarray:
     return lr.decision_function(sc.transform(X(df)))
 
 
-def ece(p, y, bins=10):
+def ece(p: np.ndarray, y: np.ndarray, bins: int = 10) -> tuple[float, list[dict[str, float]]]:
     q = pd.qcut(p + np.arange(len(p)) * 1e-12, bins, labels=False)
     t = (
         pd.DataFrame({"p": p, "y": y, "b": q})
@@ -67,7 +67,7 @@ def ece(p, y, bins=10):
     ).reset_index().to_dict("records")
 
 
-def main():
+def main() -> None:
     c = load()
     use = c[(c.excluded == "") & (c.action == "shoot") & c.made.notna() & c.shot_clock.notna()]
     league = use[~use.pid.isin(GATED)]
@@ -85,7 +85,7 @@ def main():
     a, b = float(platt.coef_[0, 0]), float(platt.intercept_[0])
     sc, lr = fit_base(tr)
 
-    def predict(df):
+    def predict(df: pd.DataFrame) -> np.ndarray:
         return 1 / (1 + np.exp(-(a * logit_of(sc, lr, df) + b)))
 
     # ---- scored once on validation

@@ -19,7 +19,7 @@ SHRINK_K = 50.0
 PRIOR_SD = 0.3
 
 
-def load():
+def load() -> pd.DataFrame:
     split = json.loads((ROOT / "checks/split.json").read_text())["split"]
     c = pd.read_csv(S3 / "catches.csv", dtype={"game": str})
     c["split"] = c.game.map(split)
@@ -60,14 +60,14 @@ def load():
     return c
 
 
-def shoot_X(df):
+def shoot_X(df: pd.DataFrame) -> np.ndarray:
     d = df.d_basket.values / 10.0
     z = np.stack([(df.zone == k).values for k in ZONES], 1).astype(float)
     lo = np.log1p(df.open_catch.clip(upper=30).values)
     return np.column_stack([d, d**2, z, lo, lo * df.points3.values])
 
 
-def cont_X(df):
+def cont_X(df: pd.DataFrame) -> np.ndarray:
     d = df.d_basket.values / 10.0
     z = np.stack([(df.zone == k).values for k in ZONES], 1).astype(float)
     return np.column_stack(
@@ -84,7 +84,7 @@ def cont_X(df):
     )
 
 
-def ece(p, y, bins=10):
+def ece(p: np.ndarray, y: np.ndarray, bins: int = 10) -> tuple[float, list[dict[str, float]]]:
     q = pd.qcut(p, bins, labels=False, duplicates="drop")
     tab = (
         pd.DataFrame({"p": p, "y": y, "b": q})
@@ -96,7 +96,7 @@ def ece(p, y, bins=10):
     ).reset_index().to_dict("records")
 
 
-def map_offset(logit, y, sd=PRIOR_SD):
+def map_offset(logit: np.ndarray, y: np.ndarray, sd: float = PRIOR_SD) -> float:
     """MAP of a single additive logit offset with N(0, sd^2) prior (Newton)."""
     d = 0.0
     for _ in range(50):
@@ -110,7 +110,7 @@ def map_offset(logit, y, sd=PRIOR_SD):
     return float(d)
 
 
-def main():
+def main() -> None:
     c = load()
     use = c[c.excluded == ""]
     league = use[~use.pid.isin(GATED)]

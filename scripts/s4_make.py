@@ -3,8 +3,10 @@
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
+from numpy.typing import ArrayLike
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
@@ -22,7 +24,9 @@ SCORE_ONLY = "--score-only" in sys.argv
 OPEN_KNOTS = np.array([2.0, 4.0, 6.0, 8.0, 12.0])
 
 
-def X2(d, zone, three, op, cs, sc):
+def X2(
+    d: ArrayLike, zone: ArrayLike, three: ArrayLike, op: ArrayLike, cs: ArrayLike, sc: ArrayLike
+) -> np.ndarray:
     d = np.asarray(d, float)
     z = np.stack([(np.asarray(zone) == q) for q in ZONES], 1).astype(float)
     lo = np.log1p(np.clip(np.asarray(op, float), 0, 30))
@@ -45,11 +49,11 @@ def X2(d, zone, three, op, cs, sc):
     )
 
 
-def shots_X(df):
+def shots_X(df: pd.DataFrame) -> np.ndarray:
     return X2(df.d_release, df.zone_release, df.three, df.open_release_all, df.cs, df.sc_release)
 
 
-def main():
+def main() -> None:
     c, s = load()
     rep = {}
     s["located"] = s.reason.astype(str).str.startswith("ok")
@@ -76,7 +80,7 @@ def main():
         js[js.split == "calib"],
     )  # attempt 2: score on the fresh calibration games
 
-    def fit_base(d):
+    def fit_base(d: pd.DataFrame) -> tuple[StandardScaler, LogisticRegression]:
         sc_ = StandardScaler().fit(shots_X(d))
         return sc_, LogisticRegression(C=1.0, max_iter=5000).fit(
             sc_.transform(shots_X(d)), d.made.astype(int)
@@ -94,7 +98,7 @@ def main():
     A, B = float(pl.coef_[0, 0]), float(pl.intercept_[0])
     scl, mdl = fit_base(tr)
 
-    def p_make(Xraw):
+    def p_make(Xraw: np.ndarray) -> np.ndarray:
         return 1 / (1 + np.exp(-(A * mdl.decision_function(scl.transform(Xraw)) + B)))
 
     pv = p_make(shots_X(va))
@@ -180,7 +184,7 @@ def main():
     }
 
     # late-clock cross-check
-    def slope(d, seed=0, nb=200):
+    def slope(d: pd.DataFrame, seed: int = 0, nb: int = 200) -> dict[str, Any]:
         Xs = np.column_stack(
             [
                 np.log1p(d.open_release_all.clip(upper=30)),

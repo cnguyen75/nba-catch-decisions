@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 S3 = ROOT / "out" / "s3"
 
 
-def main():
+def main() -> None:
     m = np.load(S3 / "vshoot2_model.npz")
     g_zone = {z: v["g"] for z, v in json.loads((S3 / "vshoot2.json").read_text())["g_zone"].items()}
     c = load()

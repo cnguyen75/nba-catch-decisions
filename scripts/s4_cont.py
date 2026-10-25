@@ -2,9 +2,11 @@
 DMF synthetic validation (7c). Registered ca82621 / f3a51a5. Reads out/s4/vshoot.csv. Writes out/s4/cont_report.json and
 out/s4/values.csv."""
 
+from collections.abc import Callable
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -19,7 +21,7 @@ from s4_data import GATED, S4, ZONES  # noqa: E402
 SHRINK_K = 50.0
 
 
-def X_full(d):
+def X_full(d: pd.DataFrame) -> np.ndarray:
     """Continuation state (registered), unstandardized; column 4 is openness at catch (capped 15)."""
     dd = d.d_basket.to_numpy(float) / 10
     z = np.stack([(d.zone == q).to_numpy() for q in ZONES[1:]], 1).astype(
@@ -44,17 +46,17 @@ OPEN_COL = 6
 EXCL_COLS = [9, 10]  # best teammate openness, margin
 
 
-def X_out(d):
+def X_out(d: pd.DataFrame) -> np.ndarray:
     return np.delete(X_full(d), EXCL_COLS, axis=1)
 
 
-def ridge(X, y, alpha=1.0):
+def ridge(X: np.ndarray, y: np.ndarray, alpha: float = 1.0) -> np.ndarray:
     pen = alpha * np.eye(X.shape[1])
     pen[0, 0] = 0
     return np.linalg.solve(X.T @ X + pen, X.T @ y)
 
 
-def logit_fit(X, y, iters=50):
+def logit_fit(X: np.ndarray, y: np.ndarray, iters: int = 50) -> np.ndarray:
     b = np.zeros(X.shape[1])
     for _ in range(iters):
         p = expit(X @ b)
@@ -66,12 +68,14 @@ def logit_fit(X, y, iters=50):
     return b
 
 
-def dmf_lambda(P):
+def dmf_lambda(P: np.ndarray) -> np.ndarray:
     P = np.clip(P, 1e-6, 1 - 1e-6)
     return P * np.log(P) / (1 - P) + np.log(1 - P)
 
 
-def dmf_fit(Xf, Xo, shoot, y):
+def dmf_fit(
+    Xf: np.ndarray, Xo: np.ndarray, shoot: np.ndarray, y: np.ndarray
+) -> tuple[np.ndarray, float]:
     """First stage on all rows; second stage on continuing rows. Returns (beta_out_without_lambda, coef_lambda)."""
     g = logit_fit(Xf, shoot)
     P = expit(Xf @ g)
@@ -81,7 +85,9 @@ def dmf_fit(Xf, Xo, shoot, y):
     return b[:-1], b[-1]
 
 
-def cluster_boot(df, fn, nb, seed):
+def cluster_boot(
+    df: pd.DataFrame, fn: Callable[[pd.DataFrame], float], nb: int, seed: int
+) -> np.ndarray:
     games = df.game.unique()
     idx = {g: np.where(df.game.to_numpy() == g)[0] for g in games}
     r = np.random.default_rng(seed)
@@ -92,7 +98,7 @@ def cluster_boot(df, fn, nb, seed):
     return np.array(out)
 
 
-def control_group(lt):
+def control_group(lt: pd.DataFrame) -> dict[str, Any]:
     band = lt[(lt.d_basket >= 22) & (lt.d_basket <= 30)]
     per = band.groupby("pid").agg(
         n=("action", "size"), rate=("action", lambda a: (a == "shoot").mean())
@@ -101,7 +107,7 @@ def control_group(lt):
     ctrl_ids, shoot_ids = per[per.rate < 0.02].index, per[per.rate >= 0.02].index
     res = {"n_players_control": int(len(ctrl_ids)), "n_players_shooters": int(len(shoot_ids))}
 
-    def slope(d):
+    def slope(d: pd.DataFrame) -> float:
         return ridge(X_full(d), d.poss_points.to_numpy(float))[OPEN_COL]
 
     for name, ids in (("control", ctrl_ids), ("shooters", shoot_ids)):
@@ -116,7 +122,9 @@ def control_group(lt):
     return res
 
 
-def synth_validation(lt, n_seeds=20, nb=200, rho=0.3):
+def synth_validation(
+    lt: pd.DataFrame, n_seeds: int = 20, nb: int = 200, rho: float = 0.3
+) -> dict[str, Any]:
     """Known continuation values; correlated choice/outcome errors; same sample size as the real league train set."""
     Xf, Xo = X_full(lt), X_out(lt)
     cont = (lt.action == "continue").to_numpy()
@@ -140,10 +148,10 @@ def synth_validation(lt, n_seeds=20, nb=200, rho=0.3):
         y = mean_c + sigma * z1
         c_ = shoot == 0
 
-        def naive(ix):
+        def naive(ix: np.ndarray) -> float:
             return np.linalg.lstsq(Xo[ix][c_[ix]], y[ix][c_[ix]], rcond=None)[0][OPEN_COL]
 
-        def corr(ix):
+        def corr(ix: np.ndarray) -> float:
             return dmf_fit(Xf[ix], Xo[ix], shoot[ix], y[ix])[0][OPEN_COL]
 
         allix = np.arange(len(lt))
@@ -183,7 +191,7 @@ def synth_validation(lt, n_seeds=20, nb=200, rho=0.3):
     }
 
 
-def main():
+def main() -> None:
     v = pd.read_csv(S4 / "vshoot.csv", dtype={"game": str})
     lt = v[~v.pid.isin(GATED) & (v.split == "train")].reset_index(drop=True)
     rep = {"control_group": control_group(lt)}

@@ -16,7 +16,7 @@ EXT = Path.home() / "Documents" / "nba-tracking" / "ext"
 OUT = ROOT / "out" / "s6"
 
 
-def elapsed(period, t):
+def elapsed(period: pd.Series | np.ndarray, t: pd.Series | np.ndarray) -> np.ndarray:
     period = np.asarray(period, float)
     t = np.asarray(t, float)
     return np.where(
@@ -24,13 +24,15 @@ def elapsed(period, t):
     )
 
 
-def norm(name):
+def norm(name: str) -> str:
     s = unicodedata.normalize("NFKD", str(name)).encode("ascii", "ignore").decode().lower()
     s = re.sub(r"\b(jr|sr|ii|iii|iv)\b\.?", "", s)
     return re.sub(r"[^a-z]", "", s)
 
 
-def rhythm_for(att_el, att_made, query_el, strict_before=True):
+def rhythm_for(
+    att_el: np.ndarray, att_made: np.ndarray, query_el: np.ndarray, strict_before: bool = True
+) -> dict[str, np.ndarray]:
     """For each query time, features from attempts with elapsed < query time (sorted attempts)."""
     k = np.searchsorted(att_el, query_el, side="left")  # number of prior attempts
     cm = np.r_[0, np.cumsum(att_made)]
@@ -68,7 +70,7 @@ def rhythm_for(att_el, att_made, query_el, strict_before=True):
     )
 
 
-def main():
+def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     sp = json.loads((ROOT / "checks/split_all.json").read_text())["split"]
     s = pd.read_csv(ROOT / "out/s4/shots.csv", dtype={"game": str})

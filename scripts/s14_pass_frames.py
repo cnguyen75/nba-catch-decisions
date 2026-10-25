@@ -21,7 +21,7 @@ OUT = ROOT / "out" / "s9"
 KEEP = set(b.GAMES.values()) | set(b.GAMES_PASS2.values())
 
 
-def main(worker, nw):
+def main(worker: int, nw: int) -> None:
     b.RULE = "d3"
     OUT.mkdir(parents=True, exist_ok=True)
     sp = json.loads((ROOT / "checks/split_all.json").read_text())

@@ -2,9 +2,11 @@
 falsification (rhythm, first shot, clock 5-24 s), exchange rate by zone, rhythm response, defender tables.
 Writes out/s6/b.json and out/s6/catch_state.parquet-like CSV for C."""
 
+from collections.abc import Callable, Iterable
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -23,11 +25,13 @@ TAU = 0.15
 NB = 500
 
 
-def cat(pattern):
+def cat(pattern: Iterable[Path]) -> pd.DataFrame:
     return pd.concat([pd.read_csv(f, dtype={"game": str}) for f in sorted(pattern)])
 
 
-def map_off(base_logit, y, groups, tau=TAU):
+def map_off(
+    base_logit: np.ndarray, y: np.ndarray, groups: np.ndarray, tau: float = TAU
+) -> pd.DataFrame:
     """Per-group MAP logit offsets with N(0, tau^2) prior; returns DataFrame(group, n, offset, se)."""
     out = []
     for g, ix in pd.Series(np.arange(len(groups))).groupby(groups):
@@ -47,7 +51,9 @@ def map_off(base_logit, y, groups, tau=TAU):
     return pd.DataFrame(out, columns=["pid", "n", "offset", "se"])
 
 
-def boot_games(d, fn, nb, seed):
+def boot_games(
+    d: pd.DataFrame, fn: Callable[[pd.DataFrame], Any], nb: int, seed: int
+) -> np.ndarray:
     gi = {g: np.where(d.game.to_numpy() == g)[0] for g in d.game.unique()}
     gl = list(gi)
     r = np.random.default_rng(seed)
@@ -60,7 +66,7 @@ def boot_games(d, fn, nb, seed):
     return np.array(res)
 
 
-def shot_margin():
+def shot_margin() -> dict[tuple[str, int], int]:
     """Offence margin before each FGA, from PBP SCORE (visitor - home), by game/eventnum."""
     p = pd.read_csv(
         Path.home() / "Documents/nba-tracking/pbp/2015-16_pbp.csv",
@@ -79,7 +85,7 @@ def shot_margin():
     return out
 
 
-def main():
+def main() -> None:
     rep = {}
     c, s = load()
     hts = pd.read_csv(S6 / "heights.csv").set_index("pid").height_cm
@@ -106,7 +112,7 @@ def main():
     # base logit from the attempt-2 make model
     m = np.load(S4 / "make_model.npz")
 
-    def base_logit(d):
+    def base_logit(d: pd.DataFrame) -> np.ndarray:
         Xr = X2(d.d_release, d.zone_release, d.three, d.open_release_all, d.cs, d.sc_release)
         return float(m["A"]) * (
             ((Xr - m["mean"]) / m["scale"]) @ m["coef"].ravel() + m["intercept"][0]
@@ -189,7 +195,7 @@ def main():
         "drive_eff",
     ]
 
-    def feats(d, variant, identity=True):
+    def feats(d: pd.DataFrame, variant: str, identity: bool = True) -> np.ndarray:
         X = cov(d)  # 1, clock, open, d10, d10sq, ab3, c3, best_tm
         if variant == "relative":
             X[:, 2] = d.rel_open.to_numpy(float)
@@ -271,7 +277,7 @@ def main():
         u[~u.pid.isin(GATED) & (u.split == "validation")],
     )
 
-    def logloss(b, X, y):
+    def logloss(b: np.ndarray, X: np.ndarray, y: np.ndarray) -> np.ndarray:
         p = np.clip(expit(X @ b), 1e-9, 1 - 1e-9)
         return -(y * np.log(p) + (1 - y) * np.log(1 - p))
 
@@ -314,7 +320,7 @@ def main():
     }
 
     # coefficient intervals: league (both) and players (both, non-test catches)
-    def coef_table(d, seed):
+    def coef_table(d: pd.DataFrame, seed: int) -> dict[str, list[Any]]:
         X, y = feats(d, "both"), d.y.to_numpy()
         b = logit_fit(X, y)
         bs = boot_games(d, lambda x: logit_fit(feats(x, "both"), x.y.to_numpy()), NB, seed)
@@ -345,7 +351,7 @@ def main():
     ).astype(float)
     jtr = jtr[jtr.shooter_minutes.notna()].reset_index(drop=True)
 
-    def mfeats(d):
+    def mfeats(d: pd.DataFrame) -> np.ndarray:
         base = X2(d.d_release, d.zone_release, d.three, d.open_release_all, d.cs, d.sc_release)[
             :, :-2
         ]
@@ -383,7 +389,7 @@ def main():
     # t_since_make -8, last_made -9, none_yet -10, window -11, n_def6 -12, set -13, speed -14, closing -15, clock_mid -16, late -17
     IDX = {"clock_mid": K - 16, "window": K - 11, "last_made": K - 9, "first_made": K - 7}
 
-    def ames(d):
+    def ames(d: pd.DataFrame) -> dict[str, float]:
         X = mfeats(d)
         mu, sdv = X.mean(0), X.std(0)
         sdv[sdv == 0] = 1
@@ -426,7 +432,7 @@ def main():
     print("MAKE", json.dumps(mk, indent=1), flush=True)
 
     # ---------------- D9 exchange rate by zone
-    def er(d):
+    def er(d: pd.DataFrame) -> tuple[float, float]:
         b = logit_fit(cov(d), d.y.to_numpy())
         return -b[2] / b[1], b[1]
 
@@ -461,7 +467,7 @@ def main():
     for pid, name in GATED.items():
         d = u[(u.pid == pid) & (u.n_prior >= 3)]
 
-        def resp(x, col, hi_vals, lo_vals):
+        def resp(x: pd.DataFrame, col: str, hi_vals: list[int], lo_vals: list[int]) -> list[float]:
             a, b_ = x[x[col].isin(hi_vals)], x[x[col].isin(lo_vals)]
             sa, sb = a[a.y == 1], b_[b_.y == 1]
             return [

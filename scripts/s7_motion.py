@@ -19,7 +19,7 @@ OUT = ROOT / "out" / "s5"
 W = 12  # 0.5 s
 
 
-def main(worker, nw):
+def main(worker: int, nw: int) -> None:
     b.RULE = "d3"
     OUT.mkdir(parents=True, exist_ok=True)
     sp = json.loads((ROOT / "checks/split_all.json").read_text())
@@ -50,23 +50,23 @@ def main(worker, nw):
             tl["prev_ok"],
         )
 
-        def pos(i, pid):
+        def pos(i: int, pid: int) -> np.ndarray | None:
             if i < 0 or i >= n:
                 return None
             j = np.where(PID[i] == pid)[0]
             return PXY[i, j[0]] if len(j) else None
 
-        def contig(a, z):
+        def contig(a: int, z: int) -> bool:
             return a >= 1 and z + 1 < n and all(ok[k] for k in range(a, z + 2))
 
-        def vel(i, pid):
+        def vel(i: int, pid: int) -> np.ndarray | None:
             p0, p1 = pos(i - 1, pid), pos(i + 1, pid)
             if p0 is None or p1 is None or not (ok[i] and ok[i + 1]):
                 return None
             dt = GC[i - 1] - GC[i + 1]
             return (p1 - p0) / dt if dt > 0 else None
 
-        def closing(a, z, dpid, cpid):
+        def closing(a: int, z: int, dpid: int, cpid: int) -> float:
             vals = []
             for i in range(a, z + 1):
                 v, pd_, pc = vel(i, dpid), pos(i, dpid), pos(i, cpid)
@@ -78,14 +78,14 @@ def main(worker, nw):
                     vals.append(float(v @ (u / nu)))
             return float(np.mean(vals)) if len(vals) >= 6 else np.nan
 
-        def speed(i, pid):
+        def speed(i: int, pid: int) -> float:
             p0, p1 = pos(i - 2, pid), pos(i + 2, pid)
             if p0 is None or p1 is None or not contig(i - 1, i + 1):
                 return np.nan
             dt = GC[i - 2] - GC[i + 2]
             return float(np.linalg.norm(p1 - p0) / dt) if dt > 0 else np.nan
 
-        def nearest_opp_pid(i, pid, team):
+        def nearest_opp_pid(i: int, pid: int, team: int) -> tuple[int, int]:
             pc = pos(i, pid)
             m = TEAM[i] != team
             d = np.linalg.norm(PXY[i][m] - pc, axis=1)
