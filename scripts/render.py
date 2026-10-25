@@ -104,7 +104,7 @@ def render(
     E.update_radius = update
 
     def fa(
-        fig: Figure, func: Callable[..., Any], fargs: tuple, frames: Any, interval: int
+        fig: Figure, func: Callable[..., Any], fargs: tuple, _frames: Any, _interval: int
     ) -> FuncAnimation:
         captured["fig"], captured["func"], captured["fargs"] = fig, func, fargs
         captured["anim"] = real_fa(fig, func, fargs=fargs, frames=seq, interval=40)
@@ -163,7 +163,7 @@ def render(
     for ax in np.ravel(axs):
         ax.axis("off")
     ref = keys[-1]
-    for ax, (i, im) in zip(np.ravel(axs), imgs):
+    for ax, (i, im) in zip(np.ravel(axs), imgs, strict=False):
         ax.imshow(im)
         off = tl["GC"][ref] - tl["GC"][i]
         ax.set_title(

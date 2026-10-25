@@ -97,7 +97,10 @@ def main() -> None:
         pt = est(np.arange(len(d)))
         rr = np.random.default_rng(rng_seed)
         bs = np.array([est(rr.integers(0, len(d), len(d))) for _ in range(2000)])
-        ci = lambda j: [round(float(x), 4) for x in np.quantile(bs[:, j], [0.025, 0.975])]
+
+        def ci(j: int) -> list[float]:
+            return [round(float(x), 4) for x in np.quantile(bs[:, j], [0.025, 0.975])]
+
         desc = {
             "n": int(len(d)),
             "n_shoot": int(y.sum()),

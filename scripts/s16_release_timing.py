@@ -2,6 +2,7 @@
 out/s10/stage10.json and the figure. Test rows are dropped at load and asserted absent.
 """
 
+from collections.abc import Callable
 import json
 from pathlib import Path
 import sys
@@ -112,7 +113,7 @@ def rush(x: pd.DataFrame) -> dict[str, float]:
     D = np.stack([(y.rbin.astype(str) == b).to_numpy() for b in others], 1).astype(float)
     b = logit_fit(np.column_stack([np.ones(len(y)), Xn, D]), y.made.to_numpy(float))
     lin = b[0] + Xn @ b[1 : 1 + Xn.shape[1]]
-    coef = dict(zip(others, b[1 + Xn.shape[1] :]))
+    coef = dict(zip(others, b[1 + Xn.shape[1] :], strict=False))
     p_ref = expit(lin).mean()
     return {lab: float(expit(lin + coef.get(lab, 0.0)).mean() - p_ref) for lab in RLAB}
 
@@ -163,7 +164,7 @@ def open_slope(s: pd.DataFrame, d: pd.DataFrame) -> tuple[float, int, int]:
 
     games = np.array(sorted(tr.game.unique()))
     perm = np.random.default_rng(5).permutation(len(games))
-    fold = {g: i % 5 for i, g in zip(range(len(games)), games[perm])}
+    fold = {g: i % 5 for i, g in zip(range(len(games)), games[perm], strict=False)}
     f = tr.game.map(fold).to_numpy()
     oof = np.zeros(len(tr))
     for k in range(5):
@@ -172,7 +173,10 @@ def open_slope(s: pd.DataFrame, d: pd.DataFrame) -> tuple[float, int, int]:
     pl = LogisticRegression(C=1e6).fit(oof.reshape(-1, 1), tr.made.astype(int))
     A, B = float(pl.coef_[0, 0]), float(pl.intercept_[0])
     scl, mdl = fit_base(tr)
-    pm = lambda Xr: expit(A * mdl.decision_function(scl.transform(Xr)) + B)
+
+    def pm(Xr: np.ndarray) -> np.ndarray:
+        return expit(A * mdl.decision_function(scl.transform(Xr)) + B)
+
     w = d[~d.shooter.isin(GATED) & (d.open_release_all >= 4) & (d.open_release_all < 6)]
     up = pm(X2(w.d_release, w.zone_release, w.three, w.open_release_all + 0.5, w.cs, w.sc_release))
     dn = pm(X2(w.d_release, w.zone_release, w.three, w.open_release_all - 0.5, w.cs, w.sc_release))
@@ -203,8 +207,13 @@ def main() -> None:
     for _ in range(NB):
         ix = np.concatenate([gi[g] for g in rng.choice(games, len(games))])
         bs.append(stats(d.iloc[ix], cuts))
-    get = lambda f: [f(b) for b in bs]
-    loss = lambda st: dpdo * st["vtop"] * 0.1
+
+    def get(f: Callable[[dict[str, Any]], Any]) -> list[Any]:
+        return [f(b) for b in bs]
+
+    def loss(st: dict[str, Any]) -> float:
+        return dpdo * st["vtop"] * 0.1
+
     res = {
         "n_shots": int(len(d)),
         "n_league": int(len(lg)),

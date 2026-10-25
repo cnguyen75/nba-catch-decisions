@@ -68,7 +68,7 @@ def main() -> None:
     )
     d = d.merge(mc[["game", "pid", "start", "source5"]], on=["game", "pid", "start"], how="left")
     hm = home_teams()
-    d["home"] = [t == hm.get(g) for g, t in zip(d.game, d.team)]
+    d["home"] = [t == hm.get(g) for g, t in zip(d.game, d.team, strict=False)]
     rep = {"n_unit_catches": int(len(d))}
     counts = d.groupby("pid").size()
     elig = counts[counts >= 300].index.tolist()
@@ -81,7 +81,7 @@ def main() -> None:
         .dropna()
         .drop_duplicates("PLAYER1_ID")
     )
-    names = dict(zip(pb.PLAYER1_ID.astype(int), pb.PLAYER1_NAME))
+    names = dict(zip(pb.PLAYER1_ID.astype(int), pb.PLAYER1_NAME, strict=False))
     rows = []
     for k, pid in enumerate(sorted(elig)):
         r = er_boot(d[d.pid == pid], 1000 + k)
@@ -91,7 +91,10 @@ def main() -> None:
             print("map", k, len(elig), flush=True)
     mp = pd.DataFrame(rows)
     res = mp[mp.resolved].sort_values("ER")
-    pct = lambda v: round(float((v > res.ER).mean() * 100), 1)
+
+    def pct(v: np.ndarray) -> float:
+        return round(float((v > res.ER).mean() * 100), 1)
+
     rep["map"] = {
         "n_eligible": int(len(mp)),
         "n_resolved": int(len(res)),

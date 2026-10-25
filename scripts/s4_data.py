@@ -65,7 +65,7 @@ def load() -> tuple[pd.DataFrame, pd.DataFrame]:
     p = pd.read_csv(S4 / "poss.csv", dtype={"game": str})
     c = c.merge(p, on=["game", "pid", "start"], how="left")
     sh = s.set_index(["game", "eventnum"])
-    key = list(zip(c.game, c.shot_event))
+    key = list(zip(c.game, c.shot_event, strict=False))
     c["made"] = [sh.made.get(k, np.nan) if not np.isnan(k[1]) else np.nan for k in key]
     c["three_pbp"] = [sh.three.get(k, np.nan) if not np.isnan(k[1]) else np.nan for k in key]
     c["open_release_all"] = [

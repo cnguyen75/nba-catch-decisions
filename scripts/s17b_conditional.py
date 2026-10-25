@@ -50,7 +50,10 @@ def main() -> None:
                 ]
             )
         diff.append(sv["LeBron"]["p_most_open_given_cand"] - sv["League"]["p_most_open_given_cand"])
-    ci = lambda a: [round(float(v), 4) for v in np.nanquantile(a, [0.025, 0.975])]
+
+    def ci(a: np.ndarray) -> list[float]:
+        return [round(float(v), 4) for v in np.nanquantile(a, [0.025, 0.975])]
+
     res = {"post_hoc": True, "n_passes_included": int(len(d)), "groups": {}}
     for k in groups:
         a = np.array(bs[k])

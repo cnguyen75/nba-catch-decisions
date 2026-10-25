@@ -51,6 +51,7 @@ def possession(
     margin = (h - v) if off == home else (v - h)
     pts = 0
     pending_fg_clock = None
+    prev_ev = None
     for r in after.itertuples():
         t = r.EVENTMSGTYPE
         mine = r.team == off
@@ -96,7 +97,6 @@ def possession(
 
 def build() -> None:
     c = pd.read_csv(ROOT / OUTDIR / "catches.csv", dtype={"game": str})
-    meta = json.loads((ROOT / OUTDIR / "build_meta.json").read_text())["games"]
     pbp = load_pbp(set(c.game))
     homes = {}
     for g in set(c.game):

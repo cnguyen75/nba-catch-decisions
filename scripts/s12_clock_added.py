@@ -136,7 +136,7 @@ def clock_fit(d: pd.DataFrame, off: np.ndarray, labels: list[str]) -> Callable[[
         b += st
         if np.abs(st).max() < 1e-10:
             break
-    coef = dict(zip(labels, b[1:]))
+    coef = dict(zip(labels, b[1:], strict=False))
 
     def adj(
         label: str,
@@ -331,7 +331,7 @@ def confirm() -> None:
         0, max(a0[1][1], raw.shoot_rate[0]) + 0.02, "rushed", ha="center", color="gray", fontsize=9
     )
     ax.set_xticks(x)
-    ax.set_xticklabels([f"{l} s" for l in LAB])
+    ax.set_xticklabels([f"{label} s" for label in LAB])
     ax.set_xlabel("shot clock at the catch / release")
     ax.set_ylim(0, 0.6)
     ax.set_ylabel("rate")

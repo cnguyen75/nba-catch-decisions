@@ -162,7 +162,7 @@ def despike(B: np.ndarray, prev_ok: np.ndarray, win: int = 5, tol: float = 3.0) 
     B = B.copy()
     starts = np.r_[np.where(~prev_ok)[0], len(B)]
     h = win // 2
-    for a, z in zip(starts[:-1], starts[1:]):
+    for a, z in zip(starts[:-1], starts[1:], strict=False):
         seg = B[a:z]
         if len(seg) < win:
             continue
@@ -407,10 +407,12 @@ def stage3_features(
     dP = np.array(
         [
             np.linalg.norm(tl["PXY"][i, jj[0]] - BASKETS[bk]) if len(jj) else np.nan
-            for i, jj in zip(seg, j_p)
+            for i, jj in zip(seg, j_p, strict=False)
         ]
     )
-    bP = np.array([tl["dist"][i, jj[0]] if len(jj) else np.inf for i, jj in zip(seg, j_p)])
+    bP = np.array(
+        [tl["dist"][i, jj[0]] if len(jj) else np.inf for i, jj in zip(seg, j_p, strict=False)]
+    )
     drib = (tl["B"][seg, 2] <= 1.5) & (bP <= 5.0)
     cs = np.r_[0, np.cumsum(drib)]
     drive = False
@@ -570,7 +572,7 @@ def main() -> None:
         my_shots = [s for s in shots_rows if s["game"] == gid and s.get("t_r") is not None]
         for p in catchers:
             psp = [(k, s) for k, s in enumerate(sp) if s[0] == p]
-            for k, (o, st, en) in psp:
+            for k, (_o, st, en) in psp:
                 ok_pre = (
                     st >= PRE_FRAMES
                     and all(tl["prev_ok"][st - j] for j in range(PRE_FRAMES))

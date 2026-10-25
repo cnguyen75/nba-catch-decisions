@@ -60,7 +60,6 @@ def sample() -> None:
             cache = {r.game: b.load_timeline(r.game)[2]}
         tl = cache[r.game]
         team = b.team_of(tl, r.start, r.pid)
-        q = int(tl["Q"][r.start])
         # attacking basket: the basket nearer the player's catch position in the frontcourt
         pxy = b.player_xy(tl, r.start, r.pid)
         bk = int(np.argmin(np.linalg.norm(b.BASKETS - pxy, axis=1)))

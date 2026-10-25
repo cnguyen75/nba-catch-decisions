@@ -125,7 +125,7 @@ def main() -> None:
             "n_shots_after_counted_catch": int(len(sh)),
             "q1_med_q3_s": q(sh.catch_to_shot),
             "share_within_1p5s": round(float((sh.catch_to_shot <= 1.5).mean()), 3),
-            "hist_0p5s": dict(zip([f"{e:.1f}" for e in edges[:-1]], hist.tolist())),
+            "hist_0p5s": dict(zip([f"{e:.1f}" for e in edges[:-1]], hist.tolist(), strict=False)),
             "max_bin_share_0p08s_within_4s": round(float(fine.max() / max(fine.sum(), 1)), 3),
             "below_0p3s": int((sh.catch_to_shot < 0.3).sum()),
         }

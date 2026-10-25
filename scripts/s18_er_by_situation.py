@@ -117,7 +117,7 @@ def main() -> None:
     )
     d = d.merge(mc[["game", "pid", "start", "source5"]], on=["game", "pid", "start"], how="left")
     hm = home_teams()
-    d["home"] = [t == hm.get(g) for g, t in zip(d.game, d.team)]
+    d["home"] = [t == hm.get(g) for g, t in zip(d.game, d.team, strict=False)]
     rng = np.random.default_rng(0)
     res = {
         "n_unit_catches": int(len(d)),
@@ -203,7 +203,10 @@ def main() -> None:
             k = f"{c}: {a} - {b}"
             if k in diff_bs:
                 diff_bs[k].append(meds[(c, a)] - meds[(c, b)])
-    q = lambda x: [round(float(v), 3) for v in np.nanquantile(x, [0.025, 0.975])]
+
+    def q(x: np.ndarray) -> list[float]:
+        return [round(float(v), 3) for v in np.nanquantile(x, [0.025, 0.975])]
+
     for (c, lv), v in lvl_bs.items():
         res["cuts"][c][lv]["median_ER_all_ci"] = q(v)
     res["differences"] = {}
@@ -226,7 +229,7 @@ def main() -> None:
     import matplotlib.pyplot as plt
 
     fig, axs = plt.subplots(1, 4, figsize=(11, 3.6), sharey=True)
-    for ax, (c, (_, levels)) in zip(axs, CUTS.items()):
+    for ax, (c, (_, levels)) in zip(axs, CUTS.items(), strict=False):
         xs, ys, lo, hi, labs = [], [], [], [], []
         for i, lv in enumerate(levels):
             o = res["cuts"][c][lv]

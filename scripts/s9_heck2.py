@@ -141,6 +141,7 @@ def excl() -> None:
             zip(
                 ["clock_mid", "best_tm_open", "margin", "oreb", "inbound", "other"],
                 g_full[-6:].round(4).tolist(),
+                strict=False,
             )
         ),
     }
@@ -278,7 +279,10 @@ def real() -> None:
     lt = vs[~vs.pid.isin(GATED) & (vs.split == "train")]
     cc = lt[lt.action == "continue"]
     b_naive = ridge(X_full(cc), cc.poss_points.to_numpy(float))
-    pts = lambda dd: 2 + dd.zone.isin(["above_break3", "corner3"]).astype(int).to_numpy()
+
+    def pts(dd: pd.DataFrame) -> np.ndarray:
+        return 2 + dd.zone.isin(["above_break3", "corner3"]).astype(int).to_numpy()
+
     d["V_shoot_corr"] = ndtr(xb) * pts(d) + d.zone.map(gz).to_numpy()
     d["V_cont"] = X_full(d) @ b_naive
     d["gap_corr"] = d.V_shoot_corr - d.V_cont

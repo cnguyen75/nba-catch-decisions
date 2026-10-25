@@ -223,6 +223,7 @@ def main() -> None:
                 zip(
                     ["q1", "median", "q3"],
                     np.quantile(cnt.open_catch, [0.25, 0.5, 0.75]).round(2).tolist(),
+                    strict=False,
                 )
             )
             if n

@@ -42,7 +42,7 @@ def main() -> None:
     rows = []
     fig, axs = plt.subplots(5, 4, figsize=(20, 16))
     cache = {}
-    for ax, r in zip(np.ravel(axs), pick.itertuples()):
+    for ax, r in zip(np.ravel(axs), pick.itertuples(), strict=False):
         if r.game not in cache:
             cache[r.game] = b.load_timeline(r.game)[2]
         tl = cache[r.game]

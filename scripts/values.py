@@ -29,10 +29,10 @@ def load() -> pd.DataFrame:
     p = pd.read_csv(S3 / "poss.csv", dtype={"game": str})
     c = c.merge(p, on=["game", "pid", "start"], how="left")
     s = pd.read_csv(S3 / "shots.csv", dtype={"game": str})
-    made = {(g, e): m for g, e, m in zip(s.game, s.eventnum, s.made)}
+    made = {(g, e): m for g, e, m in zip(s.game, s.eventnum, s.made, strict=False)}
     c["made"] = [
         made.get((g, e), np.nan) if not np.isnan(e) else np.nan
-        for g, e in zip(c.game, c.shot_event)
+        for g, e in zip(c.game, c.shot_event, strict=False)
     ]
     shoot = c.catch_to_shot.notna() & (c.catch_to_shot <= 1.5)
     c["action"] = np.where(

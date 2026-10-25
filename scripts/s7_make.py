@@ -44,7 +44,7 @@ def fit_platt(
 ) -> Callable[[pd.DataFrame], np.ndarray]:
     games = np.array(sorted(tr.game.unique()))
     perm = np.random.default_rng(5).permutation(len(games))
-    fold = {g: i % 5 for i, g in zip(range(len(games)), games[perm])}
+    fold = {g: i % 5 for i, g in zip(range(len(games)), games[perm], strict=False)}
     f = tr.game.map(fold).to_numpy()
     X = Xf(tr)
     y = tr.made.astype(int).to_numpy()
@@ -105,11 +105,19 @@ def main() -> None:
     js = js[js.s_closing_pre.notna() & js.s_speed.notna()]
     rep["make_rows_dropped_missing_motion"] = int(n_all - len(js))
     tr, ev = js[js.split == "train"], js[js.split == "calib"]
-    Xc = lambda d: X2(d.d_release, d.zone_release, d.three, d.open_release_all, d.cs, d.sc_release)
-    Xm = lambda d: np.column_stack([Xc(d), motion_X(d)])
+
+    def Xc(d: pd.DataFrame) -> np.ndarray:
+        return X2(d.d_release, d.zone_release, d.three, d.open_release_all, d.cs, d.sc_release)
+
+    def Xm(d: pd.DataFrame) -> np.ndarray:
+        return np.column_stack([Xc(d), motion_X(d)])
+
     pc, pm = fit_platt(tr, Xc)(ev), fit_platt(tr, Xm)(ev)
     y = ev.made.to_numpy(float)
-    ll = lambda p: -(y * np.log(p) + (1 - y) * np.log(1 - p))
+
+    def ll(p: np.ndarray) -> np.ndarray:
+        return -(y * np.log(p) + (1 - y) * np.log(1 - p))
+
     llc, llm = ll(pc), ll(pm)
     gidx = {g: np.where(ev.game.to_numpy() == g)[0] for g in ev.game.unique()}
     r = np.random.default_rng(0)
@@ -136,7 +144,11 @@ def main() -> None:
     sc = StandardScaler().fit(Xt)
     m = LogisticRegression(C=1.0, max_iter=5000).fit(sc.transform(Xt), tr.made.astype(int))
     rep["motion_coefs_standardized"] = dict(
-        zip(["closing_pre", "shooter_speed", "set", "n_def6"], m.coef_[0, -4:].round(4).tolist())
+        zip(
+            ["closing_pre", "shooter_speed", "set", "n_def6"],
+            m.coef_[0, -4:].round(4).tolist(),
+            strict=False,
+        )
     )
     print(json.dumps(rep, indent=1))
     # ---------- behavioural refit

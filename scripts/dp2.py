@@ -108,9 +108,8 @@ def next_receiver(
             and GC[en] - GC[t_r] <= 2.0
             and (nxt is None or t_r < nxt[1])
             and shooter != p
-        ):
-            if b.team_of(tl, t_r, shooter) == team:
-                return shooter, t_r
+        ) and b.team_of(tl, t_r, shooter) == team:
+            return shooter, t_r
     if nxt_ok and nxt[0] != p:
         return int(nxt[0]), int(nxt[1])
     return None, None
@@ -134,7 +133,7 @@ def run_on(rows: pd.DataFrame, split: dict[str, Any], meta: dict[str, Any]) -> p
                     tl0,
                     {
                         "spells": b.spells(tl0),
-                        "releases": list(zip(sh.t_r.astype(int), sh.shooter)),
+                        "releases": list(zip(sh.t_r.astype(int), sh.shooter, strict=False)),
                     },
                 )
             }
@@ -171,10 +170,10 @@ def sample() -> None:
     split, meta = load_ctx()
     c = pd.read_csv(S3 / "catches.csv", dtype={"game": str})
     first = pd.read_csv(ROOT / "checks/dp_sample.csv", dtype={"game": str})
-    used = set(zip(first.game, first.pid, first.start))
+    used = set(zip(first.game, first.pid, first.start, strict=False))
     c = c[c.game.map(lambda g: split["split"][g] == "validation")]
     c = c[~((c.catch_to_shot.notna()) & (c.catch_to_shot <= 1.5)) & ~c.f1_unknown]
-    c = c[[(g, p, s) not in used for g, p, s in zip(c.game, c.pid, c.start)]]
+    c = c[[(g, p, s) not in used for g, p, s in zip(c.game, c.pid, c.start, strict=False)]]
     drive_like = (c.min_dbasket <= 10) & (c.max_dbasket >= 20)
     pass_like = (c.next_rel == "teammate") & ~drive_like
     c["stratum"] = np.where(drive_like, "drive_like", np.where(pass_like, "pass_like", "other"))

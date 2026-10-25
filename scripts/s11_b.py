@@ -16,6 +16,8 @@ from scipy.special import expit
 
 
 sys.path.insert(0, str(Path(__file__).parent))
+import contextlib
+
 from s4_cont import logit_fit  # noqa: E402
 from s4_data import GATED, ROOT, S4, load  # noqa: E402
 from s4_make import X2  # noqa: E402
@@ -64,10 +66,8 @@ def boot_games(
     r = np.random.default_rng(seed)
     res = []
     for _ in range(nb):
-        try:
+        with contextlib.suppress(np.linalg.LinAlgError, ValueError):
             res.append(fn(d.iloc[np.concatenate([gi[g] for g in r.choice(gl, len(gl))])]))
-        except (np.linalg.LinAlgError, ValueError):
-            pass
     return np.array(res)
 
 
@@ -84,7 +84,7 @@ def shot_margin() -> dict[tuple[str, int], int]:
         hd = d[d.HOMEDESCRIPTION.notna() & d.PLAYER1_TEAM_ID.notna()]
         home = int(hd.PLAYER1_TEAM_ID.mode().iloc[0]) if len(hd) else None
         sc = d.SCORE.ffill().shift(1).fillna("0 - 0")
-        for ev, s_, t in zip(d.EVENTNUM, sc, d.PLAYER1_TEAM_ID):
+        for ev, s_, t in zip(d.EVENTNUM, sc, d.PLAYER1_TEAM_ID, strict=False):
             v, h = (int(x) for x in s_.split(" - "))
             out[(g, int(ev))] = (h - v) if (home is not None and t == home) else (v - h)
     return out
@@ -157,7 +157,10 @@ def main() -> None:
     res_ = dr.poss_points - dr.poss_points.mean()
     gg = res_.groupby(dr.rim_pid_catch.astype(int))
     ddrive = (gg.sum() / (gg.size() + 50)).rename("drive_eff")
-    mp = lambda tab: dict(zip(tab.pid, tab.offset))
+
+    def mp(tab: pd.DataFrame) -> dict[int, float]:
+        return dict(zip(tab.pid, tab.offset, strict=False))
+
     c["def_eff"] = c.def_pid_catch.map(mp(ddef)).fillna(0.0)
     c["rim_eff"] = c.rim_pid_catch.map(mp(drim)).fillna(0.0)
     c["drive_eff"] = c.rim_pid_catch.map(ddrive).fillna(0.0)
@@ -181,22 +184,6 @@ def main() -> None:
         & c.rel_open.notna()
     ].copy()
     u["y"] = (u.action == "shoot").astype(float)
-    names_A = [
-        "m3",
-        "m5",
-        "none_yet",
-        "last_made",
-        "t_since_make",
-        "first_made",
-        "def_h10",
-        "def_h_missing",
-        "minutes10",
-        "b2b",
-        "clutch",
-        "def_eff",
-        "rim_eff",
-        "drive_eff",
-    ]
 
     def feats(d: pd.DataFrame, variant: str, identity: bool = True) -> np.ndarray:
         X = cov(d)  # 1, clock, open, d10, d10sq, ab3, c3, best_tm
@@ -240,41 +227,43 @@ def main() -> None:
             cols.append(d.rel_open.to_numpy(float)[:, None])
         return np.column_stack(cols)
 
-    fnames = lambda variant, identity=True: (
-        [
-            "intercept",
-            "shot_clock",
-            "rel_open" if variant == "relative" else "open_catch",
-            "d10",
-            "d10sq",
-            "ab3",
-            "c3",
-            "best_tm",
-            "closing_pre",
-            "closing_post",
-            "catcher_speed",
-            "set",
-            "n_def6",
-            "flight_time",
-            "flight_dist",
-            "src_oreb",
-            "src_inbound",
-            "src_other",
-            "m3",
-            "m5",
-            "none_yet",
-            "last_made",
-            "t_since_make",
-            "first_made",
-            "def_height_10cm",
-            "def_h_missing",
-            "minutes_10",
-            "b2b",
-            "clutch",
-        ]
-        + (["def_eff", "rim_eff", "drive_eff"] if identity else [])
-        + (["rel_open"] if variant == "both" else [])
-    )
+    def fnames(variant: str, identity: bool = True) -> list[str]:
+        return (
+            [
+                "intercept",
+                "shot_clock",
+                "rel_open" if variant == "relative" else "open_catch",
+                "d10",
+                "d10sq",
+                "ab3",
+                "c3",
+                "best_tm",
+                "closing_pre",
+                "closing_post",
+                "catcher_speed",
+                "set",
+                "n_def6",
+                "flight_time",
+                "flight_dist",
+                "src_oreb",
+                "src_inbound",
+                "src_other",
+                "m3",
+                "m5",
+                "none_yet",
+                "last_made",
+                "t_since_make",
+                "first_made",
+                "def_height_10cm",
+                "def_h_missing",
+                "minutes_10",
+                "b2b",
+                "clutch",
+            ]
+            + (["def_eff", "rim_eff", "drive_eff"] if identity else [])
+            + (["rel_open"] if variant == "both" else [])
+        )
+
     lt, lv = (
         u[~u.pid.isin(GATED) & (u.split == "train")],
         u[~u.pid.isin(GATED) & (u.split == "validation")],
@@ -288,7 +277,7 @@ def main() -> None:
     coefs_by_variant = {}
     for v in ("absolute", "relative", "both"):
         b = logit_fit(feats(lt, v), lt.y.to_numpy())
-        coefs_by_variant[v] = dict(zip(fnames(v), b))
+        coefs_by_variant[v] = dict(zip(fnames(v), b, strict=False))
         dec["variants"][v] = {
             "val_logloss": round(float(logloss(b, feats(lv, v), lv.y.to_numpy()).mean()), 5),
             "m3": round(float(coefs_by_variant[v]["m3"]), 4),
@@ -344,7 +333,9 @@ def main() -> None:
     )
     # ---------------- B7 make model with all of A
     mg = shot_margin()
-    jtr["margin_shot"] = [mg.get((g, int(e)), 0) for g, e in zip(jtr.game, jtr.eventnum)]
+    jtr["margin_shot"] = [
+        mg.get((g, int(e)), 0) for g, e in zip(jtr.game, jtr.eventnum, strict=False)
+    ]
     jtr["def_h"] = jtr.def_pid_rel.map(hts)
     jtr["def_h_missing"] = jtr.def_h.isna().astype(float)
     jtr["def_h"] = jtr.def_h.fillna(hmean)
@@ -412,7 +403,10 @@ def main() -> None:
             X1, X0 = X[has].copy(), X[has].copy()
             X1[:, j] = 1
             X0[:, j] = 0
-            f = lambda Z: expit(np.column_stack([np.ones(len(Z)), (Z - mu) / sdv]) @ b)
+
+            def f(Z: np.ndarray) -> np.ndarray:
+                return expit(np.column_stack([np.ones(len(Z)), (Z - mu) / sdv]) @ b)
+
             out[nm] = float(np.mean(f(X1) - f(X0)))
         return out
 
@@ -508,18 +502,21 @@ def main() -> None:
     names = pd.read_csv(S6 / "heights.csv").set_index("pid").name
     t1 = ddef[ddef.n >= 100].sort_values("offset").head(10)
     t2 = drim[drim.n >= 50].sort_values("offset").head(10)
-    fmt = lambda t: [
-        {
-            "name": names.get(int(r.pid), str(int(r.pid))),
-            "contests": int(r.n),
-            "offset_logit": round(float(r.offset), 3),
-            "ci95": [
-                round(float(r.offset - 1.96 * r.se), 3),
-                round(float(r.offset + 1.96 * r.se), 3),
-            ],
-        }
-        for r in t.itertuples()
-    ]
+
+    def fmt(t: pd.DataFrame) -> list[dict[str, Any]]:
+        return [
+            {
+                "name": names.get(int(r.pid), str(int(r.pid))),
+                "contests": int(r.n),
+                "offset_logit": round(float(r.offset), 3),
+                "ci95": [
+                    round(float(r.offset - 1.96 * r.se), 3),
+                    round(float(r.offset + 1.96 * r.se), 3),
+                ],
+            }
+            for r in t.itertuples()
+        ]
+
     rep["defenders"] = {
         "top10_jump_shot_defenders": fmt(t1),
         "top10_rim_protectors": fmt(t2),

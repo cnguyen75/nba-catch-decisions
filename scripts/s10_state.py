@@ -33,7 +33,7 @@ def norm(name: str) -> str:
 
 
 def rhythm_for(
-    att_el: np.ndarray, att_made: np.ndarray, query_el: np.ndarray, strict_before: bool = True
+    att_el: np.ndarray, att_made: np.ndarray, query_el: np.ndarray
 ) -> dict[str, np.ndarray]:
     """For each query time, features from attempts with elapsed < query time (sorted attempts)."""
     k = np.searchsorted(att_el, query_el, side="left")  # number of prior attempts
@@ -88,8 +88,8 @@ def main() -> None:
     )
     c = c[c.game.map(sp) != "test"].copy()
     c["el"] = elapsed(c.quarter, c.gc)
-    rows_c, rows_s = [], []
-    for (g, p), att in s.sort_values("att_el").groupby(["game", "shooter"]):
+    rows_s = []
+    for (g, _p), att in s.sort_values("att_el").groupby(["game", "shooter"]):
         ael, am = att.att_el.to_numpy(float), att.made.to_numpy(int)
         f = rhythm_for(ael, am, ael - 1e-6)  # for shots: attempts strictly before
         rows_s.append(pd.DataFrame({"game": g, "eventnum": att.eventnum.to_numpy(), **f}))
@@ -133,10 +133,11 @@ def main() -> None:
     b2b = tg.set_index(["game", "team"]).b2b.to_dict()
     cteam = c.set_index(["game", "pid", "start"]).team
     sc["b2b"] = [
-        b2b.get((g, int(cteam[(g, p, s_)])), np.nan) for g, p, s_ in zip(sc.game, sc.pid, sc.start)
+        b2b.get((g, int(cteam[(g, p, s_)])), np.nan)
+        for g, p, s_ in zip(sc.game, sc.pid, sc.start, strict=False)
     ]
     st = st.merge(s[["game", "eventnum", "team"]], on=["game", "eventnum"], how="left")
-    st["b2b"] = [b2b.get((g, int(t)), np.nan) for g, t in zip(st.game, st.team)]
+    st["b2b"] = [b2b.get((g, int(t)), np.nan) for g, t in zip(st.game, st.team, strict=False)]
     # heights: PBP id -> name -> height (2015-16)
     pbp = pd.read_csv(
         Path.home() / "Documents/nba-tracking/pbp/2015-16_pbp.csv",
@@ -162,7 +163,7 @@ def main() -> None:
         .assign(key=lambda x: x.player_name.map(norm))
         .drop_duplicates("key")
     )
-    hmap = dict(zip(ht.key, ht.player_height))
+    hmap = dict(zip(ht.key, ht.player_height, strict=False))
     ids["height_cm"] = ids.name.map(lambda n: hmap.get(norm(n), np.nan))
     ids[["pid", "name", "height_cm"]].to_csv(OUT / "heights.csv", index=False)
     rep = {

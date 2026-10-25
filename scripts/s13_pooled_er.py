@@ -5,6 +5,7 @@ out/s8/stage8.json and figures to out/s8/.
 import json
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -156,16 +157,19 @@ def main() -> None:
         "5c_reported": 5.082,
     }
     srt = t.sort_values("ER")
-    fmt = lambda x: [
-        {
-            "name": r_.name,
-            "ER": round(r_.ER, 2),
-            "ER_ci": [round(r_.ER_ci[0], 2), round(r_.ER_ci[1], 2)],
-            "unresolved": r_.unresolved,
-            "n": r_.n,
-        }
-        for r_ in x.itertuples()
-    ]
+
+    def fmt(x: pd.DataFrame) -> list[dict[str, Any]]:
+        return [
+            {
+                "name": r_.name,
+                "ER": round(r_.ER, 2),
+                "ER_ci": [round(r_.ER_ci[0], 2), round(r_.ER_ci[1], 2)],
+                "unresolved": r_.unresolved,
+                "n": r_.n,
+            }
+            for r_ in x.itertuples()
+        ]
+
     res["ten_highest"], res["ten_lowest"] = fmt(srt.tail(10)[::-1]), fmt(srt.head(10))
     res["all"] = t.drop(columns=["pct"]).to_dict("records")
     (OUT / "stage8.json").write_text(json.dumps(res, indent=1, default=float))

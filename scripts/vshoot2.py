@@ -76,7 +76,7 @@ def main() -> None:
     # 5-fold game-grouped OOF predictions (seed 5)
     games = np.array(sorted(tr.game.unique()))
     perm = np.random.default_rng(5).permutation(len(games))
-    fold_of = {g: i % 5 for i, g in zip(range(len(games)), games[perm])}
+    fold_of = {g: i % 5 for i, g in zip(range(len(games)), games[perm], strict=False)}
     f = tr.game.map(fold_of).to_numpy()
     oof = np.zeros(len(tr))
     for k in range(5):

@@ -44,7 +44,7 @@ def sample() -> None:
     split = json.loads((ROOT / "checks/split.json").read_text())
     s = pd.read_csv(ROOT / "out/full/shots.csv", dtype={"game": str})
     d = descs()
-    s["desc"] = [d.get((g, e), "") for g, e in zip(s.game, s.eventnum)]
+    s["desc"] = [d.get((g, e), "") for g, e in zip(s.game, s.eventnum, strict=False)]
     s = s[
         s.joined
         & s.desc.map(is_close)

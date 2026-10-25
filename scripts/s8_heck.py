@@ -142,7 +142,10 @@ def fit_heck(
     Z: np.ndarray, X: np.ndarray, s: np.ndarray, y: np.ndarray, g0: np.ndarray, b0: np.ndarray
 ) -> tuple[np.ndarray, dict[str, object], np.ndarray]:
     th0 = np.r_[g0, b0, 0.0]
-    f = lambda th: -ll_vec(th, Z, X, s, y).sum()
+
+    def f(th: np.ndarray) -> float:
+        return -ll_vec(th, Z, X, s, y).sum()
+
     r = minimize(f, th0, method="L-BFGS-B", options={"maxiter": 500})
     th = r.x
     h = 1e-4
@@ -208,6 +211,7 @@ def excl() -> None:
             zip(
                 ["best_tm_open", "margin", "oreb", "inbound", "other"],
                 g_full[-5:].round(4).tolist(),
+                strict=False,
             )
         ),
     }

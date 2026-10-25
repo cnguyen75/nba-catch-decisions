@@ -63,12 +63,15 @@ def main() -> None:
     lg = s[s.located & ~s.shooter.isin(GATED) & s.open_release_all.notna() & s.d_release.notna()]
     # ---- step 0: all league threes by release openness (non-test)
     th = lg[lg.three.astype(bool)]
-    tab = lambda d: {
-        str(k): {"make": round(float(v["mean"]), 3), "n": int(v["size"])}
-        for k, v in d.groupby(pd.cut(d.open_release_all, BINS, right=False), observed=True)
-        .made.agg(["mean", "size"])
-        .iterrows()
-    }
+
+    def tab(d: pd.DataFrame) -> dict[str, dict[str, float]]:
+        return {
+            str(k): {"make": round(float(v["mean"]), 3), "n": int(v["size"])}
+            for k, v in d.groupby(pd.cut(d.open_release_all, BINS, right=False), observed=True)
+            .made.agg(["mean", "size"])
+            .iterrows()
+        }
+
     rep["threes_by_release_openness"] = {
         "all_league_threes": tab(th),
         "catch_and_shoot_threes": tab(th[th.cs == 1]),
@@ -90,7 +93,7 @@ def main() -> None:
 
     games = np.array(sorted(tr.game.unique()))
     perm = np.random.default_rng(5).permutation(len(games))
-    fold = {g: i % 5 for i, g in zip(range(len(games)), games[perm])}
+    fold = {g: i % 5 for i, g in zip(range(len(games)), games[perm], strict=False)}
     f = tr.game.map(fold).to_numpy()
     oof = np.zeros(len(tr))
     for k in range(5):

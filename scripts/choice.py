@@ -89,7 +89,7 @@ def fisher(
     k = A - 1
     P = (nz + k - 1 + 1) if zone_idx is not None else k + 1
     p = probs(V, avail, c, T) if zone_idx is None else None
-    I = np.zeros((P, P))
+    info = np.zeros((P, P))
     for i in range(n):
         if zone_idx is None:
             cc = np.r_[c, 0.0]
@@ -112,8 +112,8 @@ def fisher(
             J[:, -1] = -(V[i] - cs) / T**2
         pi = np.where(avail[i], pi, 0.0)
         W = np.diag(pi) - np.outer(pi, pi)
-        I += J.T @ W @ J
-    return I
+        info += J.T @ W @ J
+    return info
 
 
 def power() -> None:
@@ -136,7 +136,9 @@ def power() -> None:
             cov = np.linalg.inv(fisher(V, avail, c, T_p))
             se = np.sqrt(np.diag(cov))
             rows[f"c_shoot={cs:+.1f}"] = {
-                "se_c": dict(zip([f"c_{a}" for a in acts[:-1]], se[:-1].round(4).tolist())),
+                "se_c": dict(
+                    zip([f"c_{a}" for a in acts[:-1]], se[:-1].round(4).tolist(), strict=False)
+                ),
                 "se_T": round(float(se[-1]), 4),
                 "mde80_c_shoot": round(float(2.80 * se[0]), 4),
             }
@@ -146,7 +148,7 @@ def power() -> None:
         try:
             Iz = fisher(V, avail, np.r_[np.zeros(4), np.zeros(k - 1)], T_p, zone_idx=zi, nz=4)
             sez = np.sqrt(np.diag(np.linalg.pinv(Iz)))[:4]
-            zone_se = {z: round(float(s), 4) for z, s in zip(ZONES, sez)}
+            zone_se = {z: round(float(s), 4) for z, s in zip(ZONES, sez, strict=False)}
         except np.linalg.LinAlgError:
             zone_se = None
         out["players"][name] = {
@@ -224,17 +226,17 @@ def synth() -> None:
                         "seed": seed,
                         "c_shoot_immediate_scale_fit": round(float(ci[0]), 4),
                         "immediate_scale_bias": round(float(ci[0] - c0[0]), 4),
-                        "estimate": dict(zip(names, est.round(4).tolist())),
-                        "error": dict(zip(names, err.round(4).tolist())),
-                        "within": dict(zip(names, (np.abs(err) <= lim).tolist())),
+                        "estimate": dict(zip(names, est.round(4).tolist(), strict=False)),
+                        "error": dict(zip(names, err.round(4).tolist(), strict=False)),
+                        "within": dict(zip(names, (np.abs(err) <= lim).tolist(), strict=False)),
                         "pass": bool(np.all(np.abs(err) <= lim)),
                     }
                 )
             npass = sum(r["pass"] for r in runs)
             ib = np.array([r["immediate_scale_bias"] for r in runs])
             res["settings"][sname] = {
-                "true": dict(zip(names, np.r_[c0, T0].round(4).tolist())),
-                "limits": dict(zip(names, lim.round(4).tolist())),
+                "true": dict(zip(names, np.r_[c0, T0].round(4).tolist(), strict=False)),
+                "limits": dict(zip(names, lim.round(4).tolist(), strict=False)),
                 "ideal_p_run_pass": round(p_run, 4),
                 "ideal_p_rule_pass": round(p_rule, 4),
                 "runs_passed": npass,
