@@ -3,12 +3,14 @@
 Implements the rules pre-registered in README.md. Writes out/shots.csv, out/catches.csv,
 out/join_check.csv and out/build_meta.json. Raw data is read from ~/Documents/nba-tracking.
 """
+
 import json
-import re
 from pathlib import Path
+import re
 
 import numpy as np
 import pandas as pd
+
 
 DATA = Path.home() / "Documents" / "nba-tracking"
 OUT = Path(__file__).resolve().parent.parent / "out"
@@ -53,6 +55,7 @@ def load_timeline(game_id):
     path = DATA / "json" / GAMES[game_id] / f"{game_id}.json"
     if not path.exists():
         import py7zr
+
         with py7zr.SevenZipFile(DATA / "raw" / f"{GAMES[game_id]}.7z") as z:
             assert z.getnames() == [f"{game_id}.json"], z.getnames()
             z.extractall(path.parent)
@@ -182,7 +185,7 @@ def hyst_ctrl(dist, B, PID, prev_ok, keep_d=5.0, take_frames=6):
         if holder and low[i] and len(hj) and dist[i, hj[0]] <= keep_d:
             if sl >= take_frames:
                 holder = sq
-                out[i - take_frames + 1:i + 1] = holder
+                out[i - take_frames + 1 : i + 1] = holder
                 sq, sl = 0, 0
             else:
                 out[i] = holder
@@ -293,8 +296,12 @@ def spells(tl):
         o = ctrl[k]
         if cur is not None:
             co, cs, ce = cur
-            if (o == co and Q[k] == Q[ce] and GC[ce] - GC[k] <= MERGE_S
-                    and (k - ce <= 1 or Z[ce + 1:k].max() <= CTRL_Z)):
+            if (
+                o == co
+                and Q[k] == Q[ce]
+                and GC[ce] - GC[k] <= MERGE_S
+                and (k - ce <= 1 or Z[ce + 1 : k].max() <= CTRL_Z)
+            ):
                 cur = (co, cs, k)
                 continue
             out.append(cur)
@@ -308,8 +315,12 @@ def spells(tl):
     for sp in out:
         if len(res) >= 2:
             a, t = res[-2], res[-1]
-            if (a[0] == sp[0] and is_brief_opp(tl, t, sp[0], sp[1])
-                    and Q[a[2]] == Q[sp[1]] and GC[a[2]] - GC[sp[1]] <= MERGE_S):
+            if (
+                a[0] == sp[0]
+                and is_brief_opp(tl, t, sp[0], sp[1])
+                and Q[a[2]] == Q[sp[1]]
+                and GC[a[2]] - GC[sp[1]] <= MERGE_S
+            ):
                 res.pop()
                 res[-1] = (a[0], a[1], sp[2])
                 continue
@@ -319,8 +330,11 @@ def spells(tl):
 
 def is_brief_opp(tl, s, pid, at):
     """Spell s is an opponent's (relative to pid at frame `at`) and lasts <= 12 frames."""
-    return (s[2] - s[1] + 1 <= BRIEF_FRAMES and s[0] != pid
-            and team_of(tl, s[2], s[0]) != team_of(tl, at, pid))
+    return (
+        s[2] - s[1] + 1 <= BRIEF_FRAMES
+        and s[0] != pid
+        and team_of(tl, s[2], s[0]) != team_of(tl, at, pid)
+    )
 
 
 def zone_of(pxy, bk, d_b):
@@ -343,10 +357,17 @@ def stage3_features(tl, sp, k, p, team, bk, pxy, unloc):
     d_b = float(np.linalg.norm(pxy - BASKETS[bk]))
     out = {"zone": zone_of(pxy, bk, d_b)}
     tm = [j for j in range(10) if tl["TEAM"][st, j] == team and tl["PID"][st, j] != p]
-    out["best_tm_open"] = max(nearest_opp(tl, st, team, tl["PXY"][st, j]) for j in tm) if tm else np.nan
+    out["best_tm_open"] = (
+        max(nearest_opp(tl, st, team, tl["PXY"][st, j]) for j in tm) if tm else np.nan
+    )
     seg = np.arange(st, en + 1)
     j_p = [np.where(tl["PID"][i] == p)[0] for i in seg]
-    dP = np.array([np.linalg.norm(tl["PXY"][i, jj[0]] - BASKETS[bk]) if len(jj) else np.nan for i, jj in zip(seg, j_p)])
+    dP = np.array(
+        [
+            np.linalg.norm(tl["PXY"][i, jj[0]] - BASKETS[bk]) if len(jj) else np.nan
+            for i, jj in zip(seg, j_p)
+        ]
+    )
     bP = np.array([tl["dist"][i, jj[0]] if len(jj) else np.inf for i, jj in zip(seg, j_p)])
     drib = (tl["B"][seg, 2] <= 1.5) & (bP <= 5.0)
     cs = np.r_[0, np.cumsum(drib)]
@@ -370,7 +391,11 @@ def stage3_features(tl, sp, k, p, team, bk, pxy, unloc):
         rel, gap = "none", np.nan
     else:
         gap = float(GC[en] - GC[nxt[1]])
-        rel = "self" if nxt[0] == p else ("teammate" if team_of(tl, nxt[1], nxt[0]) == team else "opponent")
+        rel = (
+            "self"
+            if nxt[0] == p
+            else ("teammate" if team_of(tl, nxt[1], nxt[0]) == team else "opponent")
+        )
     out["next_rel"], out["next_gap"] = rel, gap
     out["pass"] = (not drive) and rel == "teammate" and gap <= 1.5 and (GC[st] - GC[en]) <= 4.0
     lo, hi = GC[en] - 0.5, GC[st]
@@ -405,28 +430,49 @@ def main():
             path = DATA / "json" / GAMES[gid] / f"{gid}.json"
             path.unlink()
             path.parent.rmdir()
-        gp = pbp[pbp.GAME_ID == gid]
+        gp = pbp[gid == pbp.GAME_ID]
         # --- join: every PBP row
         for _, row in gp.iterrows():
             e = events.get(int(row.EVENTNUM))
-            join_rows.append(dict(game=gid, eventnum=int(row.EVENTNUM), msgtype=int(row.EVENTMSGTYPE),
-                                  period=int(row.PERIOD), pctime=row.PCTIMESTRING,
-                                  joined=e is not None,
-                                  ev_q=None if e is None else e[0],
-                                  ev_gmax=None if e is None else e[1],
-                                  ev_gmin=None if e is None else e[2],
-                                  desc=" | ".join(str(x) for x in (row.HOMEDESCRIPTION, row.NEUTRALDESCRIPTION,
-                                                                    row.VISITORDESCRIPTION) if isinstance(x, str)),
-                                  p1=int(row.PLAYER1_ID)))
+            join_rows.append(
+                dict(
+                    game=gid,
+                    eventnum=int(row.EVENTNUM),
+                    msgtype=int(row.EVENTMSGTYPE),
+                    period=int(row.PERIOD),
+                    pctime=row.PCTIMESTRING,
+                    joined=e is not None,
+                    ev_q=None if e is None else e[0],
+                    ev_gmax=None if e is None else e[1],
+                    ev_gmin=None if e is None else e[2],
+                    desc=" | ".join(
+                        str(x)
+                        for x in (
+                            row.HOMEDESCRIPTION,
+                            row.NEUTRALDESCRIPTION,
+                            row.VISITORDESCRIPTION,
+                        )
+                        if isinstance(x, str)
+                    ),
+                    p1=int(row.PLAYER1_ID),
+                )
+            )
         # --- releases for every FGA
         fga = gp[gp.EVENTMSGTYPE.isin([1, 2])]
         votes = {}
         for _, row in fga.iterrows():
             e = events.get(int(row.EVENTNUM))
-            rec = dict(game=gid, eventnum=int(row.EVENTNUM), shooter=int(row.PLAYER1_ID),
-                       team=int(row.PLAYER1_TEAM_ID), period=int(row.PERIOD), pctime=row.PCTIMESTRING,
-                       made=int(row.EVENTMSGTYPE == 1), joined=e is not None,
-                       pbp_gc=pc_seconds(row.PCTIMESTRING))
+            rec = dict(
+                game=gid,
+                eventnum=int(row.EVENTNUM),
+                shooter=int(row.PLAYER1_ID),
+                team=int(row.PLAYER1_TEAM_ID),
+                period=int(row.PERIOD),
+                pctime=row.PCTIMESTRING,
+                made=int(row.EVENTMSGTYPE == 1),
+                joined=e is not None,
+                pbp_gc=pc_seconds(row.PCTIMESTRING),
+            )
             if e is None:
                 rec["reason"] = "not_joined"
                 shots_rows.append(rec)
@@ -434,10 +480,14 @@ def main():
             pbp_gc = pc_seconds(row.PCTIMESTRING)
             rec["pbp_gc"] = pbp_gc
             idx = window(tl, int(row.PERIOD), pbp_gc + 10.0, pbp_gc - 0.5)
-            desc = " ".join(str(x) for x in (row.HOMEDESCRIPTION, row.VISITORDESCRIPTION) if isinstance(x, str))
+            desc = " ".join(
+                str(x) for x in (row.HOMEDESCRIPTION, row.VISITORDESCRIPTION) if isinstance(x, str)
+            )
             rec["close"] = is_close(desc)
             rec["three"] = "3PT" in desc
-            t_r, t_a, bk, reason = locate_release(tl, idx, rec["shooter"], pbp_gc + 2.5, R3 and rec["close"])
+            t_r, t_a, bk, reason = locate_release(
+                tl, idx, rec["shooter"], pbp_gc + 2.5, R3 and rec["close"]
+            )
             rec.update(reason=reason, t_r=t_r, t_a=t_a, basket_at_arrival=bk)
             if t_r is not None:
                 rec["gc_release"] = float(tl["GC"][t_r])
@@ -467,8 +517,10 @@ def main():
             for t, o in (teams, teams[::-1]):
                 if (t, q) not in att and (o, q) in att:
                     att[(t, q)] = 1 - att[(o, q)]
-        vote_purity = {f"{t}_{q}": (float(np.mean(np.array(v) == att[(t, q)])), len(v))
-                       for (t, q), v in votes.items()}
+        vote_purity = {
+            f"{t}_{q}": (float(np.mean(np.array(v) == att[(t, q)])), len(v))
+            for (t, q), v in votes.items()
+        }
         # --- spells and catches for target players present in this game
         sp = spells(tl)
         present = [p for p in TARGETS if (tl["PID"] == p).any()]
@@ -482,20 +534,31 @@ def main():
         for p in catchers:
             psp = [(k, s) for k, s in enumerate(sp) if s[0] == p]
             for k, (o, st, en) in psp:
-                ok_pre = st >= PRE_FRAMES and all(tl["prev_ok"][st - j] for j in range(PRE_FRAMES)) \
+                ok_pre = (
+                    st >= PRE_FRAMES
+                    and all(tl["prev_ok"][st - j] for j in range(PRE_FRAMES))
                     and all(tl["ctrl"][st - j] != p for j in range(1, PRE_FRAMES + 1))
+                )
                 team = team_of(tl, st, p)
                 q = int(Q[st])
                 bk = att.get((team, q))
                 pxy = player_xy(tl, st, p)
                 d_b = None if bk is None else float(np.linalg.norm(pxy - BASKETS[bk]))
-                sc_run = (st + SC_LAG < tl["n"] and not np.isnan(SC[st])
-                          and all(tl["prev_ok"][st + j] for j in range(1, SC_LAG + 1))
-                          and SC[st + SC_LAG] < SC[st])
+                sc_run = (
+                    st + SC_LAG < tl["n"]
+                    and not np.isnan(SC[st])
+                    and all(tl["prev_ok"][st + j] for j in range(1, SC_LAG + 1))
+                    and SC[st + SC_LAG] < SC[st]
+                )
                 frontcourt = d_b is not None and d_b <= 47.0
                 kk = k - 1
                 brief = False
-                while RULE in ("sticky", "d3") and kk >= 0 and Q[sp[kk][1]] == q and is_brief_opp(tl, sp[kk], p, st):
+                while (
+                    RULE in ("sticky", "d3")
+                    and kk >= 0
+                    and Q[sp[kk][1]] == q
+                    and is_brief_opp(tl, sp[kk], p, st)
+                ):
                     kk -= 1
                     brief = True
                 prev = sp[kk] if kk >= 0 else None
@@ -505,10 +568,23 @@ def main():
                     src = "self"
                 else:
                     src = "teammate" if team_of(tl, prev[2], prev[0]) == team else "opponent"
-                row = dict(game=gid, player=TARGETS.get(p, "other"), pid=p, start=st, end=en, quarter=q,
-                           gc=float(GC[st]), valid_catch=bool(ok_pre), frontcourt=bool(frontcourt),
-                           sc_running=bool(sc_run), shot_clock=None if np.isnan(SC[st]) else float(SC[st]),
-                           d_basket=d_b, source=src, brief_opp_touch=brief, t_next=float(GC[st] - GC[en]))
+                row = dict(
+                    game=gid,
+                    player=TARGETS.get(p, "other"),
+                    pid=p,
+                    start=st,
+                    end=en,
+                    quarter=q,
+                    gc=float(GC[st]),
+                    valid_catch=bool(ok_pre),
+                    frontcourt=bool(frontcourt),
+                    sc_running=bool(sc_run),
+                    shot_clock=None if np.isnan(SC[st]) else float(SC[st]),
+                    d_basket=d_b,
+                    source=src,
+                    brief_opp_touch=brief,
+                    t_next=float(GC[st] - GC[en]),
+                )
                 if bk is not None:
                     row["open_catch"] = nearest_opp(tl, st, team, pxy)
                     row["rim_prot"] = nearest_opp(tl, st, team, BASKETS[bk])
@@ -518,11 +594,17 @@ def main():
                     row["team"] = int(team)
                     row.update(stage3_features(tl, sp, k, p, team, bk, pxy, unloc.get(p, [])))
                 catch_rows.append(row)
-        meta["games"][gid] = dict(file=GAMES[gid], frames=tl["n"], skipped_moments=skipped,
-                                  events=len(g["events"]), events_with_moments=len(events),
-                                  attacking={f"{t}_{q}": b for (t, q), b in att.items()},
-                                  vote_purity=vote_purity, present_targets=[TARGETS[p] for p in present],
-                                  n_spells=len(sp))
+        meta["games"][gid] = dict(
+            file=GAMES[gid],
+            frames=tl["n"],
+            skipped_moments=skipped,
+            events=len(g["events"]),
+            events_with_moments=len(events),
+            attacking={f"{t}_{q}": b for (t, q), b in att.items()},
+            vote_purity=vote_purity,
+            present_targets=[TARGETS[p] for p in present],
+            n_spells=len(sp),
+        )
         # link located target shots to latest spell of shooter at/before t_r with no other spell in between
         for s in my_shots:
             if s["shooter"] not in TARGETS and not ALL_PLAYERS:
@@ -538,15 +620,35 @@ def main():
                 s["catch_to_shot"] = float(GC[last[1]] - GC[t_r]) if Q[last[1]] == Q[t_r] else None
                 team = s["team"]
                 s["open_release"] = nearest_opp(tl, t_r, team, player_xy(tl, t_r, s["shooter"]))
-        print(gid, GAMES[gid], "frames", tl["n"], "skipped", skipped, "spells", len(sp), "targets", present)
+        print(
+            gid,
+            GAMES[gid],
+            "frames",
+            tl["n"],
+            "skipped",
+            skipped,
+            "spells",
+            len(sp),
+            "targets",
+            present,
+        )
     shots = pd.DataFrame(shots_rows)
     catches = pd.DataFrame(catch_rows)
     # attach shot outcome to catches
     link = shots[shots["linked"].astype("boolean").fillna(False).astype(bool)]
-    key = {(r.game, int(r.link_start)): (r.catch_to_shot, r.open_release, r.eventnum) for r in link.itertuples()}
-    catches["catch_to_shot"] = [key.get((r.game, r.start), (None,))[0] for r in catches.itertuples()]
-    catches["open_release"] = [key.get((r.game, r.start), (None, None))[1] for r in catches.itertuples()]
-    catches["shot_event"] = [key.get((r.game, r.start), (None, None, None))[2] for r in catches.itertuples()]
+    key = {
+        (r.game, int(r.link_start)): (r.catch_to_shot, r.open_release, r.eventnum)
+        for r in link.itertuples()
+    }
+    catches["catch_to_shot"] = [
+        key.get((r.game, r.start), (None,))[0] for r in catches.itertuples()
+    ]
+    catches["open_release"] = [
+        key.get((r.game, r.start), (None, None))[1] for r in catches.itertuples()
+    ]
+    catches["shot_event"] = [
+        key.get((r.game, r.start), (None, None, None))[2] for r in catches.itertuples()
+    ]
     shots.to_csv(OUT / "shots.csv", index=False)
     catches.to_csv(OUT / "catches.csv", index=False)
     pd.DataFrame(join_rows).to_csv(OUT / "join_check.csv", index=False)
@@ -555,14 +657,21 @@ def main():
 
 if __name__ == "__main__":
     import argparse
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--rule", choices=["nearest", "sticky", "d3"], default="nearest")
     ap.add_argument("--games", choices=["pass1", "pass2"], default="pass1")
-    ap.add_argument("--stems", default=None, help="file with one archive stem per line; replaces --games")
-    ap.add_argument("--cleanup", action="store_true", help="delete each extracted JSON after loading it")
+    ap.add_argument(
+        "--stems", default=None, help="file with one archive stem per line; replaces --games"
+    )
+    ap.add_argument(
+        "--cleanup", action="store_true", help="delete each extracted JSON after loading it"
+    )
     ap.add_argument("--out", default=None)
     ap.add_argument("--r3", action="store_true", help="close-range release rule R3")
-    ap.add_argument("--all-players", action="store_true", help="Stage 3a: counted catches for every player")
+    ap.add_argument(
+        "--all-players", action="store_true", help="Stage 3a: counted catches for every player"
+    )
     a = ap.parse_args()
     ALL_PLAYERS = a.all_players
     RULE = a.rule
@@ -573,6 +682,7 @@ if __name__ == "__main__":
         GAMES.update(GAMES_PASS2)
     if a.stems:
         import py7zr
+
         GAMES.clear()
         for stem in Path(a.stems).read_text().split():
             with py7zr.SevenZipFile(DATA / "raw" / f"{stem}.7z") as z:

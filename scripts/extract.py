@@ -1,8 +1,10 @@
 """Extract each SportVU .7z archive into its own directory under DATA/json/<stem>/."""
-import sys
+
 from pathlib import Path
+import sys
 
 import py7zr
+
 
 raw = Path(sys.argv[1])
 out = Path(sys.argv[2])

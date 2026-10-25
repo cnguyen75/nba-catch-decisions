@@ -6,10 +6,10 @@ Exit code 1 when any finding is printed. Findings are "path:line: rule: detail".
 """
 
 import ast
-import re
-import sys
 from dataclasses import dataclass
 from pathlib import Path
+import re
+import sys
 
 
 MAX_LINE = 100
@@ -17,15 +17,38 @@ MAX_FUNCTION_LINES = 50
 MAX_NESTING = 3
 MAX_PARAMS = 4
 SKIP_DIRS = {
-    ".git", "node_modules", "_site", "_site-drafts", "venv", ".venv", "dist", "build",
-    "__pycache__", "fonts", "images", "archive", "data", "results",
+    ".git",
+    "node_modules",
+    "_site",
+    "_site-drafts",
+    "venv",
+    ".venv",
+    "dist",
+    "build",
+    "__pycache__",
+    "fonts",
+    "images",
+    "archive",
+    "data",
+    "results",
 }
 CODE_SUFFIXES = {".py", ".js", ".ts", ".css", ".html", ".md", ".yml", ".yaml", ".toml", ".sh"}
 PROSE_SUFFIXES = {".md"}
 BANNED_WORDS = [
-    "powerful", "seamless", "robust", "cutting-edge", "leverage", "blazing fast",
-    "revolutionary", "delve", "tapestry", "landscape", "pivotal", "testament",
-    "it's worth noting", "it is worth noting",
+    "powerful",
+    "seamless",
+    "robust",
+    "cutting-edge",
+    "leverage",
+    "blazing fast",
+    "revolutionary",
+    "delve",
+    "tapestry",
+    "landscape",
+    "pivotal",
+    "testament",
+    "it's worth noting",
+    "it is worth noting",
 ]
 BANNED_PATTERNS = [
     (re.compile("—"), "em dash"),
@@ -35,8 +58,18 @@ BANNED_PATTERNS = [
     (re.compile(r"\bas of\b", re.I), "'as of' dated claim"),
 ]
 README_SECTIONS = ["how it works", "run it", "limitations"]
-NARRATION_STARTS = ("loop over", "iterate", "call the", "set the", "return the", "increment", "check if")
-PROVENANCE = re.compile(r"\b(ENG|ATH|AGE|PR|JIRA)-?\d+\b|\bpreviously\b|\bused to\b|\bchanged from\b")
+NARRATION_STARTS = (
+    "loop over",
+    "iterate",
+    "call the",
+    "set the",
+    "return the",
+    "increment",
+    "check if",
+)
+PROVENANCE = re.compile(
+    r"\b(ENG|ATH|AGE|PR|JIRA)-?\d+\b|\bpreviously\b|\bused to\b|\bchanged from\b"
+)
 
 
 @dataclass
@@ -82,9 +115,13 @@ def check_whitespace(path: Path, text: str) -> list[Finding]:
         if len(line) > MAX_LINE and path.suffix in {".py", ".js", ".ts"} and "http" not in line:
             findings.append(Finding(path, number, "line-length", f"{len(line)} > {MAX_LINE}"))
     if text and not text.endswith("\n"):
-        findings.append(Finding(path, len(lines), "final-newline", "file does not end with a newline"))
+        findings.append(
+            Finding(path, len(lines), "final-newline", "file does not end with a newline")
+        )
     if text.endswith("\n\n"):
-        findings.append(Finding(path, len(lines), "final-newline", "more than one newline at end of file"))
+        findings.append(
+            Finding(path, len(lines), "final-newline", "more than one newline at end of file")
+        )
     return findings
 
 
@@ -106,24 +143,34 @@ def _check_function(path: Path, node: ast.FunctionDef, lines: list[str]) -> list
     findings = []
     length = (node.end_lineno or node.lineno) - node.lineno + 1
     if length > MAX_FUNCTION_LINES:
-        findings.append(Finding(path, node.lineno, "function-length", f"{node.name} is {length} lines"))
+        findings.append(
+            Finding(path, node.lineno, "function-length", f"{node.name} is {length} lines")
+        )
     params = [a for a in node.args.args + node.args.kwonlyargs if a.arg not in {"self", "cls"}]
     if len(params) > MAX_PARAMS:
-        findings.append(Finding(path, node.lineno, "parameters", f"{node.name} takes {len(params)}"))
+        findings.append(
+            Finding(path, node.lineno, "parameters", f"{node.name} takes {len(params)}")
+        )
     depth = _max_nesting(node)
     if depth > MAX_NESTING:
         findings.append(Finding(path, node.lineno, "nesting", f"{node.name} nests {depth} deep"))
     if node.returns is None and node.name != "__init__":
-        findings.append(Finding(path, node.lineno, "return-type", f"{node.name} has no return annotation"))
+        findings.append(
+            Finding(path, node.lineno, "return-type", f"{node.name} has no return annotation")
+        )
     for arg in params:
         if arg.annotation is None:
-            findings.append(Finding(path, node.lineno, "type-hint", f"{node.name}: {arg.arg} untyped"))
-    body_lines = lines[node.lineno:node.end_lineno or node.lineno]
+            findings.append(
+                Finding(path, node.lineno, "type-hint", f"{node.name}: {arg.arg} untyped")
+            )
+    body_lines = lines[node.lineno : node.end_lineno or node.lineno]
     blank_run = 0
     for offset, line in enumerate(body_lines, start=node.lineno + 1):
         blank_run = blank_run + 1 if not line.strip() else 0
         if blank_run == 2:
-            findings.append(Finding(path, offset, "blank-lines", "two blank lines inside a function"))
+            findings.append(
+                Finding(path, offset, "blank-lines", "two blank lines inside a function")
+            )
     first_body = lines[node.body[0].lineno - 1] if node.body else ""
     if node.body and not first_body.strip() and node.body[0].lineno > node.lineno + 1:
         findings.append(Finding(path, node.lineno + 1, "blank-lines", "blank line right after def"))
@@ -151,7 +198,11 @@ def _check_comments(path: Path, lines: list[str]) -> list[Finding]:
             findings.append(Finding(path, number, "comment-narration", body[:60]))
         if PROVENANCE.search(body):
             findings.append(Finding(path, number, "comment-provenance", body[:60]))
-        if re.match(r"^(todo|fixme)\b", lowered) and " once " not in lowered and " when " not in lowered:
+        if (
+            re.match(r"^(todo|fixme)\b", lowered)
+            and " once " not in lowered
+            and " when " not in lowered
+        ):
             findings.append(Finding(path, number, "todo-without-condition", body[:60]))
         if _looks_like_code(body):
             findings.append(Finding(path, number, "commented-out-code", body[:60]))

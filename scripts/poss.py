@@ -1,14 +1,16 @@
 """Possession points and score margin for each counted catch (rule registered d3460a7).
 
-  poss.py build    writes out/s3/poss.csv (game, pid, start, poss_points, end_type, end_eventnum, margin)
-  poss.py check    prints 20 random train/validation league catches with their PBP rows (seed 20)
+poss.py build    writes out/s3/poss.csv (game, pid, start, poss_points, end_type, end_eventnum, margin)
+poss.py check    prints 20 random train/validation league catches with their PBP rows (seed 20)
 """
+
 import json
-import sys
 from pathlib import Path
+import sys
 
 import numpy as np
 import pandas as pd
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = Path.home() / "Documents" / "nba-tracking"
@@ -35,9 +37,9 @@ def load_pbp(games):
 
 def possession(rows, period, gc_catch, off, home):
     """Return (points, end_type, end_eventnum, margin_offence)."""
-    per = rows[rows.PERIOD == period]
+    per = rows[period == rows.PERIOD]
     after = per[per.gc < gc_catch]
-    before = rows[(rows.PERIOD < period) | ((rows.PERIOD == period) & (rows.gc >= gc_catch))]
+    before = rows[(period > rows.PERIOD) | ((period == rows.PERIOD) & (rows.gc >= gc_catch))]
     sc = before.SCORE.dropna()
     if len(sc):
         v, h = (int(x) for x in sc.iloc[-1].split(" - "))
@@ -49,21 +51,32 @@ def possession(rows, period, gc_catch, off, home):
     for r in after.itertuples():
         t = r.EVENTMSGTYPE
         mine = r.team == off
-        if pending_fg_clock is not None and not (t == 3 and mine and r.PCTIMESTRING == pending_fg_clock) and t not in (6, 8, 9, 18):
+        if (
+            pending_fg_clock is not None
+            and not (t == 3 and mine and pending_fg_clock == r.PCTIMESTRING)
+            and t not in (6, 8, 9, 18)
+        ):
             return pts, "made_fg", prev_ev, margin
         if t == 1 and mine:
             pts += 3 if "3PT" in r.desc else 2
             pending_fg_clock, prev_ev = r.PCTIMESTRING, r.EVENTNUM
             continue
         if t == 3 and mine:
-            made = not any(part.strip().startswith("MISS") for part in r.desc.split("|") if "Free Throw" in part)
+            made = not any(
+                part.strip().startswith("MISS")
+                for part in r.desc.split("|")
+                if "Free Throw" in part
+            )
             pts += int(made)
             if pending_fg_clock is not None:
                 prev_ev = r.EVENTNUM
                 if not made and "Technical" not in r.desc:
                     pending_fg_clock = None  # missed and-one: the rebound decides (registered rule)
                 continue
-            last = any(k in r.desc for k in ("1 of 1", "2 of 2", "3 of 3")) and "Technical" not in r.desc
+            last = (
+                any(k in r.desc for k in ("1 of 1", "2 of 2", "3 of 3"))
+                and "Technical" not in r.desc
+            )
             if last and made:
                 return pts, "last_ft_made", r.EVENTNUM, margin
             continue
@@ -91,9 +104,13 @@ def build():
     for r in c.itertuples():
         pts, et, ev, mg = possession(pbp[r.game], r.quarter, r.gc, r.team, homes[r.game])
         out.append((r.game, r.pid, r.start, pts, et, ev, mg))
-    df = pd.DataFrame(out, columns=["game", "pid", "start", "poss_points", "end_type", "end_eventnum", "margin"])
+    df = pd.DataFrame(
+        out, columns=["game", "pid", "start", "poss_points", "end_type", "end_eventnum", "margin"]
+    )
     df.to_csv(ROOT / OUTDIR / "poss.csv", index=False)
-    print(df.end_type.value_counts(normalize=True).round(3).to_dict(), df.poss_points.mean().round(3))
+    print(
+        df.end_type.value_counts(normalize=True).round(3).to_dict(), df.poss_points.mean().round(3)
+    )
 
 
 def check():
@@ -106,14 +123,18 @@ def check():
     pbp = load_pbp(set(pick.game))
     for i, r in enumerate(pick.itertuples()):
         rows = pbp[r.game]
-        per = rows[rows.PERIOD == r.quarter]
+        per = rows[r.quarter == rows.PERIOD]
         near = per[(per.gc <= r.gc + 8) & (per.gc >= r.gc - 30)]
-        print(f"\n=== P{i:02d} game {r.game} Q{r.quarter} catch gc={r.gc:.1f} ({int(r.gc)//60}:{int(r.gc)%60:02d}) offence team {r.team} "
-              f"-> points {r.poss_points}, end {r.end_type} at event {r.end_eventnum}, margin {r.margin}")
+        print(
+            f"\n=== P{i:02d} game {r.game} Q{r.quarter} catch gc={r.gc:.1f} ({int(r.gc) // 60}:{int(r.gc) % 60:02d}) offence team {r.team} "
+            f"-> points {r.poss_points}, end {r.end_type} at event {r.end_eventnum}, margin {r.margin}"
+        )
         for x in near.itertuples():
-            mark = "<-- END" if x.EVENTNUM == r.end_eventnum else ""
-            print(f"   ev{x.EVENTNUM:4d} {x.PCTIMESTRING:>5} t{x.EVENTMSGTYPE:2d} team {int(x.team) if not np.isnan(x.team) else '-'} "
-                  f"score {x.SCORE if isinstance(x.SCORE, str) else '':7} {x.desc[:90]} {mark}")
+            mark = "<-- END" if r.end_eventnum == x.EVENTNUM else ""
+            print(
+                f"   ev{x.EVENTNUM:4d} {x.PCTIMESTRING:>5} t{x.EVENTMSGTYPE:2d} team {int(x.team) if not np.isnan(x.team) else '-'} "
+                f"score {x.SCORE if isinstance(x.SCORE, str) else '':7} {x.desc[:90]} {mark}"
+            )
 
 
 if __name__ == "__main__":

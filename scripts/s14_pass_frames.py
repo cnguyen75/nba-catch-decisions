@@ -2,16 +2,19 @@
 For each pass (counted catch ending in a teammate's catch within 1.5 s), at the pass frame (passer's spell end):
 each teammate's openness, distance to the attacking basket, distance from the passer, position, and whether he is the
 receiver (owner of the next D3 spell). Long format, one row per (pass, teammate). Writes out/s9/passes_<w>.csv."""
+
 import json
+from pathlib import Path
 import shutil
 import sys
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+
 sys.path.insert(0, str(Path(__file__).parent))
 import build as b  # noqa: E402
+
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "out" / "s9"
@@ -25,8 +28,11 @@ def main(worker, nw):
     meta = json.loads((ROOT / "out/s4/build_meta.json").read_text())["games"]
     games = sorted(g for g, v in sp["split"].items() if v != "test")[worker::nw]
     assert all(sp["split"][g] != "test" for g in games), "test game in stem list"
-    c = pd.read_csv(ROOT / "out/s4/catches.csv", dtype={"game": str},
-                    usecols=["game", "pid", "start", "end", "team", "quarter", "next_rel", "next_gap"])
+    c = pd.read_csv(
+        ROOT / "out/s4/catches.csv",
+        dtype={"game": str},
+        usecols=["game", "pid", "start", "end", "team", "quarter", "next_rel", "next_gap"],
+    )
     c = c[(c.next_rel == "teammate") & (c.next_gap <= 1.5) & c.game.isin(games)]
     rows, n_drop = [], 0
     for gi, gid in enumerate(games):
@@ -43,18 +49,33 @@ def main(worker, nw):
             k = k_of.get(st)
             bk = att.get(f"{team}_{int(r.quarter)}")
             if k is None or k + 1 >= len(spells) or bk is None:
-                n_drop += 1; continue
+                n_drop += 1
+                continue
             recv = int(spells[k + 1][0])
             ppos = b.player_xy(tl, en, p)
             tm = [j for j in range(10) if tl["TEAM"][en, j] == team and tl["PID"][en, j] != p]
             if ppos is None or recv not in [int(tl["PID"][en, j]) for j in tm]:
-                n_drop += 1; continue
+                n_drop += 1
+                continue
             for j in tm:
                 pos = tl["PXY"][en, j]
-                rows.append({"game": gid, "passer": p, "start": st, "end": en, "quarter": int(r.quarter), "teammate": int(tl["PID"][en, j]),
-                             "open": b.nearest_opp(tl, en, team, pos), "d_basket": float(np.linalg.norm(pos - b.BASKETS[int(bk)])),
-                             "d_passer": float(np.linalg.norm(pos - ppos)), "x": float(pos[0]), "y": float(pos[1]), "bk": int(bk),
-                             "is_receiver": int(tl["PID"][en, j]) == recv})
+                rows.append(
+                    {
+                        "game": gid,
+                        "passer": p,
+                        "start": st,
+                        "end": en,
+                        "quarter": int(r.quarter),
+                        "teammate": int(tl["PID"][en, j]),
+                        "open": b.nearest_opp(tl, en, team, pos),
+                        "d_basket": float(np.linalg.norm(pos - b.BASKETS[int(bk)])),
+                        "d_passer": float(np.linalg.norm(pos - ppos)),
+                        "x": float(pos[0]),
+                        "y": float(pos[1]),
+                        "bk": int(bk),
+                        "is_receiver": int(tl["PID"][en, j]) == recv,
+                    }
+                )
         if gi % 25 == 0:
             print(worker, gi, len(games), flush=True)
     pd.DataFrame(rows).to_csv(OUT / f"passes_{worker}.csv", index=False)

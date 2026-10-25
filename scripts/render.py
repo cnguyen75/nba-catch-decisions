@@ -5,17 +5,21 @@ Frames are timeline indices from build.py. Labelled frames are marked in the clo
 and held for 0.5 s in the GIF. Upstream code is read from ~/Documents/nba-tracking/upstream
 (commit f7d4cf2); it draws ball height as ball circle size.
 """
-import sys
+
 from pathlib import Path
+import sys
 
 import matplotlib
+
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
+
 sys.path.insert(0, str(Path(__file__).parent))
 import build as b  # noqa: E402
+
 
 b.GAMES.update(b.GAMES_PASS2)
 
@@ -46,9 +50,13 @@ def moments(tl, lo, hi):
     for i in range(lo, hi + 1):
         rows = [[-1, -1, *tl["B"][i]]]
         order = np.argsort(tl["TEAM"][i], kind="stable")
-        rows += [[int(tl["TEAM"][i, j]), int(tl["PID"][i, j]), *tl["PXY"][i, j], 0.0] for j in order]
+        rows += [
+            [int(tl["TEAM"][i, j]), int(tl["PID"][i, j]), *tl["PXY"][i, j], 0.0] for j in order
+        ]
         sc = tl["SC"][i]
-        out.append([int(tl["Q"][i]), 0, float(tl["GC"][i]), 0.0 if np.isnan(sc) else float(sc), None, rows])
+        out.append(
+            [int(tl["Q"][i]), 0, float(tl["GC"][i]), 0.0 if np.isnan(sc) else float(sc), None, rows]
+        )
     return out
 
 
@@ -60,8 +68,11 @@ def render(gid, lo, hi, stem, marks, player=None):
             for p in ev[side]["players"]:
                 roster[p["playerid"]] = p
     base = g["events"][0]
-    ev = {"moments": moments(tl, lo, hi),
-          "home": {**base["home"], "players": list(roster.values())}, "visitor": {**base["visitor"], "players": []}}
+    ev = {
+        "moments": moments(tl, lo, hi),
+        "home": {**base["home"], "players": list(roster.values())},
+        "visitor": {**base["visitor"], "players": []},
+    }
     E = up_event.Event(ev)
     captured = {}
     real_fa = up_event.animation.FuncAnimation
@@ -77,7 +88,9 @@ def render(gid, lo, hi, stem, marks, player=None):
         clock = a[3]
         i = frame_ids[k]
         tag = marks.get(i, "")
-        clock.set_text(clock.get_text() + f"\n z={tl['B'][i, 2]:.1f}ft" + (f"\n>> {tag} <<" if tag else ""))
+        clock.set_text(
+            clock.get_text() + f"\n z={tl['B'][i, 2]:.1f}ft" + (f"\n>> {tag} <<" if tag else "")
+        )
         clock.set_color("red" if tag else "black")
         return res
 
@@ -110,8 +123,18 @@ def render(gid, lo, hi, stem, marks, player=None):
         for j in range(10):
             x, y = tl["PXY"][i, j]
             col = "#c8102e" if tl["TEAM"][i, j] == home else "#1d428a"
-            a2.add_patch(plt.Circle((x, y), 1.0, color=col, alpha=0.9 if tl["PID"][i, j] == focus else 0.5))
-            a2.text(x, y, str(roster[int(tl["PID"][i, j])]["jersey"]), color="w", ha="center", va="center", fontsize=8)
+            a2.add_patch(
+                plt.Circle((x, y), 1.0, color=col, alpha=0.9 if tl["PID"][i, j] == focus else 0.5)
+            )
+            a2.text(
+                x,
+                y,
+                str(roster[int(tl["PID"][i, j])]["jersey"]),
+                color="w",
+                ha="center",
+                va="center",
+                fontsize=8,
+            )
         bx, by, bz = tl["B"][i]
         a2.add_patch(plt.Circle((bx, by), 0.3 + bz / 12, color="#ff8c00", alpha=0.85))
         for bk in b.BASKETS:
@@ -119,7 +142,8 @@ def render(gid, lo, hi, stem, marks, player=None):
         a2.set_xlim(c[0] - 10, c[0] + 10)
         a2.set_ylim(c[1] - 8, c[1] + 8)
         a2.set_aspect("equal")
-        a2.set_xticks([]); a2.set_yticks([])
+        a2.set_xticks([])
+        a2.set_yticks([])
         f2.canvas.draw()
         imgs.append((i, np.asarray(f2.canvas.buffer_rgba()).copy()))
         plt.close(f2)
@@ -133,11 +157,14 @@ def render(gid, lo, hi, stem, marks, player=None):
     for ax, (i, im) in zip(np.ravel(axs), imgs):
         ax.imshow(im)
         off = tl["GC"][ref] - tl["GC"][i]
-        ax.set_title(f"{marks.get(i, '')} {off:+.2f}s  z={tl['B'][i, 2]:.1f} d={b.ball_to_player(tl, i, focus):.1f}",
-                     color="red" if i in marks else "black", fontsize=9)
+        ax.set_title(
+            f"{marks.get(i, '')} {off:+.2f}s  z={tl['B'][i, 2]:.1f} d={b.ball_to_player(tl, i, focus):.1f}",
+            color="red" if i in marks else "black",
+            fontsize=9,
+        )
     tr = sheet.add_subplot(rows, 1, rows)
     t = np.array([tl["GC"][ref] - tl["GC"][i] for i in frame_ids])
-    tr.plot(t, tl["B"][lo:hi + 1, 2], label="ball z (ft)")
+    tr.plot(t, tl["B"][lo : hi + 1, 2], label="ball z (ft)")
     tr.plot(t, [b.ball_to_player(tl, i, focus) for i in frame_ids], label="ball to player (ft)")
     for i, lab in marks.items():
         tr.axvline(tl["GC"][ref] - tl["GC"][i], color="red", ls="--")

@@ -1,16 +1,19 @@
 """Stage 4 (registered ea99d0c): openness priced in shot-clock seconds. Power first, then gradients, exchange rate,
 Skinner's test. Writes out/s4/stage4.json."""
+
 import json
-import sys
 from pathlib import Path
+import sys
 
 import numpy as np
 import pandas as pd
 from scipy.special import expit
 
+
 sys.path.insert(0, str(Path(__file__).parent))
 from s4_cont import X_full, logit_fit, ridge  # noqa: E402
 from s4_data import GATED, S4  # noqa: E402
+
 
 NB = 1000
 BINS = [0, 4, 8, 12, 16, 20, 24.01]
@@ -19,9 +22,18 @@ NAMES = ["intercept", "shot_clock", "open", "d10", "d10sq", "ab3", "corner3", "b
 
 def cov(d):
     dd = d.d_basket.to_numpy(float) / 10
-    return np.column_stack([np.ones(len(d)), d.shot_clock.to_numpy(float), d.open_catch.clip(upper=15).to_numpy(float), dd, dd ** 2,
-                            (d.zone == "above_break3").to_numpy(float), (d.zone == "corner3").to_numpy(float),
-                            d.best_tm_open.clip(upper=20).to_numpy(float)])
+    return np.column_stack(
+        [
+            np.ones(len(d)),
+            d.shot_clock.to_numpy(float),
+            d.open_catch.clip(upper=15).to_numpy(float),
+            dd,
+            dd**2,
+            (d.zone == "above_break3").to_numpy(float),
+            (d.zone == "corner3").to_numpy(float),
+            d.best_tm_open.clip(upper=20).to_numpy(float),
+        ]
+    )
 
 
 def ols(X, y):
@@ -29,20 +41,27 @@ def ols(X, y):
 
 
 def unit(d):
-    return d[(d.d_basket >= 16) & (d.d_basket <= 30) & d.shot_clock.notna() & d.action.isin(["shoot", "continue"])].copy()
+    return d[
+        (d.d_basket >= 16)
+        & (d.d_basket <= 30)
+        & d.shot_clock.notna()
+        & d.action.isin(["shoot", "continue"])
+    ].copy()
 
 
 def boot_games(d, fn, seed):
     games = d.game.unique()
     gi = {g: np.where(d.game.to_numpy() == g)[0] for g in games}
     r = np.random.default_rng(seed)
-    return [fn(d.iloc[np.concatenate([gi[g] for g in r.choice(games, len(games))])]) for _ in range(NB)]
+    return [
+        fn(d.iloc[np.concatenate([gi[g] for g in r.choice(games, len(games))])]) for _ in range(NB)
+    ]
 
 
 def ci(x):
     x = np.asarray(x, float)
     x = x[np.isfinite(x)]
-    return [round(float(v), 4) for v in np.quantile(x, [.025, .975])]
+    return [round(float(v), 4) for v in np.quantile(x, [0.025, 0.975])]
 
 
 def main():
@@ -67,17 +86,23 @@ def main():
     # ---- 5. power first
     pw = {}
     for name, d in groups.items():
-        X = cov(d); b = logit_fit(X, d.y.to_numpy())
+        X = cov(d)
+        b = logit_fit(X, d.y.to_numpy())
         p = expit(X @ b)
         C = np.linalg.inv((X * (p * (1 - p))[:, None]).T @ X)
         bc, bo = b[1], b[2]
         vc, vo, cco = C[1, 1], C[2, 2], C[1, 2]
         R = bo / bc
-        varR = vo / bc ** 2 + (bo ** 2 / bc ** 4) * vc - 2 * (bo / bc ** 3) * cco
-        pw[name] = {"beta_clock": round(float(bc), 4), "se_beta_clock": round(float(np.sqrt(vc)), 4),
-                    "beta_open": round(float(bo), 4), "se_beta_open": round(float(np.sqrt(vo)), 4),
-                    "R_b": round(float(R), 3), "se_R_b_delta": round(float(np.sqrt(max(varR, 0))), 3),
-                    "smallest_detectable_R_difference_80pct": round(float(2.8 * np.sqrt(max(varR, 0))), 3)}
+        varR = vo / bc**2 + (bo**2 / bc**4) * vc - 2 * (bo / bc**3) * cco
+        pw[name] = {
+            "beta_clock": round(float(bc), 4),
+            "se_beta_clock": round(float(np.sqrt(vc)), 4),
+            "beta_open": round(float(bo), 4),
+            "se_beta_open": round(float(np.sqrt(vo)), 4),
+            "R_b": round(float(R), 3),
+            "se_R_b_delta": round(float(np.sqrt(max(varR, 0))), 3),
+            "smallest_detectable_R_difference_80pct": round(float(2.8 * np.sqrt(max(varR, 0))), 3),
+        }
     out["power"] = pw
     print("POWER", json.dumps(pw, indent=1))
 
@@ -92,9 +117,11 @@ def main():
 
     gm = meas(league)
     gm_bs = np.array(boot_games(league, meas, 0))
-    out["measured_league"] = {"g_clock_pts_per_s": [round(float(gm[0]), 5), ci(gm_bs[:, 0])],
-                              "g_open_pts_per_ft": [round(float(gm[1]), 5), ci(gm_bs[:, 1])],
-                              "R_m_s_per_ft": [round(float(gm[1] / gm[0]), 3), ci(gm_bs[:, 1] / gm_bs[:, 0])]}
+    out["measured_league"] = {
+        "g_clock_pts_per_s": [round(float(gm[0]), 5), ci(gm_bs[:, 0])],
+        "g_open_pts_per_ft": [round(float(gm[1]), 5), ci(gm_bs[:, 1])],
+        "R_m_s_per_ft": [round(float(gm[1] / gm[0]), 3), ci(gm_bs[:, 1] / gm_bs[:, 0])],
+    }
     out["groups"] = {}
     for k, (name, d) in enumerate(groups.items()):
         bb = beh(d)
@@ -102,27 +129,43 @@ def main():
         Rb = bs[:, 1] / bs[:, 0]
         implied = bs[:, 1] * gm_bs[:, 0] / bs[:, 0]
         clock_ci = ci(bs[:, 0])
-        r = {"beta_clock_logodds_per_s": [round(float(bb[0]), 4), clock_ci],
-             "beta_open_logodds_per_ft": [round(float(bb[1]), 4), ci(bs[:, 1])],
-             "R_b_s_per_ft": [round(float(bb[1] / bb[0]), 3), ci(Rb)],
-             "R_m_s_per_ft": out["measured_league"]["R_m_s_per_ft"],
-             "T_clock_points": [round(float(gm[0] / bb[0]), 4), ci(gm_bs[:, 0] / bs[:, 0])],
-             "implied_value_open_pts_per_ft": [round(float(bb[1] * gm[0] / bb[0]), 4), ci(implied)],
-             "measured_value_open_pts_per_ft": out["measured_league"]["g_open_pts_per_ft"],
-             "implied_over_measured": [round(float((bb[1] * gm[0] / bb[0]) / gm[1]), 2), ci(implied / gm_bs[:, 1])],
-             "individually_resolved": bool(name == "League" or not (clock_ci[0] <= 0 <= clock_ci[1]))}
+        r = {
+            "beta_clock_logodds_per_s": [round(float(bb[0]), 4), clock_ci],
+            "beta_open_logodds_per_ft": [round(float(bb[1]), 4), ci(bs[:, 1])],
+            "R_b_s_per_ft": [round(float(bb[1] / bb[0]), 3), ci(Rb)],
+            "R_m_s_per_ft": out["measured_league"]["R_m_s_per_ft"],
+            "T_clock_points": [round(float(gm[0] / bb[0]), 4), ci(gm_bs[:, 0] / bs[:, 0])],
+            "implied_value_open_pts_per_ft": [round(float(bb[1] * gm[0] / bb[0]), 4), ci(implied)],
+            "measured_value_open_pts_per_ft": out["measured_league"]["g_open_pts_per_ft"],
+            "implied_over_measured": [
+                round(float((bb[1] * gm[0] / bb[0]) / gm[1]), 2),
+                ci(implied / gm_bs[:, 1]),
+            ],
+            "individually_resolved": bool(
+                name == "League" or not (clock_ci[0] <= 0 <= clock_ci[1])
+            ),
+        }
+
         # ---- 4. Skinner's test
         def skin(dd):
             b = pd.cut(dd.shot_clock, BINS, right=False)
-            t = dd.groupby(b, observed=False).agg(obs=("y", "mean"), imp=("gap", lambda x: float((x > 0).mean())), n=("y", "size"))
+            t = dd.groupby(b, observed=False).agg(
+                obs=("y", "mean"), imp=("gap", lambda x: float((x > 0).mean())), n=("y", "size")
+            )
             return (t.obs - t.imp).to_numpy(), t
+
         diff, tab = skin(d)
         sb = np.array([skin(x)[0] for x in boot_games(d, lambda x: x, 200 + k)])
-        r["skinner"] = {str(iv): {"n": int(row.n), "observed": round(float(row.obs), 3) if row.n else None,
-                                  "implied_maximiser": round(float(row.imp), 3) if row.n else None,
-                                  "obs_minus_implied": round(float(diff[j]), 3) if row.n else None,
-                                  "ci95": ci(sb[:, j]) if row.n else None}
-                        for j, (iv, row) in enumerate(tab.iterrows())}
+        r["skinner"] = {
+            str(iv): {
+                "n": int(row.n),
+                "observed": round(float(row.obs), 3) if row.n else None,
+                "implied_maximiser": round(float(row.imp), 3) if row.n else None,
+                "obs_minus_implied": round(float(diff[j]), 3) if row.n else None,
+                "ci95": ci(sb[:, j]) if row.n else None,
+            }
+            for j, (iv, row) in enumerate(tab.iterrows())
+        }
         out["groups"][name] = r
         print(name, json.dumps({kk: vv for kk, vv in r.items() if kk != "skinner"}))
         for iv, s in r["skinner"].items():

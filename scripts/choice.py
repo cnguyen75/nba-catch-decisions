@@ -4,14 +4,16 @@ Registered 4a3a3d3. Real-data use is limited to the pilot T on train games; pilo
   choice.py power    -> out/s3/power.json
   choice.py synth    -> out/s3/synth.json   (only players that proceed)
 """
+
 import json
 import math
-import sys
 from pathlib import Path
+import sys
 
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
+
 
 ROOT = Path(__file__).resolve().parent.parent
 S3 = ROOT / "out" / "s3"
@@ -83,7 +85,7 @@ def fisher(V, avail, c, T, zone_idx=None, nz=0):
             J = np.zeros((A, P))
             for a in range(k):
                 J[a, a] = -1.0 / T
-            J[:, -1] = -(V[i] - cc) / T ** 2
+            J[:, -1] = -(V[i] - cc) / T**2
         else:
             cz = c[:nz]
             rest = c[nz:]
@@ -95,7 +97,7 @@ def fisher(V, avail, c, T, zone_idx=None, nz=0):
             J[0, zone_idx[i]] = -1.0 / T
             for a in range(1, k):
                 J[a, nz + a - 1] = -1.0 / T
-            J[:, -1] = -(V[i] - cs) / T ** 2
+            J[:, -1] = -(V[i] - cs) / T**2
         pi = np.where(avail[i], pi, 0.0)
         W = np.diag(pi) - np.outer(pi, pi)
         I += J.T @ W @ J
@@ -121,8 +123,11 @@ def power():
             c = np.r_[cs, np.zeros(k - 1)]
             cov = np.linalg.inv(fisher(V, avail, c, T_p))
             se = np.sqrt(np.diag(cov))
-            rows[f"c_shoot={cs:+.1f}"] = {"se_c": dict(zip([f"c_{a}" for a in acts[:-1]], se[:-1].round(4).tolist())),
-                                         "se_T": round(float(se[-1]), 4), "mde80_c_shoot": round(float(2.80 * se[0]), 4)}
+            rows[f"c_shoot={cs:+.1f}"] = {
+                "se_c": dict(zip([f"c_{a}" for a in acts[:-1]], se[:-1].round(4).tolist())),
+                "se_T": round(float(se[-1]), 4),
+                "mde80_c_shoot": round(float(2.80 * se[0]), 4),
+            }
         mde = rows["c_shoot=+0.0"]["mde80_c_shoot"]
         proceed = mde <= 0.15
         zi = d.zone.map({z: i for i, z in enumerate(ZONES)}).to_numpy()
@@ -132,19 +137,36 @@ def power():
             zone_se = {z: round(float(s), 4) for z, s in zip(ZONES, sez)}
         except np.linalg.LinAlgError:
             zone_se = None
-        out["players"][name] = {"n_train_catches": int(len(d)), "n_train_games": n_games, "actions": d.action.value_counts().to_dict(),
-                                "pilot_T": round(T_p, 4), "fisher": rows, "mde80_at_c0": mde, "proceed": bool(proceed),
-                                "games_needed_if_underpowered": None if proceed else int(math.ceil(n_games * (mde / 0.15) ** 2)),
-                                "secondary_se_c_shoot_by_zone": zone_se,
-                                "zone_counts_train": d.zone.value_counts().to_dict()}
+        out["players"][name] = {
+            "n_train_catches": int(len(d)),
+            "n_train_games": n_games,
+            "actions": d.action.value_counts().to_dict(),
+            "pilot_T": round(T_p, 4),
+            "fisher": rows,
+            "mde80_at_c0": mde,
+            "proceed": bool(proceed),
+            "games_needed_if_underpowered": None
+            if proceed
+            else int(math.ceil(n_games * (mde / 0.15) ** 2)),
+            "secondary_se_c_shoot_by_zone": zone_se,
+            "zone_counts_train": d.zone.value_counts().to_dict(),
+        }
     (S3 / "power.json").write_text(json.dumps(out, indent=1))
     print(json.dumps(out, indent=1))
 
 
 def settings(model, T_p):
     if model == "fourway":
-        return {"S1": (np.array([-0.2, 0.1, -0.1]), T_p), "S2": (np.zeros(3), T_p), "S3": (np.array([0.2, -0.1, 0.1]), 1.5 * T_p)}
-    return {"S1": (np.array([-0.2]), T_p), "S2": (np.zeros(1), T_p), "S3": (np.array([0.2]), 1.5 * T_p)}
+        return {
+            "S1": (np.array([-0.2, 0.1, -0.1]), T_p),
+            "S2": (np.zeros(3), T_p),
+            "S3": (np.array([0.2, -0.1, 0.1]), 1.5 * T_p),
+        }
+    return {
+        "S1": (np.array([-0.2]), T_p),
+        "S2": (np.zeros(1), T_p),
+        "S3": (np.array([0.2]), 1.5 * T_p),
+    }
 
 
 def synth():
@@ -171,7 +193,9 @@ def synth():
             lim = 2.576 * np.sqrt(np.diag(cov))
             draws = rng.multivariate_normal(np.zeros(len(lim)), cov, 100_000)
             p_run = float(np.mean(np.all(np.abs(draws) <= lim, 1)))
-            p_rule = float(sum(math.comb(20, j) * p_run ** j * (1 - p_run) ** (20 - j) for j in range(18, 21)))
+            p_rule = float(
+                sum(math.comb(20, j) * p_run**j * (1 - p_run) ** (20 - j) for j in range(18, 21))
+            )
             runs = []
             for seed in range(100, 120):
                 g = np.random.default_rng(seed)
@@ -183,26 +207,45 @@ def synth():
                 Vimm = V.copy()
                 Vimm[:, 0] = d.V_shoot_imm.to_numpy(float)
                 ci, Ti, _ = fit(Vimm, avail, ysim, k)
-                runs.append({"seed": seed, "c_shoot_immediate_scale_fit": round(float(ci[0]), 4),
-                             "immediate_scale_bias": round(float(ci[0] - c0[0]), 4),
-                             "estimate": dict(zip(names, est.round(4).tolist())),
-                             "error": dict(zip(names, err.round(4).tolist())),
-                             "within": dict(zip(names, (np.abs(err) <= lim).tolist())),
-                             "pass": bool(np.all(np.abs(err) <= lim))})
+                runs.append(
+                    {
+                        "seed": seed,
+                        "c_shoot_immediate_scale_fit": round(float(ci[0]), 4),
+                        "immediate_scale_bias": round(float(ci[0] - c0[0]), 4),
+                        "estimate": dict(zip(names, est.round(4).tolist())),
+                        "error": dict(zip(names, err.round(4).tolist())),
+                        "within": dict(zip(names, (np.abs(err) <= lim).tolist())),
+                        "pass": bool(np.all(np.abs(err) <= lim)),
+                    }
+                )
             npass = sum(r["pass"] for r in runs)
             ib = np.array([r["immediate_scale_bias"] for r in runs])
-            res["settings"][sname] = {"true": dict(zip(names, np.r_[c0, T0].round(4).tolist())),
-                                      "limits": dict(zip(names, lim.round(4).tolist())),
-                                      "ideal_p_run_pass": round(p_run, 4), "ideal_p_rule_pass": round(p_rule, 4),
-                                      "runs_passed": npass, "setting_passes": npass >= 18,
-                                      "immediate_scale_bias_mean_sd": [round(float(ib.mean()), 4), round(float(ib.std()), 4)],
-                                      "runs": runs}
+            res["settings"][sname] = {
+                "true": dict(zip(names, np.r_[c0, T0].round(4).tolist())),
+                "limits": dict(zip(names, lim.round(4).tolist())),
+                "ideal_p_run_pass": round(p_run, 4),
+                "ideal_p_rule_pass": round(p_rule, 4),
+                "runs_passed": npass,
+                "setting_passes": npass >= 18,
+                "immediate_scale_bias_mean_sd": [
+                    round(float(ib.mean()), 4),
+                    round(float(ib.std()), 4),
+                ],
+                "runs": runs,
+            }
         res["passes"] = all(s["setting_passes"] for s in res["settings"].values())
         out["players"][name] = res
     (S3 / "synth.json").write_text(json.dumps(out, indent=1))
     for n, r in out["players"].items():
         if "settings" in r:
-            print(n, {s: (x["runs_passed"], x["ideal_p_rule_pass"], x["limits"]) for s, x in r["settings"].items()}, "PASS" if r["passes"] else "FAIL")
+            print(
+                n,
+                {
+                    s: (x["runs_passed"], x["ideal_p_rule_pass"], x["limits"])
+                    for s, x in r["settings"].items()
+                },
+                "PASS" if r["passes"] else "FAIL",
+            )
         else:
             print(n, r)
 

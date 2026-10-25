@@ -1,8 +1,10 @@
 """Game-level 60/20/20 train/validation/test split (registered d3460a7). Writes checks/split.json."""
+
 import json
 from pathlib import Path
 
 import numpy as np
+
 
 ROOT = Path(__file__).resolve().parent.parent
 meta = json.loads((ROOT / "out/full/build_meta.json").read_text())["games"]
@@ -24,7 +26,11 @@ for g in order:
     split[g] = best
     for p in ps:
         count[p][best] += 1
-out = {"seed": 2026, "split": split, "per_player_counts": count,
-       "files": {g: meta[g]["file"] for g in games}}
+out = {
+    "seed": 2026,
+    "split": split,
+    "per_player_counts": count,
+    "files": {g: meta[g]["file"] for g in games},
+}
 (ROOT / "checks/split.json").write_text(json.dumps(out, indent=1))
 print(count, {k: list(split.values()).count(k) for k in TARGET})
