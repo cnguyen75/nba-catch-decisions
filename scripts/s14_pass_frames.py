@@ -1,7 +1,9 @@
-"""Stage 9 extraction (registered 4d5a2f8). Usage: s14_pass_frames.py <worker> <n_workers>.
-For each pass (counted catch ending in a teammate's catch within 1.5 s), at the pass frame (passer's spell end):
-each teammate's openness, distance to the attacking basket, distance from the passer, position, and whether he is the
-receiver (owner of the next D3 spell). Long format, one row per (pass, teammate). Writes out/s9/passes_<w>.csv."""
+"""Stage 9 extraction (registered 4d5a2f8). Usage: s14_pass_frames.py <worker> <n_workers>. For each
+pass (counted catch ending in a teammate's catch within 1.5 s), at the pass frame (passer's spell
+end): each teammate's openness, distance to the attacking basket, distance from the passer,
+position, and whether he is the receiver (owner of the next D3 spell). Long format, one row per
+(pass, teammate). Writes out/s9/passes_<w>.csv.
+"""
 
 import json
 from pathlib import Path

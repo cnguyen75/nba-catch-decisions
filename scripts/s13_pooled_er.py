@@ -1,5 +1,6 @@
-"""Stage 8 (registered 9cca730): exchange-rate map with partial pooling (empirical Bayes). Writes out/s8/stage8.json and
-figures to out/s8/."""
+"""Stage 8 (registered 9cca730): exchange-rate map with partial pooling (empirical Bayes). Writes
+out/s8/stage8.json and figures to out/s8/.
+"""
 
 import json
 from pathlib import Path
@@ -169,7 +170,6 @@ def main() -> None:
     res["all"] = t.drop(columns=["pct"]).to_dict("records")
     (OUT / "stage8.json").write_text(json.dumps(res, indent=1, default=float))
     print(json.dumps({k: v for k, v in res.items() if k != "all"}, indent=1, default=float))
-    # figure
     import matplotlib
 
     matplotlib.use("Agg")

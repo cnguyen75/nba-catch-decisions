@@ -24,5 +24,6 @@ for i in idx[::step]:
     db = np.linalg.norm(tl["B"][i, :2] - b.BASKETS, axis=1).min()
     near = tl["PID"][i, tl["dist"][i].argmin()]
     print(
-        f"{tl['GC'][i]:7.2f} sc={tl['SC'][i]:5.1f} z={tl['B'][i, 2]:5.2f} dsh={b.ball_to_player(tl, i, sh):6.2f} dbask={db:6.2f} near={near} ctrl={tl['ctrl'][i]}"
+        f"{tl['GC'][i]:7.2f} sc={tl['SC'][i]:5.1f} z={tl['B'][i, 2]:5.2f} "
+        f"dsh={b.ball_to_player(tl, i, sh):6.2f} dbask={db:6.2f} near={near} ctrl={tl['ctrl'][i]}"
     )

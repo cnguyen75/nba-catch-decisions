@@ -1,4 +1,6 @@
-"""Join check on 20 random joined PBP events (seed 0): period, clock, shooter, and a still per event."""
+"""Join check on 20 random joined PBP events (seed 0): period, clock, shooter, and a still per
+event.
+"""
 
 from pathlib import Path
 import sys
@@ -92,7 +94,8 @@ def main() -> None:
             for bk in b.BASKETS:
                 ax.add_patch(plt.Circle(bk, 0.75, fill=False, color="k"))
             ax.set_title(
-                f"{r.game[-3:]}#{r.eventnum} Q{r.period} {r.pctime} (frame {tl['GC'][frame]:.1f}s, z={bz:.1f})\n"
+                f"{r.game[-3:]}#{r.eventnum} Q{r.period} {r.pctime} "
+                f"(frame {tl['GC'][frame]:.1f}s, z={bz:.1f})\n"
                 f"{rec['type']}: {str(r.desc)[:55]}",
                 fontsize=9,
             )

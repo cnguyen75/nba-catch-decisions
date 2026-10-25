@@ -96,14 +96,12 @@ def load_timeline(
     TEAM = np.array([[r[0] for r in seen[k][5][1:]] for k in keys])
     PXY = np.array([[r[2:4] for r in seen[k][5][1:]] for k in keys], dtype=float)
     tl = dict(Q=Q, GC=GC, SC=SC, B=B, PID=PID, TEAM=TEAM, PXY=PXY, n=n)
-    # contiguity with previous frame
     prev_ok = np.zeros(n, bool)
     prev_ok[1:] = (Q[1:] == Q[:-1]) & ((GC[:-1] - GC[1:]) <= CONTIG)
     tl["prev_ok"] = prev_ok
     if RULE == "d3":
         B = despike(B, prev_ok)
         tl["B"] = B
-    # ball-player horizontal distances, controller
     dist = np.linalg.norm(PXY - B[:, None, :2], axis=2)
     near = dist.argmin(1)
     nd = dist[np.arange(n), near]
@@ -135,8 +133,10 @@ def pc_seconds(s: str) -> int:
 def sticky_ctrl(
     dist: np.ndarray, B: np.ndarray, PID: np.ndarray, prev_ok: np.ndarray
 ) -> np.ndarray:
-    """C1: the holder keeps control while the ball is within 3 ft of him and z <= 8, whoever is nearer;
-    otherwise control goes to the nearest player within 3 ft (z <= 8) or to nobody. Resets at data gaps."""
+    """C1: the holder keeps control while the ball is within 3 ft of him and z <= 8, whoever is
+    nearer; otherwise control goes to the nearest player within 3 ft (z <= 8) or to nobody.
+    Resets at data gaps.
+    """
     n = len(B)
     out = np.zeros(n, dtype=PID.dtype)
     holder = 0
@@ -156,8 +156,9 @@ def sticky_ctrl(
 
 
 def despike(B: np.ndarray, prev_ok: np.ndarray, win: int = 5, tol: float = 3.0) -> np.ndarray:
-    """D1: within contiguous runs, replace a ball coordinate by its centred 5-frame median where they differ
-    by more than 3 ft."""
+    """D1: within contiguous runs, replace a ball coordinate by its centred 5-frame median where
+    they differ by more than 3 ft.
+    """
     B = B.copy()
     starts = np.r_[np.where(~prev_ok)[0], len(B)]
     h = win // 2
@@ -180,8 +181,10 @@ def hyst_ctrl(
     keep_d: float = 5.0,
     take_frames: int = 6,
 ) -> np.ndarray:
-    """D2: acquire within 3 ft (nearest, z <= 8); holder keeps while within 5 ft and z <= 8; another player
-    takes over after being the nearest within 3 ft for 6 consecutive frames (assigned from the first)."""
+    """D2: acquire within 3 ft (nearest, z <= 8); holder keeps while within 5 ft and z <= 8; another
+    player takes over after being the nearest within 3 ft for 6 consecutive frames (assigned from
+    the first).
+    """
     n = len(B)
     out = np.zeros(n, dtype=PID.dtype)
     holder, sq, sl = 0, 0, 0
@@ -249,7 +252,9 @@ def _release_before(
     shooter: int,
     close: bool = False,
 ) -> tuple[int | None, str]:
-    """Last frame in idx[lo:a] with ball within 3 ft (4 ft for close-range under R3) of shooter, plus checks."""
+    """Last frame in idx[lo:a] with ball within 3 ft (4 ft for close-range under R3) of shooter,
+    plus checks.
+    """
     d_sh = np.array([ball_to_player(tl, i, shooter) for i in idx[lo:a]])
     cand = np.where(d_sh <= (4.0 if close else 3.0))[0]
     if len(cand) == 0:
@@ -363,7 +368,9 @@ def is_brief_opp(tl: Timeline, s: Spell, pid: int, at: int) -> bool:
 
 
 def zone_of(pxy: np.ndarray, bk: int, d_b: float) -> str:
-    """Registered zones: rim <= 6 ft; corner three: |y-25| >= 22 and within 14 ft of baseline; three >= 23.75 ft."""
+    """Registered zones: rim <= 6 ft; corner three: |y-25| >= 22 and within 14 ft of baseline; three
+    >= 23.75 ft.
+    """
     corner = abs(pxy[1] - 25.0) >= 22.0 and abs(pxy[0] - (0.0 if bk == 0 else 94.0)) <= 14.0
     if d_b <= 6.0:
         return "rim"
@@ -384,8 +391,9 @@ def stage3_features(
     pxy: np.ndarray,
     unloc: list[tuple[int, int]],
 ) -> dict[str, Any]:
-    """Stage 3a features for a counted catch: zone, best teammate openness, drive/pass flags (registered rules),
-    next-owner relation, F1 unknown flag."""
+    """Stage 3a features for a counted catch: zone, best teammate openness, drive/pass flags
+    (registered rules), next-owner relation, F1 unknown flag.
+    """
     o, st, en = sp[k]
     GC, Q = tl["GC"], tl["Q"]
     d_b = float(np.linalg.norm(pxy - BASKETS[bk]))
@@ -465,7 +473,6 @@ def main() -> None:
             path.unlink()
             path.parent.rmdir()
         gp = pbp[gid == pbp.GAME_ID]
-        # --- join: every PBP row
         for _, row in gp.iterrows():
             e = events.get(int(row.EVENTNUM))
             join_rows.append(
@@ -491,7 +498,6 @@ def main() -> None:
                     p1=int(row.PLAYER1_ID),
                 )
             )
-        # --- releases for every FGA
         fga = gp[gp.EVENTMSGTYPE.isin([1, 2])]
         votes = {}
         for _, row in fga.iterrows():
@@ -527,7 +533,6 @@ def main() -> None:
                 rec["gc_release"] = float(tl["GC"][t_r])
                 rec["q_release"] = int(tl["Q"][t_r])
                 rec["ball_z_release"] = float(tl["B"][t_r, 2])
-                # nearest player to ball at release
                 rec["nearest_at_release"] = int(tl["PID"][t_r, tl["dist"][t_r].argmin()])
                 sxy = player_xy(tl, t_r, rec["shooter"])
                 rec["jump"] = "Jump" in desc
@@ -539,7 +544,6 @@ def main() -> None:
                     rec["open_release_all"] = nearest_opp(tl, t_r, rec["team"], sxy)
                 votes.setdefault((rec["team"], rec["period"]), []).append(bk)
             shots_rows.append(rec)
-        # --- attacking basket per (team, period)
         att = {}
         periods = sorted(set(tl["Q"].tolist()))
         teams = [tl["home_team"], tl["visitor_team"]]
@@ -555,7 +559,6 @@ def main() -> None:
             f"{t}_{q}": (float(np.mean(np.array(v) == att[(t, q)])), len(v))
             for (t, q), v in votes.items()
         }
-        # --- spells and catches for target players present in this game
         sp = spells(tl)
         present = [p for p in TARGETS if (tl["PID"] == p).any()]
         GC, Q, SC = tl["GC"], tl["Q"], tl["SC"]
@@ -639,7 +642,8 @@ def main() -> None:
             present_targets=[TARGETS[p] for p in present],
             n_spells=len(sp),
         )
-        # link located target shots to latest spell of shooter at/before t_r with no other spell in between
+        # link located target shots to latest spell of shooter at/before t_r with no other spell in
+        # between
         for s in my_shots:
             if s["shooter"] not in TARGETS and not ALL_PLAYERS:
                 continue
@@ -668,7 +672,6 @@ def main() -> None:
         )
     shots = pd.DataFrame(shots_rows)
     catches = pd.DataFrame(catch_rows)
-    # attach shot outcome to catches
     link = shots[shots["linked"].astype("boolean").fillna(False).astype(bool)]
     key = {
         (r.game, int(r.link_start)): (r.catch_to_shot, r.open_release, r.eventnum)

@@ -1,5 +1,6 @@
-"""Stage 12 (registered 0535882): the exchange rate by situation (5c's cuts), with Stage 8's partial pooling fitted
-within each cut level. Writes out/s12/stage12.json and the figure."""
+"""Stage 12 (registered 0535882): the exchange rate by situation (5c's cuts), with Stage 8's partial
+pooling fitted within each cut level. Writes out/s12/stage12.json and the figure.
+"""
 
 import json
 from pathlib import Path
@@ -245,7 +246,8 @@ def main() -> None:
         ax.grid(alpha=0.3)
     axs[0].set_ylabel("median posterior exchange rate (s of clock per ft)")
     fig.suptitle(
-        "Exchange rate by situation, shrunk within each cut (players with >= 150 catches in the level)",
+        "Exchange rate by situation, shrunk within each cut "
+        "(players with >= 150 catches in the level)",
         fontsize=10,
     )
     fig.tight_layout()

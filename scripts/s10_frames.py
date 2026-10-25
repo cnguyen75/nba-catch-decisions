@@ -1,6 +1,8 @@
-"""Stage 6 frame features (registered 811c61b). Usage: s10_frames.py <worker> <n_workers>.
-Per counted catch: minutes_so_far, def_pid_catch, rim_pid_catch. Per located shot: def_pid_rel, rim_pid_rel, shooter minutes.
-Writes out/s6/frames_catches_<w>.csv, out/s6/frames_shots_<w>.csv. Test games skipped."""
+"""Stage 6 frame features (registered 811c61b). Usage: s10_frames.py <worker> <n_workers>. Per
+counted catch: minutes_so_far, def_pid_catch, rim_pid_catch. Per located shot: def_pid_rel,
+rim_pid_rel, shooter minutes. Writes out/s6/frames_catches_<w>.csv, out/s6/frames_shots_<w>.csv.
+Test games skipped.
+"""
 
 import json
 from pathlib import Path

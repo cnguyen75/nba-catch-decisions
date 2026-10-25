@@ -1,4 +1,7 @@
-"""Game-level 60/20/20 train/validation/test split (registered d3460a7). Writes checks/split.json."""
+"""Game-level 60/20/20 train/validation/test split (registered d3460a7).
+
+Writes checks/split.json.
+"""
 
 import json
 from pathlib import Path

@@ -1,9 +1,11 @@
 """Held-out eye check for detector D1-D3 (protocol registered 25c4336).
 
-heldout.py sample   build the candidate pool from the two earlier detectors, draw 20 per openness third
-                    (seed 5), write checks/heldout_sample.csv and the render list. No D-detector output used.
-heldout.py score    after checks/heldout_labels.json is committed and D1-D3 has been run (out/heldout_d3),
-                    score each candidate and write checks/heldout_score.json.
+heldout.py sample   build the candidate pool from the two earlier detectors, draw 20 per openness
+    third
+(seed 5), write checks/heldout_sample.csv and the render list. No D-detector output used.
+heldout.py score    after checks/heldout_labels.json is committed and D1-D3 has been run
+    (out/heldout_d3),
+score each candidate and write checks/heldout_score.json.
 """
 
 import json

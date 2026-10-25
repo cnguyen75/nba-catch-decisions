@@ -1,5 +1,7 @@
-"""Stage 5a analysis (registered 0437efd): make-model comparison (current vs motion) on the fresh calibration games,
-and the Stage 4 behavioural logistic refit with motion features. Writes out/s5/s5a.json."""
+"""Stage 5a analysis (registered 0437efd): make-model comparison (current vs motion) on the fresh
+calibration games, and the Stage 4 behavioural logistic refit with motion features. Writes
+out/s5/s5a.json.
+"""
 
 from collections.abc import Callable
 import json
@@ -88,7 +90,6 @@ def main() -> None:
         [pd.read_csv(f, dtype={"game": str}) for f in sorted(S5.glob("motion_catches_*.csv"))]
     )
     rep = {"n_motion_catches": int(len(mc)), "n_motion_shots": int(len(ms))}
-    # ---------- make-model comparison
     s = s.merge(ms, on=["game", "eventnum"], how="left")
     s["located"] = s.reason.astype(str).str.startswith("ok")
     s["cs"] = (s.catch_to_shot.notna() & (s.catch_to_shot <= 1.5)).astype(int)

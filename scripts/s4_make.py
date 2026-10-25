@@ -1,4 +1,6 @@
-"""Stage 3b-prep steps 0, 2, 3, 7b, 4 (registered ca82621 / f3a51a5). Writes out/s4/make_report.json, out/s4/vshoot.csv."""
+"""Stage 3b-prep steps 0, 2, 3, 7b, 4 (registered ca82621 / f3a51a5). Writes
+out/s4/make_report.json, out/s4/vshoot.csv.
+"""
 
 import json
 from pathlib import Path

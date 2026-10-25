@@ -1,5 +1,6 @@
-"""Stage 9 analysis (registered 4d5a2f8): does the pass find the most open teammate? Writes out/s9/stage9.json and
-the figure."""
+"""Stage 9 analysis (registered 4d5a2f8): does the pass find the most open teammate? Writes
+out/s9/stage9.json and the figure.
+"""
 
 import json
 from pathlib import Path

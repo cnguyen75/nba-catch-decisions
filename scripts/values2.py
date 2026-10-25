@@ -1,7 +1,9 @@
-"""Values for the binary model (registered 4a1b93d): fixed V_shoot (vshoot2 model, Platt map) on the possession scale,
-V_shoot = P(make) * points + g(zone); also the immediate-scale V_shoot_imm = P(make) * points (sensitivity only).
-Player per-zone make offsets refit on the new logits (MAP, prior N(0, 0.3^2), train games only).
-V_continue is the part-2 league model + shrunk player offset (unchanged). Writes out/s3/values2.csv."""
+"""Values for the binary model (registered 4a1b93d): fixed V_shoot (vshoot2 model, Platt map) on the
+possession scale, V_shoot = P(make) * points + g(zone); also the immediate-scale V_shoot_imm =
+P(make) * points (sensitivity only). Player per-zone make offsets refit on the new logits (MAP,
+prior N(0, 0.3^2), train games only). V_continue is the part-2 league model + shrunk player
+offset (unchanged). Writes out/s3/values2.csv.
+"""
 
 import json
 from pathlib import Path

@@ -1,5 +1,6 @@
-"""R3 eye check (registered d3460a7). `sample`: draw 30 close-range FGAs and render detector-free sheets.
-`score`: compare R3 releases (out/r3_check/shots.csv) to checks/r3_labels.json."""
+"""R3 eye check (registered d3460a7). `sample`: draw 30 close-range FGAs and render detector-free
+sheets. `score`: compare R3 releases (out/r3_check/shots.csv) to checks/r3_labels.json.
+"""
 
 import json
 from pathlib import Path

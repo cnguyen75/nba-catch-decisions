@@ -1,6 +1,7 @@
 """Drive/pass detector held-out check (registered d3460a7).
 
-dp_eye.py sample   draw 20 per proxy stratum from validation games (seed 41), render detector-free sheets
+dp_eye.py sample   draw 20 per proxy stratum from validation games (seed 41), render detector-
+    free sheets
 dp_eye.py score    compare detector classes (out/s3/catches.csv) with checks/dp_labels.json
 """
 
@@ -108,7 +109,8 @@ def sample() -> None:
         ax2.set_aspect("equal")
         fig.colorbar(sc, ax=ax2, label="s after catch")
         ax2.set_title(
-            "ball dots by time; player red (dot = catch); others at window end (blue team, pink opp)",
+            "ball dots by time; player red (dot = catch); "
+            "others at window end (blue team, pink opp)",
             fontsize=8,
         )
         fig.tight_layout()

@@ -1,6 +1,8 @@
-"""Stage 6 B and D (registered 811c61b): identity effects, decision model (absolute/relative/both openness), make-model
-falsification (rhythm, first shot, clock 5-24 s), exchange rate by zone, rhythm response, defender tables.
-Writes out/s6/b.json and out/s6/catch_state.parquet-like CSV for C."""
+"""Stage 6 B and D (registered 811c61b): identity effects, decision model (absolute/relative/both
+openness), make-model falsification (rhythm, first shot, clock 5-24 s), exchange rate by zone,
+rhythm response, defender tables. Writes out/s6/b.json and out/s6/catch_state.parquet-like CSV
+for C.
+"""
 
 from collections.abc import Callable, Iterable
 import json
@@ -32,7 +34,10 @@ def cat(pattern: Iterable[Path]) -> pd.DataFrame:
 def map_off(
     base_logit: np.ndarray, y: np.ndarray, groups: np.ndarray, tau: float = TAU
 ) -> pd.DataFrame:
-    """Per-group MAP logit offsets with N(0, tau^2) prior; returns DataFrame(group, n, offset, se)."""
+    """Per-group MAP logit offsets with N(0, tau^2) prior.
+
+    Returns DataFrame(group, n, offset, se).
+    """
     out = []
     for g, ix in pd.Series(np.arange(len(groups))).groupby(groups):
         ix = ix.to_numpy()
@@ -89,7 +94,6 @@ def main() -> None:
     rep = {}
     c, s = load()
     hts = pd.read_csv(S6 / "heights.csv").set_index("pid").height_cm
-    # ---------------- shots table
     s = s.merge(cat(S5.glob("motion_shots_*.csv")), on=["game", "eventnum"], how="left")
     s = s.merge(
         pd.read_csv(S6 / "state_shots.csv", dtype={"game": str}).drop(columns=["team"]),
@@ -136,7 +140,6 @@ def main() -> None:
     )
     bb = logit_fit(Xb, rim.made.to_numpy(float))
     drim = map_off(Xb @ bb, rim.made.to_numpy(float), rim.rim_pid_rel.astype(int).to_numpy())
-    # ---------------- catches table
     c = c.merge(cat(S5.glob("motion_catches_*.csv")), on=["game", "pid", "start"], how="left")
     c = c.merge(
         pd.read_csv(S6 / "state_catches.csv", dtype={"game": str}),
@@ -385,8 +388,9 @@ def main() -> None:
     assert np.allclose(_probe[:, K - 11], jtr.iloc[:200][w].to_numpy(float)) and np.allclose(
         _probe[:, K - 7], jtr.iloc[:200].first_made.fillna(0).to_numpy(float)
     )
-    # columns from the end: def_eff_rel -1, clutch -2, b2b -3, minutes -4, def_h_missing -5, def_h -6, first_made -7,
-    # t_since_make -8, last_made -9, none_yet -10, window -11, n_def6 -12, set -13, speed -14, closing -15, clock_mid -16, late -17
+    # columns from the end: def_eff_rel -1, clutch -2, b2b -3, minutes -4, def_h_missing -5, def_h
+    # -6, first_made -7, t_since_make -8, last_made -9, none_yet -10, window -11, n_def6 -12, set
+    # -13, speed -14, closing -15, clock_mid -16, late -17
     IDX = {"clock_mid": K - 16, "window": K - 11, "last_made": K - 9, "first_made": K - 7}
 
     def ames(d: pd.DataFrame) -> dict[str, float]:

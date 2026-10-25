@@ -1,6 +1,7 @@
 """Possession points and score margin for each counted catch (rule registered d3460a7).
 
-poss.py build    writes out/s3/poss.csv (game, pid, start, poss_points, end_type, end_eventnum, margin)
+poss.py build    writes out/s3/poss.csv (game, pid, start, poss_points, end_type, end_eventnum,
+    margin)
 poss.py check    prints 20 random train/validation league catches with their PBP rows (seed 20)
 """
 
@@ -128,13 +129,16 @@ def check() -> None:
         per = rows[r.quarter == rows.PERIOD]
         near = per[(per.gc <= r.gc + 8) & (per.gc >= r.gc - 30)]
         print(
-            f"\n=== P{i:02d} game {r.game} Q{r.quarter} catch gc={r.gc:.1f} ({int(r.gc) // 60}:{int(r.gc) % 60:02d}) offence team {r.team} "
-            f"-> points {r.poss_points}, end {r.end_type} at event {r.end_eventnum}, margin {r.margin}"
+            f"\n=== P{i:02d} game {r.game} Q{r.quarter} catch gc={r.gc:.1f} "
+            f"({int(r.gc) // 60}:{int(r.gc) % 60:02d}) offence team {r.team} "
+            f"-> points {r.poss_points}, end {r.end_type} at event {r.end_eventnum}, "
+            f"margin {r.margin}"
         )
         for x in near.itertuples():
             mark = "<-- END" if r.end_eventnum == x.EVENTNUM else ""
             print(
-                f"   ev{x.EVENTNUM:4d} {x.PCTIMESTRING:>5} t{x.EVENTMSGTYPE:2d} team {int(x.team) if not np.isnan(x.team) else '-'} "
+                f"   ev{x.EVENTNUM:4d} {x.PCTIMESTRING:>5} t{x.EVENTMSGTYPE:2d} "
+                f"team {int(x.team) if not np.isnan(x.team) else '-'} "
                 f"score {x.SCORE if isinstance(x.SCORE, str) else '':7} {x.desc[:90]} {mark}"
             )
 

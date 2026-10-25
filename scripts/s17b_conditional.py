@@ -1,7 +1,9 @@
-"""Stage 11 addendum (post hoc, requested 2026-10-14; not registered): P(receiver is the most open candidate | receiver is
-a candidate), with the like-for-like baseline mean(1/n_candidates) over the same passes. Rebuilds Stage 11's per-pass table
-with its own build() (no model is fitted) and bootstraps games exactly as Stage 11 did (1,000, seed 0).
-Writes out/s11/stage11_conditional.json."""
+"""Stage 11 addendum (post hoc, requested 2026-10-14; not registered): P(receiver is the most open
+candidate | receiver is a candidate), with the like-for-like baseline mean(1/n_candidates) over
+the same passes. Rebuilds Stage 11's per-pass table with its own build() (no model is fitted) and
+bootstraps games exactly as Stage 11 did (1,000, seed 0). Writes
+out/s11/stage11_conditional.json.
+"""
 
 import json
 from pathlib import Path

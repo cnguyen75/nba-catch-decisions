@@ -1,6 +1,7 @@
-"""Stage 3b-prep step 5/7: V_continue (naive and Dubin-McFadden corrected), control-group selection check (7a),
-DMF synthetic validation (7c). Registered ca82621 / f3a51a5. Reads out/s4/vshoot.csv. Writes out/s4/cont_report.json and
-out/s4/values.csv."""
+"""Stage 3b-prep step 5/7: V_continue (naive and Dubin-McFadden corrected), control-group selection
+check (7a), DMF synthetic validation (7c). Registered ca82621 / f3a51a5. Reads out/s4/vshoot.csv.
+Writes out/s4/cont_report.json and out/s4/values.csv.
+"""
 
 from collections.abc import Callable
 import json
@@ -22,7 +23,10 @@ SHRINK_K = 50.0
 
 
 def X_full(d: pd.DataFrame) -> np.ndarray:
-    """Continuation state (registered), unstandardized; column 4 is openness at catch (capped 15)."""
+    """Continuation state (registered), unstandardized.
+
+    Column 4 is openness at catch (capped 15).
+    """
     dd = d.d_basket.to_numpy(float) / 10
     z = np.stack([(d.zone == q).to_numpy() for q in ZONES[1:]], 1).astype(
         float
@@ -76,7 +80,9 @@ def dmf_lambda(P: np.ndarray) -> np.ndarray:
 def dmf_fit(
     Xf: np.ndarray, Xo: np.ndarray, shoot: np.ndarray, y: np.ndarray
 ) -> tuple[np.ndarray, float]:
-    """First stage on all rows; second stage on continuing rows. Returns (beta_out_without_lambda, coef_lambda)."""
+    """First stage on all rows; second stage on continuing rows. Returns (beta_out_without_lambda,
+    coef_lambda).
+    """
     g = logit_fit(Xf, shoot)
     P = expit(Xf @ g)
     cont = shoot == 0
@@ -125,7 +131,9 @@ def control_group(lt: pd.DataFrame) -> dict[str, Any]:
 def synth_validation(
     lt: pd.DataFrame, n_seeds: int = 20, nb: int = 200, rho: float = 0.3
 ) -> dict[str, Any]:
-    """Known continuation values; correlated choice/outcome errors; same sample size as the real league train set."""
+    """Known continuation values; correlated choice/outcome errors; same sample size as the real
+    league train set.
+    """
     Xf, Xo = X_full(lt), X_out(lt)
     cont = (lt.action == "continue").to_numpy()
     beta_true = np.linalg.lstsq(Xo[cont], lt.poss_points.to_numpy(float)[cont], rcond=None)[0]

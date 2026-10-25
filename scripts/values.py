@@ -1,6 +1,8 @@
-"""Stage 3a value models (registered 4a3a3d3). Trains on league train-game catches, reports validation calibration,
-fits shrunk per-player offsets on train games, writes out/s3/values.csv (gated players' train+validation catches)
-and out/s3/values_report.json. Test games are never read past the split filter."""
+"""Stage 3a value models (registered 4a3a3d3). Trains on league train-game catches, reports
+validation calibration, fits shrunk per-player offsets on train games, writes out/s3/values.csv
+(gated players' train+validation catches) and out/s3/values_report.json. Test games are never
+read past the split filter.
+"""
 
 import json
 from pathlib import Path
@@ -120,7 +122,6 @@ def main() -> None:
         "n_league_val_catches": int(len(va)),
         "exclusions_all_nontest": c.excluded.replace("", "kept").value_counts().to_dict(),
     }
-    # --- V_shoot
     st, sv = (
         tr[(tr.action == "shoot") & tr.made.notna()],
         va[(va.action == "shoot") & va.made.notna()],
@@ -140,7 +141,6 @@ def main() -> None:
         "val_brier": round(float(np.mean((pv - sv.made.values) ** 2)), 4),
         "val_base_rate": round(float(sv.made.mean()), 4),
     }
-    # --- continuation values
     scaler = StandardScaler().fit(cont_X(tr))
     models, rep["V_cont"] = {}, {}
     groups = {

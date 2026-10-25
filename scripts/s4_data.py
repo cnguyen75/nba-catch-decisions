@@ -1,4 +1,6 @@
-"""Stage 3b-prep data: merge the parallel build parts, extend the split to new games (80/20, seed 2027), load frames."""
+"""Stage 3b-prep data: merge the parallel build parts, extend the split to new games (80/20, seed
+2027), load frames.
+"""
 
 import json
 from pathlib import Path

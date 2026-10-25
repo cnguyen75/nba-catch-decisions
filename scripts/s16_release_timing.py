@@ -1,5 +1,6 @@
-"""Stage 10 (registered e507fa2): release timing against the closeout. Descriptive. Writes out/s10/stage10.json and the
-figure. Test rows are dropped at load and asserted absent."""
+"""Stage 10 (registered e507fa2): release timing against the closeout. Descriptive. Writes
+out/s10/stage10.json and the figure. Test rows are dropped at load and asserted absent.
+"""
 
 import json
 from pathlib import Path
@@ -143,7 +144,9 @@ def stats(d: pd.DataFrame, cuts: np.ndarray) -> dict[str, Any]:
 
 
 def open_slope(s: pd.DataFrame, d: pd.DataFrame) -> tuple[float, int, int]:
-    """Attempt-2 make model refitted identically on league training jump shots; dP/dopen at release openness 4-6 ft."""
+    """Attempt-2 make model refitted identically on league training jump shots; dP/dopen at release
+    openness 4-6 ft.
+    """
     lg = s[
         s.reason.astype(str).str.startswith("ok")
         & ~s.shooter.isin(GATED)
@@ -328,7 +331,8 @@ def main() -> None:
         0.02,
         0.04,
         f"faster closeouts, quicker releases: slope {pt['lg_slope']:.3f} s per ft/s\n"
-        f"space preserved at top-quartile closing speed: {sp[0]:.2f} ft [{sp[1][0]:.2f}, {sp[1][1]:.2f}]",
+        f"space preserved at top-quartile closing speed: {sp[0]:.2f} ft "
+        f"[{sp[1][0]:.2f}, {sp[1][1]:.2f}]",
         transform=ax.transAxes,
         fontsize=8,
         color="#24292f",
@@ -338,7 +342,8 @@ def main() -> None:
     ax.legend(fontsize=8, loc="upper right")
     ax.grid(alpha=0.3)
     ax.set_title(
-        "Catch-and-shoot jump shots, 16-30 ft, non-test games (release marker ~0.1 s late: compare, don't read levels)",
+        "Catch-and-shoot jump shots, 16-30 ft, non-test games "
+        "(release marker ~0.1 s late: compare, don't read levels)",
         fontsize=8,
     )
     fig.tight_layout()

@@ -1,8 +1,10 @@
 """Drive/pass retest, D-v2 detector (registered 4a1b93d + amendment 1dcdbba).
 
 dp2.py tune     run D-v2 on the FIRST check's 60 (tuning set) and compare with those labels
-dp2.py sample   draw the FRESH 60 (validation games, excluding the first 60; seed 43) and render sheets
-dp2.py score    run D-v2 on the fresh 60 (only after checks/dp2_labels.json is committed) and score
+dp2.py sample   draw the FRESH 60 (validation games, excluding the first 60; seed 43) and render
+    sheets
+dp2.py score    run D-v2 on the fresh 60 (only after checks/dp2_labels.json is committed) and
+    score
 dp2.py all      classify every counted catch in non-test games -> out/s3/actions_v2.csv
 """
 
@@ -35,7 +37,9 @@ def att_basket(meta: dict[str, Any], game: str, team: int, q: int) -> int | None
 
 
 def first_touch(tl: dict[str, Any], p: int, e: int) -> tuple[int | None, int | None]:
-    """First non-P player with the ball within 3 ft and z <= 12 for 2 consecutive frames, within 2.0 s after e."""
+    """First non-P player with the ball within 3 ft and z <= 12 for 2 consecutive frames, within 2.0
+    s after e.
+    """
     GC, Q = tl["GC"], tl["Q"]
     run_pid, run_n = None, 0
     f = e + 1
@@ -89,8 +93,10 @@ def classify(
 def next_receiver(
     tl: dict[str, Any], p: int, en: int, team: int, ctx: dict[str, Any]
 ) -> tuple[int | None, int | None]:
-    """D-v2 (amendment 2): the owner of the next D3 spell starting within 2.0 s after e; or, if a located FG release by
-    a teammate falls in (e, e + 2.0 s] before any other spell starts, that shooter (lob / alley-oop)."""
+    """D-v2 (amendment 2): the owner of the next D3 spell starting within 2.0 s after e; or, if a
+    located FG release by a teammate falls in (e, e + 2.0 s] before any other spell starts, that
+    shooter (lob / alley-oop).
+    """
     GC, Q = tl["GC"], tl["Q"]
     sp = ctx["spells"]
     nxt = next((x for x in sp if x[1] > en), None)
@@ -208,7 +214,8 @@ def sample() -> None:
         )
         dP = np.linalg.norm(pp - b.BASKETS[bk], axis=1)
         bP = np.array([b.ball_to_player(tl, i, r.pid) for i in idx])
-        # display aid: first frame after the end where a non-P player is within 3 ft of the ball below 12 ft
+        # display aid: first frame after the end where a non-P player is within 3 ft of the ball
+        # below 12 ft
         disp = hi
         for f in range(r.end + 1, hi + 1):
             d = tl["dist"][f].copy()

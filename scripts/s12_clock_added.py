@@ -1,10 +1,12 @@
 """Stage 7: clock-added shots (registered e5933e9).
 
-  s12_clock_added.py power     power from the training pilot, scaled to the confirmatory size -> checks/s7_power.json
-  s12_clock_added.py confirm   the confirmatory analysis, run once -> out/s7/stage7.json (+ figure)
+s12_clock_added.py power     power from the training pilot, scaled to the confirmatory size ->
+    checks/s7_power.json
+s12_clock_added.py confirm   the confirmatory analysis, run once -> out/s7/stage7.json (+ figure)
 
-Nuisance terms of the make model are fitted on TRAINING shots only and held fixed as an offset; clock-bin effects are
-estimated on the confirmatory sample (validation + calibration games). Test rows are dropped at load and asserted absent.
+Nuisance terms of the make model are fitted on TRAINING shots only and held fixed as an offset;
+clock-bin effects are estimated on the confirmatory sample (validation + calibration games). Test
+rows are dropped at load and asserted absent.
 """
 
 from collections.abc import Callable
@@ -99,7 +101,9 @@ def bin_D(d: pd.DataFrame, labels: list[str]) -> np.ndarray:
 
 
 class Nuisance:
-    """Full model on training shots (all bins 0-24, [20,24) reference); keeps the nuisance part as a fixed offset."""
+    """Full model on training shots (all bins 0-24, [20,24) reference); keeps the nuisance part as a
+    fixed offset.
+    """
 
     def __init__(self, tr: pd.DataFrame) -> None:
         Xn = nuisance_X(tr)
@@ -117,7 +121,9 @@ class Nuisance:
 
 
 def clock_fit(d: pd.DataFrame, off: np.ndarray, labels: list[str]) -> Callable[[str], float]:
-    """Intercept + bin dummies (reference = last of LAB) with fixed offset. Returns per-bin adjusted mean prob function."""
+    """Intercept + bin dummies (reference = last of LAB) with fixed offset. Returns per-bin adjusted
+    mean prob function.
+    """
     D = bin_D(d, labels)
     X = np.column_stack([np.ones(len(d)), D])
     # logit_fit has no offset argument: Newton with offset
@@ -153,7 +159,7 @@ def stats(sh: pd.DataFrame, ca: pd.DataFrame, nu: Nuisance) -> dict[str, Any]:
     r1220 = cm[cm.bin.astype(str).isin(["[12,16)", "[16,20)"])].y.mean()
     m = (r48 - r1220) / r48
     out = {"ame": ame, "m": m, "delta": ame / m, "adj": {b: adj(b) for b in LAB[1:]}}
-    # info: [0,4) vs pooled [12,20), on 0-24 shots
+    # [0,4) vs pooled [12,20), on 0-24 shots
     allb = sh
     adj0 = clock_fit(allb, nu.offset(allb), LAB[:-1])
     n12b, n16b = (
@@ -163,7 +169,7 @@ def stats(sh: pd.DataFrame, ca: pd.DataFrame, nu: Nuisance) -> dict[str, Any]:
     wb = n12b / max(n12b + n16b, 1)
     out["ame_0_4"] = adj0("[0,4)") - (wb * adj0("[12,16)") + (1 - wb) * adj0("[16,20)"))
     out["adj_0_4"] = adj0("[0,4)")
-    # info: catch-and-shoot only
+    # catch-and-shoot only
     csd = main[main.cs == 1]
     adjc = clock_fit(csd, nu.offset(csd), LAB[1:-1])
     n12c, n16c = (csd.bin.astype(str) == "[12,16)").sum(), (csd.bin.astype(str) == "[16,20)").sum()
@@ -226,7 +232,10 @@ def power() -> None:
     scale = np.sqrt(g_tr / g_cf)
     se_ame, se_d = float(np.std(b[:, 0])) * scale, float(np.std(b[:, 2])) * scale
     res = {
-        "source": "training pilot (spent), game-bootstrap SEs scaled by sqrt(train games / confirmatory games)",
+        "source": (
+            "training pilot (spent), game-bootstrap SEs scaled by "
+            "sqrt(train games / confirmatory games)"
+        ),
         "train_games": g_tr,
         "confirmatory_games": g_cf,
         "scale": round(float(scale), 4),
@@ -286,7 +295,6 @@ def confirm() -> None:
     print(pd.DataFrame(res["raw_table"]).to_string(index=False))
     print("ADJUSTED")
     print(json.dumps({k: v for k, v in res.items() if k != "raw_table"}, indent=1))
-    # figure
     import matplotlib
 
     matplotlib.use("Agg")

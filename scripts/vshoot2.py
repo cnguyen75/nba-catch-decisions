@@ -1,6 +1,7 @@
-"""V_shoot fix (registered 4a1b93d): spline/shot-clock/interaction logistic + Platt map from 5-fold game-grouped
-out-of-fold predictions; scored ONCE on validation under the powered calibration rule. Also g(zone).
-Writes out/s3/vshoot2.json and out/s3/vshoot2_model.npz."""
+"""V_shoot fix (registered 4a1b93d): spline/shot-clock/interaction logistic + Platt map from 5-fold
+game-grouped out-of-fold predictions; scored ONCE on validation under the powered calibration
+rule. Also g(zone). Writes out/s3/vshoot2.json and out/s3/vshoot2_model.npz.
+"""
 
 import json
 from pathlib import Path
@@ -88,7 +89,6 @@ def main() -> None:
     def predict(df: pd.DataFrame) -> np.ndarray:
         return 1 / (1 + np.exp(-(a * logit_of(sc, lr, df) + b)))
 
-    # ---- scored once on validation
     pv = predict(va)
     yv = va.made.to_numpy(float)
     e, tab = ece(pv, yv)

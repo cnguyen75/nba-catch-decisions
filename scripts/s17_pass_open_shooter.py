@@ -1,5 +1,7 @@
-"""Stage 11 (registered 8f1379f): Stage 9 with a deliberate-choice baseline -- candidates are shooters (>= 50 jump-shot
-attempts, non-test games) within 30 ft of the basket and beyond 6 ft. Writes out/s11/stage11.json and the figure."""
+"""Stage 11 (registered 8f1379f): Stage 9 with a deliberate-choice baseline -- candidates are
+shooters (>= 50 jump-shot attempts, non-test games) within 30 ft of the basket and beyond 6 ft.
+Writes out/s11/stage11.json and the figure.
+"""
 
 import json
 from pathlib import Path

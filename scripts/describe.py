@@ -1,4 +1,6 @@
-"""Stage 2 descriptive numbers on the full D1-D3 set (out/full). No model. Writes out/full/describe.json."""
+"""Stage 2 descriptive numbers on the full D1-D3 set (out/full). No model. Writes
+out/full/describe.json.
+"""
 
 import json
 from pathlib import Path
@@ -149,7 +151,6 @@ def main() -> None:
             "located": int(ps.located.sum()),
             "linked_to_counted_catch": int(len(sh)),
         }
-        # artefact checks
         r["artefacts"] = {
             "catches_per_quarter_per_game": {
                 int(k): round(v / len(games), 2)

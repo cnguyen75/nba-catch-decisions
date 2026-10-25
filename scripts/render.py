@@ -167,7 +167,8 @@ def render(
         ax.imshow(im)
         off = tl["GC"][ref] - tl["GC"][i]
         ax.set_title(
-            f"{marks.get(i, '')} {off:+.2f}s  z={tl['B'][i, 2]:.1f} d={b.ball_to_player(tl, i, focus):.1f}",
+            f"{marks.get(i, '')} {off:+.2f}s  z={tl['B'][i, 2]:.1f} "
+            f"d={b.ball_to_player(tl, i, focus):.1f}",
             color="red" if i in marks else "black",
             fontsize=9,
         )

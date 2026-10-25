@@ -1,5 +1,7 @@
-"""Stage 3b-prep step 6: value-gap openness check, old-vs-new value-gap table, power, synthetic recovery (binary model).
-LeBron is computed and reported but not gated. Reads out/s4/values.csv, out/s4/cont_report.json. Writes out/s4/checks.json."""
+"""Stage 3b-prep step 6: value-gap openness check, old-vs-new value-gap table, power, synthetic
+recovery (binary model). LeBron is computed and reported but not gated. Reads out/s4/values.csv,
+out/s4/cont_report.json. Writes out/s4/checks.json.
+"""
 
 import json
 import math
@@ -149,9 +151,10 @@ def main() -> None:
         r["power_main"] = pw
         r["power_sensitivity_other_Vcont"] = power_one(d, sens_col)[0]
         if pw["mde80_at_c0"] > 0.15:
-            r["decision"] = (
-                f"underpowered (MDE {pw['mde80_at_c0']}); games needed ~{math.ceil(json.loads((ROOT / 'checks/split.json').read_text())['per_player_counts'][name]['train'] * (pw['mde80_at_c0'] / 0.15) ** 2)}"
-            )
+            train_games = json.loads((ROOT / "checks/split.json").read_text())
+            train_games = train_games["per_player_counts"][name]["train"]
+            games_needed = math.ceil(train_games * (pw["mde80_at_c0"] / 0.15) ** 2)
+            r["decision"] = f"underpowered (MDE {pw['mde80_at_c0']}); games needed ~{games_needed}"
             rep["players"][name] = r
             continue
         r["synthetic"], ok = synth_one(d, V, avail, T_p)

@@ -1,4 +1,6 @@
-"""Stage 5c (registered f391697): league exchange-rate map and within-player variation. Writes out/s5/s5c.json."""
+"""Stage 5c (registered f391697): league exchange-rate map and within-player variation. Writes
+out/s5/s5c.json.
+"""
 
 import json
 from pathlib import Path
@@ -68,7 +70,6 @@ def main() -> None:
     hm = home_teams()
     d["home"] = [t == hm.get(g) for g, t in zip(d.game, d.team)]
     rep = {"n_unit_catches": int(len(d))}
-    # ---- league map
     counts = d.groupby("pid").size()
     elig = counts[counts >= 300].index.tolist()
     names = {}
@@ -123,7 +124,6 @@ def main() -> None:
         "all": mp.to_dict("records"),
     }
     print(json.dumps({k: v for k, v in rep["map"].items() if k != "all"}, indent=1, default=str))
-    # ---- within-player variation
     groups = {
         "League": d[~d.pid.isin(GATED) & (d.split != "test")],
         **{n: d[d.pid == p] for p, n in GATED.items()},

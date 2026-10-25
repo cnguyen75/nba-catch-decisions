@@ -1,5 +1,6 @@
-"""Stage 4 (registered ea99d0c): openness priced in shot-clock seconds. Power first, then gradients, exchange rate,
-Skinner's test. Writes out/s4/stage4.json."""
+"""Stage 4 (registered ea99d0c): openness priced in shot-clock seconds. Power first, then gradients,
+exchange rate, Skinner's test. Writes out/s4/stage4.json.
+"""
 
 from collections.abc import Callable
 import json
@@ -108,7 +109,6 @@ def main() -> None:
     out["power"] = pw
     print("POWER", json.dumps(pw, indent=1))
 
-    # ---- 1-3 point estimates and bootstrap
     def meas(d: pd.DataFrame) -> tuple[float, float]:
         g = ols(cov(d), d.gap.to_numpy())
         return g[1], g[2]

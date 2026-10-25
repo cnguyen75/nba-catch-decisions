@@ -203,7 +203,9 @@ def synth(rho: float) -> None:
 
 
 def real() -> None:
-    """Step 4 (only if steps 1-3 pass): real fit on league training catches, validation once, reports, player check."""
+    """Step 4 (only if steps 1-3 pass): real fit on league training catches, validation once,
+    reports, player check.
+    """
     import json as _j
 
     from s4_checks import gap_slope
@@ -233,7 +235,6 @@ def real() -> None:
         "fit": info,
         "resolved": bool(info["rho_ci"][0] > 0 or info["rho_ci"][1] < 0),
     }
-    # validation once
     Xvo, Xvz = raw(dv)
     Xv, Zv = sx(Xvo), sz(Xvz)
     sv, yv = dv.s.to_numpy(float), dv.y.to_numpy(float)

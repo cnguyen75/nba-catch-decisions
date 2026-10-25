@@ -1,8 +1,9 @@
-"""Stage 3a choice model: pilot T, Fisher power, ideal-estimator power of the synthetic rule, synthetic recovery.
-Registered 4a3a3d3. Real-data use is limited to the pilot T on train games; pilot c estimates are discarded.
+"""Stage 3a choice model: pilot T, Fisher power, ideal-estimator power of the synthetic rule,
+synthetic recovery. Registered 4a3a3d3. Real-data use is limited to the pilot T on train games;
+pilot c estimates are discarded.
 
-  choice.py power    -> out/s3/power.json
-  choice.py synth    -> out/s3/synth.json   (only players that proceed)
+choice.py power    -> out/s3/power.json
+choice.py synth    -> out/s3/synth.json   (only players that proceed)
 """
 
 import json
@@ -35,7 +36,9 @@ def load_values() -> pd.DataFrame:
 
 
 def design(df: pd.DataFrame, model: str) -> tuple[np.ndarray, np.ndarray, np.ndarray, list[str]]:
-    """Return V (n x A), avail mask (n x A), observed action index y, action names. Last action is the reference."""
+    """Return V (n x A), avail mask (n x A), observed action index y, action names. Last action is
+    the reference.
+    """
     if model == "fourway":
         acts = ["shoot", "drive", "pass", "hold"]
         V = df[["V_shoot", "V_drive", "V_pass", "V_hold"]].to_numpy(float)

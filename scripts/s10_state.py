@@ -1,6 +1,8 @@
-"""Stage 6 PBP-derived state (registered 811c61b): rhythm (m3, m5, none_yet, last_made, t_since_make), first_made,
-relative openness, heights table (by PBP id via names), back-to-back. Writes out/s6/state_catches.csv,
-out/s6/state_shots.csv, out/s6/heights.csv, out/s6/state_report.json."""
+"""Stage 6 PBP-derived state (registered 811c61b): rhythm (m3, m5, none_yet, last_made,
+t_since_make), first_made, relative openness, heights table (by PBP id via names), back-to-back.
+Writes out/s6/state_catches.csv, out/s6/state_shots.csv, out/s6/heights.csv,
+out/s6/state_report.json.
+"""
 
 import json
 from pathlib import Path
@@ -51,7 +53,6 @@ def rhythm_for(
         )
     last_made = np.where(k > 0, att_made[np.maximum(k - 1, 0)], np.nan)
     first_made = np.where(k > 0, att_made[0], np.nan)
-    # time since last make
     make_el = att_el[att_made == 1]
     j = np.searchsorted(make_el, query_el, side="left")
     tsm = (
@@ -118,7 +119,6 @@ def main() -> None:
         on=["game", "pid", "start"],
         how="left",
     )
-    # back-to-back from schedule
     gm = pd.read_csv(EXT / "games" / "games.csv")
     gm = gm[(gm.SEASON == 2015) & (gm.GAME_ID.astype(str).str.startswith("215"))]
     gm["date"] = pd.to_datetime(gm.GAME_DATE_EST)

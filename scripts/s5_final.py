@@ -1,5 +1,6 @@
-"""Final round (registered e0ab785): gated checks on the 16-30 ft unit, and the descriptive revealed-vs-measured value of
-openness. Writes out/s4/final.json."""
+"""Final round (registered e0ab785): gated checks on the 16-30 ft unit, and the descriptive
+revealed-vs-measured value of openness. Writes out/s4/final.json.
+"""
 
 import json
 from pathlib import Path

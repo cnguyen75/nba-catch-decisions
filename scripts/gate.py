@@ -1,4 +1,7 @@
-"""Compute the pre-registered gate from out/catches.csv and out/shots.csv. Writes out/results.json."""
+"""Compute the pre-registered gate from out/catches.csv and out/shots.csv.
+
+Writes out/results.json.
+"""
 
 import json
 import math
@@ -57,8 +60,10 @@ def crit2(far: pd.DataFrame, rng: np.random.Generator) -> dict[str, Any]:
 
 
 def sensitivity(c: pd.DataFrame, rng: np.random.Generator) -> dict[str, Any]:
-    """POST HOC, not part of the verdict. (a) catches from a teammate's pass only (drops 'opponent' catches,
-    mostly a defender momentarily nearest the ball); (b) criterion 2 on catches 22-30 ft out."""
+    """POST HOC, not part of the verdict. (a) catches from a teammate's pass only (drops 'opponent'
+    catches, mostly a defender momentarily nearest the ball); (b) criterion 2 on catches 22-30 ft
+    out.
+    """
     out = {}
     for name, pid in TARGET_IDS.items():
         cnt = counted(c, pid)
@@ -80,9 +85,11 @@ def sensitivity(c: pd.DataFrame, rng: np.random.Generator) -> dict[str, Any]:
 
 
 def power_crit2(res: dict[str, Any], reps: int = 500, seed: int = 0) -> dict[str, Any]:
-    """Simulated power of criterion 2 for a true top-minus-bottom tercile gap of 15 or 20 pp centred on the
-    player's own 22+ catch-and-shoot rate. (A true gap of exactly 10 pp caps power at 50%, since the rule
-    needs the estimate itself to reach 10 pp.) Planning number only; 200 bootstrap draws per replicate."""
+    """Simulated power of criterion 2 for a true top-minus-bottom tercile gap of 15 or 20 pp centred
+    on the player's own 22+ catch-and-shoot rate. (A true gap of exactly 10 pp caps power at 50%,
+    since the rule needs the estimate itself to reach 10 pp.) Planning number only; 200 bootstrap
+    draws per replicate.
+    """
     rng = np.random.default_rng(seed)
     out = {}
     for name, r in res["players"].items():
@@ -157,7 +164,6 @@ def main() -> None:
             },
             "source": cnt.source.value_counts().to_dict(),
         }
-        # bands
         bands = {}
         crit1_ok = True
         for lab, lo, hi in BANDS:
@@ -212,7 +218,6 @@ def main() -> None:
         r["enough_catches"] = n >= MIN_CATCHES
         r["passes"] = bool(crit1_ok and crit2_ok and crit3_ok and n >= MIN_CATCHES)
         r["games_needed_for_60"] = math.ceil(MIN_CATCHES / r["catches_per_game"]) if n else None
-        # descriptives
         r["descriptive"] = {
             "open_catch_all": dict(
                 zip(
