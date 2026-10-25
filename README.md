@@ -3,7 +3,11 @@
 A pre-registered study of catch-and-shoot decisions in the NBA's public
 2015-16 player-tracking data.
 
-**The question.** When Stephen Curry, LeBron James and James Harden (and the
+**Status:** finished. The exchange rate between space and shot clock was measured
+(about 7 s/ft for the league); the selection model for the value of the shot not
+taken was closed without a real fit.
+
+**The question.** When Stephen Curry, LeBron James, and James Harden (and the
 league) catch the ball 16-30 ft from the basket, do they shoot when the
 expected points say they should?
 
@@ -14,28 +18,6 @@ expected points say they should?
 - The held-out test games were never read.
 - Every failed gate stays failed.
 - The full record, mistakes included, is in [record/](record/).
-
-## The story in one paragraph
-
-Inverse optimization rests on one idea. If a choice solves a problem, its
-first-order condition reveals the cost you can't see.
-
-- **The earlier attempt.** On 2014-15 shot logs, I tried to recover players'
-  costs from defender distance at the shot, and it failed. That distance is
-  an outcome of shooting: in this tracking data, defenders close about 4 ft
-  between catch and release.
-- **This repository's approach.** It measures space at the catch, before the
-  decision. That delivers the one thing a first-order condition can: a
-  marginal rate of substitution, the exchange rate between a foot of space
-  and seconds of shot clock.
-- **Release timing** is where a timing condition can be tested directly. The
-  answer is a corner, not a trade-off: shooters release at a mechanical floor.
-- **What neither design can deliver** is the value of the shot not taken. Three
-  instrument sets were too weak for a selection model to recover it. The
-  record shows the precision any instrument would need (SE on ρ of about 0.02)
-  against what the three sets achieved (0.06-0.16).
-
-See [record/thread.md](record/thread.md) for the longer version.
 
 ## Headline results
 
@@ -70,14 +52,29 @@ are at 16-30 ft, in non-test games.
 | The same for LeBron; Harden | 50.5% [45.9, 54.8]; 53.9% [49.0, 59.1] |
 | After a make, the next shot | −1.9 points [−3.2, −0.7]: no positive hot hand |
 
-**The selection model.** It recovered passed-up shot quality within 0.03
-in only 6, 1 and 8 of 20 synthetic runs, so it was closed without a real
-fit.
+## How it works
 
-**Gate errors.** Five gates were set below their own noise floor. Each was
-caught and is numbered in the record.
+Inverse optimization rests on one idea. If a choice solves a problem, its
+first-order condition reveals the cost you can't see.
 
-## Stages
+- **The earlier attempt.** On 2014-15 shot logs, I tried to recover players'
+  costs from defender distance at the shot, and it failed. That distance is
+  an outcome of shooting: in this tracking data, defenders close about 4 ft
+  between catch and release.
+- **This repository's approach.** It measures space at the catch, before the
+  decision. That delivers the one thing a first-order condition can: a
+  marginal rate of substitution, the exchange rate between a foot of space
+  and seconds of shot clock.
+- **Release timing** is where a timing condition can be tested directly. The
+  answer is a corner, not a trade-off: shooters release at a mechanical floor.
+- **What neither design can deliver** is the value of the shot not taken. Three
+  instrument sets were too weak for a selection model to recover it. The
+  record shows the precision any instrument would need (SE on ρ of about 0.02)
+  against what the three sets achieved (0.06-0.16).
+
+See [record/thread.md](record/thread.md) for the longer version.
+
+### Stages
 
 The full chronological table, with every number, is at the top of
 [record/feasibility.md](record/feasibility.md). In short:
@@ -91,13 +88,13 @@ The full chronological table, with every number, is at the top of
 | Stage 4, 5a, 5c | Openness priced in clock seconds | About 7 s/ft for the league. The league under-shoots a points-maximiser at every clock state. |
 | Stage 5b, strategy 2, Stage 6 | Hidden shot quality via selection | Three instrument sets too weak. Closed. |
 | Review | Independent audit | Gate errors three to five recorded. Pooled league 7 s/ft. |
-| Stages 7-12 | Clock-added shots, pooled map, passes, release timing, situation | As in the headline results above. |
+| Stages 7-12 | Clock-added shots, pooled map, passes, release timing, and situation | As in the headline results above. |
 
-## Data and provenance
+### Data and provenance
 
 **Data:** the 2015-16 SportVU feed (27 October 2015 to 23 January 2016; 621
 usable games), archived publicly. The licence is not stated, and raw data is
-not redistributed: this repository carries code, registrations and aggregate
+not redistributed: this repository carries code, registrations, and aggregate
 results only.
 
 **Tracking:**
@@ -112,7 +109,7 @@ folder `data/2016.NBA.Raw.SportVU.Game.Logs/` (upstream commit `f7d4cf2`).
 - The join follows the Hugging Face loader
   `dcayton/nba_tracking_data_15_16`.
 
-## Reproduce
+## Run it
 
 The scripts expect the data at `~/Documents/nba-tracking/` (`DATA` in
 `scripts/build.py`). Edit that line to use another location. Python 3.12
@@ -220,18 +217,31 @@ uv run python -I scripts/s18_er_by_situation.py
 - The small result JSONs from the original run are in `checks/` and
   `out/s*/`.
 
-**Caveat:** this section was reconstructed from the scripts and the session
-logs. It has not been re-executed from a clean checkout.
+## Limitations and next steps
+
+**The selection model.** It recovered passed-up shot quality within 0.03
+in only 6, 1, and 8 of 20 synthetic runs, so it was closed without a real
+fit.
+
+**Gate errors.** Five gates were set below their own noise floor. Each was
+caught and is numbered in the record.
+
+**Reproduction.** The "Run it" section was reconstructed from the scripts and the
+session logs. It has not been re-executed from a clean checkout; doing that is the
+next step.
+
+**Earlier-pass scripts** (`gate.py`, `heldout.py`, `values.py`, and the others listed
+above) are kept for the record and are not part of the final pipeline.
 
 ## References
 
 Methods draw on:
 
 - **Skinner (2011):** the clock-threshold form.
-- **Cervone, D'Amour, Bornn and Goldsberry (2014):** valuing possessions
+- **Cervone, D'Amour, Bornn, and Goldsberry (2014):** valuing possessions
   from tracking.
-- **Sandholtz, Mortensen and Bornn (2019):** zone-level allocation.
-- **Bocskocsky, Ezekowitz and Stein (2014):** rhythm and shot difficulty.
+- **Sandholtz, Mortensen, and Bornn (2019):** zone-level allocation.
+- **Bocskocsky, Ezekowitz, and Stein (2014):** rhythm and shot difficulty.
 - **Chang and colleagues (2014):** defender height.
 - **Goldman and Rao (2012):** pressure.
 
