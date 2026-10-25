@@ -16,6 +16,10 @@ MAX_LINE = 100
 MAX_FUNCTION_LINES = 50
 MAX_NESTING = 3
 MAX_PARAMS = 4
+MIN_ARGV = 2
+MIN_HEADING_WORDS = 3
+MIN_README_LINES = 3
+BLANK_RUN_LIMIT = 2
 SKIP_DIRS = {
     ".git",
     "node_modules",
@@ -31,7 +35,12 @@ SKIP_DIRS = {
     "archive",
     "data",
     "results",
+    "out",
+    "checks",
+    "record",
 }
+SKIP_FILES = {"CODING-RULES.md", "PROTOCOL.md", "REGISTRATIONS.md"}
+FROZEN_PREFIXES = ("PREREG",)
 CODE_SUFFIXES = {".py", ".js", ".ts", ".css", ".html", ".md", ".yml", ".yaml", ".toml", ".sh"}
 PROSE_SUFFIXES = {".md"}
 BANNED_WORDS = [
@@ -84,8 +93,8 @@ class Finding:
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) < 2:
-        print(__doc__)
+    if len(argv) < MIN_ARGV:
+        print(__doc__)  # noqa: T201
         return 2
     root = Path(argv[1]).resolve()
     findings: list[Finding] = []
@@ -99,8 +108,8 @@ def main(argv: list[str]) -> int:
         if path.name.lower() == "readme.md":
             findings += check_readme(path, text)
     for finding in sorted(findings, key=lambda f: (str(f.path), f.line)):
-        print(finding)
-    print(f"{len(findings)} findings")
+        print(finding)  # noqa: T201
+    print(f"{len(findings)} findings")  # noqa: T201
     return 1 if findings else 0
 
 
@@ -167,7 +176,7 @@ def _check_function(path: Path, node: ast.FunctionDef, lines: list[str]) -> list
     blank_run = 0
     for offset, line in enumerate(body_lines, start=node.lineno + 1):
         blank_run = blank_run + 1 if not line.strip() else 0
-        if blank_run == 2:
+        if blank_run == BLANK_RUN_LIMIT:
             findings.append(
                 Finding(path, offset, "blank-lines", "two blank lines inside a function")
             )
@@ -235,7 +244,7 @@ def check_prose(path: Path, text: str) -> list[Finding]:
 def _is_title_case(heading: str) -> bool:
     words = re.sub(r"^#+ ", "", heading).split()
     capitalised = [w for w in words[1:] if w[:1].isupper() and not w.isupper()]
-    return len(words) > 2 and len(capitalised) >= len(words[1:]) - 1
+    return len(words) >= MIN_HEADING_WORDS and len(capitalised) >= len(words[1:]) - 1
 
 
 def check_readme(path: Path, text: str) -> list[Finding]:
@@ -245,7 +254,7 @@ def check_readme(path: Path, text: str) -> list[Finding]:
         if not any(wanted in h for h in headings):
             findings.append(Finding(path, 1, "readme-structure", f"no '{wanted}' section"))
     body = text.strip().split("\n")
-    if len(body) > 2 and not body[0].startswith("#"):
+    if len(body) >= MIN_README_LINES and not body[0].startswith("#"):
         findings.append(Finding(path, 1, "readme-structure", "first line should be the title"))
     if re.search(r"\bwe\b", text) and "collaborat" not in text.lower():
         findings.append(Finding(path, 1, "readme-voice", "'we' in a solo project"))
@@ -256,6 +265,8 @@ def _source_files(root: Path) -> list[Path]:
     files = []
     for path in root.rglob("*"):
         if any(part in SKIP_DIRS for part in path.relative_to(root).parts):
+            continue
+        if path.name in SKIP_FILES or path.name.startswith(FROZEN_PREFIXES):
             continue
         if path.is_file() and path.suffix in CODE_SUFFIXES:
             files.append(path)

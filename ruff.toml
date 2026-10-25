@@ -20,7 +20,7 @@ select = [
     "BLE",              # blind except Exception
     "TRY",              # raise specific, no bare Exception
 ]
-ignore = ["ANN101", "ANN102", "ANN401", "TRY003", "E501"]
+ignore = ["ANN401", "TRY003", "E501"]
 
 [lint.per-file-ignores]
 "tests/**" = ["PLR2004", "ANN", "ARG"]
