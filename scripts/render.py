@@ -104,7 +104,7 @@ def render(
     E.update_radius = update
 
     def fa(
-        fig: Figure, func: Callable[..., Any], fargs: tuple, _frames: Any, _interval: int
+        fig: Figure, func: Callable[..., Any], fargs: tuple, frames: Any, interval: int
     ) -> FuncAnimation:
         captured["fig"], captured["func"], captured["fargs"] = fig, func, fargs
         captured["anim"] = real_fa(fig, func, fargs=fargs, frames=seq, interval=40)
